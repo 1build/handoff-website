@@ -2,6 +2,7 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Header from "@/components/sections/Header.astro";
 import Footer from "@/components/sections/Footer.astro";
+import CtaSection from "@/components/sections/CtaSection.astro";
 import { navItems, footerColumns } from "@/lib/navigation";
 import { getCollection } from "astro:content";
 
@@ -145,6 +146,7 @@ const categories = ["All", ...Array.from(categorySet).sort()];
     </div>
   </section>
 
+  <CtaSection />
   <Footer columns={footerColumns} />
 </BaseLayout>
 
