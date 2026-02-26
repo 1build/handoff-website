@@ -31,7 +31,7 @@ function isWide(item: any): boolean {
 <header id="site-header" class="fixed top-0 left-0 right-0 z-100 h-20 flex items-center justify-center bg-transparent transition-all duration-300">
   <div class="w-full max-w-[1600px] px-8 flex items-center justify-between relative">
     <!-- Logo -->
-    <a href="/" class="flex items-start h-8 pb-2">
+    <a href="/" class="flex items-center h-8">
       <Logo />
     </a>
 
@@ -81,3 +81,21 @@ function isWide(item: any): boolean {
     </div>
   </div>
 </header>
+
+<script>
+  function initHeader() {
+    const header = document.getElementById("site-header");
+    if (!header) return;
+    const onScroll = () => {
+      if (window.scrollY > 20) {
+        header.classList.add("header-scrolled");
+      } else {
+        header.classList.remove("header-scrolled");
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  }
+  initHeader();
+  document.addEventListener("astro:page-load", initHeader);
+</script>

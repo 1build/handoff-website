@@ -1,0 +1,250 @@
+---
+type CellValue =
+  | { type: "check" }
+  | { type: "x" }
+  | { type: "text"; value: string }
+  | { type: "badge"; value: string }
+  | { type: "text_badge"; value: string; badge: string };
+
+interface TableRow {
+  label: string;
+  flex: CellValue;
+  pro: CellValue;
+  custom: CellValue;
+  enterprise: CellValue;
+}
+
+interface TableGroup {
+  title: string;
+  rows: TableRow[];
+}
+
+const check: CellValue = { type: "check" };
+const x: CellValue = { type: "x" };
+const text = (value: string): CellValue => ({ type: "text", value });
+const badge = (value: string): CellValue => ({ type: "badge", value });
+const text_badge = (value: string, b: string): CellValue => ({ type: "text_badge", value, badge: b });
+
+const plans = [
+  {
+    name: "Flex",
+    badge: { label: "7-day free trial", color: "green" },
+    annualPrice: "$149",
+    monthlyPrice: "$185",
+    description: "Solo contractors and small crews who want fast, professional estimates, proposals and invoicing.",
+    cta: { label: "Start free trial", href: "https://app.tryhandoff.com/signup", primary: true },
+  },
+  {
+    name: "Pro",
+    badge: { label: "Contract", color: "gray" },
+    annualPrice: "$299",
+    monthlyPrice: "$375",
+    description: "For growing teams that want unlimited AI and a smoother client experience.",
+    cta: { label: "Book a demo", href: "https://app.tryhandoff.com/demo", primary: false },
+  },
+  {
+    name: "Custom",
+    badge: { label: "Contract", color: "gray" },
+    annualPrice: "$599",
+    monthlyPrice: "$749",
+    description: "For high-volume contractors who need more control, support, and advanced features.",
+    cta: { label: "Contact sales", href: "https://app.tryhandoff.com/demo", primary: false },
+  },
+  {
+    name: "Enterprise",
+    badge: undefined,
+    annualPrice: null,
+    monthlyPrice: null,
+    priceLabel: "Contact us",
+    description: "For large or multi-location operations that need API integrations and custom setup.",
+    cta: { label: "Contact sales", href: "https://app.tryhandoff.com/demo", primary: false },
+  },
+];
+
+const tableGroups: TableGroup[] = [
+  {
+    title: "AI Features",
+    rows: [
+      { label: "AI Agent Credits", flex: text("50 credits"), pro: text("Unlimited"), custom: text("Unlimited"), enterprise: text("Unlimited") },
+      { label: "AI Estimating from PDFs", flex: text("3 PDFs"), pro: text("Unlimited"), custom: text("Unlimited"), enterprise: text("Unlimited") },
+      { label: "AI Scopes and Proposals", flex: check, pro: check, custom: check, enterprise: check },
+      { label: "Voice Transcription", flex: x, pro: check, custom: check, enterprise: check },
+      { label: "AI Site Walkthroughs", flex: x, pro: check, custom: check, enterprise: check },
+      { label: "AI presets", flex: text("Standard"), pro: text_badge("Advanced", "Coming soon"), custom: text_badge("Advanced", "Coming soon"), enterprise: text_badge("Advanced", "Coming soon") },
+      { label: "Advanced Takeoff", flex: x, pro: check, custom: check, enterprise: check },
+      { label: "AI Localize Costs", flex: text("Standard"), pro: text_badge("Advanced", "Coming soon"), custom: text_badge("Advanced", "Coming soon"), enterprise: text_badge("Advanced", "Coming soon") },
+      { label: "AI Estimate Updates", flex: x, pro: check, custom: check, enterprise: check },
+    ],
+  },
+  {
+    title: "Documents & Job Management",
+    rows: [
+      { label: "File to Job Documentation", flex: check, pro: check, custom: check, enterprise: check },
+      { label: "Photos & Files Storage", flex: check, pro: check, custom: check, enterprise: check },
+      { label: "Digital Signatures", flex: check, pro: check, custom: check, enterprise: check },
+      { label: "Service Catalog", flex: text("1 catalog"), pro: text("Unlimited"), custom: text("Unlimited"), enterprise: text("Unlimited") },
+      { label: "Cost Codes", flex: x, pro: x, custom: badge("Coming soon"), enterprise: badge("Coming soon") },
+      { label: "Daily Log", flex: x, pro: x, custom: badge("Coming soon"), enterprise: badge("Coming soon") },
+      { label: "Schedule", flex: x, pro: x, custom: badge("Coming soon"), enterprise: badge("Coming soon") },
+      { label: "Tasks", flex: x, pro: x, custom: badge("Coming soon"), enterprise: badge("Coming soon") },
+    ],
+  },
+  {
+    title: "Customer Experience & Visibility",
+    rows: [
+      { label: "Client Portal", flex: x, pro: check, custom: check, enterprise: check },
+      { label: "Track Customer Activity", flex: check, pro: check, custom: check, enterprise: check },
+      { label: "Client Financing", flex: check, pro: check, custom: check, enterprise: check },
+    ],
+  },
+  {
+    title: "Payments & Invoicing",
+    rows: [
+      { label: "Invoices & Payments", flex: check, pro: check, custom: check, enterprise: check },
+      { label: "Progress Payments", flex: check, pro: check, custom: check, enterprise: check },
+      { label: "Card Fees to Client", flex: text("3.3%"), pro: text("2.85%"), custom: text("2.85%"), enterprise: text("2.85%") },
+      { label: "ACH Fees to Client", flex: text("1% ($10 cap)"), pro: text("1% ($10 cap)"), custom: text("1% ($10 cap)"), enterprise: text("1% ($10 cap)") },
+    ],
+  },
+  {
+    title: "Team, Access & Support",
+    rows: [
+      { label: "Custom Roles", flex: x, pro: badge("Coming soon"), custom: badge("Coming soon"), enterprise: badge("Coming soon") },
+      { label: "Seat Management", flex: text("2 seats"), pro: text("5 included + add more"), custom: text("5 included + add more"), enterprise: text("5 included + add more") },
+      { label: "Onboarding", flex: text("Standard"), pro: text("Success Coach (AI Trainer & Setup)"), custom: text("Success Coach (AI Trainer & Setup)"), enterprise: text("Success Coach (AI Trainer & Setup)") },
+      { label: "Support channels", flex: check, pro: check, custom: check, enterprise: check },
+      { label: "Book an expert call", flex: check, pro: check, custom: check, enterprise: check },
+      { label: "New Feature Request", flex: check, pro: check, custom: check, enterprise: check },
+      { label: "Desktop App", flex: check, pro: check, custom: check, enterprise: check },
+      { label: "iOS App", flex: check, pro: check, custom: check, enterprise: check },
+      { label: "Android App", flex: check, pro: check, custom: check, enterprise: check },
+    ],
+  },
+];
+---
+
+<section class="bg-bg-primary py-16 lg:py-24" id="compare">
+  <div class="max-w-[1280px] mx-auto px-6 lg:px-8">
+
+    <!-- Table header -->
+    <div class="border border-border-primary rounded-2xl overflow-hidden mb-0" data-animate="fade-up">
+      <div class="grid grid-cols-[1fr_1fr_1fr_1fr_1fr] border-b border-border-primary">
+        <!-- Label col -->
+        <div class="p-6 flex flex-col justify-between gap-4 border-r border-border-primary">
+          <p class="text-base font-normal leading-6 text-brand-700">Compare plans:</p>
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 bg-green-50 border border-green-200 rounded-md text-xs font-medium text-green-700">Save 20%</span>
+            <span class="text-xs font-medium text-text-tertiary billing-period-label">billed annually</span>
+          </div>
+        </div>
+        <!-- Plan cols -->
+        {plans.map((plan, i) => (
+          <div class:list={[
+            "p-6 flex flex-col gap-5",
+            i < plans.length - 1 ? "border-r border-border-primary" : "",
+          ]}>
+            <!-- Name + badge -->
+            <div class="flex items-center gap-2">
+              <span class="font-display text-2xl font-medium leading-8 text-text-primary flex-1">{plan.name}</span>
+              {plan.badge && (
+                <span class:list={[
+                  "px-2 py-0.5 rounded-md text-xs font-medium border",
+                  plan.badge.color === "green"
+                    ? "bg-green-50 border-green-200 text-green-700"
+                    : "bg-neutral-50 border-neutral-200 text-neutral-700",
+                ]}>
+                  {plan.badge.label}
+                </span>
+              )}
+            </div>
+            <!-- Description -->
+            <p class="text-xs font-normal leading-[18px] text-text-tertiary">{plan.description}</p>
+            <!-- Price -->
+            <div class="flex flex-col gap-1">
+              {plan.priceLabel ? (
+                <p class="font-display text-2xl font-medium leading-8 text-text-quaternary">{plan.priceLabel}</p>
+              ) : (
+                <>
+                  <p class="font-display text-2xl font-medium leading-8 text-text-primary">
+                    <span class="price-annual">{plan.annualPrice}</span>
+                    <span class="price-monthly hidden">{plan.monthlyPrice}</span>
+                  </p>
+                  <p class="text-xs font-medium text-text-tertiary">
+                    per month, <span class="billing-period-label">billed annually</span>
+                  </p>
+                </>
+              )}
+            </div>
+            <!-- CTA -->
+            <a
+              href={plan.cta.href}
+              class:list={[
+                "w-full py-2 px-3 rounded-xl text-sm font-medium leading-5 text-center transition-colors shadow-xs",
+                plan.cta.primary
+                  ? "bg-bg-brand-solid text-white hover:bg-brand-800"
+                  : "bg-bg-primary text-text-secondary border border-border-primary hover:bg-bg-secondary",
+              ]}
+            >
+              {plan.cta.label}
+            </a>
+          </div>
+        ))}
+      </div>
+
+      <!-- Table body groups -->
+      {tableGroups.map((group, gi) => (
+        <div class:list={["", gi < tableGroups.length - 1 ? "border-b border-border-primary" : ""]}>
+          <!-- Group header -->
+          <div class="grid grid-cols-[1fr_1fr_1fr_1fr_1fr] bg-bg-secondary border-b border-border-primary">
+            <div class="px-6 py-4 col-span-5">
+              <p class="text-sm font-semibold leading-5 text-text-primary">{group.title}</p>
+            </div>
+          </div>
+          <!-- Rows -->
+          {group.rows.map((row, ri) => (
+            <div class:list={[
+              "grid grid-cols-[1fr_1fr_1fr_1fr_1fr]",
+              ri < group.rows.length - 1 ? "border-b border-border-primary" : "",
+            ]}>
+              {/* Label cell */}
+              <div class="px-6 py-4 flex items-center gap-1 bg-bg-secondary border-r border-border-primary">
+                <span class="text-sm font-medium leading-5 text-text-primary">{row.label}</span>
+              </div>
+              {/* Value cells */}
+              {([row.flex, row.pro, row.custom, row.enterprise] as CellValue[]).map((cell, ci) => (
+                <div class:list={[
+                  "px-6 h-16 flex items-center justify-center",
+                  ci < 3 ? "border-r border-border-primary" : "",
+                ]}>
+                  {cell.type === "check" && (
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="text-brand-600 shrink-0">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z" fill="currentColor"/>
+                    </svg>
+                  )}
+                  {cell.type === "x" && (
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="text-text-quaternary shrink-0">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16ZM8.28 7.22a.75.75 0 0 0-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 1 0 1.06 1.06L10 11.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L11.06 10l1.72-1.72a.75.75 0 0 0-1.06-1.06L10 8.94 8.28 7.22Z" fill="currentColor"/>
+                    </svg>
+                  )}
+                  {cell.type === "text" && (
+                    <span class="text-sm font-medium leading-5 text-text-tertiary text-center">{cell.value}</span>
+                  )}
+                  {cell.type === "badge" && (
+                    <span class="px-2 py-0.5 bg-neutral-50 border border-neutral-200 rounded-md text-xs font-medium text-neutral-600">{cell.value}</span>
+                  )}
+                  {cell.type === "text_badge" && (
+                    <div class="flex items-center gap-1.5 flex-wrap justify-center">
+                      <span class="text-sm font-medium leading-5 text-text-tertiary">{cell.value}</span>
+                      <span class="px-2 py-0.5 bg-neutral-50 border border-neutral-200 rounded-md text-xs font-medium text-neutral-600">{cell.badge}</span>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
