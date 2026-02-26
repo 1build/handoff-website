@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+html {
+  scrollbar-gutter: stable;
+}
+
 /* ─── Theme Tokens ─── */
 @theme {
   /* Brand colors */
