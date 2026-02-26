@@ -1,0 +1,118 @@
+---
+interface Testimonial {
+  quote: string;
+  name: string;
+  role: string;
+}
+
+const columns: Testimonial[][] = [
+  [
+    {
+      quote: "I'm very impressed. We won a $10,000 job with Handoff in our first month!",
+      name: "Glenn",
+      role: "Glenn and Sons Remodel",
+    },
+    {
+      quote: "I've been so frustrated with estimating that I was ready to give it up. Handoff is like taking a 1,000-pound weight off my chest. I feel so much better now. I'm so glad I found you guys.",
+      name: "Matt",
+      role: "Equi-linc",
+    },
+    {
+      quote: "I've been so frustrated with estimating that I was ready to give it up. Handoff is like taking a 1,000-pound weight off my chest. I feel so much better now. I'm so glad I found you guys.",
+      name: "Zaid Schwartz",
+      role: "Founder, Wildcrafted",
+    },
+  ],
+  [
+    {
+      quote: "Handoff AI is a game changer in helping us develop our long term sales & operations plan... AI is the way of the future and this hits us in a very important part of our business.",
+      name: "Matt",
+      role: "UX Designer, Goodwell",
+    },
+    {
+      quote: "Handoff is hands down the best estimating tool we've used. It has literally everything we need to get started for any possible project.",
+      name: "Florence Shaw",
+      role: "Web Designer, Quixotic",
+    },
+    {
+      quote: "With Handoff, we can focus more on winning jobs and less on the tedious setup work. Best money ever spent.",
+      name: "Owen Garcia",
+      role: "CTO, Solaris Energy",
+    },
+  ],
+  [
+    {
+      quote: "Our workflow has improved dramatically since we started using Handoff and it's become an integral part of our workflow. It's easy to use, and the resources are top-notch. I recommend it to everyone!",
+      name: "Mathilde Lewis",
+      role: "Project Lead, Stack3d Lab",
+    },
+    {
+      quote: "Handoff is an absolute game-changer for our projects. We can't imagine going back to how we used to work without it.",
+      name: "Stefan Sears",
+      role: "UI/UX Designer, Mangolia",
+    },
+    {
+      quote: "Handoff has been a real time-saver for us. It's organized, efficient, and keeps us moving forward with every project.",
+      name: "Harriet Rojas",
+      role: "Product Designer, Ikigai Labs",
+    },
+  ],
+];
+---
+
+<section class="bg-bg-primary py-16 lg:py-24">
+  <div class="max-w-[1280px] mx-auto px-6 lg:px-8 flex flex-col gap-12">
+
+    <!-- Heading -->
+    <div class="flex flex-col gap-4 items-center text-center" data-animate="fade-up">
+      <h2 class="font-display text-4xl font-medium leading-[44px] tracking-[-0.72px] text-text-primary">
+        How contractors use Handoff
+      </h2>
+      <p class="text-xl font-normal leading-[30px] text-text-tertiary max-w-[640px]">
+        Forward-thinking teams use Handoff to move faster, protect margins, and scale without over-hiring.
+      </p>
+    </div>
+
+    <!-- 3-column testimonial grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4" data-animate="stagger">
+      {columns.map((col) => (
+        <div class="flex flex-col gap-4">
+          {col.map((t) => (
+            <div class="bg-bg-primary border border-border-primary rounded-2xl p-6 flex flex-col gap-4">
+              <p class="text-base font-normal leading-6 text-text-secondary flex-1">"{t.quote}"</p>
+              <div class="flex items-center gap-3">
+                <!-- Avatar placeholder -->
+                <div class="w-10 h-10 rounded-full bg-bg-secondary border border-border-primary shrink-0 flex items-center justify-center">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="text-text-quaternary">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-sm font-semibold leading-5 text-text-primary flex items-center gap-1">
+                    {t.name}
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" class="text-brand-600 shrink-0">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z" fill="currentColor"/>
+                    </svg>
+                  </p>
+                  <p class="text-sm font-normal leading-5 text-text-tertiary">{t.role}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+
+    <!-- CTA -->
+    <div class="flex justify-center" data-animate="fade-up">
+      <a
+        href="https://app.tryhandoff.com/signup"
+        class="py-3 px-5 rounded-xl text-base font-medium leading-6 text-center border border-border-primary text-text-secondary bg-bg-primary hover:bg-bg-secondary transition-colors shadow-xs"
+      >
+        View more reviews
+      </a>
+    </div>
+
+  </div>
+</section>
