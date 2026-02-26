@@ -108,7 +108,7 @@ const categories = ["All", ...Array.from(categorySet).sort()];
 
         {/* Posts Grid */}
         {remainingPosts.length > 0 && (
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-[opacity,height] duration-150" data-animate="stagger" id="posts-grid">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-[opacity,max-height] duration-200 ease-in-out overflow-hidden" data-animate="stagger" id="posts-grid">
             {remainingPosts.map((post) => (
               <a href={`/blog/${post.id.replace(/\.md$/, "")}`} class="group flex flex-col gap-6" data-post-category={post.data.category || ""}>
                 <div class="w-full h-[256px] rounded-md overflow-hidden">
@@ -185,21 +185,19 @@ const categories = ["All", ...Array.from(categorySet).sort()];
       tab.classList.remove("border-transparent", "text-text-quaternary");
       tab.classList.add("border-brand-700", "text-brand-700");
 
-      // Filter posts with fade + height transition
+      // Filter posts with fade + smooth resize
       const grid = document.getElementById("posts-grid");
       if (grid) {
-        const startHeight = grid.offsetHeight;
-        grid.style.height = startHeight + "px";
+        grid.style.maxHeight = grid.scrollHeight + "px";
         grid.style.opacity = "0";
         setTimeout(() => {
           posts.forEach((post) => {
             post.style.display = (cat === "All" || post.dataset.postCategory === cat) ? "" : "none";
           });
-          const endHeight = grid.scrollHeight;
-          grid.style.height = endHeight + "px";
+          grid.style.maxHeight = grid.scrollHeight + "px";
           grid.style.opacity = "1";
-          setTimeout(() => { grid.style.height = ""; }, 150);
-        }, 150);
+          setTimeout(() => { grid.style.maxHeight = ""; }, 250);
+        }, 200);
       }
     });
   });
