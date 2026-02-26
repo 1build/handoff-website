@@ -39,7 +39,7 @@ const faqItems = items?.length ? items : localFaqItems;
                 <path d="M12 8V16" stroke="#535862" stroke-width="2" stroke-linecap="round" />
               </svg>
             </summary>
-            <div class="grid grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-in-out">
+            <div class="grid grid-rows-[0fr] group-open:grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-in-out">
               <div class="overflow-hidden">
                 <p class="text-base font-normal leading-6 text-text-tertiary mt-1 pr-10">
                   {item.answer}

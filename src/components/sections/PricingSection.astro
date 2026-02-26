@@ -1,0 +1,266 @@
+---
+import bgPattern from "@/assets/images/background-pattern.png";
+
+interface PricingTier {
+  name: string;
+  badge?: { label: string; color: "green" | "gray" };
+  monthlyPrice: string | null;
+  annualPrice: string | null;
+  priceLabel?: string;
+  description: string;
+  cta: { label: string; primary: boolean; href: string };
+  featuresLabel?: { prefix: string; highlight: string; suffix: string };
+  features: string[];
+}
+
+const tiers: PricingTier[] = [
+  {
+    name: "Flex",
+    badge: { label: "7-day free trial", color: "green" },
+    monthlyPrice: "$185",
+    annualPrice: "$149",
+    description: "Solo contractors and small crews who want fast, professional estimates, proposals and invoicing.",
+    cta: { label: "Start free trial", primary: true, href: "https://app.tryhandoff.com/signup" },
+    features: [
+      "50 AI credits",
+      "3 AI Estimating from PDFs",
+      "1 service catalog",
+      "AI-generated scopes & proposals",
+      "Client financing",
+      "Mobile & desktop access",
+      "2 seats included",
+    ],
+  },
+  {
+    name: "Pro",
+    badge: { label: "Contract required", color: "gray" },
+    monthlyPrice: "$375",
+    annualPrice: "$299",
+    description: "For growing teams that want unlimited AI and a smoother client experience.",
+    cta: { label: "Book a demo", primary: false, href: "https://app.tryhandoff.com/demo" },
+    featuresLabel: { prefix: "All ", highlight: "Flex", suffix: " features plus:" },
+    features: [
+      "Unlimited AI credits",
+      "Unlimited service catalogs",
+      "AI transcription and site walkthroughs",
+      "Client portal",
+      "File storage and job documentation",
+      "5 seats + add more",
+      "Success Coach onboarding",
+    ],
+  },
+  {
+    name: "Custom",
+    badge: { label: "Contract required", color: "gray" },
+    monthlyPrice: "$749",
+    annualPrice: "$599",
+    description: "For high-volume contractors who need more control, support, and advanced features.",
+    cta: { label: "Contact sales", primary: false, href: "https://app.tryhandoff.com/demo" },
+    featuresLabel: { prefix: "All ", highlight: "Pro", suffix: " features plus:" },
+    features: [
+      "Advanced Takeoffs (coming soon)",
+      "Cost codes (coming soon)",
+      "Client financing",
+      "Priority feature requests",
+      "Custom onboarding",
+      "Dedicated support",
+    ],
+  },
+  {
+    name: "Enterprise",
+    badge: undefined,
+    monthlyPrice: null,
+    annualPrice: null,
+    priceLabel: "Contact us",
+    description: "For large or multi-location operations that need API integrations and custom setup.",
+    cta: { label: "Contact sales", primary: false, href: "https://app.tryhandoff.com/demo" },
+    featuresLabel: { prefix: "All ", highlight: "Custom", suffix: " features plus:" },
+    features: [
+      "API access",
+      "Custom integrations",
+      "Advanced security",
+      "Uptime SLA",
+    ],
+  },
+];
+---
+
+<section id="pricing" class="relative bg-brand-25 overflow-hidden py-24">
+  <!-- Background grid pattern -->
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1920px] h-[1440px] pointer-events-none z-0">
+    <img src={bgPattern.src} alt="" class="w-full h-full block object-contain object-top opacity-60" />
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-[1] max-w-[1280px] mx-auto px-6 lg:px-8 flex flex-col gap-12 lg:gap-14">
+
+    <!-- Heading -->
+    <div class="flex flex-col gap-6 items-center text-center" data-animate="fade-up">
+      <h1 class="font-display text-4xl lg:text-[48px] font-medium leading-[44px] lg:leading-[60px] tracking-[-0.96px] text-text-primary max-w-[800px]">
+        Everything you need to grow your contracting business with AI
+      </h1>
+      <div class="text-lg lg:text-xl font-normal leading-[28px] lg:leading-[30px] text-text-secondary flex flex-col gap-1">
+        <p>Pay for one system. Automate your business. Upgrade anytime.</p>
+        <p>Try the Flex plan free for 7 days</p>
+      </div>
+    </div>
+
+    <!-- Billing Toggle -->
+    <div class="flex items-center justify-center gap-3" data-animate="fade-up">
+      <span id="label-monthly" class="text-sm font-medium text-text-tertiary transition-colors">Monthly</span>
+
+      <button
+        id="billing-toggle"
+        role="switch"
+        aria-checked="true"
+        aria-label="Toggle billing period"
+        class="relative w-10 h-6 rounded-full bg-brand-600 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2"
+      >
+        <span class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow-xs transition-transform translate-x-4 pointer-events-none"></span>
+      </button>
+
+      <span id="label-annual" class="text-sm font-medium text-text-primary transition-colors">Annually</span>
+
+      <span class="px-2 py-0.5 bg-green-50 border border-green-200 rounded-md text-xs font-medium text-green-700">
+        Save 20%
+      </span>
+    </div>
+
+    <!-- Pricing Cards Grid -->
+    <div class="rounded-2xl border border-border-primary overflow-hidden shadow-xs grid grid-cols-1 lg:grid-cols-4" data-animate="stagger">
+      {tiers.map((tier, i) => (
+        <div class:list={[
+          "flex flex-col bg-bg-primary",
+          i < tiers.length - 1 ? "border-b lg:border-b-0 lg:border-r border-border-primary" : "",
+        ]}>
+          <!-- Card Header -->
+          <div class="flex flex-col gap-8 p-8">
+            <!-- Name + Badge -->
+            <div class="flex flex-col gap-5">
+              <div class="flex items-center gap-2">
+                <h2 class="font-display text-2xl font-medium leading-8 text-text-primary flex-1">{tier.name}</h2>
+                {tier.badge && (
+                  <span class:list={[
+                    "px-2 py-0.5 rounded-md text-sm font-medium border",
+                    tier.badge.color === "green"
+                      ? "bg-green-50 border-green-200 text-green-700"
+                      : "bg-neutral-50 border-neutral-200 text-neutral-700",
+                  ]}>
+                    {tier.badge.label}
+                  </span>
+                )}
+              </div>
+
+              <!-- Price -->
+              <div class="flex flex-col gap-1">
+                {tier.priceLabel ? (
+                  <p class="font-display text-4xl font-medium leading-[44px] tracking-[-0.72px] text-text-primary">
+                    {tier.priceLabel}
+                  </p>
+                ) : (
+                  <>
+                    <p class="font-display text-4xl font-medium leading-[44px] tracking-[-0.72px] text-text-primary">
+                      <span class="price-annual">{tier.annualPrice}</span>
+                      <span class="price-monthly hidden">{tier.monthlyPrice}</span>
+                    </p>
+                    <p class="text-base font-medium text-text-tertiary">
+                      per month, <span class="text-brand-accent billing-period-label">billed annually</span>
+                    </p>
+                  </>
+                )}
+              </div>
+
+              <!-- Description -->
+              <p class="text-sm font-medium leading-5 text-text-tertiary">{tier.description}</p>
+            </div>
+
+            <!-- CTA Button -->
+            <a
+              href={tier.cta.href}
+              class:list={[
+                "w-full py-3 px-[18px] rounded-xl text-base font-medium leading-6 text-center transition-colors shadow-xs",
+                tier.cta.primary
+                  ? "bg-bg-brand-solid text-white hover:bg-brand-800"
+                  : "bg-bg-primary text-text-secondary border border-border-primary hover:bg-bg-secondary",
+              ]}
+            >
+              {tier.cta.label}
+            </a>
+          </div>
+
+          <!-- Card Content / Features -->
+          <div class="flex flex-col gap-6 px-8 pt-5 pb-12 flex-1">
+            <!-- Features label -->
+            <p class="text-base font-semibold leading-6">
+              {tier.featuresLabel ? (
+                <>
+                  <span class="text-text-quaternary">{tier.featuresLabel.prefix}</span>
+                  <span class="text-text-primary">{tier.featuresLabel.highlight}</span>
+                  <span class="text-text-quaternary">{tier.featuresLabel.suffix}</span>
+                </>
+              ) : (
+                <span class="text-text-quaternary">What you get:</span>
+              )}
+            </p>
+
+            <!-- Feature list -->
+            <ul class="flex flex-col gap-4">
+              {tier.features.map((feature) => (
+                <li class="flex items-start gap-3">
+                  <!-- Check icon -->
+                  <span class="shrink-0 w-6 h-6 rounded-full bg-brand-500/[0.16] flex items-center justify-center mt-0">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" class="text-brand-600">
+                      <path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                  <span class="text-base font-normal leading-6 text-text-secondary">{feature}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  const toggle = document.getElementById("billing-toggle");
+  const monthlyLabel = document.getElementById("label-monthly");
+  const annualLabel = document.getElementById("label-annual");
+  const pricesAnnual = document.querySelectorAll(".price-annual");
+  const pricesMonthly = document.querySelectorAll(".price-monthly");
+  const periodLabels = document.querySelectorAll(".billing-period-label");
+  const thumb = toggle?.querySelector("span");
+
+  let isAnnual = true;
+
+  toggle?.addEventListener("click", () => {
+    isAnnual = !isAnnual;
+    toggle.setAttribute("aria-checked", String(isAnnual));
+
+    // Move thumb
+    thumb?.classList.toggle("translate-x-4", isAnnual);
+    thumb?.classList.toggle("translate-x-0", !isAnnual);
+
+    // Toggle background
+    toggle.classList.toggle("bg-brand-600", isAnnual);
+    toggle.classList.toggle("bg-neutral-300", !isAnnual);
+
+    // Swap prices
+    pricesAnnual.forEach((el) => el.classList.toggle("hidden", !isAnnual));
+    pricesMonthly.forEach((el) => el.classList.toggle("hidden", isAnnual));
+
+    // Swap label emphasis
+    annualLabel?.classList.toggle("text-text-primary", isAnnual);
+    annualLabel?.classList.toggle("text-text-tertiary", !isAnnual);
+    monthlyLabel?.classList.toggle("text-text-primary", !isAnnual);
+    monthlyLabel?.classList.toggle("text-text-tertiary", isAnnual);
+
+    // Update billing period label
+    periodLabels.forEach((el) => {
+      el.textContent = isAnnual ? "billed annually" : "billed monthly";
+    });
+  });
+</script>
