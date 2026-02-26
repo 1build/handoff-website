@@ -8,6 +8,8 @@ import { getCollection } from "astro:content";
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime(),
 );
+
+const [featuredPost, ...remainingPosts] = posts;
 ---
 
 <BaseLayout title="Blog — Handoff">
@@ -24,34 +26,103 @@ const posts = (await getCollection("blog")).sort(
           <p class="text-lg text-text-tertiary">No posts yet. Check back soon.</p>
         )}
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" data-animate="stagger">
-          {posts.map((post) => (
-            <a href={`/blog/${post.id}`} class="group flex flex-col gap-4">
-              {post.data.featuredImage && (
-                <img
-                  src={post.data.featuredImage}
-                  alt={post.data.title}
-                  class="w-full aspect-[16/10] object-cover rounded-xl"
-                  loading="lazy"
-                  decoding="async"
-                />
+        {/* Featured Post */}
+        {featuredPost && (
+          <a href={`/blog/${featuredPost.id.replace(/\.md$/, "")}`} class="group flex flex-col lg:flex-row gap-8 mb-16 pb-16 border-b border-border-primary" data-animate="fade-up">
+            {featuredPost.data.featuredImage ? (
+              <img
+                src={featuredPost.data.featuredImage}
+                alt={featuredPost.data.title}
+                class="w-full lg:w-1/2 aspect-[16/10] object-cover rounded-xl"
+                loading="lazy"
+                decoding="async"
+              />
+            ) : (
+              <div class="w-full lg:w-1/2 aspect-[16/10] rounded-xl bg-detail-visual-bg"></div>
+            )}
+            <div class="flex-1 flex flex-col justify-center gap-4">
+              {featuredPost.data.category && (
+                <span class="text-sm font-semibold text-text-quaternary">
+                  {featuredPost.data.category}
+                </span>
               )}
-              <h2 class="font-display text-xl font-medium text-text-primary group-hover:text-brand-500 transition-colors">
-                {post.data.title}
+              <h2 class="font-display text-2xl lg:text-4xl font-medium leading-tight tracking-[-0.72px] text-text-primary group-hover:text-brand-500 transition-colors">
+                {featuredPost.data.title}
               </h2>
-              {post.data.excerpt && (
-                <p class="text-base text-text-tertiary line-clamp-2">{post.data.excerpt}</p>
+              {featuredPost.data.excerpt && (
+                <p class="text-lg text-text-tertiary">{featuredPost.data.excerpt}</p>
               )}
-              <time class="text-sm text-text-quaternary">
-                {post.data.publishedAt.toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </time>
-            </a>
-          ))}
-        </div>
+              <div class="flex items-center gap-3 mt-2">
+                {featuredPost.data.authorAvatar ? (
+                  <img
+                    src={featuredPost.data.authorAvatar}
+                    alt={featuredPost.data.author}
+                    class="w-10 h-10 rounded-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ) : (
+                  <div class="w-10 h-10 rounded-full bg-brand-100 flex items-center justify-center">
+                    <span class="text-brand-700 font-medium">{featuredPost.data.author?.charAt(0) || "H"}</span>
+                  </div>
+                )}
+                <div class="flex flex-col">
+                  {featuredPost.data.author && (
+                    <span class="text-sm font-medium text-text-primary">{featuredPost.data.author}</span>
+                  )}
+                  <time class="text-sm text-text-quaternary">
+                    {featuredPost.data.publishedAt.toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </time>
+                </div>
+              </div>
+            </div>
+          </a>
+        )}
+
+        {/* Remaining Posts Grid */}
+        {remainingPosts.length > 0 && (
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" data-animate="stagger">
+            {remainingPosts.map((post) => (
+              <a href={`/blog/${post.id.replace(/\.md$/, "")}`} class="group flex flex-col gap-4">
+                {post.data.featuredImage ? (
+                  <img
+                    src={post.data.featuredImage}
+                    alt={post.data.title}
+                    class="w-full aspect-[16/10] object-cover rounded-xl"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ) : (
+                  <div class="w-full aspect-[16/10] rounded-xl bg-detail-visual-bg"></div>
+                )}
+                <div class="flex flex-col gap-2">
+                  {post.data.category && (
+                    <span class="text-sm font-semibold text-text-quaternary">
+                      {post.data.category}
+                    </span>
+                  )}
+                  <h2 class="font-display text-xl font-medium text-text-primary group-hover:text-brand-500 transition-colors">
+                    {post.data.title}
+                  </h2>
+                  {post.data.excerpt && (
+                    <p class="text-base text-text-tertiary line-clamp-2">{post.data.excerpt}</p>
+                  )}
+                </div>
+                <time class="text-sm text-text-quaternary">
+                  {post.data.publishedAt.toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </time>
+              </a>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   </section>
