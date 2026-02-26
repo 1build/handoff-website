@@ -1,5 +1,6 @@
 ---
-import bgPattern from "@/assets/images/background-pattern.png";
+import bgPattern from "@/assets/images/background-pattern-dots.png";
+import heroGlow from "@/assets/images/hero-glow-line.svg";
 
 interface PricingTier {
   name: string;
@@ -19,7 +20,7 @@ const tiers: PricingTier[] = [
     badge: { label: "7-day free trial", color: "green" },
     monthlyPrice: "$185",
     annualPrice: "$149",
-    description: "Solo contractors and small crews who want fast, professional estimates, proposals and invoicing.",
+    description: "Fast, professional estimates, proposals and invoicing for small crews.",
     cta: { label: "Start free trial", primary: true, href: "https://app.tryhandoff.com/signup" },
     features: [
       "50 AI credits",
@@ -36,7 +37,7 @@ const tiers: PricingTier[] = [
     badge: { label: "Contract required", color: "gray" },
     monthlyPrice: "$375",
     annualPrice: "$299",
-    description: "For growing teams that want unlimited AI and a smoother client experience.",
+    description: "Fast, professional estimates, proposals and invoicing for small crews.",
     cta: { label: "Book a demo", primary: false, href: "https://app.tryhandoff.com/demo" },
     featuresLabel: { prefix: "All ", highlight: "Flex", suffix: " features plus:" },
     features: [
@@ -54,8 +55,8 @@ const tiers: PricingTier[] = [
     badge: { label: "Contract required", color: "gray" },
     monthlyPrice: "$749",
     annualPrice: "$599",
-    description: "For high-volume contractors who need more control, support, and advanced features.",
-    cta: { label: "Contact sales", primary: false, href: "https://app.tryhandoff.com/demo" },
+    description: "Advanced features, more control, and support for high-volume contractors.",
+    cta: { label: "Book a demo", primary: false, href: "https://app.tryhandoff.com/demo" },
     featuresLabel: { prefix: "All ", highlight: "Pro", suffix: " features plus:" },
     features: [
       "Advanced Takeoffs (coming soon)",
@@ -72,8 +73,8 @@ const tiers: PricingTier[] = [
     monthlyPrice: null,
     annualPrice: null,
     priceLabel: "Contact us",
-    description: "For large or multi-location operations that need API integrations and custom setup.",
-    cta: { label: "Contact sales", primary: false, href: "https://app.tryhandoff.com/demo" },
+    description: "API integrations and custom setup for large or multi-location operations.",
+    cta: { label: "Book a demo", primary: false, href: "https://app.tryhandoff.com/demo" },
     featuresLabel: { prefix: "All ", highlight: "Custom", suffix: " features plus:" },
     features: [
       "API access",
@@ -85,41 +86,49 @@ const tiers: PricingTier[] = [
 ];
 ---
 
-<section id="pricing" class="relative bg-brand-25 overflow-hidden py-24">
+<section id="pricing" class="px-4 pt-2">
+  <div class="relative bg-bg-brand-dark overflow-hidden py-24 rounded-3xl">
+
   <!-- Background grid pattern -->
-  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1920px] h-[1440px] pointer-events-none z-0">
-    <img src={bgPattern.src} alt="" class="w-full h-full block object-contain object-top opacity-60" />
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1920px] h-[1440px] pointer-events-none z-0 opacity-30">
+    <img src={bgPattern.src} alt="" class="w-full h-full block object-contain object-top" />
+  </div>
+
+  <!-- Glow line -->
+  <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[2135px] h-[1268px] pointer-events-none z-0">
+    <img src={heroGlow.src} alt="" class="w-full h-full block" />
   </div>
 
   <!-- Content -->
-  <div class="relative z-[1] max-w-[1280px] mx-auto px-6 lg:px-8 flex flex-col gap-12 lg:gap-14">
+  <div class="relative z-[1] max-w-[1440px] mx-auto px-6 lg:px-8 flex flex-col items-center">
 
     <!-- Heading -->
-    <div class="flex flex-col gap-6 items-center text-center" data-animate="fade-up">
-      <h1 class="font-display text-4xl lg:text-[48px] font-medium leading-[44px] lg:leading-[60px] tracking-[-0.96px] text-text-primary max-w-[800px]">
+    <div class="flex flex-col items-center text-center pt-24" data-animate="fade-up">
+      <p class="font-mono text-sm font-semibold leading-6 tracking-[0.56px] uppercase text-text-on-brand-tertiary">
+        PRICING
+      </p>
+      <h1 class="font-display text-4xl lg:text-[48px] font-medium leading-[44px] lg:leading-[60px] tracking-[-0.96px] text-white max-w-[800px] mt-3">
         Everything you need to grow your contracting business with AI
       </h1>
-      <div class="text-lg lg:text-xl font-normal leading-[28px] lg:leading-[30px] text-text-secondary flex flex-col gap-1">
+      <div class="text-lg lg:text-xl font-normal leading-[28px] lg:leading-[30px] text-text-on-brand-tertiary flex flex-col gap-1 mt-6">
         <p>Pay for one system. Automate your business. Upgrade anytime.</p>
         <p>Try the Flex plan free for 7 days</p>
       </div>
     </div>
 
     <!-- Billing Toggle -->
-    <div class="flex items-center justify-center gap-3" data-animate="fade-up">
-      <span id="label-monthly" class="text-sm font-medium text-text-tertiary transition-colors">Monthly</span>
-
+    <div class="flex items-center justify-center gap-3 mt-20" data-animate="fade-up">
       <button
         id="billing-toggle"
         role="switch"
         aria-checked="true"
         aria-label="Toggle billing period"
-        class="relative w-10 h-6 rounded-full bg-brand-600 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2"
+        class="relative w-[44px] h-[24px] rounded-full bg-brand-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2"
       >
-        <span class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow-xs transition-transform translate-x-4 pointer-events-none"></span>
+        <span class="absolute top-[2px] left-[2px] w-5 h-5 bg-white rounded-full shadow-xs transition-transform translate-x-5 pointer-events-none"></span>
       </button>
 
-      <span id="label-annual" class="text-sm font-medium text-text-primary transition-colors">Annually</span>
+      <span id="label-annual" class="text-sm font-medium text-white transition-colors">Annually</span>
 
       <span class="px-2 py-0.5 bg-green-50 border border-green-200 rounded-md text-xs font-medium text-green-700">
         Save 20%
@@ -127,16 +136,17 @@ const tiers: PricingTier[] = [
     </div>
 
     <!-- Pricing Cards Grid -->
-    <div class="rounded-2xl border border-border-primary overflow-hidden shadow-xs grid grid-cols-1 lg:grid-cols-4" data-animate="stagger">
+    <div class="rounded-2xl border border-border-primary overflow-hidden shadow-xs grid grid-cols-1 lg:grid-cols-4 mt-8 w-full" data-animate="stagger">
       {tiers.map((tier, i) => (
         <div class:list={[
           "flex flex-col bg-bg-primary",
           i < tiers.length - 1 ? "border-b lg:border-b-0 lg:border-r border-border-primary" : "",
         ]}>
           <!-- Card Header -->
-          <div class="flex flex-col gap-8 p-8">
-            <!-- Name + Badge -->
+          <div class="flex flex-col h-[328px] px-8 pt-8 pb-8">
+            <!-- Heading and price -->
             <div class="flex flex-col gap-5">
+              <!-- Name + Badge -->
               <div class="flex items-center gap-2">
                 <h2 class="font-display text-2xl font-medium leading-8 text-text-primary flex-1">{tier.name}</h2>
                 {tier.badge && (
@@ -178,7 +188,7 @@ const tiers: PricingTier[] = [
             <a
               href={tier.cta.href}
               class:list={[
-                "w-full py-3 px-[18px] rounded-xl text-base font-medium leading-6 text-center transition-colors shadow-xs",
+                "w-full py-3 px-[18px] rounded-xl text-base font-medium leading-6 text-center transition-colors shadow-xs mt-auto",
                 tier.cta.primary
                   ? "bg-bg-brand-solid text-white hover:bg-brand-800"
                   : "bg-bg-primary text-text-secondary border border-border-primary hover:bg-bg-secondary",
@@ -223,6 +233,7 @@ const tiers: PricingTier[] = [
     </div>
 
   </div>
+  </div>
 </section>
 
 <script>
@@ -241,11 +252,11 @@ const tiers: PricingTier[] = [
     toggle.setAttribute("aria-checked", String(isAnnual));
 
     // Move thumb
-    thumb?.classList.toggle("translate-x-4", isAnnual);
+    thumb?.classList.toggle("translate-x-5", isAnnual);
     thumb?.classList.toggle("translate-x-0", !isAnnual);
 
     // Toggle background
-    toggle.classList.toggle("bg-brand-600", isAnnual);
+    toggle.classList.toggle("bg-brand-accent", isAnnual);
     toggle.classList.toggle("bg-neutral-300", !isAnnual);
 
     // Swap prices
@@ -253,10 +264,10 @@ const tiers: PricingTier[] = [
     pricesMonthly.forEach((el) => el.classList.toggle("hidden", isAnnual));
 
     // Swap label emphasis
-    annualLabel?.classList.toggle("text-text-primary", isAnnual);
-    annualLabel?.classList.toggle("text-text-tertiary", !isAnnual);
-    monthlyLabel?.classList.toggle("text-text-primary", !isAnnual);
-    monthlyLabel?.classList.toggle("text-text-tertiary", isAnnual);
+    annualLabel?.classList.toggle("text-white", isAnnual);
+    annualLabel?.classList.toggle("text-text-on-brand-tertiary", !isAnnual);
+    monthlyLabel?.classList.toggle("text-white", !isAnnual);
+    monthlyLabel?.classList.toggle("text-text-on-brand-tertiary", isAnnual);
 
     // Update billing period label
     periodLabels.forEach((el) => {

@@ -1,0 +1,161 @@
+---
+import bgPattern from "@/assets/images/background-pattern.png";
+import checkmarkShield from "@/assets/images/checkmark-shield.png";
+import mattAvatar from "@/assets/images/testimonial-matt-avatar.png";
+
+const metrics = [
+  { value: "400+", label: "Projects completed" },
+  { value: "400+", label: "Projects completed" },
+];
+
+const testimonial = {
+  quote: "Handoff AI is a game changer in helping us develop our long term sales & operations plan\u2026 AI is the way of the future and this hits us in a very important part of our business.",
+  name: "Matt",
+  role: "Equi-linc",
+};
+
+const notifications = [
+  {
+    icon: "file-check",
+    text: 'Master Bath Remodel proposal <strong>approved</strong> by Sarah Miller',
+    time: "Just now",
+  },
+  {
+    icon: "bank-note",
+    text: 'Deposit of <strong>$8,500 received</strong> for Kitchen Remodel project',
+    time: "2m ago",
+  },
+  {
+    icon: "send",
+    text: 'Kitchen Remodel <strong>proposal sent</strong> successfully to Olivia Rhye',
+    time: "15m ago",
+  },
+];
+---
+
+<section class="bg-bg-primary px-4 py-2">
+  <div
+    class="bg-gradient-to-b from-[#d5ded8] to-brand-25 rounded-3xl overflow-hidden py-16 lg:py-24 relative"
+    data-animate="fade-up"
+  >
+    <!-- Background pattern -->
+    <div class="absolute top-24 left-1/2 -translate-x-1/2 w-[1920px] h-[1440px] pointer-events-none opacity-50">
+      <img src={bgPattern.src} alt="" class="w-full h-full block object-contain object-top" />
+    </div>
+
+    <div class="max-w-[1280px] mx-auto px-6 lg:px-8 relative z-10 flex flex-col lg:flex-row items-center gap-16">
+      <!-- Left column: Heading + Metrics + Testimonial -->
+      <div class="flex-1 flex flex-col gap-16">
+        <!-- Heading -->
+        <h2 class="font-display text-4xl lg:text-[48px] font-semibold leading-[1.2] lg:leading-[60px] tracking-[-0.96px] text-text-primary max-w-[768px]">
+          Built for contractors who want their time back
+        </h2>
+
+        <!-- Metrics -->
+        <div class="flex flex-wrap gap-6" data-animate="fade-up">
+          {metrics.map((metric) => (
+            <div class="flex-1 min-w-[240px] flex flex-col gap-3">
+              <p class="font-display text-[60px] font-semibold leading-[72px] tracking-[-1.2px] text-[#335645]">
+                {metric.value}
+              </p>
+              <p class="text-lg font-semibold leading-7 text-text-primary">
+                {metric.label}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <!-- Testimonial -->
+        <div class="border-l-2 border-[#849a8d] pl-10 py-6 flex flex-col gap-6" data-animate="fade-up">
+          <p class="text-xl font-medium leading-[30px] text-text-tertiary">
+            {testimonial.quote}
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-full border border-[rgba(0,0,0,0.08)] overflow-hidden shrink-0">
+              <img src={mattAvatar.src} alt={testimonial.name} class="w-full h-full object-cover" />
+            </div>
+            <div>
+              <p class="text-base font-medium leading-6 text-text-primary flex items-center gap-1">
+                {testimonial.name}
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="none" class="text-brand-accent shrink-0">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z" fill="currentColor"/>
+                </svg>
+              </p>
+              <p class="text-base font-normal leading-6 text-text-tertiary">{testimonial.role}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right column: Illustration + Notification cards -->
+      <div class="hidden lg:flex flex-col items-end relative w-[582px] h-[546px] shrink-0">
+        <!-- Green checkmark shape -->
+        <img
+          src={checkmarkShield.src}
+          alt=""
+          class="w-[520px] h-[498px]"
+        />
+
+        <!-- Notification stack -->
+        <div class="absolute bottom-0 left-[19px] w-[320px] h-[300px]">
+          <!-- Top notification: file-check (proposal approved) -->
+          <div class="absolute top-0 left-0 w-[320px] bg-white rounded-xl p-4 shadow-[0px_20px_24px_-4px_rgba(10,13,18,0.08),0px_8px_8px_-4px_rgba(10,13,18,0.03),0px_3px_3px_-1.5px_rgba(10,13,18,0.04)] overflow-hidden">
+            <div class="flex gap-4 items-start">
+              <div class="bg-[rgba(213,222,216,0.3)] rounded-lg p-2 shrink-0">
+                <!-- file-check-02 icon -->
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-brand-800">
+                  <path d="M20 10V6.8C20 5.1198 20 4.2798 19.673 3.638C19.3854 3.0735 18.9265 2.6146 18.362 2.327C17.7202 2 16.8802 2 15.2 2H8.8C7.1198 2 6.2798 2 5.638 2.327C5.0735 2.6146 4.6146 3.0735 4.327 3.638C4 4.2798 4 5.1198 4 6.8V17.2C4 18.8802 4 19.7202 4.327 20.362C4.6146 20.9265 5.0735 21.3854 5.638 21.673C6.2798 22 7.1198 22 8.8 22H12M15 19L17 21L22 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="flex-1 flex flex-col gap-0.5">
+                <p class="text-sm font-medium leading-5 text-text-brand-secondary">
+                  Master Bath Remodel proposal <strong class="font-bold">approved</strong> by Sarah Miller
+                </p>
+                <p class="text-xs font-medium leading-[18px] text-text-quaternary">Just now</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Middle notification: bank-note (deposit received) -->
+          <div class="absolute top-[104px] left-[32px] w-[320px] bg-white rounded-xl p-4 shadow-[0px_20px_24px_-4px_rgba(10,13,18,0.08),0px_8px_8px_-4px_rgba(10,13,18,0.03),0px_3px_3px_-1.5px_rgba(10,13,18,0.04)] overflow-hidden">
+            <div class="flex gap-4 items-start">
+              <div class="bg-[rgba(213,222,216,0.3)] rounded-lg p-2 shrink-0">
+                <!-- bank-note-01 icon -->
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-brand-800">
+                  <path d="M2 8.5H14.5M2 12H5M9 15.5H22M17 12H22M12 8.5C12 9.8807 10.6569 11 9 11C7.3431 11 6 9.8807 6 8.5C6 7.1193 7.3431 6 9 6C10.6569 6 12 7.1193 12 8.5ZM20 15.5C20 16.8807 18.6569 18 17 18C15.3431 18 14 16.8807 14 15.5C14 14.1193 15.3431 13 17 13C18.6569 13 20 14.1193 20 15.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="flex-1 flex flex-col gap-0.5">
+                <p class="text-sm font-medium leading-5 text-text-brand-secondary">
+                  Deposit of <strong class="font-bold">$8,500 received</strong> for Kitchen Remodel project
+                </p>
+                <p class="text-xs font-medium leading-[18px] text-text-quaternary">2m ago</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom notification: send (proposal sent) — fading out -->
+          <div class="absolute top-[208px] left-0 w-[320px] bg-gradient-to-b from-white from-[48%] to-transparent rounded-xl p-4 opacity-80 overflow-hidden">
+            <div class="flex gap-4 items-start">
+              <div class="bg-[rgba(213,222,216,0.3)] rounded-lg p-2 shrink-0">
+                <!-- send-01 icon -->
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-brand-800">
+                  <path d="M10.5004 12H5.00043M4.91577 12.2915L2.58085 19.2662C2.39742 19.8139 2.3057 20.0878 2.37152 20.2671C2.42868 20.4229 2.55144 20.5457 2.70724 20.6028C2.88652 20.6687 3.16042 20.5769 3.70822 20.3935L21.3291 14.4724C21.8599 14.2946 22.1254 14.2058 22.2087 14.0658C22.2811 13.944 22.2811 13.7945 22.2087 13.6728C22.1254 13.5328 21.8599 13.4439 21.3291 13.2661L3.70336 7.34267C3.15744 7.15985 2.88448 7.06844 2.70534 7.13413C2.54968 7.19108 2.42692 7.31353 2.36963 7.46918C2.30369 7.64833 2.39468 7.92109 2.57665 8.46662L4.91644 15.4609C4.94869 15.558 4.96481 15.6065 4.97167 15.6563C4.97776 15.7003 4.97876 15.7449 4.97467 15.7892C4.97003 15.8392 4.95614 15.8882 4.92837 15.9862L4.91577 16.0312" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="flex-1 flex flex-col gap-0.5">
+                <p class="text-sm font-medium leading-5 text-text-brand-secondary">
+                  Kitchen Remodel <strong class="font-bold">proposal sent</strong> successfully to Olivia Rhye
+                </p>
+                <p class="text-xs font-medium leading-[18px] text-text-quaternary">15m ago</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ghost blur card behind bottom -->
+          <div class="absolute top-[208px] left-0 w-[320px] h-[92px] bg-[rgba(255,255,255,0.1)] backdrop-blur-[6px] rounded-xl -z-10"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
