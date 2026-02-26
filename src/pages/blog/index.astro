@@ -10,6 +10,13 @@ const posts = (await getCollection("blog")).sort(
 );
 
 const [featuredPost, ...remainingPosts] = posts;
+
+// Build category tabs from actual post data — only show categories that have posts
+const categorySet = new Set<string>();
+posts.forEach((p) => {
+  if (p.data.category) categorySet.add(p.data.category);
+});
+const categories = ["All", ...Array.from(categorySet).sort()];
 ---
 
 <BaseLayout title="Blog — Handoff">
@@ -83,11 +90,30 @@ const [featuredPost, ...remainingPosts] = posts;
           </a>
         )}
 
-        {/* Remaining Posts Grid */}
+        {/* Category Tabs */}
+        {categories.length > 1 && (
+          <div class="flex items-center gap-2 border-b border-neutral-200 overflow-x-auto mb-12">
+            {categories.map((cat, i) => (
+              <button
+                class:list={[
+                  "px-4 py-3 text-sm font-semibold leading-5 whitespace-nowrap border-b-2 transition-colors cursor-pointer",
+                  i === 0
+                    ? "border-brand-700 text-brand-700"
+                    : "border-transparent text-text-quaternary hover:text-text-secondary hover:border-neutral-300"
+                ]}
+                data-category={cat}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {/* Posts Grid */}
         {remainingPosts.length > 0 && (
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" data-animate="stagger">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" data-animate="stagger" id="posts-grid">
             {remainingPosts.map((post) => (
-              <a href={`/blog/${post.id.replace(/\.md$/, "")}`} class="group flex flex-col gap-4">
+              <a href={`/blog/${post.id.replace(/\.md$/, "")}`} class="group flex flex-col gap-4" data-post-category={post.data.category || ""}>
                 {post.data.featuredImage ? (
                   <img
                     src={post.data.featuredImage}
@@ -143,4 +169,31 @@ const [featuredPost, ...remainingPosts] = posts;
   });
 
   initScrollAnimations();
+
+  // Category filter tabs
+  const tabs = document.querySelectorAll<HTMLButtonElement>("[data-category]");
+  const posts = document.querySelectorAll<HTMLElement>("[data-post-category]");
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const cat = tab.dataset.category;
+
+      // Update active tab
+      tabs.forEach((t) => {
+        t.classList.remove("border-brand-700", "text-brand-700");
+        t.classList.add("border-transparent", "text-text-quaternary");
+      });
+      tab.classList.remove("border-transparent", "text-text-quaternary");
+      tab.classList.add("border-brand-700", "text-brand-700");
+
+      // Filter posts
+      posts.forEach((post) => {
+        if (cat === "All" || post.dataset.postCategory === cat) {
+          post.style.display = "";
+        } else {
+          post.style.display = "none";
+        }
+      });
+    });
+  });
 </script>
