@@ -5,54 +5,15 @@ import Footer from "@/components/sections/Footer.astro";
 import Button from "@/components/ui/Button.astro";
 import checkCircle from "@/assets/icons/check-circle.svg";
 import { navItems, footerColumns } from "@/lib/navigation";
+import { getCollection } from "astro:content";
 
-const featuredPost = {
-  title: "19 ways contractors use AI to win more jobs and waste less time",
-  excerpt: "Here are 19 practical ways to use AI as a second brain for your construction business, improving decisions, standardizing workflows, reducing mistakes, and driving real, compounding productivity gains.",
-  slug: "/resources",
-  image: null,
-};
+const allPosts = (await getCollection("blog")).sort(
+  (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime(),
+);
+
+const [featuredPost, ...posts] = allPosts;
 
 const categories = ["All", "Growth", "Playbooks", "Industry", "Success Stories", "Handoff Updates"];
-
-const posts = [
-  {
-    title: "How to scale your construction business with AI",
-    date: "20 Jan 2025",
-    slug: "/resources",
-    image: null,
-  },
-  {
-    title: "The future of pre-construction: AI-powered estimating",
-    date: "20 Jan 2025",
-    slug: "/resources",
-    image: null,
-  },
-  {
-    title: "5 ways to improve client communication in construction",
-    date: "20 Jan 2025",
-    slug: "/resources",
-    image: null,
-  },
-  {
-    title: "Building a strong brand for your construction company",
-    date: "20 Jan 2025",
-    slug: "/resources",
-    image: null,
-  },
-  {
-    title: "Safety first: using tech to reduce on-site risks",
-    date: "20 Jan 2025",
-    slug: "/resources",
-    image: null,
-  },
-  {
-    title: "Sustainable building practices for the modern contractor",
-    date: "20 Jan 2025",
-    slug: "/resources",
-    image: null,
-  },
-];
 
 const ctaChecks = ["30-day free trial", "Personalized onboarding", "Access to all features"];
 ---
@@ -65,28 +26,43 @@ const ctaChecks = ["30-day free trial", "Personalized onboarding", "Access to al
     <div class="max-w-[1920px] mx-auto bg-white rounded-3xl border border-black/[0.04] py-16 lg:py-24 overflow-hidden flex flex-col gap-16 lg:gap-24">
 
       <!-- Featured Post -->
-      <div class="max-w-[1440px] px-6 lg:px-8 mx-auto w-full">
-        <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
-          <!-- Image -->
-          <div class="flex-[1.5] w-full">
-            <div class="w-full aspect-[16/9] rounded-2xl bg-detail-visual-bg flex items-center justify-center">
-              <p class="text-white/80 text-lg font-medium">Featured post image</p>
+      {featuredPost && (
+        <div class="max-w-[1440px] px-6 lg:px-8 mx-auto w-full">
+          <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+            <!-- Image -->
+            <div class="flex-[1.5] w-full">
+              {featuredPost.data.featuredImage ? (
+                <img
+                  src={featuredPost.data.featuredImage}
+                  alt={featuredPost.data.title}
+                  class="w-full aspect-[16/9] rounded-2xl object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+              ) : (
+                <div class="w-full aspect-[16/9] rounded-2xl bg-detail-visual-bg flex items-center justify-center">
+                  <p class="text-white/80 text-lg font-medium">Featured post image</p>
+                </div>
+              )}
             </div>
-          </div>
-          <!-- Text -->
-          <div class="flex-1 flex flex-col gap-5">
-            <h1 class="font-display text-[28px] lg:text-4xl font-medium leading-9 lg:leading-[44px] tracking-[-0.72px] text-text-primary">
-              {featuredPost.title}
-            </h1>
-            <p class="text-base font-normal leading-6 text-text-tertiary">
-              {featuredPost.excerpt}
-            </p>
-            <div>
-              <Button variant="secondary-outline" href={featuredPost.slug}>Read more</Button>
+            <!-- Text -->
+            <div class="flex-1 flex flex-col gap-5">
+              {featuredPost.data.category && (
+                <span class="text-sm font-semibold text-text-quaternary">{featuredPost.data.category}</span>
+              )}
+              <h1 class="font-display text-[28px] lg:text-4xl font-medium leading-9 lg:leading-[44px] tracking-[-0.72px] text-text-primary">
+                {featuredPost.data.title}
+              </h1>
+              <p class="text-base font-normal leading-6 text-text-tertiary">
+                {featuredPost.data.excerpt}
+              </p>
+              <div>
+                <Button variant="secondary-outline" href={`/blog/${featuredPost.id.replace(/\.md$/, "")}`}>Read more</Button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
 
       <!-- Category Tabs + Grid -->
       <div class="max-w-[1440px] px-6 lg:px-8 mx-auto w-full flex flex-col gap-12">
@@ -109,53 +85,41 @@ const ctaChecks = ["30-day free trial", "Personalized onboarding", "Access to al
         <!-- Blog Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
           {posts.map((post) => (
-            <a href={post.slug} class="group flex flex-col gap-4">
-              <div class="w-full aspect-[3/2] rounded-xl bg-detail-visual-bg flex items-center justify-center overflow-hidden">
-                <p class="text-white/80 text-sm font-medium">Blog post image</p>
+            <a href={`/blog/${post.id.replace(/\.md$/, "")}`} class="group flex flex-col gap-4">
+              <div class="w-full aspect-[3/2] rounded-xl overflow-hidden">
+                {post.data.featuredImage ? (
+                  <img
+                    src={post.data.featuredImage}
+                    alt={post.data.title}
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ) : (
+                  <div class="w-full h-full bg-detail-visual-bg flex items-center justify-center">
+                    <p class="text-white/80 text-sm font-medium">Blog post image</p>
+                  </div>
+                )}
               </div>
               <div class="flex flex-col gap-2">
                 <div class="flex items-start justify-between gap-2">
                   <h3 class="font-display text-lg font-medium leading-7 text-text-primary group-hover:text-brand-700 transition-colors">
-                    {post.title}
+                    {post.data.title}
                   </h3>
                   <svg class="w-5 h-5 shrink-0 mt-1 text-text-quaternary" viewBox="0 0 20 20" fill="none">
                     <path d="M5.833 14.167L14.167 5.833M14.167 5.833H5.833M14.167 5.833v8.334" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </div>
-                <p class="text-sm font-normal leading-5 text-text-quaternary">{post.date}</p>
+                <p class="text-sm font-normal leading-5 text-text-quaternary">
+                  {post.data.publishedAt.toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </p>
               </div>
             </a>
           ))}
-        </div>
-
-        <!-- Pagination -->
-        <div class="flex items-center justify-between pt-4 border-t border-neutral-200">
-          <button class="inline-flex items-center gap-2 text-sm font-semibold leading-5 text-text-secondary hover:text-text-primary transition-colors">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M12.667 8H3.333M3.333 8l4 4M3.333 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            Previous
-          </button>
-          <div class="hidden sm:flex items-center gap-1">
-            {[1, 2, 3, "...", 8, 9, 10].map((p) => (
-              <button
-                class:list={[
-                  "w-10 h-10 rounded-lg text-sm font-medium transition-colors",
-                  p === 1
-                    ? "bg-neutral-100 text-text-primary"
-                    : "text-text-quaternary hover:bg-neutral-50"
-                ]}
-              >
-                {p}
-              </button>
-            ))}
-          </div>
-          <button class="inline-flex items-center gap-2 text-sm font-semibold leading-5 text-text-secondary hover:text-text-primary transition-colors">
-            Next
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M3.333 8h9.334M8.667 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
         </div>
       </div>
     </div>
