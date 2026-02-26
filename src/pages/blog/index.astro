@@ -108,9 +108,9 @@ const categories = ["All", ...Array.from(categorySet).sort()];
 
         {/* Posts Grid */}
         {remainingPosts.length > 0 && (
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" data-animate="stagger" id="posts-grid">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-opacity duration-150" data-animate="stagger" id="posts-grid">
             {remainingPosts.map((post) => (
-              <a href={`/blog/${post.id.replace(/\.md$/, "")}`} class="group flex flex-col gap-6 transition-all duration-200 ease-out" data-post-category={post.data.category || ""}>
+              <a href={`/blog/${post.id.replace(/\.md$/, "")}`} class="group flex flex-col gap-6" data-post-category={post.data.category || ""}>
                 <div class="w-full h-[256px] rounded-md overflow-hidden">
                   {post.data.featuredImage ? (
                     <img
@@ -185,22 +185,17 @@ const categories = ["All", ...Array.from(categorySet).sort()];
       tab.classList.remove("border-transparent", "text-text-quaternary");
       tab.classList.add("border-brand-700", "text-brand-700");
 
-      // Filter posts with fade transition
-      posts.forEach((post) => {
-        if (cat === "All" || post.dataset.postCategory === cat) {
-          post.style.display = "";
-          requestAnimationFrame(() => {
-            post.style.opacity = "1";
-            post.style.transform = "translateY(0)";
+      // Filter posts with fade
+      const grid = document.getElementById("posts-grid");
+      if (grid) {
+        grid.style.opacity = "0";
+        setTimeout(() => {
+          posts.forEach((post) => {
+            post.style.display = (cat === "All" || post.dataset.postCategory === cat) ? "" : "none";
           });
-        } else {
-          post.style.opacity = "0";
-          post.style.transform = "translateY(8px)";
-          setTimeout(() => {
-            if (post.style.opacity === "0") post.style.display = "none";
-          }, 200);
-        }
-      });
+          grid.style.opacity = "1";
+        }, 150);
+      }
     });
   });
 </script>
