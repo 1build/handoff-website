@@ -51,7 +51,7 @@ export const navItems: NavItem[] = [
       },
     ],
   },
-  { label: "Pricing", href: "/" },
+  { label: "Pricing", href: "/pricing" },
   {
     label: "Resources",
     items: [
@@ -89,7 +89,7 @@ export const footerColumns: FooterColumn[] = [
       { label: "Financial Management", href: "/financial-management" },
       { label: "Permissions & Roles", href: "/permissions-roles" },
       { label: "Customization", href: "/customization" },
-      { label: "Pricing", href: "/" },
+      { label: "Pricing", href: "/pricing" },
     ],
   },
   {
