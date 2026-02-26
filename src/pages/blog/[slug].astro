@@ -235,11 +235,14 @@ const relatedPosts = allPosts
       }
     }
 
-    // Reading progress
-    if (progressBar) {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = docHeight > 0 ? Math.min((scrollTop / docHeight) * 100, 100) : 0;
+    // Reading progress scoped to article body
+    const article = document.querySelector(".article-body");
+    if (progressBar && article) {
+      const rect = article.getBoundingClientRect();
+      const articleTop = rect.top + window.scrollY;
+      const articleBottom = articleTop + rect.height;
+      const scrollPos = window.scrollY + window.innerHeight * 0.1;
+      const progress = Math.min(Math.max((scrollPos - articleTop) / (articleBottom - articleTop) * 100, 0), 100);
       progressBar.style.width = progress + "%";
     }
   });
