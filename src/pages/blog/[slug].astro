@@ -39,6 +39,11 @@ const relatedPosts = allPosts
 >
   <Header navItems={navItems} />
 
+  <!-- Reading Progress Bar -->
+  <div class="fixed top-0 left-0 w-full h-[3px] z-[100]">
+    <div id="reading-progress" class="h-full bg-brand-600 w-0 transition-[width] duration-150 ease-out"></div>
+  </div>
+
   <article class="relative z-[2] pt-32 pb-2 px-4 bg-brand-800">
     <div class="max-w-[1920px] mx-auto bg-white rounded-3xl py-16 lg:py-24 overflow-hidden">
 
@@ -219,6 +224,7 @@ const relatedPosts = allPosts
   import { initScrollAnimations } from "@/lib/animations";
 
   const header = document.getElementById("site-header");
+  const progressBar = document.getElementById("reading-progress");
 
   window.addEventListener("scroll", () => {
     if (header) {
@@ -227,6 +233,14 @@ const relatedPosts = allPosts
       } else {
         header.classList.remove("header-scrolled");
       }
+    }
+
+    // Reading progress
+    if (progressBar) {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? Math.min((scrollTop / docHeight) * 100, 100) : 0;
+      progressBar.style.width = progress + "%";
     }
   });
 
