@@ -198,6 +198,115 @@
   transform: none;
 }
 
+/* ─── Article Body Typography ─── */
+.article-body h2 {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 44px;
+  letter-spacing: -0.72px;
+  color: var(--color-text-primary);
+  margin-top: 48px;
+  margin-bottom: 24px;
+}
+
+.article-body h3 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+  color: var(--color-text-primary);
+  margin-top: 48px;
+  margin-bottom: 16px;
+}
+
+.article-body h4 {
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 30px;
+  color: var(--color-text-primary);
+  margin-top: 48px;
+  margin-bottom: 12px;
+}
+
+.article-body p {
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 32px;
+  color: var(--color-neutral-900);
+  margin-bottom: 24px;
+}
+
+.article-body blockquote {
+  border-left: 2px solid var(--color-brand-accent);
+  padding-left: 20px;
+  margin-top: 48px;
+  margin-bottom: 48px;
+}
+
+.article-body blockquote p {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+  color: var(--color-text-primary);
+  margin-bottom: 0;
+}
+
+.article-body ul,
+.article-body ol {
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--color-text-tertiary);
+  margin-bottom: 24px;
+  padding-left: 24px;
+}
+
+.article-body ul {
+  list-style: disc;
+}
+
+.article-body ol {
+  list-style: decimal;
+}
+
+.article-body li {
+  margin-bottom: 8px;
+}
+
+.article-body li::marker {
+  color: var(--color-brand-accent);
+}
+
+.article-body a {
+  color: var(--color-brand-700);
+  text-decoration: none;
+}
+
+.article-body a:hover {
+  text-decoration: underline;
+}
+
+.article-body img {
+  width: 100%;
+  border-radius: 12px;
+  margin-top: 48px;
+  margin-bottom: 48px;
+}
+
+.article-body strong {
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.article-body hr {
+  border: none;
+  border-top: 1px solid var(--color-border-primary);
+  margin: 48px 0;
+}
+
 /* ─── Page Transitions (fade through dark green) ─── */
 @keyframes page-fade-out {
   from { opacity: 1; }
