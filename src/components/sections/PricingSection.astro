@@ -281,12 +281,18 @@ const tiers: PricingTier[] = [
       (el as HTMLElement).style.opacity = "1";
     });
 
-    // Compare table prices (simple show/hide)
-    document.querySelectorAll(".compare-price-annual").forEach((el) => {
-      el.classList.toggle("hidden", !isAnnual);
+    // Compare table prices (same slide animation)
+    const comparePricesAnnual = document.querySelectorAll(".compare-price-annual");
+    const comparePricesMonthly = document.querySelectorAll(".compare-price-monthly");
+    const compareEntering = isAnnual ? comparePricesAnnual : comparePricesMonthly;
+    const compareLeaving = isAnnual ? comparePricesMonthly : comparePricesAnnual;
+    compareLeaving.forEach((el) => {
+      (el as HTMLElement).style.transform = "translateY(-100%)";
+      (el as HTMLElement).style.opacity = "0";
     });
-    document.querySelectorAll(".compare-price-monthly").forEach((el) => {
-      el.classList.toggle("hidden", isAnnual);
+    compareEntering.forEach((el) => {
+      (el as HTMLElement).style.transform = "translateY(0)";
+      (el as HTMLElement).style.opacity = "1";
     });
 
     // Label emphasis (hero section)
