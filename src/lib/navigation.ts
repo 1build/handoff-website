@@ -30,24 +30,19 @@ export const navItems: NavItem[] = [
     wide: true,
     items: [
       {
-        label: "Project Management",
+        label: "Sales & Marketing Growth",
+        href: "/sales-marketing-growth",
+        description: "Win more projects with AI-powered estimates and proposals that convert leads into clients faster.",
+      },
+      {
+        label: "Project Management & Operations",
         href: "/project-management",
-        description: "Run more projects without more admin. Documentation, scheduling, and crew coordination in one system.",
+        description: "Streamline projects from estimate to completion with connected AI systems that save time and reduce errors.",
       },
       {
-        label: "Financial Management",
+        label: "Financial & Business Management",
         href: "/financial-management",
-        description: "Get paid faster with AI-powered invoicing, track profitability, and make data-driven decisions.",
-      },
-      {
-        label: "Permissions & Roles",
-        href: "/permissions-roles",
-        description: "Keep control of your business as your team grows with role-based access and approval workflows.",
-      },
-      {
-        label: "Customization",
-        href: "/customization",
-        description: "Set up instructions, templates, and workflows that match how you actually run your business.",
+        description: "Get paid faster with AI-powered digital invoicing, track profitability, and make data-driven decisions to grow your business.",
       },
     ],
   },

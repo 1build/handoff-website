@@ -1,0 +1,30 @@
+---
+const stats = [
+  { value: "+$5,250", label: "more earned per week" },
+  { value: "+14 hrs", label: "saved per week" },
+  { value: "+40%", label: "more deals closed" },
+  { value: "+$85k", label: "more annual profit" },
+];
+---
+
+<section class="relative z-[2] max-w-[1280px] mx-auto w-full">
+  <div class="flex flex-col lg:flex-row items-stretch border-t border-l border-r border-border-brand-alt rounded-t-3xl overflow-hidden">
+    <!-- "See results immediately" column -->
+    <div class="flex-1 bg-black/8 border-r border-border-brand-alt flex items-start justify-center px-10 py-8">
+      <p class="text-xl font-medium leading-[30px] text-white">
+        See results<br />immediately
+      </p>
+    </div>
+
+    {stats.map((stat) => (
+      <div class="flex-1 bg-black/8 border-r border-border-brand-alt flex flex-col gap-1 items-start justify-center px-6 py-8 text-center">
+        <p class="font-display text-5xl font-medium leading-[60px] tracking-[-0.96px] text-white w-full">
+          {stat.value}
+        </p>
+        <p class="text-base font-normal leading-6 text-brand-100 w-full">
+          {stat.label}
+        </p>
+      </div>
+    ))}
+  </div>
+</section>

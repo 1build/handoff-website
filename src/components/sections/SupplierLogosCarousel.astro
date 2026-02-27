@@ -1,0 +1,89 @@
+---
+import logoJeldWen from "@/assets/images/supplier-logos/jeld-wen.webp";
+import logoTrex from "@/assets/images/supplier-logos/trex.webp";
+import logoEaton from "@/assets/images/supplier-logos/eaton.webp";
+import logoPergo from "@/assets/images/supplier-logos/pergo.webp";
+import logoOwensCorning from "@/assets/images/supplier-logos/owens-corning.webp";
+import logoJamesHardie from "@/assets/images/supplier-logos/james-hardie.webp";
+import logoSchluterSystems from "@/assets/images/supplier-logos/schluter-systems.webp";
+import logoAllenRoth from "@/assets/images/supplier-logos/allen-roth.webp";
+import logoDelta from "@/assets/images/supplier-logos/delta.webp";
+import logoLG from "@/assets/images/supplier-logos/lg.webp";
+import logoSherwinWilliams from "@/assets/images/supplier-logos/sherwin-williams.webp";
+import logoPella from "@/assets/images/supplier-logos/pella.webp";
+import logoSimpson from "@/assets/images/supplier-logos/simpson-strong-tie.webp";
+import logoKohler from "@/assets/images/supplier-logos/kohler.webp";
+import logoSouthwire from "@/assets/images/supplier-logos/southwire.webp";
+import logoUSG from "@/assets/images/supplier-logos/usg.webp";
+import logoMohawk from "@/assets/images/supplier-logos/mohawk.webp";
+import logoBoiseCascade from "@/assets/images/supplier-logos/boise-cascade.webp";
+
+interface Props {
+  title?: string;
+}
+
+const { title = "Used by thousands of construction businesses like yours:" } = Astro.props;
+
+const logos = [
+  { src: logoJeldWen.src, alt: "Jeld-Wen" },
+  { src: logoTrex.src, alt: "Trex" },
+  { src: logoEaton.src, alt: "Eaton" },
+  { src: logoPergo.src, alt: "Pergo" },
+  { src: logoOwensCorning.src, alt: "Owens Corning" },
+  { src: logoJamesHardie.src, alt: "James Hardie" },
+  { src: logoSchluterSystems.src, alt: "Schluter Systems" },
+  { src: logoAllenRoth.src, alt: "Allen + Roth" },
+  { src: logoDelta.src, alt: "Delta" },
+  { src: logoLG.src, alt: "LG" },
+  { src: logoSherwinWilliams.src, alt: "Sherwin-Williams" },
+  { src: logoPella.src, alt: "Pella Windows & Doors" },
+  { src: logoSimpson.src, alt: "Simpson Strong-Tie" },
+  { src: logoKohler.src, alt: "Kohler" },
+  { src: logoSouthwire.src, alt: "Southwire" },
+  { src: logoUSG.src, alt: "USG" },
+  { src: logoMohawk.src, alt: "Mohawk Industries" },
+  { src: logoBoiseCascade.src, alt: "Boise Cascade" },
+];
+---
+
+<div class="flex flex-col items-center gap-12">
+  <p class="font-display text-2xl font-medium leading-8 text-text-quaternary text-center px-8">
+    {title}
+  </p>
+  <div class="supplier-carousel relative w-full overflow-hidden">
+    <!-- Fade edges -->
+    <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-white to-transparent"></div>
+    <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-white to-transparent"></div>
+
+    <div class="supplier-track flex items-center gap-16 px-8">
+      {[...logos, ...logos].map((logo) => (
+        <div class="shrink-0 h-[60px] flex items-center">
+          <img
+            src={logo.src}
+            alt={logo.alt}
+            class="h-full w-auto object-contain mix-blend-darken"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes supplier-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .supplier-track {
+    animation: supplier-scroll 40s linear infinite;
+    transition: animation-play-state 0.5s ease;
+  }
+
+  .supplier-carousel:hover .supplier-track {
+    animation-play-state: paused;
+    transition-delay: 0.3s;
+  }
+</style>

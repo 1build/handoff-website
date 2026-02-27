@@ -179,16 +179,16 @@ const tiers: PricingTier[] = [
                   </>
                 )}
               </div>
-
-              <!-- Description -->
-              <p class="text-sm font-medium leading-5 text-text-tertiary">{tier.description}</p>
             </div>
+
+            <!-- Description -->
+            <p class="text-sm font-medium leading-5 text-text-tertiary mt-auto">{tier.description}</p>
 
             <!-- CTA Button -->
             <a
               href={tier.cta.href}
               class:list={[
-                "w-full py-3 px-[18px] rounded-xl text-base font-medium leading-6 text-center transition-colors shadow-xs mt-auto",
+                "w-full py-3 px-[18px] rounded-xl text-base font-medium leading-6 text-center transition-colors shadow-xs mt-6",
                 tier.cta.primary
                   ? "bg-bg-brand-solid text-white hover:bg-brand-800"
                   : "bg-bg-primary text-text-secondary border border-border-primary hover:bg-bg-secondary",

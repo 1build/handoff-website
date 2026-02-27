@@ -1,0 +1,30 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/sections/Header.astro";
+import HeroSection from "@/components/sections/HeroSection.astro";
+import FeaturesSection from "@/components/sections/FeaturesSection.astro";
+import DetailedFeatures from "@/components/sections/DetailedFeatures.astro";
+import OverviewSection from "@/components/sections/OverviewSection.astro";
+import FaqSection from "@/components/sections/FaqSection.astro";
+import CtaSection from "@/components/sections/CtaSection.astro";
+import Footer from "@/components/sections/Footer.astro";
+import { navItems, footerColumns, faqItems } from "@/lib/navigation";
+---
+
+<BaseLayout title="Handoff — Construction-Trained AI for Sales and Lead Intake">
+  <Header navItems={navItems} />
+  <HeroSection />
+  <FeaturesSection />
+  <DetailedFeatures />
+  <OverviewSection />
+  <FaqSection items={faqItems} />
+  <CtaSection />
+  <Footer columns={footerColumns} />
+</BaseLayout>
+
+<script>
+  import { initScrollAnimations } from "@/lib/animations";
+  import { initHeroScroll } from "@/lib/heroScroll";
+  initScrollAnimations();
+  initHeroScroll();
+</script>

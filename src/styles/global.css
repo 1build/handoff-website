@@ -51,6 +51,9 @@ html {
   --color-bg-brand-solid: #183f2e;
   --color-bg-brand-dark: #113120;
 
+  /* Highlight */
+  --color-text-highlight: #47cd89;
+
   /* Detail visual */
   --color-detail-visual-bg: #4e6d5d;
 
@@ -98,7 +101,7 @@ html {
 
 /* ─── Header Scroll State ─── */
 .header-scrolled {
-  background: rgba(17, 49, 32, 0.85) !important;
+  background: rgba(17, 49, 32, 0.95) !important;
   backdrop-filter: blur(12px);
 }
 
@@ -117,6 +120,7 @@ html {
   transform: translateX(-50%) translateY(0);
   pointer-events: auto;
 }
+
 
 /* ─── Hero Sticky ─── */
 .hero-fixed {

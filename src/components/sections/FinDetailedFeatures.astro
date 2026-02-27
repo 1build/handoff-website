@@ -1,0 +1,74 @@
+---
+import DetailRow from "./DetailRow.astro";
+
+const rows = [
+  {
+    eyebrow: "Estimate to payment automation",
+    title: "Get paid while others are still bidding",
+    description: "Connect your entire financial workflow from first quote to final payment.",
+    bullets: [
+      "No retyping numbers from old spreadsheets",
+      "Payment tracking happens behind the scenes",
+      "You focus on building, not billing",
+    ],
+    reverse: false,
+    visualType: "desktop" as const,
+    placeholder: "Screenshot of payment automation workflow",
+  },
+  {
+    eyebrow: "Payment schedules & milestone billing",
+    title: "Money flows throughout the project",
+    description: "Set payment schedules once and get paid throughout the project lifecycle. Handoff automates invoices at each phase.",
+    bullets: [
+      "Define your milestones: deposit, framing, completion — whatever fits your projects",
+      "Invoices go out automatically when milestones hit",
+      "Get paid as work progresses instead of financing the project yourself",
+    ],
+    reverse: true,
+    visualType: "phones" as const,
+    placeholder: "Screenshot of milestone billing setup",
+  },
+  {
+    eyebrow: "Pricing standardization & markup logic",
+    title: "Keep pricing consistent and profitable",
+    description: "Set your markup rules once and every job automatically protects your margins — whether you're pricing your first estimate of the day or your fifteenth.",
+    bullets: [
+      "Every estimate includes your markup automatically — no more forgetting profit margins",
+      "Consistent pricing across all projects and estimators",
+      "Protect against accidentally underpricing work",
+    ],
+    reverse: false,
+    visualType: "isometric" as const,
+    placeholder: "Screenshot of pricing standardization rules",
+  },
+  {
+    eyebrow: "Financial visibility",
+    title: "See the complete financial picture",
+    description: "Track estimates, costs, invoices, and payments in real-time across every project — synced with QuickBooks.",
+    bullets: [
+      "See exactly which projects are making money",
+      "Know if projects are going over budget while there's time to fix them",
+      "Track which clients owe money and when payments are due",
+    ],
+    reverse: true,
+    visualType: "phones" as const,
+    placeholder: "Screenshot of financial reporting dashboard",
+  },
+];
+---
+
+<section class="relative z-[2] px-4 pb-4 bg-brand-800">
+  <div class="max-w-[1920px] mx-auto bg-white rounded-3xl py-16 lg:py-24 overflow-hidden flex flex-col gap-20 lg:gap-40">
+    {rows.map((r) => (
+      <DetailRow
+        eyebrow={r.eyebrow}
+        title={r.title}
+        description={r.description}
+        bullets={r.bullets}
+        reverse={r.reverse}
+        visualType={r.visualType}
+        placeholder={r.placeholder}
+      />
+    ))}
+  </div>
+</section>
