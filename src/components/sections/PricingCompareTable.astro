@@ -123,8 +123,9 @@ const tableGroups: TableGroup[] = [
 ];
 ---
 
-<section class="bg-bg-primary py-16 lg:py-24" id="compare">
-  <div class="max-w-[1440px] mx-auto px-6 lg:px-8">
+<section class="px-4 pt-2" id="compare">
+  <div class="bg-bg-primary rounded-3xl py-16 lg:py-24">
+    <div class="max-w-[1440px] mx-auto px-6 lg:px-8">
 
     <!-- Table header (separate from table body) -->
     <div class="px-8 sticky top-[72px] z-10 bg-bg-primary" data-animate="fade-up">
@@ -177,9 +178,9 @@ const tableGroups: TableGroup[] = [
                   <p class="font-display text-2xl font-medium leading-8 text-text-quaternary">{plan.priceLabel}</p>
                 ) : (
                   <>
-                    <p class="font-display text-2xl font-medium leading-8 text-text-primary">
-                      <span class="compare-price-annual">{plan.annualPrice}</span>
-                      <span class="compare-price-monthly hidden">{plan.monthlyPrice}</span>
+                    <p class="font-display text-2xl font-medium leading-8 text-text-primary relative overflow-hidden h-8">
+                      <span class="compare-price-annual inline-block transition-all duration-300 ease-out" style="transform:translateY(0);opacity:1">{plan.annualPrice}</span>
+                      <span class="compare-price-monthly absolute left-0 top-0 inline-block transition-all duration-300 ease-out" style="transform:translateY(100%);opacity:0">{plan.monthlyPrice}</span>
                     </p>
                     <p class="text-xs font-medium text-text-tertiary">
                       per month, <span class="billing-period-label">billed annually</span>
@@ -211,7 +212,7 @@ const tableGroups: TableGroup[] = [
         <div class:list={["", gi < tableGroups.length - 1 ? "mb-16" : ""]}>
           <!-- Group header -->
           <div class="px-6 pb-4">
-            <p class="text-sm font-semibold leading-5 text-brand-700">{group.title}</p>
+            <p class="text-xl font-semibold leading-7 text-brand-700">{group.title}</p>
           </div>
           <!-- Rows -->
           <div class="flex">
@@ -263,5 +264,6 @@ const tableGroups: TableGroup[] = [
       ))}
     </div>
 
+    </div>
   </div>
 </section>
