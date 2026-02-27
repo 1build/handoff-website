@@ -169,12 +169,12 @@ const tiers: PricingTier[] = [
                   </p>
                 ) : (
                   <>
-                    <p class="font-display text-4xl font-medium leading-[44px] tracking-[-0.72px] text-text-primary">
-                      <span class="price-annual">{tier.annualPrice}</span>
-                      <span class="price-monthly hidden">{tier.monthlyPrice}</span>
+                    <p class="font-display text-4xl font-medium leading-[44px] tracking-[-0.72px] text-text-primary relative overflow-hidden h-[44px]">
+                      <span class="price-annual inline-block transition-all duration-300 ease-out" style="transform:translateY(0);opacity:1">{tier.annualPrice}</span>
+                      <span class="price-monthly absolute left-0 top-0 inline-block transition-all duration-300 ease-out" style="transform:translateY(100%);opacity:0">{tier.monthlyPrice}</span>
                     </p>
                     <p class="text-base font-medium text-text-tertiary">
-                      per month, <span class="text-brand-accent billing-period-label">billed annually</span>
+                      per month, <span class="billing-period-label text-brand-accent">billed annually</span>
                     </p>
                   </>
                 )}
@@ -259,9 +259,18 @@ const tiers: PricingTier[] = [
     toggle.classList.toggle("bg-brand-accent", isAnnual);
     toggle.classList.toggle("bg-neutral-300", !isAnnual);
 
-    // Swap prices
-    pricesAnnual.forEach((el) => el.classList.toggle("hidden", !isAnnual));
-    pricesMonthly.forEach((el) => el.classList.toggle("hidden", isAnnual));
+    // Animate prices
+    const entering = isAnnual ? pricesAnnual : pricesMonthly;
+    const leaving = isAnnual ? pricesMonthly : pricesAnnual;
+
+    leaving.forEach((el) => {
+      (el as HTMLElement).style.transform = "translateY(-100%)";
+      (el as HTMLElement).style.opacity = "0";
+    });
+    entering.forEach((el) => {
+      (el as HTMLElement).style.transform = "translateY(0)";
+      (el as HTMLElement).style.opacity = "1";
+    });
 
     // Swap label emphasis
     annualLabel?.classList.toggle("text-white", isAnnual);
@@ -272,6 +281,8 @@ const tiers: PricingTier[] = [
     // Update billing period label
     periodLabels.forEach((el) => {
       el.textContent = isAnnual ? "billed annually" : "billed monthly";
+      el.classList.toggle("text-brand-accent", isAnnual);
+      el.classList.toggle("text-text-tertiary", !isAnnual);
     });
   });
 </script>
