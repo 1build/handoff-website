@@ -237,32 +237,41 @@ const tiers: PricingTier[] = [
 </section>
 
 <script>
-  const toggle = document.getElementById("billing-toggle");
-  const monthlyLabel = document.getElementById("label-monthly");
-  const annualLabel = document.getElementById("label-annual");
-  const pricesAnnual = document.querySelectorAll(".price-annual");
-  const pricesMonthly = document.querySelectorAll(".price-monthly");
-  const periodLabels = document.querySelectorAll(".billing-period-label");
-  const thumb = toggle?.querySelector("span");
-
   let isAnnual = true;
 
-  toggle?.addEventListener("click", () => {
-    isAnnual = !isAnnual;
-    toggle.setAttribute("aria-checked", String(isAnnual));
+  // --- Element references ---
+  const heroToggle = document.getElementById("billing-toggle");
+  const compareToggle = document.getElementById("billing-toggle-compare");
+  const annualLabel = document.getElementById("label-annual");
+  const monthlyLabel = document.getElementById("label-monthly");
 
-    // Move thumb
-    thumb?.classList.toggle("translate-x-5", isAnnual);
-    thumb?.classList.toggle("translate-x-0", !isAnnual);
+  // --- Apply billing state to all UI ---
+  function applyBillingState() {
+    // Hero toggle (PricingSection)
+    if (heroToggle) {
+      const thumb = heroToggle.querySelector("span");
+      heroToggle.setAttribute("aria-checked", String(isAnnual));
+      thumb?.classList.toggle("translate-x-5", isAnnual);
+      thumb?.classList.toggle("translate-x-0", !isAnnual);
+      heroToggle.classList.toggle("bg-brand-accent", isAnnual);
+      heroToggle.classList.toggle("bg-neutral-300", !isAnnual);
+    }
 
-    // Toggle background
-    toggle.classList.toggle("bg-brand-accent", isAnnual);
-    toggle.classList.toggle("bg-neutral-300", !isAnnual);
+    // Compare table toggle
+    if (compareToggle) {
+      const thumb = compareToggle.querySelector("span");
+      compareToggle.setAttribute("aria-checked", String(isAnnual));
+      thumb?.classList.toggle("translate-x-5", isAnnual);
+      thumb?.classList.toggle("translate-x-0", !isAnnual);
+      compareToggle.classList.toggle("bg-brand-accent", isAnnual);
+      compareToggle.classList.toggle("bg-neutral-300", !isAnnual);
+    }
 
-    // Animate prices
+    // Animated prices (PricingSection cards)
+    const pricesAnnual = document.querySelectorAll(".price-annual");
+    const pricesMonthly = document.querySelectorAll(".price-monthly");
     const entering = isAnnual ? pricesAnnual : pricesMonthly;
     const leaving = isAnnual ? pricesMonthly : pricesAnnual;
-
     leaving.forEach((el) => {
       (el as HTMLElement).style.transform = "translateY(-100%)";
       (el as HTMLElement).style.opacity = "0";
@@ -272,17 +281,33 @@ const tiers: PricingTier[] = [
       (el as HTMLElement).style.opacity = "1";
     });
 
-    // Swap label emphasis
+    // Compare table prices (simple show/hide)
+    document.querySelectorAll(".compare-price-annual").forEach((el) => {
+      el.classList.toggle("hidden", !isAnnual);
+    });
+    document.querySelectorAll(".compare-price-monthly").forEach((el) => {
+      el.classList.toggle("hidden", isAnnual);
+    });
+
+    // Label emphasis (hero section)
     annualLabel?.classList.toggle("text-white", isAnnual);
     annualLabel?.classList.toggle("text-text-on-brand-tertiary", !isAnnual);
     monthlyLabel?.classList.toggle("text-white", !isAnnual);
     monthlyLabel?.classList.toggle("text-text-on-brand-tertiary", isAnnual);
 
-    // Update billing period label
-    periodLabels.forEach((el) => {
+    // Billing period labels (all)
+    document.querySelectorAll(".billing-period-label").forEach((el) => {
       el.textContent = isAnnual ? "billed annually" : "billed monthly";
       el.classList.toggle("text-brand-accent", isAnnual);
       el.classList.toggle("text-text-tertiary", !isAnnual);
     });
-  });
+  }
+
+  function toggleBilling() {
+    isAnnual = !isAnnual;
+    applyBillingState();
+  }
+
+  heroToggle?.addEventListener("click", toggleBilling);
+  compareToggle?.addEventListener("click", toggleBilling);
 </script>
