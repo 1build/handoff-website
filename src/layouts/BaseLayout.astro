@@ -1,5 +1,6 @@
 ---
 import { ViewTransitions } from "astro:transitions";
+import SpeedInsights from "@vercel/speed-insights/astro";
 import "../styles/global.css";
 
 interface Props {
@@ -31,5 +32,6 @@ const {
   </head>
   <body class="min-h-screen bg-brand-800 overflow-x-hidden animate-fade-in">
     <slot />
+    <SpeedInsights />
   </body>
 </html>

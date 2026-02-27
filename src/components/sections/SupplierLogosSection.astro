@@ -1,5 +1,5 @@
 ---
-import supplierLogos from "@/assets/images/supplier-logos.png";
+import SupplierLogosCarousel from "./SupplierLogosCarousel.astro";
 ---
 
 <section class="bg-bg-primary px-4 py-2">
@@ -7,17 +7,6 @@ import supplierLogos from "@/assets/images/supplier-logos.png";
     class="bg-[#bac7be] border border-[rgba(0,0,0,0.04)] rounded-3xl overflow-hidden py-16 flex flex-col items-center gap-4"
     data-animate="fade-up"
   >
-    <div class="max-w-[1280px] w-full px-8 flex flex-col items-center gap-4">
-      <p class="text-xl font-medium leading-[30px] text-text-tertiary text-center">
-        Connected to the suppliers you already use
-      </p>
-      <div class="w-full max-w-[1280px] h-[119px] mix-blend-darken overflow-hidden relative">
-        <img
-          src={supplierLogos.src}
-          alt="Supplier partner logos"
-          class="absolute h-full left-1/2 -translate-x-1/2 max-w-none"
-        />
-      </div>
-    </div>
+    <SupplierLogosCarousel title="Connected to the suppliers you already use" />
   </div>
 </section>

@@ -28,7 +28,7 @@ function isWide(item: any): boolean {
 }
 ---
 
-<header id="site-header" class="fixed top-0 left-0 right-0 z-100 h-20 flex items-center justify-center bg-transparent transition-all duration-300">
+<header id="site-header" class="fixed top-0 left-0 right-0 z-100 h-20 flex items-center justify-center bg-[rgba(17,49,32,0.4)] backdrop-blur-[6px] transition-[background,backdrop-filter] duration-300">
   <div class="w-full max-w-[1600px] px-8 flex items-center justify-between relative">
     <!-- Logo -->
     <a href="/" class="flex items-center h-8">
@@ -41,7 +41,7 @@ function isWide(item: any): boolean {
         hasChildren(item) ? (
           <div class="nav-dropdown relative">
             <button class="flex items-center gap-0.5 px-1.5 py-1 text-base font-medium leading-6 text-white/70 rounded-md transition-all duration-150 hover:bg-white/10 hover:text-white">
-              <span class="px-0.5">{item.label}</span>
+              <span class="px-0.5 text-white">{item.label}</span>
               <ChevronDown />
             </button>
             <div class:list={[
@@ -64,7 +64,7 @@ function isWide(item: any): boolean {
           </div>
         ) : (
           <a href={item.href || "/"} class="flex items-center gap-0.5 px-1.5 py-1 text-base font-medium leading-6 text-white/70 rounded-md transition-all duration-150 hover:bg-white/10 hover:text-white">
-            <span class="px-0.5">{item.label}</span>
+            <span class="px-0.5 text-white">{item.label}</span>
           </a>
         )
       )}
@@ -72,11 +72,12 @@ function isWide(item: any): boolean {
 
     <!-- Actions -->
     <div class="flex items-center gap-3">
-      <button class="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 text-base font-medium leading-6 rounded-xl transition-all duration-150 whitespace-nowrap bg-white/10 border border-white/20 text-white hover:bg-white/[0.18]">
+      <button class="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 text-base font-medium leading-6 rounded-xl transition-all duration-150 whitespace-nowrap bg-black/20 backdrop-blur-md text-white border border-white/10 hover:bg-black/30">
         Log in
       </button>
-      <button class="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 text-base font-medium leading-6 rounded-xl transition-all duration-150 whitespace-nowrap bg-white text-brand-700 hover:bg-white/90">
+      <button class="relative inline-flex items-center justify-center gap-1.5 px-5 py-2.5 text-base font-medium leading-6 rounded-xl transition-all duration-150 whitespace-nowrap bg-brand-accent text-white shadow-[0px_1px_2px_0px_rgba(10,13,18,0.05)] hover:bg-brand-500">
         Sign up
+        <span class="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_0px_0px_1px_rgba(10,13,18,0.18),inset_0px_-2px_0px_0px_rgba(10,13,18,0.05)]"></span>
       </button>
     </div>
   </div>
