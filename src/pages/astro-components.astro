@@ -480,7 +480,7 @@ const levels = [
     function openPreview(anchorId: string, name: string) {
       if (!modal || !iframe || !title) return;
       title.textContent = name;
-      iframe.src = `/components#${anchorId}`;
+      iframe.src = `/components?embed#${anchorId}`;
       modal.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
     }

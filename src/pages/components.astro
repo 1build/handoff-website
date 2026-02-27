@@ -86,9 +86,9 @@ const uiComponents = [
 ---
 
 <BaseLayout title="Component Browser — Handoff">
-  <div class="flex min-h-screen bg-white">
+  <div class="flex min-h-screen bg-white" id="comp-root">
     <!-- Sidebar -->
-    <nav class="comp-sidebar">
+    <nav class="comp-sidebar" id="comp-nav">
       <a href="/" class="text-sm text-gray-500 hover:text-gray-900 mb-4 block">&larr; Back to site</a>
       <h1 class="text-lg font-semibold text-gray-900 mb-4">Components</h1>
 
@@ -537,4 +537,19 @@ const uiComponents = [
     top: auto !important;
     transform: none !important;
   }
+
+  /* Embed mode: hide sidebar, full-width main */
+  .embed-mode #comp-nav {
+    display: none !important;
+  }
+  .embed-mode main {
+    margin-left: 0 !important;
+  }
 </style>
+
+<script>
+  // Embed mode: triggered by ?embed query param
+  if (new URLSearchParams(window.location.search).has('embed')) {
+    document.documentElement.classList.add('embed-mode');
+  }
+</script>
