@@ -1,0 +1,509 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/sections/Header.astro";
+import Footer from "@/components/sections/Footer.astro";
+import { navItems, footerColumns } from "@/lib/navigation";
+
+const atoms = [
+  {
+    name: "Button",
+    file: "ui/Button.astro",
+    description: "Versatile button/link component. Renders as <a> or <button> based on href prop.",
+    props: [
+      { name: "variant", type: '"primary" | "secondary-outline"', default: '"primary"' },
+      { name: "size", type: '"default" | "lg"', default: '"default"' },
+      { name: "href", type: "string", default: "—" },
+      { name: "class", type: "string", default: "—" },
+    ],
+    usedOn: ["Homepage", "Sales & Marketing", "Financial Management", "Pricing", "CTA sections"],
+  },
+  {
+    name: "Logo",
+    file: "ui/Logo.astro",
+    description: "Handoff brand logo with icon and wordmark. Fixed 112px width.",
+    props: [],
+    usedOn: ["Header", "Footer"],
+  },
+  {
+    name: "StarIcon",
+    file: "ui/StarIcon.astro",
+    description: "Static 5-star SVG icon (20x20) filled in gold. Used for review ratings.",
+    props: [],
+    usedOn: ["TestimonialCard", "SocialProofSection", "PricingTestimonials"],
+  },
+  {
+    name: "ChevronDown",
+    file: "ui/ChevronDown.astro",
+    description: "SVG chevron-down icon (24x24) for dropdown indicators.",
+    props: [{ name: "class", type: "string", default: "—" }],
+    usedOn: ["Header dropdowns"],
+  },
+  {
+    name: "BulletIcon",
+    file: "ui/BulletIcon.astro",
+    description: "Small teal checkmark SVG icon used as bullet list markers.",
+    props: [],
+    usedOn: ["DetailRow", "Feature lists"],
+  },
+  {
+    name: "AppBadge",
+    file: "ui/AppBadge.astro",
+    description: "App Store or Google Play download badge for dark backgrounds.",
+    props: [{ name: "store", type: '"apple" | "google"', default: "required" }],
+    usedOn: ["Footer"],
+  },
+];
+
+const molecules = [
+  {
+    name: "CalloutBanner",
+    file: "ui/CalloutBanner.astro",
+    description: "Gray background banner with heading, description, and CTA button. Inline call-to-action.",
+    props: [],
+    usedOn: ["Embedded within section components"],
+  },
+  {
+    name: "TestimonialCard",
+    file: "sections/TestimonialCard.astro",
+    description: "Single testimonial card with avatar, star rating, highlighted quote, name, and role.",
+    props: [],
+    usedOn: ["FeaturesSection", "FinFeaturesSection"],
+  },
+  {
+    name: "DetailRow",
+    file: "sections/DetailRow.astro",
+    description: "Two-column layout (text + visual) with eyebrow, title, description, and bullet list. Supports 3 visual types.",
+    props: [
+      { name: "eyebrow", type: "string", default: "required" },
+      { name: "title", type: "string", default: "required" },
+      { name: "description", type: "string", default: "required" },
+      { name: "bullets", type: "string[]", default: "required" },
+      { name: "reverse", type: "boolean", default: "false" },
+      { name: "visualType", type: '"desktop" | "phones" | "isometric"', default: "required" },
+      { name: "visualImages", type: "ImageMetadata[]", default: "—" },
+      { name: "placeholder", type: "string", default: "—" },
+    ],
+    usedOn: ["DetailedFeatures", "FinDetailedFeatures"],
+  },
+  {
+    name: "SupplierLogosCarousel",
+    file: "sections/SupplierLogosCarousel.astro",
+    description: "Scrolling carousel of 18 supplier logos (Jeld-Wen, Trex, Eaton, etc.) with custom title.",
+    props: [{ name: "title", type: "string", default: "—" }],
+    usedOn: ["SupplierLogosSection", "Pricing"],
+  },
+];
+
+const organisms = [
+  {
+    name: "Header",
+    file: "sections/Header.astro",
+    description: "Fixed navigation header with logo, desktop nav dropdowns, mobile menu, and CTA button.",
+    props: [{ name: "navItems", type: "NavItem[]", default: "from navigation.ts" }],
+    usedOn: ["Every page"],
+  },
+  {
+    name: "Footer",
+    file: "sections/Footer.astro",
+    description: "Dark green footer with columnar link groups, logo, app badges, and copyright.",
+    props: [{ name: "columns", type: "FooterColumn[]", default: "from navigation.ts" }],
+    usedOn: ["Every page"],
+  },
+  {
+    name: "NewHeroSection",
+    file: "sections/NewHeroSection.astro",
+    description: "Centered hero with badge pill, large headline with highlight, description, CTA, and background glow effects.",
+    props: [],
+    usedOn: ["Homepage"],
+  },
+  {
+    name: "HeroSection",
+    file: "sections/HeroSection.astro",
+    description: "Left-aligned hero with eyebrow, headline with accent highlight, description, and play button CTA. Parallax scroll.",
+    props: [],
+    usedOn: ["Sales & Marketing Growth"],
+  },
+  {
+    name: "StatsStrip",
+    file: "sections/StatsStrip.astro",
+    description: "Horizontal stats bar with 4 columns (earnings, time saved, deals, profit) divided by borders.",
+    props: [],
+    usedOn: ["Homepage"],
+  },
+  {
+    name: "SocialProofSection",
+    file: "sections/SocialProofSection.astro",
+    description: "Testimonial showcase with 4 customer quotes, G2/Capterra/AppStore logos, and review metrics.",
+    props: [],
+    usedOn: ["Homepage"],
+  },
+  {
+    name: "FeaturesSection",
+    file: "sections/FeaturesSection.astro",
+    description: "Three-column feature card grid with icons, titles, descriptions, testimonial, and supplier logos.",
+    props: [],
+    usedOn: ["Sales & Marketing Growth"],
+  },
+  {
+    name: "DetailedFeatures",
+    file: "sections/DetailedFeatures.astro",
+    description: "Multi-row feature showcase using 3 DetailRow components with alternating layouts.",
+    props: [],
+    usedOn: ["Sales & Marketing Growth"],
+  },
+  {
+    name: "FaqSection",
+    file: "sections/FaqSection.astro",
+    description: "Two-column FAQ with heading and native <details> accordion. Supports custom items.",
+    props: [{ name: "items", type: "{ question: string; answer: string }[]", default: "from navigation.ts" }],
+    usedOn: ["Sales & Marketing", "Financial Management", "Pricing"],
+  },
+  {
+    name: "CtaSection",
+    file: "sections/CtaSection.astro",
+    description: "Large gradient CTA with two-column layout (text + screenshot mockup) and primary button.",
+    props: [],
+    usedOn: ["Sales & Marketing Growth"],
+  },
+  {
+    name: "OverviewSection",
+    file: "sections/OverviewSection.astro",
+    description: "Core features overview with 6-item grid and expandable bottom feature cards.",
+    props: [],
+    usedOn: ["Available (not currently active)"],
+  },
+  {
+    name: "NewsletterSection",
+    file: "sections/NewsletterSection.astro",
+    description: "Email subscription form with centered heading, email input, and subscribe button.",
+    props: [],
+    usedOn: ["Available (not currently active)"],
+  },
+  {
+    name: "SupplierLogosSection",
+    file: "sections/SupplierLogosSection.astro",
+    description: "White background wrapper for SupplierLogosCarousel with fade-up animation.",
+    props: [],
+    usedOn: ["Pricing"],
+  },
+  {
+    name: "FinHeroSection",
+    file: "sections/FinHeroSection.astro",
+    description: "Financial management themed hero with eyebrow, title, description, and play button CTA.",
+    props: [],
+    usedOn: ["Financial Management"],
+  },
+  {
+    name: "FinFeaturesSection",
+    file: "sections/FinFeaturesSection.astro",
+    description: "Three-column feature card grid for financial workflows with testimonial.",
+    props: [],
+    usedOn: ["Financial Management"],
+  },
+  {
+    name: "FinDetailedFeatures",
+    file: "sections/FinDetailedFeatures.astro",
+    description: "Three DetailRow components for financial features: payment automation, milestone billing, pricing standardization.",
+    props: [],
+    usedOn: ["Financial Management"],
+  },
+  {
+    name: "FinCtaSection",
+    file: "sections/FinCtaSection.astro",
+    description: "Financial management CTA with gradient background, cash flow heading, button, and app mockup.",
+    props: [],
+    usedOn: ["Financial Management"],
+  },
+  {
+    name: "PricingSection",
+    file: "sections/PricingSection.astro",
+    description: "Pricing tier display with 4 tiers (Flex, Pro, Custom, Enterprise) showing prices and feature lists.",
+    props: [],
+    usedOn: ["Pricing"],
+  },
+  {
+    name: "PricingCompareTable",
+    file: "sections/PricingCompareTable.astro",
+    description: "Detailed feature comparison table across 4 tiers with grouped rows. Supports checkmarks, text, and badges.",
+    props: [],
+    usedOn: ["Pricing"],
+  },
+  {
+    name: "PricingFaqSection",
+    file: "sections/PricingFaqSection.astro",
+    description: "Pricing-specific FAQ with 5 hardcoded Q&A pairs about trials, costs, and features.",
+    props: [],
+    usedOn: ["Pricing"],
+  },
+  {
+    name: "PricingFeatureStrip",
+    file: "sections/PricingFeatureStrip.astro",
+    description: "Horizontal strip of 6+ feature highlights (AI estimates, proposals, mobile access, support) with icons.",
+    props: [],
+    usedOn: ["Pricing"],
+  },
+  {
+    name: "PricingTestimonials",
+    file: "sections/PricingTestimonials.astro",
+    description: "Three-column testimonial grid with customer quotes from contractors.",
+    props: [],
+    usedOn: ["Pricing"],
+  },
+  {
+    name: "PricingMetricsSection",
+    file: "sections/PricingMetricsSection.astro",
+    description: "Metrics dashboard with project stats, testimonial, and real-time notification feed.",
+    props: [],
+    usedOn: ["Pricing"],
+  },
+];
+
+// Map component names to their anchor IDs on /components
+const previewIds: Record<string, string> = {
+  Button: "button",
+  Logo: "logo",
+  StarIcon: "star-icon",
+  ChevronDown: "chevron-down",
+  BulletIcon: "bullet-icon",
+  AppBadge: "app-badge",
+  CalloutBanner: "callout-banner",
+  TestimonialCard: "testimonial-card",
+  DetailRow: "detail-row",
+  SupplierLogosCarousel: "supplier-logos-carousel",
+  Header: "header",
+  Footer: "footer",
+  NewHeroSection: "new-hero-section",
+  HeroSection: "hero-section",
+  StatsStrip: "stats-strip",
+  SocialProofSection: "social-proof-section",
+  FeaturesSection: "features-section",
+  DetailedFeatures: "detailed-features",
+  FaqSection: "faq-section",
+  CtaSection: "cta-section",
+  OverviewSection: "overview-section",
+  NewsletterSection: "newsletter-section",
+  SupplierLogosSection: "supplier-logos-section",
+  FinHeroSection: "fin-hero-section",
+  FinFeaturesSection: "fin-features-section",
+  FinDetailedFeatures: "fin-detailed-features",
+  FinCtaSection: "fin-cta-section",
+  PricingSection: "pricing-section",
+  PricingCompareTable: "pricing-compare-table",
+  PricingFaqSection: "pricing-faq-section",
+  PricingFeatureStrip: "pricing-feature-strip",
+  PricingTestimonials: "pricing-testimonials",
+  PricingMetricsSection: "pricing-metrics-section",
+};
+
+const levels = [
+  { title: "Atoms", subtitle: "Small, indivisible UI primitives — icons, buttons, badges", items: atoms, color: "brand-accent" },
+  { title: "Molecules", subtitle: "Composite components built from atoms — cards, rows, carousels", items: molecules, color: "text-highlight" },
+  { title: "Organisms", subtitle: "Full-width page sections — heroes, features, footers", items: organisms, color: "brand-300" },
+];
+---
+
+<BaseLayout title="Astro Components — Handoff Design System">
+  <Header navItems={navItems} />
+
+  <main class="bg-bg-primary">
+    <!-- Page header -->
+    <section class="bg-brand-800 pt-32 pb-16 px-6 lg:px-8">
+      <div class="max-w-[1200px] mx-auto text-center">
+        <p class="text-brand-accent font-medium text-sm tracking-wide uppercase mb-3">Developer Reference</p>
+        <h1 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">
+          Astro Components
+        </h1>
+        <p class="text-text-on-brand-secondary text-lg max-w-2xl mx-auto">
+          All {atoms.length + molecules.length + organisms.length} components used across the Handoff marketing site, organized by atomic design level.
+        </p>
+      </div>
+    </section>
+
+    <!-- Summary strip -->
+    <section class="bg-brand-700 border-t border-brand-600">
+      <div class="max-w-[1200px] mx-auto px-6 lg:px-8 py-6 flex flex-wrap justify-center gap-8 text-center">
+        {levels.map((level) => (
+          <div class="flex items-center gap-3">
+            <span class={`text-3xl font-display font-bold text-${level.color}`}>{level.items.length}</span>
+            <span class="text-text-on-brand-secondary text-sm">{level.title}</span>
+          </div>
+        ))}
+        <div class="flex items-center gap-3">
+          <span class="text-3xl font-display font-bold text-white">{atoms.length + molecules.length + organisms.length}</span>
+          <span class="text-text-on-brand-secondary text-sm">Total</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Component levels -->
+    {levels.map((level, levelIdx) => (
+      <section class={levelIdx % 2 === 0 ? "bg-bg-primary" : "bg-bg-secondary"}>
+        <div class="max-w-[1200px] mx-auto px-6 lg:px-8 py-16">
+          <!-- Level header -->
+          <div class="mb-10">
+            <h2 class="font-display text-3xl font-bold text-text-primary mb-2">{level.title}</h2>
+            <p class="text-text-secondary">{level.subtitle}</p>
+          </div>
+
+          <!-- Component cards -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {level.items.map((comp) => (
+              <div class="bg-white border border-border-primary rounded-xl p-6 shadow-xs hover:shadow-sm transition-shadow">
+                <!-- Component name + file -->
+                <div class="flex items-start justify-between gap-4 mb-3">
+                  <h3 class="font-display text-lg font-semibold text-text-primary">{comp.name}</h3>
+                  <code class="text-xs bg-brand-50 text-brand-700 px-2 py-1 rounded-md font-mono whitespace-nowrap shrink-0">
+                    {comp.file}
+                  </code>
+                </div>
+
+                <!-- Description -->
+                <p class="text-text-secondary text-sm mb-4 leading-relaxed">{comp.description}</p>
+
+                <!-- Props table -->
+                {comp.props.length > 0 ? (
+                  <div class="mb-4">
+                    <p class="text-xs font-semibold text-text-tertiary uppercase tracking-wide mb-2">Props</p>
+                    <div class="overflow-x-auto">
+                      <table class="w-full text-xs">
+                        <thead>
+                          <tr class="border-b border-border-secondary">
+                            <th class="text-left py-1.5 pr-4 text-text-tertiary font-medium">Name</th>
+                            <th class="text-left py-1.5 pr-4 text-text-tertiary font-medium">Type</th>
+                            <th class="text-left py-1.5 text-text-tertiary font-medium">Default</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {comp.props.map((prop) => (
+                            <tr class="border-b border-border-secondary/50">
+                              <td class="py-1.5 pr-4 font-mono text-brand-accent font-medium">{prop.name}</td>
+                              <td class="py-1.5 pr-4 font-mono text-text-secondary">{prop.type}</td>
+                              <td class="py-1.5 text-text-tertiary">{prop.default}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                ) : (
+                  <p class="text-xs text-text-tertiary italic mb-4">No props — self-contained component</p>
+                )}
+
+                <!-- Used on + Preview button -->
+                <div class="flex items-center justify-between gap-4">
+                  <div class="flex flex-wrap gap-1.5">
+                    {comp.usedOn.map((page) => (
+                      <span class="text-xs bg-brand-50 text-brand-700 px-2 py-0.5 rounded-full">{page}</span>
+                    ))}
+                  </div>
+                  {previewIds[comp.name] && (
+                    <button
+                      data-preview={previewIds[comp.name]}
+                      class="preview-btn shrink-0 inline-flex items-center gap-1.5 text-xs font-semibold text-brand-accent hover:text-brand-700 transition-colors cursor-pointer"
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                      </svg>
+                      Preview
+                    </button>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    ))}
+
+    <!-- Tech stack summary -->
+    <section class="bg-brand-800 py-16 px-6 lg:px-8">
+      <div class="max-w-[1200px] mx-auto">
+        <h2 class="font-display text-2xl font-bold text-white mb-8 text-center">Tech Stack & Conventions</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-brand-700 rounded-xl p-6">
+            <h3 class="font-display font-semibold text-white mb-3">Framework</h3>
+            <ul class="space-y-2 text-sm text-text-on-brand-secondary">
+              <li>Astro 5.x (100% static)</li>
+              <li>Tailwind CSS 4.x</li>
+              <li>Zero framework JS</li>
+              <li>Vercel deployment</li>
+            </ul>
+          </div>
+          <div class="bg-brand-700 rounded-xl p-6">
+            <h3 class="font-display font-semibold text-white mb-3">Design Tokens</h3>
+            <ul class="space-y-2 text-sm text-text-on-brand-secondary">
+              <li>Brand greens (50–900 + accent)</li>
+              <li>Semantic text colors</li>
+              <li>Bricolage Grotesque (display)</li>
+              <li>Geist (body) / Geist Mono</li>
+            </ul>
+          </div>
+          <div class="bg-brand-700 rounded-xl p-6">
+            <h3 class="font-display font-semibold text-white mb-3">Patterns</h3>
+            <ul class="space-y-2 text-sm text-text-on-brand-secondary">
+              <li>All .astro, no React/Vue</li>
+              <li>Self-contained sections</li>
+              <li>CSS scroll animations</li>
+              <li>Native &lt;details&gt; accordions</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer columns={footerColumns} />
+
+  <!-- Preview Modal -->
+  <div id="preview-modal" class="fixed inset-0 z-[9999] hidden">
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="preview-backdrop"></div>
+    <div class="absolute inset-4 md:inset-8 bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden">
+      <div class="flex items-center justify-between px-6 py-3 border-b border-border-primary bg-bg-secondary">
+        <span id="preview-title" class="font-mono text-sm font-semibold text-text-primary"></span>
+        <button id="preview-close" class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-200 transition-colors text-text-secondary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <iframe id="preview-iframe" class="flex-1 w-full border-0"></iframe>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('preview-modal');
+    const iframe = document.getElementById('preview-iframe') as HTMLIFrameElement;
+    const title = document.getElementById('preview-title');
+
+    function openPreview(anchorId: string, name: string) {
+      if (!modal || !iframe || !title) return;
+      title.textContent = name;
+      iframe.src = `/components#${anchorId}`;
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePreview() {
+      if (!modal || !iframe) return;
+      modal.classList.add('hidden');
+      iframe.src = '';
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.preview-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const anchorId = (btn as HTMLElement).dataset.preview;
+        const name = btn.closest('[class*="rounded-xl"]')?.querySelector('h3')?.textContent?.trim() || '';
+        if (anchorId) openPreview(anchorId, name);
+      });
+    });
+
+    document.getElementById('preview-backdrop')?.addEventListener('click', closePreview);
+    document.getElementById('preview-close')?.addEventListener('click', closePreview);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closePreview();
+    });
+  </script>
+</BaseLayout>
