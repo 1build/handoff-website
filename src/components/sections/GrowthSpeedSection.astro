@@ -1,0 +1,88 @@
+---
+import bgPattern from "@/assets/images/bg-pattern-grow.png";
+import growImg from "@/assets/images/grow-img.png";
+
+const benefits = [
+  {
+    title: "Estimates worth $10K in ~60 minutes",
+    description:
+      "Generate a full day's worth of estimates before lunch. More bids out means more jobs won.",
+  },
+  {
+    title: "Same-day proposals",
+    description:
+      "Every lead gets a proposal while they're still thinking about the project. No more losing deals to faster competitors.",
+  },
+  {
+    title: "Project kickoff in 24 hours",
+    description:
+      "From walkthrough to ready-to-build in a day. Your team starts the work while others are still sending quotes.",
+  },
+];
+---
+
+<section class="relative z-[2]   px-4 overflow-hidden" data-animate="fade-up">
+  <div class="bg-[#F5F5F5] px-4 md:px-0 py-12 md:py-20 rounded-3xl relative">
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1920px] h-[1440px] pointer-events-none z-0">
+    <img src={bgPattern.src} alt="" class="w-full h-full block object-contain object-top" />
+  </div>
+  <div class="max-w-[1280px] mx-auto relative z-1 px-0 sm:px-6 md:px-8">
+    <div class="max-w-[700px] mb-12">
+    <h2 class="font-display text-3xl md:text-4xl font-semibold leading-tight tracking-[-0.02em] text-text-primary mb-4">
+            Growth favors the fastest teams
+          </h2>
+          <p class="text-base md:text-lg text-text-secondary leading-relaxed mb-8">
+            Faster turnaround means more bids, higher win rates, and healthier cash flow without increasing overhead.
+          </p>
+</div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-center">
+        
+        <div>
+          
+
+          <div class="space-y-6 md:space-y-12 mb-8">
+            {benefits.map((benefit) => (
+              <div>
+                <h3 class="text-base md:text-lg font-semibold text-text-primary mb-1">
+                  {benefit.title}
+                </h3>
+                <p class="text-sm md:text-base text-text-secondary leading-relaxed">
+                  {benefit.description}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
+            <a
+              href="#"
+              class="relative w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-5 py-2.5 text-base font-medium leading-6 rounded-xl whitespace-nowrap bg-brand-700 text-white shadow-[0px_1px_2px_0px_rgba(10,13,18,0.05)] hover:bg-brand-800 transition-all duration-150"
+            >
+              Start free trial
+              <span
+                class="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_0px_0px_1px_rgba(10,13,18,0.18),inset_0px_-2px_0px_0px_rgba(10,13,18,0.05)]"
+                aria-hidden="true"
+              ></span>
+            </a>
+            <a
+              href="#"
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-5 py-2.5 text-base font-medium leading-6 rounded-xl whitespace-nowrap bg-white text-text-secondary border border-border-primary shadow-xs hover:bg-neutral-50 transition-all duration-150"
+            >
+              Book a demo
+            </a>
+          </div>
+        </div>
+
+        <div class="w-full">
+          <img
+            src={growImg.src}
+            alt=""
+            class="w-full h-auto rounded-3xl object-cover"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

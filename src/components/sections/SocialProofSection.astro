@@ -97,12 +97,12 @@ const ratings = [
 ---
 
 <section class="relative z-[2] px-4 pt-0 pb-2">
-  <div class="max-w-[1920px] mx-auto bg-white rounded-3xl border border-black/[0.04] overflow-hidden">
-    <div class="max-w-[1280px] mx-auto px-8 pt-12 pb-0">
+  <div class="max-w-[1920px] mx-auto bg-white rounded-3xl  overflow-hidden">
+    <div class="max-w-[1280px] mx-auto px-0 md:px-8 pt-12 pb-0">
       <!-- Ratings row -->
-      <div class="flex flex-wrap items-center justify-between gap-6 mb-10">
+      <div class="grid grid-cols-2 md:flex md:flex-wrap md:items-center md:justify-between gap-6 mb-10">
         {ratings.map((r) => (
-          <div class="flex items-center gap-4">
+          <div class="flex flex-col md:flex-row items-start md:items-center justify-center md:justify-start gap-4">
             <div class="flex items-center gap-2.5">
               {r.logoSrc ? (
                 <img src={r.logoSrc} alt={r.name} class={`${r.logoHeight} w-auto`} />
@@ -113,7 +113,7 @@ const ratings = [
                 <span class="text-base font-medium text-text-secondary">{r.name}</span>
               )}
             </div>
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-1 md:gap-3">
               <div class="flex items-center gap-1">
                 <Fragment set:html={StarIcon()} />
                 <Fragment set:html={StarIcon()} />

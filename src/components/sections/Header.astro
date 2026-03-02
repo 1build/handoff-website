@@ -28,20 +28,20 @@ function isWide(item: any): boolean {
 }
 ---
 
-<header id="site-header" class="fixed top-0 left-0 right-0 z-100 h-20 flex items-center justify-center bg-[rgba(17,49,32,0.4)] backdrop-blur-[6px] transition-[background,backdrop-filter] duration-300">
+<header id="site-header" class="fixed top-0 left-0 right-0 z-[100] h-20 flex items-center justify-center bg-white backdrop-blur-[6px] transition-[background,backdrop-filter] duration-300">
   <div class="w-full max-w-[1600px] px-8 flex items-center justify-between relative">
-    <!-- Logo -->
-    <a href="/" class="flex items-center h-8">
+    <!-- Logo (black by default, white when scrolled) -->
+    <a href="/" class="flex items-center h-8 header-logo">
       <Logo />
     </a>
 
     <!-- Nav (desktop) -->
-    <nav class="fixed left-1/2 top-0 h-20 -translate-x-1/2 hidden lg:flex items-center gap-2 z-101">
+    <nav class="fixed left-1/2 top-0 h-20 -translate-x-1/2 hidden lg:flex items-center gap-2 z-[101]">
       {items.map((item: any) =>
         hasChildren(item) ? (
           <div class="nav-dropdown relative">
-            <button class="flex items-center gap-0.5 px-1.5 py-1 text-base font-medium leading-6 text-white/70 rounded-md transition-all duration-150 hover:bg-white/10 hover:text-white">
-              <span class="px-0.5 text-white">{item.label}</span>
+            <button class="nav-link flex items-center gap-0.5 px-1.5 py-1 text-base font-medium leading-6 rounded-md transition-all duration-150 hover:bg-white/10">
+              <span class="px-0.5">{item.label}</span>
               <ChevronDown />
             </button>
             <div class:list={[
@@ -63,23 +63,88 @@ function isWide(item: any): boolean {
             </div>
           </div>
         ) : (
-          <a href={item.href || "/"} class="flex items-center gap-0.5 px-1.5 py-1 text-base font-medium leading-6 text-white/70 rounded-md transition-all duration-150 hover:bg-white/10 hover:text-white">
-            <span class="px-0.5 text-white">{item.label}</span>
+          <a href={item.href || "/"} class="nav-link flex items-center gap-0.5 px-1.5 py-1 text-base font-medium leading-6 rounded-md transition-all duration-150 hover:bg-white/10">
+            <span class="px-0.5">{item.label}</span>
           </a>
         )
       )}
     </nav>
 
-    <!-- Actions -->
-    <div class="flex items-center gap-3">
-      <button class="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 text-base font-medium leading-6 rounded-xl transition-all duration-150 whitespace-nowrap bg-black/20 backdrop-blur-md text-white border border-white/10 hover:bg-black/30">
+    <!-- Mobile menu button -->
+    <button
+      type="button"
+      data-mobile-menu-btn
+      class="lg:hidden flex items-center justify-center w-10 h-10 rounded-lg text-[#414651] hover:bg-black/5"
+      aria-expanded="false"
+      aria-controls="mobile-nav"
+      aria-label="Open menu"
+    >
+      <svg data-mobile-icon-open class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+      <svg data-mobile-icon-close class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+    <div class="hidden lg:flex items-center gap-3">
+      <button class="inline-flex login-btn items-center justify-center gap-1.5 px-5 py-2.5 text-base font-medium leading-6 rounded-xl transition-all duration-150 whitespace-nowrap bg-transparent backdrop-blur-md text-[#183F2E]">
         Log in
       </button>
-      <button class="relative inline-flex items-center justify-center gap-1.5 px-5 py-2.5 text-base font-medium leading-6 rounded-xl transition-all duration-150 whitespace-nowrap bg-brand-accent text-white shadow-[0px_1px_2px_0px_rgba(10,13,18,0.05)] hover:bg-brand-500">
-        Sign up
+      <button class="relative inline-flex items-center justify-center gap-1.5 px-5 py-2.5 text-base font-medium leading-6 rounded-xl transition-all duration-150 whitespace-nowrap bg-[#183F2E] text-white shadow-[0px_1px_2px_0px_rgba(10,13,18,0.05)] hover:bg-brand-500">
+        Start free trial
         <span class="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_0px_0px_1px_rgba(10,13,18,0.18),inset_0px_-2px_0px_0px_rgba(10,13,18,0.05)]"></span>
       </button>
     </div>
+  </div>
+
+  <!-- Mobile nav panel (direct child of header so fixed positioning works; panel is found by script via data-mobile-nav) -->
+  <div
+    id="mobile-nav"
+    data-mobile-nav
+    class="mobile-nav-panel fixed top-20 left-0 right-0 z-[99] max-h-0 overflow-hidden bg-white border-b border-border-primary shadow-lg transition-[max-height] duration-300 ease-out lg:hidden"
+    aria-hidden="true"
+  >
+    <nav class="max-h-[calc(100vh-5rem)] overflow-y-auto px-6 py-4" aria-label="Mobile">
+      <ul class="flex flex-col gap-0">
+        {items.map((item: any) =>
+          hasChildren(item) ? (
+            <li class="border-b border-border-primary last:border-b-0">
+              <details class="group">
+                <summary class="flex items-center justify-between py-4 text-base font-medium text-text-primary cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                  {item.label}
+                  <svg class="w-5 h-5 text-text-tertiary transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </summary>
+                <ul class="pb-3 pl-0">
+                  {getChildren(item).map((link: any) => (
+                    <li>
+                      <a href={link.href || "/"} class="mobile-nav-link block py-2.5 text-sm text-text-secondary hover:text-text-primary">
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            </li>
+          ) : (
+            <li class="border-b border-border-primary last:border-b-0">
+              <a href={item.href || "/"} class="mobile-nav-link block py-4 text-base font-medium text-text-primary">
+                {item.label}
+              </a>
+            </li>
+          )
+        )}
+      </ul>
+      <div class="flex flex-col gap-3 pt-4 mt-2 border-t border-border-primary">
+        <a href="/" class="inline-flex items-center justify-center px-5 py-2.5 text-base font-medium rounded-xl border border-border-primary text-text-secondary hover:bg-neutral-50">
+          Log in
+        </a>
+        <a href="/" class="inline-flex items-center justify-center px-5 py-2.5 text-base font-medium rounded-xl bg-brand-accent text-white hover:bg-brand-500">
+          Start free trial
+        </a>
+      </div>
+    </nav>
   </div>
 </header>
 
@@ -97,6 +162,123 @@ function isWide(item: any): boolean {
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
   }
-  initHeader();
-  document.addEventListener("astro:page-load", initHeader);
+
+  function initMobileMenu() {
+    const header = document.getElementById("site-header");
+    if (!header) return;
+    const btn = header.querySelector("[data-mobile-menu-btn]");
+    const panel = header.querySelector("[data-mobile-nav]");
+    const iconOpen = header.querySelector("[data-mobile-icon-open]");
+    const iconClose = header.querySelector("[data-mobile-icon-close]");
+    if (!btn || !panel) return;
+
+    if (btn.hasAttribute("data-mobile-menu-inited")) return;
+    btn.setAttribute("data-mobile-menu-inited", "true");
+
+    function openMenu() {
+      panel.classList.add("mobile-nav-open");
+      panel.classList.remove("max-h-0");
+      panel.style.setProperty("max-height", "calc(100vh - 5rem)");
+      panel.setAttribute("aria-hidden", "false");
+      btn.setAttribute("aria-expanded", "true");
+      btn.setAttribute("aria-label", "Close menu");
+      if (iconOpen) iconOpen.classList.add("hidden");
+      if (iconClose) iconClose.classList.remove("hidden");
+    }
+    function closeMenu() {
+      panel.classList.remove("mobile-nav-open");
+      panel.style.setProperty("max-height", "0");
+      panel.setAttribute("aria-hidden", "true");
+      btn.setAttribute("aria-expanded", "false");
+      btn.setAttribute("aria-label", "Open menu");
+      if (iconOpen) iconOpen.classList.remove("hidden");
+      if (iconClose) iconClose.classList.add("hidden");
+    }
+
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const isOpen = panel.classList.contains("mobile-nav-open");
+      if (isOpen) closeMenu();
+      else openMenu();
+    });
+
+    panel.querySelectorAll(".mobile-nav-link").forEach((link) => {
+      link.addEventListener("click", closeMenu);
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!panel.classList.contains("mobile-nav-open")) return;
+      const target = e.target;
+      if (target && !btn.contains(target) && !panel.contains(target)) closeMenu();
+    });
+  }
+
+  function init() {
+    initHeader();
+    initMobileMenu();
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+  document.addEventListener("astro:page-load", () => {
+    initHeader();
+    initMobileMenu();
+  });
 </script>
+
+<style>
+  /* Logo: black wordmark on default header, white wordmark when scrolled (only inside header) */
+  :global(#site-header .header-logo .logo-wordmark-black) {
+    display: block;
+  }
+  :global(#site-header .header-logo .logo-wordmark) {
+    display: none;
+  }
+  :global(#site-header.header-scrolled .header-logo .logo-wordmark-black) {
+    display: none;
+  }
+  :global(#site-header.header-scrolled .header-logo .logo-wordmark) {
+    display: block;
+  }
+
+  /* Nav items: #414651 by default, white when header is scrolled */
+  #site-header .nav-link,
+  #site-header .nav-link span {
+    color: #414651;
+    transition: color 0.2s ease;
+  }
+  #site-header .nav-link:hover,
+  #site-header .nav-link:hover span {
+    color: #252b37;
+  }
+  #site-header.header-scrolled .nav-link,
+  #site-header.header-scrolled .nav-link span {
+    color: white;
+  }
+  #site-header.header-scrolled .nav-link:hover,
+  #site-header.header-scrolled .nav-link:hover span {
+    color: white;
+  }
+  #site-header.header-scrolled .nav-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  #site-header.header-scrolled .login-btn {
+    color: white
+  }
+
+  /* Mobile nav open state — !important overrides Tailwind max-h-0 */
+  :global(.mobile-nav-panel.mobile-nav-open) {
+    max-height: calc(100vh - 5rem) !important;
+  }
+
+  /* Mobile menu button: white when header scrolled */
+  #site-header.header-scrolled [data-mobile-menu-btn] {
+    color: white;
+  }
+  #site-header.header-scrolled [data-mobile-menu-btn]:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+</style>

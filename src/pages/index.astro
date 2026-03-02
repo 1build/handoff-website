@@ -5,13 +5,26 @@ import NewHeroSection from "@/components/sections/NewHeroSection.astro";
 import StatsStrip from "@/components/sections/StatsStrip.astro";
 import SocialProofSection from "@/components/sections/SocialProofSection.astro";
 import Footer from "@/components/sections/Footer.astro";
+import HomeFeaturesSection from "@/components/sections/HomeFeaturesSection.astro";
+import PlatformFeaturesSection from "@/components/sections/PlatformFeaturesSection.astro";
+import BuiltOnDataSection from "@/components/sections/BuiltOnDataSection.astro";
+import WhoIsHandoffSection from "@/components/sections/WhoIsHandoffSection.astro";
+import VideoSection from "@/components/sections/VideoSection.astro";
+import GrowthSpeedSection from "@/components/sections/GrowthSpeedSection.astro";
+import TestimonialsGridSection from "@/components/sections/TestimonialsGridSection.astro";
 import { navItems, footerColumns } from "@/lib/navigation";
 ---
 
 <BaseLayout title="Handoff — Run Your Entire Contracting Business with AI">
   <Header navItems={navItems} />
   <NewHeroSection />
-  <StatsStrip />
   <SocialProofSection />
+  <HomeFeaturesSection />
+  <PlatformFeaturesSection />
+  <BuiltOnDataSection />
+  <WhoIsHandoffSection />
+  <VideoSection />
+   <GrowthSpeedSection />
+   <TestimonialsGridSection />
   <Footer columns={footerColumns} />
 </BaseLayout>

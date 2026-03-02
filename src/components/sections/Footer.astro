@@ -1,55 +1,69 @@
 ---
-import Logo from "@/components/ui/Logo.astro";
+import LogoFooter from "@/components/ui/LogoFooter.astro";
 import AppBadge from "@/components/ui/AppBadge.astro";
 import { footerColumns as localFooterColumns } from "@/lib/navigation";
 
+interface FooterLink {
+  label: string;
+  href: string;
+  badge?: string;
+}
+
 interface Props {
-  columns?: { title: string; lightTitle?: boolean; links: { label: string; href: string }[] }[];
+  columns?: { title: string; lightTitle?: boolean; links: FooterLink[] }[];
 }
 
 const { columns } = Astro.props;
 const footerColumns = columns?.length ? columns : localFooterColumns;
 ---
 
-<footer class="relative z-[2] pt-16 pb-12 bg-brand-800">
+<footer class="relative z-[2] pt-16 pb-12 bg-white">
   <div class="max-w-[1440px] mx-auto px-8 flex flex-col gap-12">
-    <!-- Columns -->
-    <div class="flex flex-wrap gap-y-8 lg:gap-y-12 gap-x-8 justify-between" data-animate="fade-up">
-      {footerColumns.map((col) => (
-        <div class="min-w-24 flex flex-col gap-4 w-[calc(50%-20px)] sm:w-auto">
-          <h4 class="text-sm font-semibold leading-5 text-text-on-brand-secondary">
-            {col.title}
-          </h4>
-          <ul class="flex flex-col gap-3">
-            {col.links.map((link) => (
-              <li>
-                <a href={link.href} class="text-base font-medium leading-6 text-text-on-brand-tertiary hover:text-brand-accent transition-colors duration-150">
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
-      <!-- App column -->
-      <div class="flex flex-col gap-4 min-w-[160px]">
-        <h4 class="text-sm font-semibold leading-5 text-white">
+    <!-- Top: Get the app first on mobile, last on desktop; nav in 2-col grid on mobile -->
+    <div class="flex flex-col gap-y-8 md:flex-row md:flex-wrap md:gap-y-12 gap-x-8 md:justify-between" data-animate="fade-up">
+      <!-- Nav columns: 2-col grid on mobile, flex wrap on desktop -->
+      <div class="grid grid-cols-2 gap-x-6 gap-y-8 md:contents order-2 md:order-1">
+        {footerColumns.map((col) => (
+          <div class="min-w-24 flex flex-col gap-4">
+            <h4 class="text-sm font-semibold leading-5 text-[#181D27]">
+              {col.title}
+            </h4>
+            <ul class="flex flex-col gap-3">
+              {col.links.map((link) => (
+                <li class="flex items-center gap-2">
+                  <a href={link.href} class="text-base font-medium leading-6 text-[#183F2E] hover:text-brand-accent transition-colors duration-150">
+                    {link.label}
+                  </a>
+                  {link.badge && (
+                    <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium border border-[#D5D7DA] text-[#414651]">
+                      {link.badge}
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <!-- Get the app: first on mobile, last on desktop; badges horizontal on mobile -->
+      <div class="flex flex-col gap-4 order-1 md:order-last md:min-w-[160px]">
+        <h4 class="text-sm font-semibold leading-5 text-[#181D27]">
           Get the app
         </h4>
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-row flex-wrap gap-4">
           <AppBadge store="apple" />
           <AppBadge store="google" />
         </div>
       </div>
     </div>
 
-    <!-- Bottom -->
-    <div class="flex items-center justify-between flex-wrap gap-6 pt-8 border-t border-border-brand-alt">
+    <!-- Bottom: stacked on mobile, row on desktop -->
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6 pt-8 border-t border-[#E9EAEB]">
       <a href="/" class="flex items-center h-8">
-        <Logo />
+        <LogoFooter />
       </a>
-      <p class="text-base font-normal leading-6 text-text-on-brand-secondary">
-        &copy; 2026 Handoff. All rights reserved.
+      <p class="text-base font-normal leading-6 text-[#717680]">
+        © 2077 Untitled UI. All rights reserved.
       </p>
     </div>
   </div>

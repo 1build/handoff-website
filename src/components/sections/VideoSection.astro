@@ -1,0 +1,40 @@
+---
+import videoImg from "@/assets/images/video-img.png";
+---
+
+<section class="relative z-[2] py-10 md:py-16 lg:py-20 bg-white" data-animate="fade-up">
+  <div class="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-8">
+    <!-- Heading -->
+    <div class="text-center max-w-[720px] mx-auto mb-8 md:mb-12">
+      <h2 class="font-display text-3xl sm:text-4xl md:text-[2.5rem] font-semibold leading-tight tracking-[-0.02em] text-text-primary mb-4">
+        Modern contractors move faster
+      </h2>
+      <p class="text-base md:text-lg leading-relaxed text-text-secondary">
+        See how top contractors use Handoff to run their day-to-day on connected systems and AI, not sticky notes and memory.
+      </p>
+    </div>
+
+    <div class="relative w-full max-w-[1280px] mx-auto">
+      <a
+        href="#"
+        class="block relative rounded-3xl overflow-hidden border border-neutral-200 shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50"
+        aria-label="Play video"
+      >
+        <div class="aspect-video w-full bg-neutral-200 relative">
+          <img
+            src={videoImg.src}
+            alt=""
+            class="w-full h-full object-cover rounded-3xl"
+            loading="lazy"
+          />
+          
+          <div class="absolute flex items-center justify-center">
+            <span class="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/30 ">
+              <span class="w-0 h-0 ml-1.5 border-y-[12px] border-y-transparent border-l-[20px] border-l-white sm:border-y-[14px] sm:border-l-[24px]" aria-hidden="true"></span>
+            </span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>

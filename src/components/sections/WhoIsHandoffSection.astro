@@ -1,0 +1,58 @@
+---
+import whoisplaceImg from "@/assets/images/whoisplace.png";
+
+const audiences = [
+  {
+    title: "Remodelers",
+    description: "Grow your business without adding overhead",
+  },
+  {
+    title: "Handyman",
+    description: "Grow your business without adding overhead",
+  },
+];
+---
+
+<section class="relative z-[2] py-12 md:py-16 lg:py-20 bg-white" data-animate="fade-up">
+  <div class="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-8">
+    <div class="text-center max-w-[640px] mx-auto mb-8 md:mb-10">
+      <h2 class="font-display text-3xl sm:text-4xl md:text-[2.5rem] font-semibold leading-tight tracking-[-0.02em] text-text-primary mb-4">
+        Who is Handoff for?
+      </h2>
+      <p class="text-base md:text-lg text-text-secondary leading-relaxed mb-8">
+        If you are an owner of a residential construction business, Handoff is for you. Supercharge your growth and let us handle your operations on autopilot.
+      </p>
+
+      <!-- CTAs: stacked on mobile, row on desktop -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+        <a
+          href="#"
+          class="relative w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-5 py-2.5 text-base font-medium leading-6 rounded-xl whitespace-nowrap bg-brand-700 text-white shadow-[0px_1px_2px_0px_rgba(10,13,18,0.05)] hover:bg-brand-800 transition-all duration-150"
+        >
+          Start free trial
+          <span class="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_0px_0px_1px_rgba(10,13,18,0.18),inset_0px_-2px_0px_0px_rgba(10,13,18,0.05)]" aria-hidden="true"></span>
+        </a>
+        <a
+          href="#"
+          class="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-5 py-2.5 text-base font-medium leading-6 rounded-xl whitespace-nowrap bg-white text-text-secondary border border-border-primary shadow-xs hover:bg-neutral-50 transition-all duration-150"
+        >
+          Plans and Capabilities
+        </a>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mt-12 md:mt-16">
+      {audiences.map((audience) => (
+        <article class="flex flex-col gap-3 rounded-xl overflow-hidden">
+           <img src={whoisplaceImg.src} alt="" class="w-full h-full object-cover rounded-xl" loading="lazy" />
+          <h3 class="text-xl md:text-2xl font-semibold text-text-primary">
+              {audience.title}
+            </h3>
+            <p class="text-base text-text-secondary leading-relaxed">
+              {audience.description}
+            </p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
