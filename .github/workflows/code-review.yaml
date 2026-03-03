@@ -1,0 +1,12 @@
+name: Code review
+
+on:
+  pull_request:
+    types: [review_requested]
+
+jobs:
+  code-review:
+    uses: 1build/gha-build-tools/.github/workflows/code-review.yaml@main
+    secrets:
+      AUGMENT_SESSION_AUTH: ${{ secrets.AUGMENT_SESSION_AUTH }}
+      ONEBUILD_SA_TOKEN: ${{ secrets.ONEBUILD_SA_TOKEN }}
