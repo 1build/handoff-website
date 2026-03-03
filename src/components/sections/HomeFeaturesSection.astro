@@ -1,0 +1,331 @@
+---
+import captureEverythingImg from "@/assets/images/Mockup wrap.png";
+import estimatesImg from "@/assets/images/estimatesimg.png";
+import TrainyourAIassistantImg from "@/assets/images/TrainyourAIassistant.png";
+import FasterkickoffsImg from "@/assets/images/Fasterkickoffs.png";
+import backofficeImg from "@/assets/images/backoffice.png";
+import PlatformFeaturesSection from "@/components/sections/PlatformFeaturesSection.astro";
+
+const tabs = [
+  { id: "capture", label: "Capture everything" },
+  { id: "estimates", label: "Estimates" },
+  { id: "train", label: "Train your AI assistant" },
+  { id: "kickoffs", label: "Faster kickoffs" },
+  { id: "backoffice", label: "Back office management" },
+];
+---
+
+<section class="px-4">
+ <div class="relative z-[2]  pb-4 bg-white transition-colors duration-300 rounded-3xl" data-animate="fade-up" data-features-tab-order={tabs.map((t) => t.id).join(",")}>
+  <div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 py-16 lg:py-24 overflow-hidden">
+    <!-- Heading -->
+    <div class="text-center max-w-[720px] mx-auto mb-8 md:mb-[100px]">
+      <h2 class="font-display text-3xl sm:text-4xl md:text-[2.75rem] lg:text-5xl font-medium leading-[1.15] tracking-[-0.02em] text-text-primary mb-5 md:mb-6">
+        AI that handles the paperwork <span class="text-brand-accent">between jobs</span>
+      </h2>
+      <p class="text-base md:text-lg text-text-tertiary leading-relaxed mb-3 md:mb-4">
+        Most construction software slows down as your business grows. More jobs mean more complexity, more handoffs, and more friction.
+      </p>
+      <hr class="border-border-primary max-w-[100px] mx-auto mb-3 md:mb-4" />
+      <p class="text-base md:text-lg font-semibold text-text-tertiary leading-relaxed">
+        Handoff is built so growth increases leverage, not complexity.
+      </p>
+    </div>
+
+    <!-- Tab navigation: mobile = label + arrows + progress; desktop = tab strip -->
+    <div class="mb-6 md:mb-10">
+      <!-- Mobile: category label + arrow buttons + progress bar -->
+      <div class="md:hidden" role="tablist" aria-label="Feature tabs">
+        <div class="flex items-center justify-between gap-3 mb-3">
+          <h3 class="text-base font-semibold text-text-primary" data-features-mobile-label>
+            {tabs[0].label}
+          </h3>
+          <div class="flex items-center gap-1.5 shrink-0">
+            <button type="button" aria-label="Previous feature" data-features-prev class="flex items-center justify-center w-10 h-10 rounded-full bg-transparent border border-[#E9EAEB] text-neutral-700 hover:bg-neutral-300 active:bg-neutral-400 transition-colors">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.4997 6.66659H0.833008M0.833008 6.66659L6.66634 12.4999M0.833008 6.66659L6.66634 0.833252" stroke="#535862" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+            </button>
+            <button type="button" aria-label="Next feature" data-features-next class="flex items-center justify-center w-10 h-10 rounded-full bg-transparent border border-[#E9EAEB] text-neutral-700 hover:bg-neutral-300 active:bg-neutral-400 transition-colors">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0.833008 6.66659H12.4997M12.4997 6.66659L6.66634 0.833252M12.4997 6.66659L6.66634 12.4999" stroke="#535862" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+            </button>
+          </div>
+        </div>
+        <div class="flex gap-1.5 items-center justify-between" data-features-progress aria-hidden="true">
+          {tabs.map((tab, i) => (
+            <span
+              data-features-progress-segment
+              data-tab-id={tab.id}
+              data-index={i}
+              data-active={i === 0 ? "" : undefined}
+              class="h-2 rounded-full bg-neutral-300 data-[active]:bg-brand-700 transition-all duration-200 data-[active]:w-1/2 w-full"
+            />
+          ))}
+        </div>
+      </div>
+   
+      <div class="hidden md:block border-b border-neutral-200 overflow-x-auto">
+        <div class="flex gap-6 lg:gap-8 min-w-max pb-px justify-between" role="tablist" aria-label="Feature tabs">
+          {tabs.map((tab, i) => (
+            <button
+              type="button"
+              role="tab"
+              aria-selected={i === 0}
+              aria-controls={`features-panel-${tab.id}`}
+              id={`features-tab-${tab.id}`}
+              data-features-tab={tab.id}
+              data-tab-index={i}
+              data-active={i === 0 ? "" : undefined}
+              class="features-tab px-5 pb-4 text-base font-medium whitespace-nowrap border-b-4 border-transparent -mb-px transition-colors duration-150 text-text-quaternary hover:text-text-primary data-[active]:text-text-brand-secondary data-[active]:border-brand-700 data-[active]:font-semibold"
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div class="rounded-2xl md:rounded-3xl bg-neutral-100 p-5">
+      <div class="rounded-xl md:rounded-2xl bg-white overflow-hidden shadow-sm">
+        <div class="grid grid-cols-1 md:grid-cols-2 min-h-0 shadow-2xl">
+          <!-- Text content (below image on mobile) -->
+          <div class="p-5 md:p-8 lg:p-10 flex flex-col justify-center order-2 md:order-1">
+            <!-- Panels: same structure — main heading, subtext, two feature blocks with Learn more -->
+            <!-- Capture everything panel (default visible) -->
+            <div data-features-panel="capture" class="features-panel features-panel-content" role="tabpanel" id="features-panel-capture" aria-labelledby="features-tab-capture">
+              <h3 class="text-xl md:text-2xl lg:text-3xl font-semibold text-text-primary mb-2">Everything starts with the walkthrough</h3>
+              <p class="text-base text-text-secondary mb-6 md:mb-[80px]">Capture everything in one place</p>
+              <div class="space-y-6 md:space-y-8">
+                <div class="border-l-0 md:border-l-2 md:border-border-primary pl-4 md:pl-5">
+                  <h4 class="text-base font-semibold text-text-primary mb-2">Voice, photo, and plan capture</h4>
+                  <p class="text-sm md:text-base text-text-secondary leading-relaxed mb-3">Enter details once using text, voice, photos, or drawing plans. No re-entry, no lost notes, no switching apps on the job site.</p>
+                  <a href="#" class="text-sm font-medium text-[#183F2E] hover:opacity-90 transition-opacity inline-flex items-center gap-1">Learn more <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4.16699 9.99996H15.8337M15.8337 9.99996L10.0003 4.16663M15.8337 9.99996L10.0003 15.8333" stroke="#4E6D5D" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+                </div>
+                <div class="border-l-0 md:border-l-2 md:border-border-primary pl-4 md:pl-5">
+                  <h4 class="text-base font-semibold text-text-primary mb-2">All job details in one record</h4>
+                  <p class="text-sm md:text-base text-text-secondary leading-relaxed mb-3">Everything from the walkthrough lives in one place. Accessible from the office or the job site.</p>
+                  <a href="#" class="text-sm font-medium text-[#183F2E] hover:opacity-90 transition-opacity inline-flex items-center gap-1">Learn more <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4.16699 9.99996H15.8337M15.8337 9.99996L10.0003 4.16663M15.8337 9.99996L10.0003 15.8333" stroke="#4E6D5D" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+                </div>
+              </div>
+            </div>
+            <!-- Estimates panel -->
+            <div data-features-panel="estimates" class="features-panel features-panel-content hidden" role="tabpanel" id="features-panel-estimates" aria-labelledby="features-tab-estimates">
+              <h3 class="text-xl md:text-2xl lg:text-3xl font-semibold text-text-primary mb-2">Project estimate done in minutes, not days</h3>
+              <p class="text-base text-text-secondary mb-6 md:mb-[80px]">Pricing, labor, and materials from your walkthrough</p>
+              <div class="space-y-6 md:space-y-8">
+                <div class="border-l-0 md:border-l-2 md:border-border-primary pl-4 md:pl-5">
+                  <h4 class="text-base font-semibold text-text-primary mb-2">Your pricing, your way</h4>
+                  <p class="text-sm md:text-base text-text-secondary leading-relaxed mb-3">Use your own rates, catalogs, and markup rules. Count with Handoff to fill the gaps with data from thousands of real estimates.</p>
+                  <a href="#" class="text-sm font-medium text-[#183F2E] hover:opacity-90 transition-opacity inline-flex items-center gap-1">Learn more <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4.16699 9.99996H15.8337M15.8337 9.99996L10.0003 4.16663M15.8337 9.99996L10.0003 15.8333" stroke="#4E6D5D" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+                </div>
+                <div class="border-l-0 md:border-l-2 md:border-border-primary pl-4 md:pl-5">
+                  <h4 class="text-base font-semibold text-text-primary mb-2">Materials calculated automatically</h4>
+                  <p class="text-sm md:text-base text-text-secondary leading-relaxed mb-3">Quantities pulled from photos and plans. Costs updated daily from Lowe's, Home Depot and other official partnerships.</p>
+                  <a href="#" class="text-sm font-medium text-[#183F2E] hover:opacity-90 transition-opacity inline-flex items-center gap-1">Learn more <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4.16699 9.99996H15.8337M15.8337 9.99996L10.0003 4.16663M15.8337 9.99996L10.0003 15.8333" stroke="#4E6D5D" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+                </div>
+              </div>
+            </div>
+            <!-- Train your AI assistant panel -->
+            <div data-features-panel="train" class="features-panel features-panel-content hidden" role="tabpanel" id="features-panel-train" aria-labelledby="features-tab-train">
+              <h3 class="text-xl md:text-2xl lg:text-3xl font-semibold text-text-primary mb-2">Built-in learning that scales with volume</h3>
+              <p class="text-base text-text-secondary mb-6 md:mb-[80px]">Every project sharpens accuracy, speed, and consistency</p>
+              <div class="space-y-6 md:space-y-8">
+                <div class="border-l-0 md:border-l-2 md:border-border-primary pl-4 md:pl-5">
+                  <h4 class="text-base font-semibold text-text-primary mb-2">Learns from you</h4>
+                  <p class="text-sm md:text-base text-text-secondary leading-relaxed mb-3">The more you use it, the smarter it gets. Train the AI to match how you estimate and run your business.</p>
+                  <a href="#" class="text-sm font-medium text-[#183F2E] hover:opacity-90 transition-opacity inline-flex items-center gap-1">Learn more <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4.16699 9.99996H15.8337M15.8337 9.99996L10.0003 4.16663M15.8337 9.99996L10.0003 15.8333" stroke="#4E6D5D" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+                </div>
+                <div class="border-l-0 md:border-l-2 md:border-border-primary pl-4 md:pl-5">
+                  <h4 class="text-base font-semibold text-text-primary mb-2">Works the way your business does</h4>
+                  <p class="text-sm md:text-base text-text-secondary leading-relaxed mb-3">Your pricing rules, your preferred materials, your markup structure. Built into every estimate.</p>
+                  <a href="#" class="text-sm font-medium text-[#183F2E] hover:opacity-90 transition-opacity inline-flex items-center gap-1">Learn more <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4.16699 9.99996H15.8337M15.8337 9.99996L10.0003 4.16663M15.8337 9.99996L10.0003 15.8333" stroke="#4E6D5D" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+                </div>
+              </div>
+            </div>
+            <!-- Faster kickoffs panel -->
+            <div data-features-panel="kickoffs" class="features-panel features-panel-content hidden" role="tabpanel" id="features-panel-kickoffs" aria-labelledby="features-tab-kickoffs">
+              <h3 class="text-xl md:text-2xl lg:text-3xl font-semibold text-text-primary mb-2">From estimate to project kickoff effortlessly</h3>
+              <p class="text-base text-text-secondary mb-6 md:mb-[80px]">Signed scope, clear next steps, ready to build</p>
+              <div class="space-y-6 md:space-y-8">
+                <div class="border-l-0 md:border-l-2 md:border-border-primary pl-4 md:pl-5">
+                  <h4 class="text-base font-semibold text-text-primary mb-2">Kickoff ready</h4>
+                  <p class="text-sm md:text-base text-text-secondary leading-relaxed mb-3">Approved scope and pricing in one place. Project record created automatically. Your team can access immediately.</p>
+                  <a href="#" class="text-sm font-medium text-[#183F2E] hover:opacity-90 transition-opacity inline-flex items-center gap-1">Learn more <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4.16699 9.99996H15.8337M15.8337 9.99996L10.0003 4.16663M15.8337 9.99996L10.0003 15.8333" stroke="#4E6D5D" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+                </div>
+                <div class="border-l-0 md:border-l-2 md:border-border-primary pl-4 md:pl-5">
+                  <h4 class="text-base font-semibold text-text-primary mb-2">Follow up handled</h4>
+                  <p class="text-sm md:text-base text-text-secondary leading-relaxed mb-3">Reminders, approvals, and next steps tracked automatically. No chasing clients or digging through email.</p>
+                  <a href="#" class="text-sm font-medium text-[#183F2E] hover:opacity-90 transition-opacity inline-flex items-center gap-1">Learn more <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4.16699 9.99996H15.8337M15.8337 9.99996L10.0003 4.16663M15.8337 9.99996L10.0003 15.8333" stroke="#4E6D5D" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+                </div>
+              </div>
+            </div>
+            <!-- Back office management panel -->
+            <div data-features-panel="backoffice" class="features-panel features-panel-content hidden" role="tabpanel" id="features-panel-backoffice" aria-labelledby="features-tab-backoffice">
+              <h3 class="text-xl md:text-2xl lg:text-3xl font-semibold text-text-primary mb-2">Back office that runs itself</h3>
+              <p class="text-base text-text-secondary mb-6 md:mb-[80px]">Invoicing, change orders, and documentation in one place, powered by AI.</p>
+              <div class="space-y-6 md:space-y-8">
+                <div class="border-l-0 md:border-l-2 md:border-border-primary pl-4 md:pl-5">
+                  <h4 class="text-base font-semibold text-text-primary mb-2">Invoicing and change orders</h4>
+                  <p class="text-sm md:text-base text-text-secondary leading-relaxed mb-3">Generate invoices from approved scopes. Change orders update the project record automatically.</p>
+                  <a href="#" class="text-sm font-medium text-[#183F2E] hover:opacity-90 transition-opacity inline-flex items-center gap-1">Learn more <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4.16699 9.99996H15.8337M15.8337 9.99996L10.0003 4.16663M15.8337 9.99996L10.0003 15.8333" stroke="#4E6D5D" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+                </div>
+                <div class="border-l-0 md:border-l-2 md:border-border-primary pl-4 md:pl-5">
+                  <h4 class="text-base font-semibold text-text-primary mb-2">Documentation flows through</h4>
+                  <p class="text-sm md:text-base text-text-secondary leading-relaxed mb-3">Contracts, approvals, and project docs all connected. No re-entry, no chasing paperwork.</p>
+                  <a href="#" class="text-sm font-medium text-[#183F2E] hover:opacity-90 transition-opacity inline-flex items-center gap-1">Learn more <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4.16699 9.99996H15.8337M15.8337 9.99996L10.0003 4.16663M15.8337 9.99996L10.0003 15.8333" stroke="#4E6D5D" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right column: tab-specific images -->
+          <div class="relative flex items-center justify-center p-5 md:p-8 lg:p-10 order-1 md:order-2" data-features-right-col>
+            <div class="relative w-full h-full flex items-center justify-center" data-features-phone>
+              <img
+                src={captureEverythingImg.src}
+                alt="Capture everything - walkthrough and capture on device"
+                class="w-full h-auto "
+              />
+            </div>
+            <div class="relative w-full h-full flex items-center justify-center hidden" data-features-estimates-img aria-hidden="true">
+              <img
+                src={estimatesImg.src}
+                alt="AI estimates and scope"
+                class="w-full h-auto "
+              />
+            </div>
+            <div class="relative w-full h-full flex items-center justify-center hidden" data-features-train-img aria-hidden="true">
+              <img
+                src={TrainyourAIassistantImg.src}
+                alt="Train your AI assistant"
+                class="w-full h-auto "
+              />
+            </div>
+            <div class="relative w-full h-full flex items-center justify-center hidden" data-features-kickoffs-img aria-hidden="true">
+              <img
+                src={FasterkickoffsImg.src}
+                alt="Faster kickoffs"
+                class="w-full h-auto "
+              />
+            </div>
+            <div class="relative w-full h-full flex items-center justify-center hidden" data-features-backoffice-img aria-hidden="true">
+              <img
+                src={backofficeImg.src}
+                alt="Back office management"
+                class="w-full h-auto "
+              />
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <PlatformFeaturesSection />
+
+  </div>
+</section>
+
+<script>
+  function initFeaturesTabs() {
+    const container = document.querySelector("[data-features-tab]")?.closest("section");
+    if (!container) return;
+
+    // Use server-rendered tab order so mobile progress/label match desktop exactly
+    const tabOrder = (container.getAttribute("data-features-tab-order") ?? "").split(",").filter(Boolean);
+    const tabButtons = container.querySelectorAll("[data-features-tab]");
+    const panels = container.querySelectorAll("[data-features-panel]");
+    const phone = container.querySelector("[data-features-phone]");
+    const estimatesImgEl = container.querySelector("[data-features-estimates-img]");
+    const trainImgEl = container.querySelector("[data-features-train-img]");
+    const kickoffsImgEl = container.querySelector("[data-features-kickoffs-img]");
+    const backofficeImgEl = container.querySelector("[data-features-backoffice-img]");
+    const mobileLabel = container.querySelector("[data-features-mobile-label]");
+    const progressSegments = container.querySelectorAll("[data-features-progress-segment]");
+    const prevBtn = container.querySelector("[data-features-prev]");
+    const nextBtn = container.querySelector("[data-features-next]");
+
+    // Build tabIds and tabLabels in desktop order (from data-features-tab-order)
+    const tabIds = tabOrder.length ? tabOrder : Array.from(tabButtons).map((t) => t.getAttribute("data-features-tab"));
+    const tabLabels = tabIds.map((id) => {
+      const btn = container.querySelector(`[data-features-tab="${id}"]`);
+      return btn?.textContent?.trim() ?? "";
+    });
+
+    function setActiveIndex(index) {
+      const i = Math.max(0, Math.min(index, tabIds.length - 1));
+      const id = tabIds[i];
+      tabButtons.forEach((t) => {
+        const active = t.getAttribute("data-features-tab") === id;
+        t.toggleAttribute("data-active", active);
+        t.setAttribute("aria-selected", String(active));
+      });
+      panels.forEach((panel) => {
+        panel.classList.toggle("hidden", panel.getAttribute("data-features-panel") !== id);
+      });
+      if (phone) phone.classList.toggle("hidden", id !== "capture");
+      if (estimatesImgEl) estimatesImgEl.classList.toggle("hidden", id !== "estimates");
+      if (trainImgEl) trainImgEl.classList.toggle("hidden", id !== "train");
+      if (kickoffsImgEl) kickoffsImgEl.classList.toggle("hidden", id !== "kickoffs");
+      if (backofficeImgEl) backofficeImgEl.classList.toggle("hidden", id !== "backoffice");
+      if (mobileLabel && tabLabels[i]) mobileLabel.textContent = tabLabels[i];
+      progressSegments.forEach((seg) => {
+        seg.toggleAttribute("data-active", seg.getAttribute("data-tab-id") === id);
+      });
+    }
+
+    tabButtons.forEach((tab) => {
+      const id = tab.getAttribute("data-features-tab");
+      const idx = tabIds.indexOf(id);
+      if (idx !== -1) tab.addEventListener("click", () => setActiveIndex(idx));
+    });
+    prevBtn?.addEventListener("click", () => {
+      const currentId = Array.from(tabButtons).find((t) => t.hasAttribute("data-active"))?.getAttribute("data-features-tab");
+      const current = currentId ? tabIds.indexOf(currentId) : 0;
+      const next = current <= 0 ? tabIds.length - 1 : current - 1;
+      setActiveIndex(next);
+    });
+    nextBtn?.addEventListener("click", () => {
+      const currentId = Array.from(tabButtons).find((t) => t.hasAttribute("data-active"))?.getAttribute("data-features-tab");
+      const current = currentId ? tabIds.indexOf(currentId) : 0;
+      const next = current >= tabIds.length - 1 ? 0 : current + 1;
+      setActiveIndex(next);
+    });
+  }
+  initFeaturesTabs();
+  document.addEventListener("astro:page-load", initFeaturesTabs);
+</script>

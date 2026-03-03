@@ -3,6 +3,15 @@ import Button from "@/components/ui/Button.astro";
 import bgPattern from "@/assets/images/background-pattern.png";
 import heroGlow from "@/assets/images/hero-glow-line.svg";
 import heroDashboard from "@/assets/images/hero-dashboard.png";
+import StatsStrip from "@/components/sections/StatsStrip.astro";
+
+const stats = [
+  { value: "+$5,250", label: "more earned per week" },
+  { value: "+14 hrs", label: "saved per week" },
+  { value: "+40%", label: "more deals closed" },
+  { value: "+$85k", label: "more annual profit" },
+];
+
 ---
 
 <section class="relative overflow-hidden pt-20">
@@ -19,13 +28,13 @@ import heroDashboard from "@/assets/images/hero-dashboard.png";
   <!-- Content -->
   <div class="relative z-[2] max-w-[1280px] mx-auto px-8 pt-20 pb-12 flex flex-col items-center text-center">
     <!-- Badge pill -->
-    <a href="#" class="inline-flex items-center gap-2 rounded-full border border-[#abefc6] bg-[#ecfdf3] pl-2 pr-3 py-0.5 mb-8 transition-opacity hover:opacity-80">
-      <span class="inline-flex items-center rounded-full bg-[#ecfdf3] border border-[#abefc6] px-2 py-0.5 text-xs font-medium text-[#067647]">
-        Label
+    <a href="#" class="inline-flex items-center gap-2 rounded-full backdrop-blur-[19px] bg-[#244232] pl-1 pr-2 py-0.5 mb-8 transition-opacity hover:opacity-80">
+      <span class="inline-flex items-center rounded-full bg-[#079455] px-2 py-0.5 text-xs font-medium text-white">
+        NEW
       </span>
-      <span class="text-xs font-medium text-[#067647]">You've updated your profile and details</span>
+      <span class="flex text-xs font-medium text-[#ABEFC6]">AI site walkthrough <span class="hidden md:flex">to replace photo-only tools</span></span>
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="shrink-0">
-        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#067647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#ABEFC6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
       </svg>
     </a>
 
@@ -41,29 +50,28 @@ import heroDashboard from "@/assets/images/hero-dashboard.png";
     </div>
 
     <!-- CTA Buttons -->
-    <div class="flex items-center gap-3 mb-16">
-      <Button variant="primary" size="lg" href="#">
-        <span class="px-1">Get started</span>
-      </Button>
-      <Button variant="secondary-outline" size="lg" href="#" class="backdrop-blur-sm">
-        <span class="px-1">See how it works</span>
-      </Button>
+    <div class="flex flex-col md:flex-row w-full justify-center items-center gap-3 mb-16">
+  
+      <a href="/" class="relative w-full md:w-auto inline-flex items-center justify-center gap-1.5 px-5 py-3 text-base font-medium leading-6 rounded-xl transition-all duration-150 whitespace-nowrap bg-brand-accent text-white shadow-[0px_1px_2px_0px_rgba(10,13,18,0.05)] hover:bg-brand-500">
+        Start free trial
+        <span class="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_0px_0px_1px_rgba(10,13,18,0.18),inset_0px_-2px_0px_0px_rgba(10,13,18,0.05)]"></span>
+      </a>
+      <a href="/" class="inline-flex items-center justify-center gap-1.5 px-5 py-3 text-base font-medium leading-6 rounded-xl transition-all duration-150 whitespace-nowrap bg-black/40 backdrop-blur-md text-white hover:bg-black/30">
+        Book a demo
+        <span class="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_0px_0px_1px_rgba(10,13,18,0.18),inset_0px_-2px_0px_0px_rgba(10,13,18,0.05)]"></span>
+      </a>
+     
     </div>
 
     <!-- Dashboard mockup -->
     <div class="w-full max-w-[1216px] px-0">
-      <div class="rounded-[28px] bg-white/12 backdrop-blur-[29px] p-4 overflow-hidden">
-        <div class="rounded-xl border-[6px] border-[#181d27] overflow-hidden relative">
-          <div class="relative shadow-3xl">
-            <img
+      <img
               src={heroDashboard.src}
               alt="Handoff dashboard"
               class="w-full h-auto block"
               loading="eager"
             />
-          </div>
-        </div>
-      </div>
     </div>
   </div>
+ <StatsStrip />
 </section>
