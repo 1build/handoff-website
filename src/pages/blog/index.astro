@@ -2,7 +2,7 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Header from "@/components/sections/Header.astro";
 import Footer from "@/components/sections/Footer.astro";
-import CtaSection from "@/components/sections/CtaSection.astro";
+import CtaSystemsSection from "@/components/sections/CtaSystemsSection.astro";
 import { navItems, footerColumns } from "@/lib/navigation";
 import { getCollection } from "astro:content";
 
@@ -11,6 +11,9 @@ const posts = (await getCollection("blog")).sort(
 );
 
 const [featuredPost, ...remainingPosts] = posts;
+
+const PER_PAGE = 3;
+const totalPages = Math.max(1, Math.ceil(remainingPosts.length / PER_PAGE));
 
 // Build category tabs from actual post data — only show categories that have posts
 const categorySet = new Set<string>();
@@ -106,8 +109,13 @@ const categories = ["All", ...Array.from(categorySet).sort()];
         {/* Posts Grid */}
         {remainingPosts.length > 0 && (
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-[opacity,max-height] duration-200 ease-in-out overflow-hidden" data-animate="stagger" id="posts-grid">
-            {remainingPosts.map((post) => (
-              <a href={`/blog/${post.id.replace(/\.md$/, "")}`} class="group flex flex-col gap-6" data-post-category={post.data.category || ""}>
+            {remainingPosts.map((post, index) => (
+              <a
+                href={`/blog/${post.id.replace(/\.md$/, "")}`}
+                class="group flex flex-col gap-6"
+                data-post-category={post.data.category || ""}
+                data-post-index={index}
+              >
                 <div class="w-full h-[256px] rounded-md overflow-hidden">
                   {post.data.featuredImage ? (
                     <img
@@ -142,11 +150,50 @@ const categories = ["All", ...Array.from(categorySet).sort()];
             ))}
           </div>
         )}
+
+        {/* Pagination */}
+        {remainingPosts.length > PER_PAGE && (
+          <nav class="mt-10 flex items-center justify-between border-t border-t-[#E9EAEB] pt-5" aria-label="Blog pagination">
+            <button
+              type="button"
+              data-page-prev
+              class="inline-flex items-center gap-2 rounded-xl shadow-xs px-3 py-2 text-sm font-medium text-text-secondary border border-[#D5D7DA] bg-white hover:bg-neutral-50 disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              <span aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M15.8332 10.0001H4.1665M4.1665 10.0001L9.99984 15.8334M4.1665 10.0001L9.99984 4.16675" stroke="#A4A7AE" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+              <span>Previous</span>
+            </button>
+            <div class="flex items-center gap-1 sm:gap-2">
+              {Array.from({ length: totalPages }).map((_, i) => (
+                <button
+                  type="button"
+                  data-page-btn={i + 1}
+                  class="min-w-10 h-10 rounded-md px-2 text-sm font-medium text-text-quaternary hover:text-text-secondary hover:border-neutral-300"
+                >
+                  {i + 1}
+                </button>
+              ))}
+            </div>
+            <button
+              type="button"
+              data-page-next
+              class="inline-flex items-center gap-2 rounded-xl shadow-xs px-3 py-2 text-sm font-medium text-text-secondary border border-[#D5D7DA] bg-white hover:bg-neutral-50 disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              <span>Next</span>
+              <span aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0.833496 6.66659H12.5002M12.5002 6.66659L6.66683 0.833252M12.5002 6.66659L6.66683 12.4999" stroke="#A4A7AE" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+            </button>
+          </nav>
+        )}
       </div>
     </div>
   </section>
 
-  <CtaSection />
+  <CtaSystemsSection />
   <Footer columns={footerColumns} />
 </BaseLayout>
 
@@ -167,15 +214,88 @@ const categories = ["All", ...Array.from(categorySet).sort()];
 
   initScrollAnimations();
 
-  // Category filter tabs
+  // Category filter tabs + pagination
   const tabs = document.querySelectorAll<HTMLButtonElement>("[data-category]");
-  const posts = document.querySelectorAll<HTMLElement>("[data-post-category]");
+  const postCards = Array.from(document.querySelectorAll<HTMLElement>("[data-post-category]"));
+  const grid = document.getElementById("posts-grid");
+  const pageButtons = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-page-btn]"));
+  const prevPageBtn = document.querySelector<HTMLButtonElement>("[data-page-prev]");
+  const nextPageBtn = document.querySelector<HTMLButtonElement>("[data-page-next]");
 
+  const PER_PAGE = 6;
+  let currentCategory = "All";
+  let currentPage = 1;
+
+  function applyFiltersAndPagination() {
+    if (!grid) return;
+
+    // Compute total filtered posts
+    let filteredCount = 0;
+    postCards.forEach((post) => {
+      const matches = currentCategory === "All" || post.dataset.postCategory === currentCategory;
+      if (matches) filteredCount++;
+    });
+
+    const totalPagesForCategory = Math.max(1, Math.ceil(filteredCount / PER_PAGE));
+    if (currentPage > totalPagesForCategory) currentPage = totalPagesForCategory;
+
+    const start = (currentPage - 1) * PER_PAGE;
+    const end = start + PER_PAGE;
+
+    grid.style.maxHeight = grid.scrollHeight + "px";
+    grid.style.opacity = "0";
+
+    setTimeout(() => {
+      let index = 0;
+      postCards.forEach((post) => {
+        const matches = currentCategory === "All" || post.dataset.postCategory === currentCategory;
+        if (matches) {
+          if (index >= start && index < end) {
+            post.style.display = "";
+          } else {
+            post.style.display = "none";
+          }
+          index++;
+        } else {
+          post.style.display = "none";
+        }
+      });
+
+      // Update pagination UI
+      pageButtons.forEach((btn) => {
+        const pageNum = Number(btn.dataset.pageBtn || "1");
+        if (pageNum > totalPagesForCategory) {
+          btn.style.display = "none";
+        } else {
+          btn.style.display = "";
+        }
+        if (pageNum === currentPage) {
+          btn.classList.add("bg-[#FAFAFA]", "text-[#414651]");
+          btn.classList.remove("text-text-quaternary", "border-transparent");
+        } else {
+          btn.classList.remove("bg-[#FAFAFA]", "text-[#414651]");
+          btn.classList.add("text-text-quaternary");
+        }
+      });
+
+      if (prevPageBtn) prevPageBtn.disabled = currentPage === 1;
+      if (nextPageBtn) nextPageBtn.disabled = currentPage === totalPagesForCategory;
+
+      grid.style.maxHeight = grid.scrollHeight + "px";
+      grid.style.opacity = "1";
+      setTimeout(() => {
+        grid.style.maxHeight = "";
+      }, 250);
+    }, 200);
+  }
+
+  // Category tab clicks
   tabs.forEach((tab) => {
     tab.addEventListener("click", () => {
-      const cat = tab.dataset.category;
+      const cat = tab.dataset.category || "All";
+      currentCategory = cat;
+      currentPage = 1;
 
-      // Update active tab
       tabs.forEach((t) => {
         t.classList.remove("border-brand-700", "text-brand-700");
         t.classList.add("border-transparent", "text-text-quaternary");
@@ -183,20 +303,35 @@ const categories = ["All", ...Array.from(categorySet).sort()];
       tab.classList.remove("border-transparent", "text-text-quaternary");
       tab.classList.add("border-brand-700", "text-brand-700");
 
-      // Filter posts with fade + smooth resize
-      const grid = document.getElementById("posts-grid");
-      if (grid) {
-        grid.style.maxHeight = grid.scrollHeight + "px";
-        grid.style.opacity = "0";
-        setTimeout(() => {
-          posts.forEach((post) => {
-            post.style.display = (cat === "All" || post.dataset.postCategory === cat) ? "" : "none";
-          });
-          grid.style.maxHeight = grid.scrollHeight + "px";
-          grid.style.opacity = "1";
-          setTimeout(() => { grid.style.maxHeight = ""; }, 250);
-        }, 200);
-      }
+      applyFiltersAndPagination();
     });
   });
+
+  // Page button clicks
+  pageButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const pageNum = Number(btn.dataset.pageBtn || "1");
+      currentPage = pageNum;
+      applyFiltersAndPagination();
+    });
+  });
+
+  if (prevPageBtn) {
+    prevPageBtn.addEventListener("click", () => {
+      if (currentPage > 1) {
+        currentPage -= 1;
+        applyFiltersAndPagination();
+      }
+    });
+  }
+
+  if (nextPageBtn) {
+    nextPageBtn.addEventListener("click", () => {
+      currentPage += 1;
+      applyFiltersAndPagination();
+    });
+  }
+
+  // Initial render
+  applyFiltersAndPagination();
 </script>
