@@ -1,0 +1,240 @@
+---
+import heroDashboard from "@/assets/images/hero-dashboard.png";
+const slides = [heroDashboard, heroDashboard, heroDashboard, heroDashboard];
+---
+
+<section class="w-full">
+  <div class="w-full mx-auto">
+    <div class="relative">
+      <div class="overflow-hidden">
+        <div class="partial-track relative h-[300px] md:h-[700px]">
+          {slides.map((img, i) => (
+            <div class="partial-slide py-8 md:py-25" data-index={i}>
+              <img src={img.src} alt="" class="w-full h-full object-cover rounded-[24px]" />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      
+    </div>
+  </div>
+</section>
+
+<style>
+  .partial-track {
+    perspective: 100px;
+  }
+
+  .partial-slide {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    opacity: 0;
+    width: 100%;
+    transform: translate3d(0, 0, 0);
+    transition: transform 1s, opacity 1s;
+  }
+
+.partial-slide.partial-next {
+width: 17%;
+opacity: 1;
+    display: flex;
+    align-items: center;
+}
+.partial-slide.partial-prev {
+width: 17%;
+opacity: 1;
+    display: flex;
+    align-items: center;
+}
+.partial-slide.partial-next img {
+    max-height: 50%;
+    transform: rotate(-75deg);
+}
+.partial-slide.partial-prev img {
+      max-height: 50%;
+      transform: rotate(75deg);
+}
+  .partial-slide.partial-current {
+    width: 60%;
+    opacity: 1;
+    transform: translate3d(0, 0, 20px);
+    z-index: 2;
+border-radius: 28px;
+  }
+  .partial-slide img {
+   
+    background: rgba(255, 255, 255, 0.12);
+backdrop-filter: blur(29px);
+border-radius: 28px;
+padding: 16px;
+  }
+
+  .partial-slide.partial-next,
+  .partial-slide.partial-prev {
+    opacity: 1;
+    z-index: 1;
+  }
+
+  .partial-slide.partial-next {
+    transform: translate3d(218%, 0, 0);
+        
+  }
+
+  .partial-slide.partial-prev {
+    transform: translate3d(-218%, 0, 0);
+  }
+  @media only screen and (max-width: 767px) {
+    .partial-slide.partial-next img , .partial-slide.partial-prev img  {
+    display: none
+}
+
+ .partial-slide.partial-current {
+    width: 100%;
+ }
+  }
+</style>
+
+<script>
+  function initPartialCarousel() {
+    const track = document.querySelector(".partial-track");
+    if (!track) return;
+
+    const slides = Array.from(track.querySelectorAll(".partial-slide"));
+    const prevBtn = document.querySelector("[data-partial-prev]");
+    const nextBtn = document.querySelector("[data-partial-next]");
+
+    if (!slides.length) return;
+
+    let current = 0;
+    let autoplayId = null;
+    const AUTOPLAY_MS = 5000;
+    let isDragging = false;
+    let dragStartX = 0;
+    let dragDeltaX = 0;
+
+    function update() {
+      const cur = current;
+      const prev = (current - 1 + slides.length) % slides.length;
+      const next = (current + 1) % slides.length;
+
+      slides.forEach((slide, i) => {
+        slide.classList.remove("partial-current", "partial-prev", "partial-next");
+        if (i === cur) slide.classList.add("partial-current");
+        else if (i === prev) slide.classList.add("partial-prev");
+        else if (i === next) slide.classList.add("partial-next");
+      });
+    }
+
+    function go(delta) {
+      current = (current + delta + slides.length) % slides.length;
+      update();
+    }
+
+    function stopAutoplay() {
+      if (autoplayId !== null) {
+        clearInterval(autoplayId);
+        autoplayId = null;
+      }
+    }
+
+    function startAutoplay() {
+      stopAutoplay();
+      autoplayId = setInterval(function () {
+        go(1);
+      }, AUTOPLAY_MS);
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", function () {
+        stopAutoplay();
+        go(-1);
+        startAutoplay();
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener("click", function () {
+        stopAutoplay();
+        go(1);
+        startAutoplay();
+      });
+    }
+
+    // Mouse drag across full viewport
+    track.addEventListener("mousedown", function (e) {
+      isDragging = true;
+      dragStartX = e.clientX;
+      dragDeltaX = 0;
+      stopAutoplay();
+      e.preventDefault(); // avoid image dragging
+    });
+
+    window.addEventListener("mousemove", function (e) {
+      if (!isDragging) return;
+      dragDeltaX = e.clientX - dragStartX;
+    });
+
+    window.addEventListener("mouseup", function () {
+      if (!isDragging) return;
+      var THRESHOLD = 20;
+      if (dragDeltaX > THRESHOLD) {
+        go(-1);
+      } else if (dragDeltaX < -THRESHOLD) {
+        go(1);
+      }
+      isDragging = false;
+      dragStartX = 0;
+      dragDeltaX = 0;
+      startAutoplay();
+    });
+
+    // Touch drag across full viewport
+    track.addEventListener(
+      "touchstart",
+      function (e) {
+        if (!e.touches.length) return;
+        if (!e.touches.length) return;
+        isDragging = true;
+        dragStartX = e.touches[0].clientX;
+        dragDeltaX = 0;
+        stopAutoplay();
+      },
+      { passive: true }
+    );
+
+    window.addEventListener(
+      "touchmove",
+      function (e) {
+        if (!isDragging || !e.touches.length) return;
+        dragDeltaX = e.touches[0].clientX - dragStartX;
+      },
+      { passive: true }
+    );
+
+    window.addEventListener(
+      "touchend",
+      function () {
+        if (!isDragging) return;
+        var THRESHOLD = 20;
+        if (dragDeltaX > THRESHOLD) {
+          go(-1);
+        } else if (dragDeltaX < -THRESHOLD) {
+          go(1);
+        }
+        isDragging = false;
+        dragStartX = 0;
+        dragDeltaX = 0;
+        startAutoplay();
+      },
+      { passive: true }
+    );
+
+    update();
+    startAutoplay();
+  }
+
+  initPartialCarousel();
+  document.addEventListener("astro:page-load", initPartialCarousel);
+</script>

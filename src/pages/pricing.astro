@@ -3,17 +3,18 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import Header from "@/components/sections/Header.astro";
 import PricingSection from "@/components/sections/PricingSection.astro";
 import PricingCompareTable from "@/components/sections/PricingCompareTable.astro";
-import SupplierLogosSection from "@/components/sections/SupplierLogosSection.astro";
 import PricingMetricsSection from "@/components/sections/PricingMetricsSection.astro";
 import Footer from "@/components/sections/Footer.astro";
-import { navItems, footerColumns } from "@/lib/navigation";
+import TestimonialsGridSectionPricing from "@/components/sections/TestimonialsGridSectionPricing.astro";
+import FaqSection from "@/components/sections/FaqSection.astro";
+import { navItems, footerColumns, faqItems } from "@/lib/navigation";
 ---
 
 <BaseLayout title="Pricing — Handoff">
   <Header navItems={navItems} />
   <PricingSection />
   <PricingCompareTable />
-  <SupplierLogosSection />
-  <PricingMetricsSection />
+  <TestimonialsGridSectionPricing />
+  <FaqSection items={faqItems} />
   <Footer columns={footerColumns} />
 </BaseLayout>
