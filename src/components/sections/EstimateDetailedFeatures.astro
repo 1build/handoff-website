@@ -1,0 +1,61 @@
+---
+import EstimateDetailRow from "./EstimateDetailRow.astro";
+
+const rows = [
+  {
+    eyebrow: "GENERATING",
+    title: "Real-time local pricing",
+    
+    bullets: [
+        'Handoff analyzes live construction costs across every U.S. city and pulls data from trusted suppliers like Home Depot, Lowe’s, and regional distributors.',
+                'Your estimates always reflect current local pricing.',
+                'Now, product details appear directly in-app, so you can compare specs and prices without switching tabs.',
+    ],
+    reverse: false,
+    visualType: "desktop" as const,
+    placeholder: "TBD",
+  },
+  {
+    eyebrow: "Editing estimates",
+    title: "Edit instantly. Without redoing work",
+    
+    bullets: [
+              'Need to change a scope, swap materials, or upload a new photo?',
+                'Handoff updates your estimate automatically.',
+                'Describe the change, adjust a line, or drop in a file, and totals, markups, and profit recalculate on the spot',
+    ],
+    reverse: true,
+    visualType: "phones" as const,
+    placeholder: "TBD",
+  },
+  {
+    eyebrow: "Localized costs",
+    title: "One estimating experiencefor every Job",
+   
+    bullets: [
+              'From small repairs to full custom builds, Handoff adapts to how you price work.',
+                'Combine rooms, separate labor and materials, and manage markups at every level, all within a single connected system that keeps profit clear from start to finish.',
+    ],
+    reverse: false,
+    visualType: "isometric" as const,
+    placeholder: "TBD",
+  },
+  
+];
+---
+
+<section class="relative z-[2] border-t border-[#E9EAEB] mt-16 lg:mt-24 pt-16 lg:pt-24">
+  <div class="max-w-[1920px] mx-auto bg-white   overflow-hidden flex flex-col gap-20 lg:gap-40">
+    {rows.map((r) => (
+      <EstimateDetailRow
+        eyebrow={r.eyebrow}
+        title={r.title}
+        description={r.description}
+        bullets={r.bullets}
+        reverse={r.reverse}
+        visualType={r.visualType}
+        placeholder={r.placeholder}
+      />
+    ))}
+  </div>
+</section>

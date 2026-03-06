@@ -3,7 +3,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import Header from "@/components/sections/Header.astro";
 import Footer from "@/components/sections/Footer.astro";
 import FaqSection from "@/components/sections/FaqSection.astro";
-import CtaSection from "@/components/sections/CtaSection.astro";
+import ProjectManagementCta from "@/components/sections/ProjectManagementCta.astro";
 import DetailRow from "@/components/sections/DetailRow.astro";
 import TestimonialCard from "@/components/sections/TestimonialCard.astro";
 import StarIcon from "@/components/ui/StarIcon.astro";
@@ -11,10 +11,11 @@ import Button from "@/components/ui/Button.astro";
 import bgPattern from "@/assets/images/background-pattern.png";
 import heroGlow from "@/assets/images/hero-glow-line.svg";
 import SupplierLogosCarousel from "@/components/sections/SupplierLogosCarousel.astro";
-import featureEstimate from "@/assets/icons/feature-estimate.svg";
-import featureWin from "@/assets/icons/feature-win.svg";
-import featureMoney from "@/assets/icons/feature-money.svg";
+import projectIcon1 from "@/assets/icons/projectIcon1.svg";
+import projectIcon2 from "@/assets/icons/clock-plus.svg";
+import projectIcon3 from "@/assets/icons/projectIcon3.svg";
 import { navItems, footerColumns } from "@/lib/navigation";
+import placeholder from "@/assets/images/placeholder-img.png";
 
 const faqItems = [
   {
@@ -91,17 +92,17 @@ const features = [
 
 const outcomes = [
   {
-    icon: featureEstimate.src,
+    icon: projectIcon1.src,
     title: "Keep project organized",
     description: "Every contract, change order, and document in one place. No more hunting through excel sheets for approvals.",
   },
   {
-    icon: featureWin.src,
+    icon: projectIcon2.src,
     title: "Cut admin time in half",
     description: "Proposals turn into payments seamlessly. Change orders stay organized without the extra work.",
   },
   {
-    icon: featureMoney.src,
+    icon: projectIcon3.src,
     title: "Scale without the bottleneck",
     description: "Your AI teammate learns your way of doing things and handles it on every project. Scale up without being in three places at once.",
   },
@@ -112,14 +113,14 @@ const outcomes = [
   <Header navItems={navItems} />
 
   <!-- Hero (matches solutions HeroSection pattern) -->
-  <section id="hero" class="hero-fixed">
+  <section id="hero" class="hero-fixed oveflow-hidden relative">
     <!-- Background grid pattern -->
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1920px] h-[1440px] pointer-events-none z-0">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 max-w-full w-[1920px] h-[1440px] pointer-events-none z-0">
       <img src={bgPattern.src} alt="" class="w-full h-full block object-contain object-top" />
     </div>
 
     <!-- Glow line -->
-    <div class="absolute -top-[24%] -left-[14%] -right-[14%] -bottom-[24%] pointer-events-none z-[1]">
+    <div class="absolute max-w-full -top-[24%] -left-[14%] -right-[14%] -bottom-[24%] pointer-events-none z-[1]">
       <img src={heroGlow.src} alt="" class="w-full h-full block" />
     </div>
 
@@ -136,20 +137,25 @@ const outcomes = [
           Spend your time building and growing your business instead of chasing project details. Built for contractors, Handoff's trained AI manages all the documentation, scheduling, and crew coordination in one system, acting like your AI teammate.
         </p>
         <div class="mt-12">
-          <Button variant="secondary-outline" size="lg" class="!bg-white !text-text-secondary !border-border-primary">
-            See how it works
-          </Button>
+         
+          <a href="/" class="inline-flex w-full md:w-auto items-center justify-center gap-1.5 px-5 py-3 text-base font-medium leading-6 rounded-xl transition-all duration-150 whitespace-nowrap bg-black/40 backdrop-blur-md text-white hover:bg-black/30">
+
+        See how it works
+<span class="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_0px_0px_1px_rgba(10,13,18,0.18),inset_0px_-2px_0px_0px_rgba(10,13,18,0.05)]"></span> </a>
         </div>
       </div>
 
       <!-- Hero visual placeholder -->
-      <div class="flex-1 relative z-[2]">
-        <div class="w-full h-[500px] rounded-3xl bg-white/10 backdrop-blur-sm p-8 flex items-center justify-center">
-          <div class="w-full h-full rounded-xl bg-detail-visual-bg flex items-center justify-center">
-            <p class="text-white/80 text-lg font-medium">Screenshot of project dashboard</p>
-          </div>
-        </div>
-      </div>
+      <div class="flex-1 relative z-[2] bg-[rgba(255,255,255,0.1)] backdrop-blur-[4px] rounded-3xl p-6">
+      <img
+                src={placeholder.src}
+                alt=""
+                class="w-full h-auto rounded-xl"
+                loading="lazy"
+                decoding="async"
+              />
+              
+    </div>
     </div>
   </section>
 
@@ -161,7 +167,7 @@ const outcomes = [
         <h2 class="font-display text-4xl lg:text-5xl font-medium leading-[44px] lg:leading-[60px] tracking-[-0.96px] text-text-primary max-w-4xl">
           Run projects in one connected system
         </h2>
-        <p class="text-xl font-normal leading-[30px] text-text-tertiary max-w-4xl">
+        <p class="text-xl font-normal leading-[30px] text-text-tertiary">
           Handoff gives you the tools to respond faster, look more professional, and protect your margins on every job.
         </p>
       </div>
@@ -212,7 +218,7 @@ const outcomes = [
   </section>
 
   <!-- Detailed feature rows -->
-  <section class="relative z-[2] px-4 pb-4 bg-brand-800">
+  <section class="relative z-[2] px-4 bg-brand-800">
     <div class="max-w-[1920px] mx-auto bg-white rounded-3xl py-16 lg:py-24 overflow-hidden flex flex-col gap-20 lg:gap-40">
       {features.map((f, i) => (
         <DetailRow
@@ -232,7 +238,7 @@ const outcomes = [
   <FaqSection items={faqItems} />
 
   <!-- CTA -->
-  <CtaSection />
+  <ProjectManagementCta />
 
   <!-- Footer -->
   <Footer columns={footerColumns} />

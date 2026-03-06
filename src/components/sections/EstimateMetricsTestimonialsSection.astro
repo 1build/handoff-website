@@ -1,4 +1,5 @@
 ---
+import contractorPhoto from "@/assets/images/contractor-photo.png";
 import bgPattern from "@/assets/images/testi-bg-pattern.png";
 import avatar1 from "@/assets/images/avatar1.png";
 import avatar2 from "@/assets/images/avatar2.png";
@@ -9,7 +10,6 @@ import avatar6 from "@/assets/images/avatar6.png";
 import avatar7 from "@/assets/images/avatar7.png";
 import avatar8 from "@/assets/images/avatar8.png";
 import avatar9 from "@/assets/images/avatar9.png";
-import CustomerStorySection from "@/components/sections/CustomerStorySection.astro";
 
 const testimonials = [
   {
@@ -86,28 +86,115 @@ const testimonials = [
   },
 ];
 
-const visibleOnMobile = 3;
+const visibleOnMobile = 4;
+
+
 ---
-<section class="px-4 pt-4">
-<div class="relative z-[2] overflow-hidden py-10 md:py-16 lg:py-20 bg-[linear-gradient(180deg,_#D5DED8_0%,_#F4F6F4_80%,_#FFFFFF_100%)] rounded-3xl" data-animate="fade-up">
-  <div class="absolute top-[10%] right-0  pointer-events-none z-[2]">
+
+<section class="relative z-[2] px-4" data-animate="fade-up">
+  <div class="bg-[#D5DED8] rounded-3xl max-w-[1920px] mx-auto overflow-hidden py-16 lg:py-24 relative">
+    <!-- Background pattern -->
+    <div class="absolute top-[10%] right-0  pointer-events-none z-[2]">
     <img src={bgPattern.src} alt="" class="w-full h-full block object-contain object-top" />
   </div>
-  <div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8">
-    <div class="text-center max-w-[700px] mx-auto mb-10 md:mb-12">
-      <h2 class="font-display text-3xl sm:text-4xl md:text-[2.5rem] font-semibold leading-tight tracking-[-0.02em] text-text-primary mb-4">
-        How high-growth remodelers stay ahead
-      </h2>
-      <p class="text-base md:text-lg text-text-secondary leading-relaxed">
-        Forward-thinking teams use Handoff to move faster, protect margins, and scale without over-hiring.
-      </p>
-    </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-[12]">
+    <!-- Top: Metrics + Contractor Image -->
+    <div class="relative z-[1] max-w-[1280px] mx-auto pl-4 lg:pl-8">
+      <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-16 lg:h-[546px]">
+        <!-- Left content (flex-1 fills remaining space) -->
+        <div class="flex-1 min-w-0 flex flex-col gap-10 lg:gap-16 px-4 lg:px-0">
+          <!-- Heading + subtitle -->
+          <div class="flex flex-col gap-5">
+            <h2 class="font-display text-4xl lg:text-[48px] font-medium leading-[60px] tracking-[-0.96px] text-text-primary">
+              Built for contractors who want their time back
+            </h2>
+            <p class="text-lg lg:text-xl text-text-tertiary leading-[30px] font-normal">
+              Forward-thinking teams use Handoff to move faster, protect margins, and scale without over-hiring.
+            </p>
+          </div>
+
+          <!-- Metrics -->
+          <div class="flex flex-wrap gap-y-12 gap-x-6">
+            <div class="flex-1 min-w-[240px] flex flex-col gap-1">
+              <span class="font-display text-6xl lg:text-[72px] font-medium leading-[90px] tracking-[-1.44px] text-brand-300">
+                10x
+              </span>
+              <span class="text-base lg:text-[16px] font-semibold text-text-primary leading-6">
+                Faster than manual estimating
+              </span>
+            </div>
+            <div class="flex-1 min-w-[240px] flex flex-col gap-1">
+              <span class="font-display text-6xl lg:text-[72px] font-medium leading-[90px] tracking-[-1.44px] text-brand-300">
+                21 min
+              </span>
+              <span class="text-base lg:text-[16px] font-semibold text-text-primary leading-6">
+                Average time spent per estimate
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Contractor image + notification cards (fixed 582x546) -->
+        <div class="relative w-[582px] h-[546px] shrink-0 overflow-hidden">
+          <img
+            src={contractorPhoto.src}
+            alt="Contractor using Handoff"
+            class="w-[520px] h-[498px] object-cover"
+            loading="lazy"
+            decoding="async"
+          />
+
+          <!-- Notification queue (absolute positioned per Figma) -->
+          <div class="absolute bottom-[3px] left-4 w-[320px] h-[300px]">
+            <!-- Top card: file-check "approved" -->
+            <div class="absolute top-0 left-0 w-[320px] bg-white rounded-xl p-4 flex gap-4 items-start overflow-hidden shadow-[0px_20px_24px_-4px_rgba(10,13,18,0.08),0px_8px_8px_-4px_rgba(10,13,18,0.03),0px_3px_3px_-1.5px_rgba(10,13,18,0.04)]">
+              <div class="shrink-0 w-10 h-10 rounded-lg bg-[rgba(213,222,216,0.3)] flex items-center justify-center">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10 18H14C14.55 18 15.0208 17.8042 15.4125 17.4125C15.8042 17.0208 16 16.55 16 16V9.825C16 9.55833 15.9 9.30417 15.7 9.0625L12.875 6.3C12.675 6.1 12.4333 6 12.15 6H10C9.45 6 8.97917 6.19583 8.5875 6.5875C8.19583 6.97917 8 7.45 8 8V16C8 16.55 8.19583 17.0208 8.5875 17.4125C8.97917 17.8042 9.45 18 10 18ZM11 13.175L10.4 12.575C10.2167 12.3917 10.2167 12.2083 10.4 12.025C10.5833 11.8417 10.7667 11.8417 10.95 12.025L11.275 12.35L12.55 11.075C12.7333 10.8917 12.9167 10.8917 13.1 11.075C13.2833 11.2583 13.2833 11.4417 13.1 11.625L11.55 13.175C11.3667 13.3583 11.1833 13.3583 11 13.175Z" fill="var(--color-brand-700)"/>
+                </svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-sm font-medium text-brand-700 leading-5">Master Bath Remodel proposal <strong class="font-bold">approved</strong> by Sarah Miller</p>
+                <p class="text-xs text-neutral-500 mt-0.5">Just now</p>
+              </div>
+            </div>
+
+            <!-- Middle card: bank-note "$8,500 received" (offset 32px left) -->
+            <div class="absolute top-[104px] left-8 w-[320px] bg-white rounded-xl p-4 flex gap-4 items-start overflow-hidden shadow-[0px_20px_24px_-4px_rgba(10,13,18,0.08),0px_8px_8px_-4px_rgba(10,13,18,0.03),0px_3px_3px_-1.5px_rgba(10,13,18,0.04)]">
+              <div class="shrink-0 w-10 h-10 rounded-lg bg-[rgba(213,222,216,0.3)] flex items-center justify-center">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2 17V7C2 6.45 2.19583 5.97917 2.5875 5.5875C2.97917 5.19583 3.45 5 4 5H20C20.55 5 21.0208 5.19583 21.4125 5.5875C21.8042 5.97917 22 6.45 22 7V17C22 17.55 21.8042 18.0208 21.4125 18.4125C21.0208 18.8042 20.55 19 20 19H4C3.45 19 2.97917 18.8042 2.5875 18.4125C2.19583 18.0208 2 17.55 2 17ZM12 14C12.55 14 13.0208 13.8042 13.4125 13.4125C13.8042 13.0208 14 12.55 14 12C14 11.45 13.8042 10.9792 13.4125 10.5875C13.0208 10.1958 12.55 10 12 10C11.45 10 10.9792 10.1958 10.5875 10.5875C10.1958 10.9792 10 11.45 10 12C10 12.55 10.1958 13.0208 10.5875 13.4125C10.9792 13.8042 11.45 14 12 14Z" fill="var(--color-brand-700)"/>
+                </svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-sm font-medium text-brand-700 leading-5">Deposit of <strong class="font-bold">$8,500 received</strong> for Kitchen Remodel project</p>
+                <p class="text-xs text-neutral-500 mt-0.5">2m ago</p>
+              </div>
+            </div>
+
+            <!-- Bottom card: send "proposal sent" (faded) -->
+            <div class="absolute top-[208px] left-0 w-[320px] rounded-xl p-4 flex gap-4 items-start overflow-hidden opacity-80 bg-gradient-to-b from-white from-[48%] to-transparent">
+              <div class="shrink-0 w-10 h-10 rounded-lg bg-[rgba(213,222,216,0.3)] flex items-center justify-center">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 20V14L11 12L3 10V4L22 12L3 20Z" fill="var(--color-brand-700)"/>
+                </svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-sm font-medium text-brand-700 leading-5">Kitchen Remodel <strong class="font-bold">proposal sent</strong> successfully to Olivia Rhye</p>
+                <p class="text-xs text-neutral-500 mt-0.5">15m ago</p>
+              </div>
+            </div>
+
+            <!-- Blurred background behind bottom card -->
+            <div class="absolute top-[208px] left-0 w-[320px] h-[92px] rounded-xl backdrop-blur-[6px] bg-white/10 -z-10"></div>
+          </div>
+        </div>
+      </div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-[12] pt-16 lg:pt-24">
       {testimonials.map((t, i) => (
         <article
-            class={`rounded-xl border border-[#E9EAEB] bg-white p-5 md:p-8 flex flex-col ${i >= 3 ? "hidden" : ""}`}
-            data-testimonial-more={i >= 3 ? "" : undefined}
+            class={`rounded-xl border border-[#E9EAEB] bg-white p-5 md:p-8 flex flex-col ${i >= 4 ? "hidden" : ""}`}
+            data-testimonial-more={i >= 4 ? "" : undefined}
           >
           <p class="text-base text-[#535862] leading-relaxed mb-5 flex-grow">{t.quote}</p>
           <div class="flex items-center gap-3">
@@ -154,11 +241,11 @@ const visibleOnMobile = 3;
         View more reviews
       </button>
     </div>
-  </div>
-  
-  <CustomerStorySection />
-  </div>
+    </div>
+
+    
 </section>
+
 
 <script>
   function initTestimonialsMore() {

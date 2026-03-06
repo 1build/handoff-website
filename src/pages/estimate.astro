@@ -1,0 +1,55 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/sections/Header.astro";
+import FaqSection from "@/components/sections/FaqSection.astro";
+import EstimateHero from "@/components/sections/EstimateHero.astro";
+import Footer from "@/components/sections/Footer.astro";
+import EstimateFeatures from "@/components/sections/EstimateFeatures.astro";
+import EstimateVideoSection from "@/components/sections/EstimateVideoSection.astro";
+import BuiltOnDataSection from "@/components/sections/BuiltOnDataSection.astro";
+import EstimateMetricsTestimonialsSection from "@/components/sections/EstimateMetricsTestimonialsSection.astro";
+import EstimateCta from "@/components/sections/EstimateCta.astro";
+import { navItems, footerColumns } from "@/lib/navigation";
+
+const faqItems = [
+  {
+    question: "How does the AI build my estimate?",
+    answer: "You type a quick scope or upload a photo or floor plan. Handoff's AI reads your files, identifies the materials and labor needed, then assembles a clean, itemized estimate using real-time local pricing — no spreadsheets, no guesswork.",
+  },
+  {
+    question: "What file types can I upload?",
+    answer: "Handoff accepts photos, PDFs, floor plans, and scope documents. The AI extracts job details automatically so you spend less time entering data and more time winning bids.",
+  },
+  {
+    question: "How accurate is the pricing?",
+    answer: "Prices are sourced from real-time local supplier data, so estimates reflect what materials actually cost in your area. You can also set custom markup rules and the AI applies them consistently to every estimate.",
+  },
+  {
+    question: "Can I edit the estimate after the AI builds it?",
+    answer: "Yes. Every line item is fully editable. You can add, remove, or adjust quantities and prices. The estimate is yours — the AI just does the heavy lifting.",
+  },
+  {
+    question: "How do I send the estimate to my client?",
+    answer: "Once your estimate looks good, send it directly from Handoff with one click. Clients get a clean, professional PDF and can approve it digitally.",
+  },
+];
+---
+
+<BaseLayout title="Estimating AI — Handoff">
+  <Header navItems={navItems} />
+  <EstimateHero />
+  <EstimateFeatures />
+  <EstimateVideoSection />
+  <BuiltOnDataSection />
+  <EstimateMetricsTestimonialsSection />
+  <FaqSection items={faqItems} />
+  <EstimateCta />
+  <Footer columns={footerColumns} />
+</BaseLayout>
+
+<script>
+  import { initScrollAnimations } from "@/lib/animations";
+  import { initHeroScroll } from "@/lib/heroScroll";
+  initScrollAnimations();
+  initHeroScroll();
+</script>
