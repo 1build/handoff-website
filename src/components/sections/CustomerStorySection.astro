@@ -3,7 +3,7 @@ import avatar10 from "@/assets/images/avatar10.png";
 import storyimg from "@/assets/images/storyimg.png";
 import storyimg2 from "@/assets/images/storyimg2.png";
 
-const videoSrc = ""; // Set to a video URL (e.g. "/video/demo.webm") or pass via prop when you have a video file
+const videoSrc = "https://cdn.jumpshare.com/preview/C9-qzyMtW_qLhh5QxgYBxiyrZGe19WEdsO2LD3AgQ4QNvMPOwkauLYsdKLau4RmgCdhEanORjPEjavxdKSoUX-XLPzCUvA8sE5rrBIdPhpI";
 
 const stories = [
   {
@@ -127,7 +127,6 @@ const stories = [
                 <video
                   class="w-full h-full object-cover"
                   src={videoSrc || undefined}
-                  poster={story.videoPoster || undefined}
                   playsinline
                   preload="metadata"
                   controls
