@@ -1,5 +1,10 @@
 ---
-import videoImg from "@/assets/images/video-img.png";
+import handoffVideo from "@/assets/images/HandoffDeliveryVideo.webm";
+
+interface Props {
+  videoSrc?: string;
+}
+const { videoSrc = (typeof handoffVideo === 'string' ? handoffVideo : handoffVideo?.src ?? '') } = Astro.props;
 ---
 <section class="px-4">
 <div class="relative z-[2] py-10 md:py-16 lg:py-20 bg-white rounded-3xl" data-animate="fade-up">
@@ -13,12 +18,17 @@ import videoImg from "@/assets/images/video-img.png";
       </p>
     </div>
 
-     <img
-            src={videoImg.src}
-            alt=""
-            class="w-full h-full object-cover rounded-3xl"
-            loading="lazy"
-          />
+    <div class="relative w-full rounded-3xl overflow-hidden bg-black/5 aspect-video">
+      <video
+        class="w-full h-full object-cover rounded-3xl"
+        controls
+        playsinline
+        preload="auto"
+      >
+        <source src={videoSrc} type="video/webm" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
   </div>
-  </div>
+</div>
 </section>

@@ -2,6 +2,9 @@
 import avatar10 from "@/assets/images/avatar10.png";
 import storyimg from "@/assets/images/storyimg.png";
 import storyimg2 from "@/assets/images/storyimg2.png";
+import handoffVideo from "@/assets/images/HandoffDeliveryVideo.webm";
+
+const videoSrc = typeof handoffVideo === "string" ? handoffVideo : (handoffVideo?.src ?? "");
 
 const stories = [
   {
@@ -118,20 +121,24 @@ const stories = [
               data-slide
               data-slide-index={index}
             >
-              <a
-                href={story.videoUrl}
-                class="block relative md:min-h-[600px] rounded-2xl overflow-hidden border border-neutral-200 shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50 aspect-video w-full bg-[#b8d4c8]"
-                aria-label="Play video: {story.name}"
+              <div
+                class="customer-story-video-wrap relative md:min-h-[600px] rounded-2xl overflow-hidden border border-neutral-200 shadow-sm aspect-video w-full bg-[#b8d4c8]"
+                data-video-wrap
               >
-                {story.videoPoster ? (
-                  <img
-                    src={story.videoPoster}
-                    alt=""
-                    class="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                ) : null}
-                <div class="absolute inset-0 flex items-center justify-center">
+                <video
+                  class="w-full h-full object-cover"
+                  src={videoSrc}
+                  playsinline
+                  preload="metadata"
+                  controls
+                  data-customer-story-video
+                />
+                <button
+                  type="button"
+                  class="customer-story-play-overlay absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50"
+                  aria-label="Play video"
+                  data-customer-story-play
+                >
                   <span
                     class="flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white/30"
                     aria-hidden="true"
@@ -141,8 +148,8 @@ const stories = [
                       aria-hidden="true"
                     />
                   </span>
-                </div>
-              </a>
+                </button>
+              </div>
             </div>
           ))}
         </div>
@@ -165,7 +172,38 @@ const stories = [
       current = (index + total) % total;
       section.querySelectorAll(".customer-story-slide").forEach((el) => el.classList.add("hidden"));
       section.querySelectorAll(`[data-slide-index="${current}"]`).forEach((el) => el.classList.remove("hidden"));
+      section.querySelectorAll("[data-customer-story-video]").forEach((v) => {
+        (v as HTMLVideoElement).pause();
+      });
+      section.querySelectorAll(".customer-story-play-overlay").forEach((el) => el.classList.remove("hidden"));
     }
+
+    section.querySelectorAll("[data-customer-story-play]").forEach((btn) => {
+      btn.addEventListener("click", function () {
+        const wrap = (this as HTMLElement).closest("[data-video-wrap]");
+        if (!wrap) return;
+        const video = wrap.querySelector("[data-customer-story-video]") as HTMLVideoElement;
+        const overlay = wrap.querySelector(".customer-story-play-overlay") as HTMLElement;
+        if (video && overlay) {
+          video.play();
+          overlay.classList.add("hidden");
+        }
+      });
+    });
+
+    section.querySelectorAll("[data-customer-story-video]").forEach((videoEl) => {
+      const video = videoEl as HTMLVideoElement;
+      video.addEventListener("pause", function () {
+        const wrap = video.closest("[data-video-wrap]");
+        const overlay = wrap?.querySelector(".customer-story-play-overlay") as HTMLElement | null;
+        if (overlay) overlay.classList.remove("hidden");
+      });
+      video.addEventListener("ended", function () {
+        const wrap = video.closest("[data-video-wrap]");
+        const overlay = wrap?.querySelector(".customer-story-play-overlay") as HTMLElement | null;
+        if (overlay) overlay.classList.remove("hidden");
+      });
+    });
 
     prevBtns.forEach((btn) => btn.addEventListener("click", () => goTo(current - 1)));
     nextBtns.forEach((btn) => btn.addEventListener("click", () => goTo(current + 1)));

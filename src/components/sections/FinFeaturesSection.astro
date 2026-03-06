@@ -1,26 +1,27 @@
 ---
 import StarIcon from "@/components/ui/StarIcon.astro";
 import Button from "@/components/ui/Button.astro";
-import featureMoney from "@/assets/icons/feature-money.svg";
-import featureEstimate from "@/assets/icons/feature-estimate.svg";
-import featureWin from "@/assets/icons/feature-win.svg";
+import featurePayment from "@/assets/icons/feature-payment.svg";
+import featureStandard from "@/assets/icons/feature-standard.svg";
+import featureComplete from "@/assets/icons/credit-card-check.svg";
+import SupplierLogosCarousel from "./SupplierLogosCarousel.astro";
 
 const sectionTitle = "Connected financial workflows mean faster payments";
-const sectionSubtitle = "From first quote to final payment, Handoff keeps your money moving. Automated invoicing, milestone billing, and real-time profitability tracking built for how contractors actually work.";
+const sectionSubtitle = "From first quote to final payment, Handoff keeps your money moving so you can stay focused on the job.";
 
 const cards = [
   {
-    icon: featureMoney.src,
+    icon: featurePayment.src,
     title: "Faster payment cycles",
     desc: "Money comes in as work gets done, not just at the end. Invoices go out automatically when milestones are hit, speeding up cash flow.",
   },
   {
-    icon: featureEstimate.src,
+    icon: featureStandard.src,
     title: "Standardized pricing",
     desc: "Consistent markup on every estimate means no more pricing inconsistencies. Every job protects your margins automatically.",
   },
   {
-    icon: featureWin.src,
+    icon: featureComplete.src,
     title: "Complete financial visibility",
     desc: "Track every dollar from estimate to payment with real-time profitability data. Make decisions based on facts, not guesswork.",
   },
@@ -30,8 +31,8 @@ const testimonialName = "Andrew B.";
 const testimonialRole = "Chief Operating Officer";
 const testimonialSource = "G2 review";
 const testimonialRating = 5;
-const testimonialQuote = "Handoff has helped us accelerate our business lifecycle and allows our human experts to do what they do best!";
-const highlightText = "accelerate our business lifecycle";
+const testimonialQuote = "Required product for every toolbox! Handoff has helped us accelerate our business lifecycle and allows our human experts to do what they do best!";
+const highlightText = "accelerate our business";
 
 const parts = highlightText && testimonialQuote.includes(highlightText)
   ? [
@@ -46,10 +47,10 @@ const parts = highlightText && testimonialQuote.includes(highlightText)
   <div class="max-w-[1920px] mx-auto bg-white rounded-3xl border border-black/[0.04] py-16 lg:py-24 overflow-hidden flex flex-col gap-12 lg:gap-20">
     <!-- Header -->
     <div class="max-w-[1440px] px-6 lg:px-8 mx-auto w-full flex flex-col gap-5">
-      <h2 class="font-display text-4xl lg:text-5xl font-medium leading-[44px] lg:leading-[60px] tracking-[-0.96px] text-text-primary max-w-4xl">
+      <h2 class="font-display text-4xl lg:text-5xl font-medium leading-[44px] lg:leading-[60px] tracking-[-0.96px] text-text-primary">
         {sectionTitle}
       </h2>
-      <p class="text-xl font-normal leading-[30px] text-text-tertiary max-w-4xl">
+      <p class="text-xl font-normal leading-[30px] text-text-tertiary">
         {sectionSubtitle}
       </p>
     </div>
@@ -99,5 +100,6 @@ const parts = highlightText && testimonialQuote.includes(highlightText)
         <Button variant="secondary-outline">View more testimonials</Button>
       </div>
     </div>
+    <SupplierLogosCarousel />
   </div>
 </section>

@@ -73,37 +73,19 @@ export const navItems: NavItem[] = [
 export interface FooterColumn {
   title: string;
   lightTitle?: boolean;
-  links: NavLink[];
+  links: (NavLink & { badge?: string })[];
 }
 
 export const footerColumns: FooterColumn[] = [
   {
-    title: "Solutions",
+    title: "Product",
     links: [
-      { label: "Project Management", href: "/project-management" },
-      { label: "Financial Management", href: "/financial-management" },
-      { label: "Permissions & Roles", href: "/permissions-roles" },
-      { label: "Customization", href: "/customization" },
+      { label: "Overview", href: "/" },
+      { label: "Features", href: "/" },
+      { label: "Solutions", href: "/", badge: "New" },
+      { label: "Tutorials", href: "/" },
       { label: "Pricing", href: "/pricing" },
-    ],
-  },
-  {
-    title: "Who We Serve",
-    links: [
-      { label: "Established Remodelers", href: "/" },
-      { label: "New & Small Businesses", href: "/" },
-      { label: "Trade Contractors", href: "/" },
-    ],
-  },
-  {
-    title: "Resources",
-    links: [
-      { label: "Case Studies", href: "/" },
-      { label: "Blog", href: "/blog" },
-      { label: "Guides", href: "/" },
-      { label: "Webinars", href: "/" },
-      { label: "Testimonials", href: "/" },
-      { label: "Contractor Course", href: "/" },
+      { label: "Releases", href: "/" },
     ],
   },
   {
@@ -111,17 +93,43 @@ export const footerColumns: FooterColumn[] = [
     links: [
       { label: "About us", href: "/" },
       { label: "Careers", href: "/" },
-      { label: "Platform Updates", href: "/" },
-      { label: "Community", href: "/" },
+      { label: "Press", href: "/" },
+      { label: "News", href: "/" },
+      { label: "Media kit", href: "/" },
+      { label: "Contact", href: "/" },
     ],
   },
   {
-    title: "Support",
+    title: "Resources",
     links: [
-      { label: "Help Center", href: "/" },
-      { label: "Contact Us", href: "/" },
+      { label: "Blog", href: "/blog" },
+      { label: "Newsletter", href: "/" },
+      { label: "Events", href: "/" },
+      { label: "Help centre", href: "/" },
+      { label: "Tutorials", href: "/" },
+      { label: "Support", href: "/" },
+    ],
+  },
+  {
+    title: "Social",
+    links: [
+      { label: "Twitter", href: "/" },
+      { label: "LinkedIn", href: "/" },
+      { label: "Facebook", href: "/" },
+      { label: "GitHub", href: "/" },
+      { label: "AngelList", href: "/" },
+      { label: "Dribbble", href: "/" },
+    ],
+  },
+  {
+    title: "Legal",
+    links: [
       { label: "Terms", href: "/" },
       { label: "Privacy", href: "/" },
+      { label: "Cookies", href: "/" },
+      { label: "Licenses", href: "/" },
+      { label: "Settings", href: "/" },
+      { label: "Contact", href: "/" },
     ],
   },
 ];

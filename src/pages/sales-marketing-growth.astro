@@ -4,9 +4,10 @@ import Header from "@/components/sections/Header.astro";
 import HeroSection from "@/components/sections/HeroSection.astro";
 import FeaturesSection from "@/components/sections/FeaturesSection.astro";
 import DetailedFeatures from "@/components/sections/DetailedFeatures.astro";
+import BuiltForContractorsSection from "@/components/sections/BuiltForContractorsSection.astro";
 import OverviewSection from "@/components/sections/OverviewSection.astro";
 import FaqSection from "@/components/sections/FaqSection.astro";
-import CtaSection from "@/components/sections/CtaSection.astro";
+import SolutionsCta from "@/components/sections/SolutionsCta.astro";
 import Footer from "@/components/sections/Footer.astro";
 import { navItems, footerColumns, faqItems } from "@/lib/navigation";
 ---
@@ -16,9 +17,10 @@ import { navItems, footerColumns, faqItems } from "@/lib/navigation";
   <HeroSection />
   <FeaturesSection />
   <DetailedFeatures />
+  <BuiltForContractorsSection />
   <!-- <OverviewSection /> -->
   <FaqSection items={faqItems} />
-  <CtaSection />
+  <SolutionsCta />
   <Footer columns={footerColumns} />
 </BaseLayout>
 
