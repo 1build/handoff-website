@@ -2,9 +2,8 @@
 import avatar10 from "@/assets/images/avatar10.png";
 import storyimg from "@/assets/images/storyimg.png";
 import storyimg2 from "@/assets/images/storyimg2.png";
-import handoffVideo from "@/assets/images/HandoffDeliveryVideo.webm";
 
-const videoSrc = typeof handoffVideo === "string" ? handoffVideo : (handoffVideo?.src ?? "");
+const videoSrc = ""; // Set to a video URL (e.g. "/video/demo.webm") or pass via prop when you have a video file
 
 const stories = [
   {
@@ -127,7 +126,8 @@ const stories = [
               >
                 <video
                   class="w-full h-full object-cover"
-                  src={videoSrc}
+                  src={videoSrc || undefined}
+                  poster={story.videoPoster || undefined}
                   playsinline
                   preload="metadata"
                   controls

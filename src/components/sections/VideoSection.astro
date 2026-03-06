@@ -1,10 +1,8 @@
 ---
-import handoffVideo from "@/assets/images/HandoffDeliveryVideo.webm";
-
 interface Props {
   videoSrc?: string;
 }
-const { videoSrc = (typeof handoffVideo === 'string' ? handoffVideo : handoffVideo?.src ?? '') } = Astro.props;
+const { videoSrc = "" } = Astro.props;
 ---
 <section class="px-4">
 <div class="relative z-[2] py-10 md:py-16 lg:py-20 bg-white rounded-3xl" data-animate="fade-up">
@@ -18,6 +16,7 @@ const { videoSrc = (typeof handoffVideo === 'string' ? handoffVideo : handoffVid
       </p>
     </div>
 
+    {videoSrc ? (
     <div class="relative w-full rounded-3xl overflow-hidden bg-black/5 aspect-video">
       <video
         class="w-full h-full object-cover rounded-3xl"
@@ -29,6 +28,11 @@ const { videoSrc = (typeof handoffVideo === 'string' ? handoffVideo : handoffVid
         Your browser does not support the video tag.
       </video>
     </div>
+    ) : (
+    <div class="relative w-full rounded-3xl overflow-hidden bg-black/5 aspect-video flex items-center justify-center text-text-tertiary">
+      <p>Add a video via the videoSrc prop or place a file at <code class="text-sm">public/video/demo.webm</code></p>
+    </div>
+    )}
   </div>
 </div>
 </section>
