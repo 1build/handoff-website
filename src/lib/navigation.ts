@@ -20,7 +20,7 @@ export const navItems: NavItem[] = [
   {
     label: "Who We Serve",
     items: [
-      { label: "Established Remodelers", href: "/" },
+      { label: "Established Remodelers", href: "/remodelers" },
       { label: "New & Small Remodeling Businesses", href: "/" },
       { label: "Trade Contractors & Handymen", href: "/" },
     ],

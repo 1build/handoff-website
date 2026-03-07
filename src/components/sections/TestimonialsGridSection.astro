@@ -86,7 +86,7 @@ const testimonials = [
   },
 ];
 
-const visibleOnMobile = 3;
+const visibleOnMobile = 6;
 ---
 <section class="px-4 pt-4">
 <div class="relative z-[2] overflow-hidden py-10 md:py-16 lg:py-20 bg-[linear-gradient(180deg,_#D5DED8_0%,_#F4F6F4_80%,_#FFFFFF_100%)] rounded-3xl" data-animate="fade-up">
@@ -106,8 +106,8 @@ const visibleOnMobile = 3;
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-[12]">
       {testimonials.map((t, i) => (
         <article
-            class={`rounded-xl border border-[#E9EAEB] bg-white p-5 md:p-8 flex flex-col ${i >= 3 ? "hidden" : ""}`}
-            data-testimonial-more={i >= 3 ? "" : undefined}
+            class={`rounded-xl border border-[#E9EAEB] bg-white p-5 md:p-8 flex flex-col ${i >= 6 ? "hidden" : ""}`}
+            data-testimonial-more={i >= 6 ? "" : undefined}
           >
           <p class="text-base text-[#535862] leading-relaxed mb-5 flex-grow">{t.quote}</p>
           <div class="flex items-center gap-3">
