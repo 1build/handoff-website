@@ -1,0 +1,416 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/sections/Header.astro";
+import Footer from "@/components/sections/Footer.astro";
+import { navItems, footerColumns } from "@/lib/navigation";
+import bgPattern from "@/assets/images/background-pattern.png";
+import heroGlow from "@/assets/images/hero-glow-line.svg";
+import heroCareer from "@/assets/images/career-hero.png";
+import ourTeam from "@/assets/images/team.png";
+import eyeIcon from "@/assets/icons/eye.svg";
+import giftIcon from "@/assets/icons/gifticon.svg";
+import toIcon from "@/assets/icons/toicon.svg";
+import value1 from "@/assets/images/value1.png";
+import value2 from "@/assets/images/value2.png";
+import value3 from "@/assets/images/value3.png";
+import value4 from "@/assets/images/value4.png";
+import value5 from "@/assets/images/value5.png";
+import value6 from "@/assets/images/value6.png";
+import value7 from "@/assets/images/value7.png";
+import value8 from "@/assets/images/value8.png";
+
+// Values section assets (images only, used in grid)
+const values = [
+  {
+    title: "Delight customers daily",
+    desc: "Can you trace your effort to something that will delight our users? Did you put our customers first today?",
+    img: value1?.src ?? value1,
+  },
+  {
+    title: "Step up to the challenge",
+    desc: "We take on big hairy problems outside our comfort zone. We don't hide from challenge, but embrace it and grow together.",
+    img: value2?.src ?? value2,
+  },
+  {
+    title: "Seek and speak the truth",
+    desc: "Always look for the truth. Lead with data, customer anecdotes, and results. Don't sugarcoat anything and communicate the truth directly.",
+    img: value3?.src ?? value3,
+  },
+  {
+    title: "Assume positive intent",
+    desc: "Trust that behind every behavior is a good intention. If someone upset you, let them know, but assume intentions were positive.",
+    img: value4?.src ?? value4,
+  },
+  {
+    title: "Focus and simplify",
+    desc: "Narrow the focus and find the most elegant solution to every problem. Work from first principles and understand the purpose of what you're doing.",
+    img: value5?.src ?? value5,
+  },
+  {
+    title: "Excellence in every action",
+    desc: "Be the owner of your outcomes. Don't do something just to check the box, make it the best version possible.",
+    img: value6?.src ?? value6,
+  },
+  {
+    title: "No ego",
+    desc: "Operate with a No nonsense mentality, a commitment to putting the team and the mission above personal accolades.",
+    img: value7?.src ?? value7,
+  },
+  {
+    title: "Win together",
+    desc: "Be kind and amazing to others: celebrate wins together and extend a helping hand when things get tough.",
+    img: value8?.src ?? value8,
+  },
+];
+
+
+
+const questionTags = [
+  { icon: "culture", text: "Competitive salary in USD" },
+  { icon: "comp", text: "Attractive stock options" },
+  { icon: "location", text: "Unlimited PTO" },
+  { icon: "growth", text: "Relocation Allowance" },
+  { icon: "testimonials", text: "Top-notch equipment" },
+  { icon: "health", text: "Regular offsites around the world" },
+];
+
+// Fetch open positions from Lever API at build time
+const LEVER_API_URL = "https://api.lever.co/v0/postings/handoff?mode=json";
+let jobs: { title: string; location: string; type: string; dept: string; url: string }[] = [];
+try {
+  const res = await fetch(LEVER_API_URL);
+  if (res.ok) {
+    const postings = await res.json();
+    jobs = (Array.isArray(postings) ? postings : []).map((p: {
+      text?: string;
+      categories?: { location?: string; team?: string };
+      workplaceType?: string;
+      hostedUrl?: string;
+    }) => ({
+      title: p.text ?? "Open position",
+      location: p.categories?.location ?? "",
+      type: (p.workplaceType === "hybrid" ? "Hybrid" : p.workplaceType === "remote" ? "Remote" : "Onsite") || "Onsite",
+      dept: p.categories?.team ?? "",
+      url: p.hostedUrl ?? "#",
+    }));
+  }
+} catch (_) {
+  // Fallback if fetch fails (e.g. offline build)
+  jobs = [
+    { title: "Content Marketer", location: "Austin, US", type: "Onsite", dept: "Marketing", url: "https://jobs.lever.co/handoff" },
+    { title: "Customer Success Manager", location: "Austin, US", type: "Onsite", dept: "Customer Success", url: "https://jobs.lever.co/handoff" },
+    { title: "Head of Product", location: "Austin, US", type: "Onsite", dept: "Product", url: "https://jobs.lever.co/handoff" },
+    { title: "Senior Backend Engineer", location: "São Paulo, BR", type: "Hybrid", dept: "Engineering", url: "https://jobs.lever.co/handoff" },
+    { title: "Account Executive, SMB", location: "Buenos Aires, AR", type: "Hybrid", dept: "Sales", url: "https://jobs.lever.co/handoff" },
+    { title: "Senior Data Analyst", location: "São Paulo, BR", type: "Hybrid", dept: "Engineering", url: "https://jobs.lever.co/handoff" },
+    { title: "Staff AI/Machine Learning Engineer", location: "Austin, US", type: "Onsite", dept: "Engineering", url: "https://jobs.lever.co/handoff" },
+  ];
+}
+
+const sectionTitle = "Handoff is changing residential construction forever";
+const sectionSubtitle = "We're building the first AI agent that can run a construction business. Contractors see us as a trusted partner — and we take that seriously. We obsess over delivering the best product and experience, all while pushing toward a future of more affordable housing.";
+
+const cards = [
+  {
+    icon: eyeIcon.src,
+    subtitle: "Vision",
+    title: "Creating AI that can run a construction business",
+    desc: "We're developing residential construction's first back-office AI agent so that builders can get back to doing what they do best: building great homes!",
+  },
+  {
+    icon: giftIcon.src,
+    subtitle: "Product",
+    title: "Building the first AI-native construction product that our customers want",
+    desc: "Proposals turn into payments seamlessly. Change orders stay organized without the extra work.",
+  },
+  {
+    icon: toIcon.src,
+    subtitle: "impact",
+    title: "Building towards a future of affordable housing",
+    desc: "We see a future where running a residential construction business is simpler and more transparent, opening doors for more contractors to enter the market.",
+  },
+];
+---
+
+<BaseLayout title="careers — Build the Future of Construction | Handoff">
+  <Header navItems={navItems} />
+
+  <section id="hero">
+    <!-- Background grid pattern -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 max-w-full w-[1920px] h-[1440px] pointer-events-none z-0">
+      <img src={bgPattern?.src ?? bgPattern ?? ''} alt="" class="w-full h-full block object-contain object-top" />
+    </div>
+
+    <!-- Glow line -->
+    <div class="absolute -top-[24%] -left-[14%] -right-[14%] max-w-full -bottom-[24%] pointer-events-none z-[1]">
+      <img src={heroGlow?.src ?? heroGlow ?? ''} alt="" class="w-full h-full block" />
+    </div>
+
+    <!-- Content -->
+    <div id="hero-container" class="relative z-[1] max-w-[1440px] mx-auto px-8 py-24 flex flex-col lg:flex-row items-center gap-12 lg:gap-16 will-change-[opacity,transform]">
+      <!-- Left: Text -->
+      <div class="flex-1 flex flex-col">
+        <p class="font-mono text-sm font-semibold leading-6 tracking-[0.56px] uppercase text-text-on-brand-tertiary mb-3">
+          Careers
+        </p>
+        <h1 class="font-display text-4xl sm:text-[44px] lg:text-[60px] font-medium leading-[1.2] lg:leading-[72px] tracking-[-1.2px] text-white mb-6">
+          Build the future of construction
+        </h1>
+        <p class="text-lg lg:text-xl font-medium leading-[30px] text-white max-w-[640px]">
+          Handoff is the AI agent that runs construction businesses. We help remodelers automate estimates and streamline operations, so they can focus on building in the real world.<br /><br />
+          Join us - we're just getting started!
+        </p>
+        <div class="mt-12 w-full">
+          <button class="inline-flex w-full md:w-auto items-center justify-center gap-1.5 px-5 py-3 text-base font-medium leading-6 rounded-xl transition-all duration-150 whitespace-nowrap bg-black/40 backdrop-blur-md text-white hover:bg-black/30">
+            View open positions
+          </button>
+        </div>
+      </div>
+
+      <!-- Right: Hero visual -->
+      <div class="flex-1 relative z-[2] flex items-center justify-center">
+        <div class="relative w-full max-w-[600px] h-[570px]">
+          <!-- Diamond contractor photo -->
+          <img
+            src={heroCareer?.src ?? heroCareer ?? ''}
+            alt=""
+            class="w-[536px] h-[513px] object-contain mx-auto"
+            loading="eager"
+            decoding="async"
+          />
+
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+ <section id="features" class="relative z-[2] px-4 pb-4 bg-transparent transition-colors duration-300">
+  <div class="max-w-[1920px] mx-auto bg-white rounded-3xl border border-black/[0.04] py-16 lg:py-24 overflow-hidden flex flex-col gap-12 lg:gap-20">
+    <!-- Header -->
+    <div class="max-w-[1440px] px-6 lg:px-8 mx-auto w-full flex flex-col gap-5">
+    
+      <h2 class="font-display text-4xl lg:text-5xl font-medium leading-[44px] lg:leading-[60px] tracking-[-0.96px] text-text-primary max-w-4xl">
+        {sectionTitle}
+      </h2>
+      <p class="text-xl font-normal leading-[30px] text-text-tertiary">
+        {sectionSubtitle}
+      </p>
+    </div>
+
+    <!-- Grid -->
+    <div class="max-w-[1440px] px-6 lg:px-8 mx-auto w-full grid grid-cols-1 lg:grid-cols-3 gap-8">
+      {cards.map((f) => (
+        <div class="bg-bg-secondary rounded-xl p-6 flex flex-col gap-16">
+          <div class="w-12 h-12 bg-white rounded-md flex items-center justify-center shadow-3xl">
+            <img src={f.icon} alt="" class="w-6 h-6" loading="lazy" decoding="async" />
+          </div>
+          <div class="flex flex-col gap-4">
+          <p class="text-[#9FB1A5] text-sm font-mono semibold uppercase">{f.subtitle}</p>
+            <h3 class="font-display text-2xl font-medium leading-8 text-text-primary">{f.title}</h3>
+            <p class="text-lg font-normal leading-7 text-text-tertiary">{f.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    
+  </div>
+</section>
+
+  <!-- ─── Values Section ─── -->
+  <div class="px-4 pb-4">
+    <div class="relative rounded-3xl py-24 overflow-hidden bg-brand-800">
+      <div class="relative max-w-[1440px] mx-auto px-8 flex flex-col gap-16">
+
+        <!-- Heading -->
+        <div class="max-w-[768px] mx-auto text-center flex flex-col gap-5" data-animate="fade-up">
+        <p class="font-mono text-sm font-semibold leading-6 tracking-[0.56px] uppercase text-text-on-brand-tertiary">
+OUR VALUES</p>
+          <h2 class="font-display font-medium text-[48px] leading-[60px] tracking-[-0.02em] text-white">
+            What we stand for
+          </h2>
+          <div class="text-xl leading-[30px] text-white/90">
+            <p>
+              We're a team that puts customers first, tackles big challenges head-on, and always
+              leads with truth, humility, and positivity.
+            </p>
+            <p class="mt-4">
+              We believe in working smart, owning our outcomes, celebrating wins together, and
+              constantly striving for excellence without ego. Through these values, we know we'll
+              build a revolutionary AI agent that'll change residential construction forever.
+            </p>
+          </div>
+        </div>
+
+        <!-- Values grid (2 cols x 3 rows) -->
+        <div class="grid grid-col-1 md:grid-cols-2 gap-0">
+          {values.map((value) => (
+            <div
+              class="flex gap-6 items-center p-8"
+              style="background: rgba(0, 0, 0, 0.12); border-width: 0px 1px 1px 0px; border-style: solid; border-color: rgba(255, 255, 255, 0.16); backdrop-filter: blur(4px);"
+            >
+              <img
+                src={value.img || ''}
+                alt=""
+                width="80"
+                height="80"
+                class="rounded-xl object-cover shrink-0 w-20 h-20"
+              />
+              <div class="flex flex-col gap-2 min-w-0">
+                <h3 class="font-display font-medium text-lg leading-7 text-white">
+                  {value.title}
+                </h3>
+                <p class="text-base leading-6 text-[#9FB1A5]">
+                  {value.desc}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── Team & Open Positions Section ─── -->
+  <div class="px-4 pb-4">
+    <div class="bg-white border border-black/[0.04] rounded-3xl py-24 overflow-hidden">
+      <div class="max-w-[1440px] mx-auto px-8 flex flex-col gap-20">
+
+        <!-- Our team heading -->
+        <div class="flex flex-col gap-5 max-w-[1024px]" data-animate="fade-up">
+          <h2 class="font-display font-medium text-[48px] leading-[60px] tracking-[-0.02em] text-text-primary">
+            Our team
+          </h2>
+          <p class="text-xl leading-[30px] text-text-tertiary">
+            Our team is spread across three vibrant cities, São Paulo, Buenos Aires, and Austin,
+            bringing together diverse perspectives and a shared passion for building something
+            great. No matter the timezone, we move fast, collaborate closely, and show up for
+            each other every day.
+          </p>
+        </div>
+
+        <!-- Team photo mosaic -->
+        
+        <div class="relative w-full">
+          <img src={ourTeam?.src ?? ourTeam ?? ''} alt="Handoff team" class="w-full h-full object-cover" />
+        </div>
+
+        <!-- Questions about working at Handoff -->
+        <div class="flex flex-col gap-6" data-animate="fade-up">
+          <h3 class="font-display font-medium text-2xl leading-8 text-[#717680]">
+            Questions about working for Handoff?
+          </h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {questionTags.map((item) => (
+              <div class="flex items-center gap-3 px-5 py-4 bg-bg-secondary rounded-xl">
+                <div class="w-10 h-10 flex items-center justify-center shrink-0">
+                  {item.icon === "culture" && (
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4.5 22V17M4.5 7V2M2 4.5H7M2 19.5H7M13 3L11.2658 7.50886C10.9838 8.24209 10.8428 8.60871 10.6235 8.91709C10.4292 9.1904 10.1904 9.42919 9.91709 9.62353C9.60871 9.8428 9.24209 9.98381 8.50886 10.2658L4 12L8.50886 13.7342C9.24209 14.0162 9.60871 14.1572 9.91709 14.3765C10.1904 14.5708 10.4292 14.8096 10.6235 15.0829C10.8428 15.3913 10.9838 15.7579 11.2658 16.4911L13 21L14.7342 16.4911C15.0162 15.7579 15.1572 15.3913 15.3765 15.0829C15.5708 14.8096 15.8096 14.5708 16.0829 14.3765C16.3913 14.1572 16.7579 14.0162 17.4911 13.7342L22 12L17.4911 10.2658C16.7579 9.98381 16.3913 9.8428 16.0829 9.62353C15.8096 9.42919 15.5708 9.1904 15.3765 8.91709C15.1572 8.60871 15.0162 8.24209 14.7342 7.50886L13 3Z" stroke="#698474" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+                  )}
+                  {item.icon === "comp" && (
+                    <svg width="19" height="22" viewBox="0 0 19 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M17 11.5V5.8C17 4.11984 17 3.27976 16.673 2.63803C16.3854 2.07354 15.9265 1.6146 15.362 1.32698C14.7202 1 13.8802 1 12.2 1H5.8C4.11984 1 3.27976 1 2.63803 1.32698C2.07354 1.6146 1.6146 2.07354 1.32698 2.63803C1 3.27976 1 4.11984 1 5.8V16.2C1 17.8802 1 18.7202 1.32698 19.362C1.6146 19.9265 2.07354 20.3854 2.63803 20.673C3.27976 21 4.11984 21 5.8 21H9M11 10H5M7 14H5M13 6H5M11.5 18L13.5 20L18 15.5" stroke="#698474" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+                  )}
+                  {item.icon === "location" && (
+                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M9.12257 12.1094L19.6226 1.60936M9.25015 12.4374L11.8783 19.1954C12.1098 19.7908 12.2255 20.0885 12.3923 20.1754C12.5369 20.2507 12.7092 20.2508 12.8539 20.1756C13.0208 20.0889 13.1369 19.7914 13.3691 19.1963L19.9595 2.30856C20.1691 1.77138 20.2739 1.50279 20.2166 1.33116C20.1668 1.18212 20.0498 1.06515 19.9008 1.01535C19.7291 0.958019 19.4606 1.06283 18.9234 1.27247L2.03562 7.86281C1.44055 8.09503 1.14301 8.21114 1.0563 8.37805C0.981136 8.52273 0.981238 8.69498 1.05658 8.83958C1.14348 9.00639 1.44115 9.12215 2.0365 9.35367L8.7945 11.9818C8.91535 12.0288 8.97578 12.0523 9.02666 12.0886C9.07175 12.1207 9.11119 12.1602 9.14336 12.2053C9.17965 12.2562 9.20315 12.3166 9.25015 12.4374Z" stroke="#698474" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+                  )}
+                  {item.icon === "growth" && (
+                    <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M19 9H1M19 11.5V7.8C19 6.11984 19 5.27976 18.673 4.63803C18.3854 4.07354 17.9265 3.6146 17.362 3.32698C16.7202 3 15.8802 3 14.2 3H5.8C4.11984 3 3.27976 3 2.63803 3.32698C2.07354 3.6146 1.6146 4.07354 1.32698 4.63803C1 5.27976 1 6.11984 1 7.8V16.2C1 17.8802 1 18.7202 1.32698 19.362C1.6146 19.9265 2.07354 20.3854 2.63803 20.673C3.27976 21 4.11984 21 5.8 21H10M14 1V5M6 1V5M12.5 18L14.5 20L19 15.5" stroke="#698474" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+                  )}
+                  {item.icon === "testimonials" && (
+                    <svg width="16" height="22" viewBox="0 0 16 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M11 1V2.4C11 2.96005 11 3.24008 10.891 3.45399C10.7951 3.64215 10.6422 3.79513 10.454 3.89101C10.2401 4 9.96005 4 9.4 4H6.6C6.03995 4 5.75992 4 5.54601 3.89101C5.35785 3.79513 5.20487 3.64215 5.10899 3.45399C5 3.24008 5 2.96005 5 2.4V1M4.2 21H11.8C12.9201 21 13.4802 21 13.908 20.782C14.2843 20.5903 14.5903 20.2843 14.782 19.908C15 19.4802 15 18.9201 15 17.8V4.2C15 3.07989 15 2.51984 14.782 2.09202C14.5903 1.71569 14.2843 1.40973 13.908 1.21799C13.4802 1 12.9201 1 11.8 1H4.2C3.0799 1 2.51984 1 2.09202 1.21799C1.71569 1.40973 1.40973 1.71569 1.21799 2.09202C1 2.51984 1 3.0799 1 4.2V17.8C1 18.9201 1 19.4802 1.21799 19.908C1.40973 20.2843 1.71569 20.5903 2.09202 20.782C2.51984 21 3.07989 21 4.2 21Z" stroke="#698474" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+                  )}
+                  {item.icon === "health" && (
+                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M19 11C19 15.4183 15.4183 19 11 19M19 11C19 6.58172 15.4183 3 11 3M19 11H3M11 19C6.58172 19 3 15.4183 3 11M11 19C13.001 16.8093 14.1388 13.9664 14.2006 11C14.1388 8.03363 13.001 5.19068 11 3M11 19C8.99898 16.8093 7.86235 13.9664 7.80055 11C7.86235 8.03363 8.99898 5.19068 11 3M3 11C3 6.58172 6.58172 3 11 3M5 19C5 20.1046 4.10457 21 3 21C1.89543 21 1 20.1046 1 19C1 17.8954 1.89543 17 3 17C4.10457 17 5 17.8954 5 19ZM21 19C21 20.1046 20.1046 21 19 21C17.8954 21 17 20.1046 17 19C17 17.8954 17.8954 17 19 17C20.1046 17 21 17.8954 21 19ZM5 3C5 4.10457 4.10457 5 3 5C1.89543 5 1 4.10457 1 3C1 1.89543 1.89543 1 3 1C4.10457 1 5 1.89543 5 3ZM21 3C21 4.10457 20.1046 5 19 5C17.8954 5 17 4.10457 17 3C17 1.89543 17.8954 1 19 1C20.1046 1 21 1.89543 21 3Z" stroke="#698474" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+                  )}
+                </div>
+                <span class="text-base font-medium text-text-primary">{item.text}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <hr class="border-border-primary" />
+
+        <!-- Open positions -->
+        <div id="open-positions" class="flex flex-col gap-10" data-animate="fade-up">
+          <h2 class="font-display font-medium text-[48px] leading-[60px] tracking-[-0.02em] text-text-primary">
+            Open positions
+          </h2>
+          <div class="flex flex-col overflow-hidden bg-white ">
+            {jobs.map((job) => (
+              <a
+                href={job.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group flex flex-col md:flex-row gap-8 items-center px-8 py-10 border-b border-[#D5D7DA] last:border-b-0 transition-colors hover:bg-[#F4F6F4]"
+              >
+                <p class="flex-1 min-w-0 font-display text-center md:text-left font-medium text-xl leading-7 text-[#181D27] group-hover:text-neutral-900">
+                  {job.title}
+                </p>
+                <div class="flex  flex-wrap gap-6 items-center justify-center md:justify-start shrink-0 w-auto xl:w-[40%]">
+                <span class="flex items-center gap-2 text-sm font-medium text-[#414651]">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_10014_10001)">
+<path d="M10.0007 10.8333C11.3814 10.8333 12.5007 9.71403 12.5007 8.33332C12.5007 6.95261 11.3814 5.83332 10.0007 5.83332C8.61994 5.83332 7.50065 6.95261 7.50065 8.33332C7.50065 9.71403 8.61994 10.8333 10.0007 10.8333Z" stroke="#A6A6A6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M10.0007 18.3333C13.334 15 16.6673 12.0152 16.6673 8.33332C16.6673 4.65142 13.6825 1.66666 10.0007 1.66666C6.31875 1.66666 3.33398 4.65142 3.33398 8.33332C3.33398 12.0152 6.66732 15 10.0007 18.3333Z" stroke="#A6A6A6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_10014_10001">
+<rect width="20" height="20" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+
+                    {job.location}
+                  </span>
+                  <span class="flex items-center gap-2 text-sm font-medium text-[#414651]">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.8327 9.16667H14.8327C15.7661 9.16667 16.2328 9.16667 16.5893 9.34832C16.9029 9.50811 17.1579 9.76308 17.3177 10.0767C17.4993 10.4332 17.4993 10.8999 17.4993 11.8333V17.5M10.8327 17.5V5.16667C10.8327 4.23325 10.8327 3.76654 10.651 3.41002C10.4912 3.09641 10.2363 2.84144 9.92267 2.68166C9.56615 2.5 9.09944 2.5 8.16602 2.5H5.16602C4.23259 2.5 3.76588 2.5 3.40936 2.68166C3.09576 2.84144 2.84079 3.09641 2.681 3.41002C2.49935 3.76654 2.49935 4.23325 2.49935 5.16667V17.5M18.3327 17.5H1.66602M5.41602 5.83333H7.91602M5.41602 9.16667H7.91602M5.41602 12.5H7.91602" stroke="#A6A6A6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+                    {job.type}
+                  </span>
+                  <span class="flex items-center gap-2 text-sm font-medium text-[#414651]">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M7.91731 2.5L5.41731 17.5M14.584 2.5L12.084 17.5M17.084 6.66667H2.91732M16.2507 13.3333H2.08398" stroke="#A6A6A6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+                    {job.dept}
+                  </span>
+                </div>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M9 6L15 12L9 18" stroke="#A4A7AE" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+              </a>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <Footer columns={footerColumns} />
+</BaseLayout>

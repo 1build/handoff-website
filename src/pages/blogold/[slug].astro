@@ -6,44 +6,36 @@ import CtaSystemsSection from "@/components/sections/CtaSystemsSection.astro";
 import NewsletterSection from "@/components/sections/NewsletterSection.astro";
 import CalloutBanner from "@/components/ui/CalloutBanner.astro";
 import { navItems, footerColumns } from "@/lib/navigation";
-import {
-  getPostBySlug,
-  getAllPosts,
-  urlFor,
-  formatPostDate,
-  formatPostDateShort,
-  renderPostBody,
-  type SanityPostListItem,
-} from "@/lib/sanity";
+import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
-  const { getAllPostSlugs } = await import("@/lib/sanity");
-  const slugs = await getAllPostSlugs();
-  return slugs.filter(Boolean).map((slug) => ({
-    params: { slug },
-    props: { slug },
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.id.replace(/\.md$/, "") },
+    props: { post },
   }));
 }
 
-const { slug } = Astro.props;
-const post = await getPostBySlug(slug);
+const { post } = Astro.props;
+const { Content } = await render(post);
 
-if (!post) {
-  return Astro.redirect("/404");
-}
+const publishedDate = post.data.publishedAt.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
 
-const publishedDate = formatPostDate(post.publishedAt ?? post.date);
-const bodyHtml = renderPostBody(post);
-
-const allPosts = await getAllPosts();
-const relatedPosts: SanityPostListItem[] = allPosts
-  .filter((p) => p.slug && p.slug !== slug)
+// Related posts: all posts except current, sorted by date, limit 3
+const allPosts = await getCollection("blog");
+const relatedPosts = allPosts
+  .filter((p) => p.id !== post.id)
+  .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())
   .slice(0, 3);
 ---
 
 <BaseLayout
-  title={post.seoTitle ?? `${post.title ?? "Post"} — Handoff Blog`}
-  description={post.seoDescription ?? post.excerpt ?? undefined}
+  title={`${post.data.title} — Handoff Blog`}
+  description={post.data.excerpt}
 >
   <Header navItems={navItems} />
 
@@ -58,24 +50,24 @@ const relatedPosts: SanityPostListItem[] = allPosts
       <!-- Article Header -->
       <header class="max-w-[1280px] mx-auto px-6 lg:px-8" data-animate="fade-up">
         <div class="max-w-[768px] mx-auto text-center flex flex-col items-center">
-          {post.category?.name && (
+          {post.data.category && (
             <span class="text-base font-semibold leading-6 text-text-quaternary mb-4">
-              {post.category.name}
+              {post.data.category}
             </span>
           )}
           <h1 class="font-display text-3xl md:text-[48px] font-medium leading-tight md:leading-[60px] tracking-[-0.96px] text-text-primary">
-            {post.title}
+            {post.data.title}
           </h1>
-          {post.excerpt && (
+          {post.data.excerpt && (
             <p class="mt-6 text-xl font-normal leading-[30px] text-text-secondary">
-              {post.excerpt}
+              {post.data.excerpt}
             </p>
           )}
           <div class="mt-8 flex items-center gap-3">
-            {post.author?.avatar ? (
+            {post.data.authorAvatar ? (
               <img
-                src={urlFor(post.author.avatar).width(96).height(96).url()}
-                alt={post.author.name ?? "Author"}
+                src={post.data.authorAvatar}
+                alt={post.data.author}
                 class="w-12 h-12 rounded-full object-cover"
                 loading="lazy"
                 decoding="async"
@@ -83,14 +75,14 @@ const relatedPosts: SanityPostListItem[] = allPosts
             ) : (
               <div class="w-12 h-12 rounded-full bg-brand-100 flex items-center justify-center">
                 <span class="text-brand-700 font-medium text-lg">
-                  {post.author?.name?.charAt(0) ?? "H"}
+                  {post.data.author?.charAt(0) || "H"}
                 </span>
               </div>
             )}
             <div class="flex flex-col items-start">
-              {post.author?.name && (
+              {post.data.author && (
                 <span class="text-base font-medium leading-6 text-text-primary">
-                  {post.author.name}
+                  {post.data.author}
                 </span>
               )}
               <time class="text-sm font-normal leading-5 text-text-tertiary">
@@ -100,11 +92,11 @@ const relatedPosts: SanityPostListItem[] = allPosts
           </div>
         </div>
 
-        {(post.featuredImage || post.thumbnailImage) && (
+        {post.data.featuredImage && (
           <div class="mt-20">
             <img
-              src={urlFor(post.featuredImage ?? post.thumbnailImage).width(1200).url()}
-              alt={post.title ?? "Blog post"}
+              src={post.data.featuredImage}
+              alt={post.data.title}
               class="w-full h-[280px] md:h-[456px] rounded-xl object-cover"
               loading="lazy"
               decoding="async"
@@ -116,10 +108,14 @@ const relatedPosts: SanityPostListItem[] = allPosts
       <!-- Article Body -->
       <div class="max-w-[1280px] mx-auto px-6 lg:px-8 mt-16">
         <div class="max-w-[720px] mx-auto">
-          <div class="article-body prose prose-neutral max-w-none" data-animate="fade-up" set:html={bodyHtml}></div>
+          <div class="article-body" data-animate="fade-up">
+            <Content />
+          </div>
 
           <!-- Callout CTA Banner -->
-          <CalloutBanner />
+          {post.data.calloutAfterSection && (
+            <CalloutBanner />
+          )}
         </div>
       </div>
 
@@ -139,7 +135,7 @@ const relatedPosts: SanityPostListItem[] = allPosts
                   </svg>
                   Copy link
                 </button>
-                <a href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(Astro.url.href)}&text=${encodeURIComponent(post.title ?? "")}`} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-neutral-50 border border-neutral-200 text-text-secondary hover:bg-neutral-100 transition-colors" aria-label="Share on X">
+                <a href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(Astro.url.href)}&text=${encodeURIComponent(post.data.title)}`} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-neutral-50 border border-neutral-200 text-text-secondary hover:bg-neutral-100 transition-colors" aria-label="Share on X">
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12.6009 0.75H15.0544L9.69434 6.89167L16 15.25H11.0627L7.19566 10.1817L2.77087 15.25H0.31595L6.04904 8.685L0 0.75H5.06262L8.55811 5.3875L12.6009 0.75ZM11.7399 13.7683H13.0993L4.32392 2.145H2.86506L11.7399 13.7683Z" fill="currentColor"/>
                   </svg>
@@ -174,12 +170,12 @@ Practical advice for contractors who would <span class="text-brand-accent">rathe
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {relatedPosts.map((related) => (
-              <a href={`/blog/${related.slug}`} class="group flex flex-col gap-6">
+              <a href={`/blog/${related.id.replace(/\.md$/, "")}`} class="group flex flex-col gap-6">
                 <div class="w-full h-[256px] rounded-md overflow-hidden">
-                  {(related.featuredImage || related.thumbnailImage) ? (
+                  {related.data.featuredImage ? (
                     <img
-                      src={urlFor(related.featuredImage ?? related.thumbnailImage).width(600).height(256).url()}
-                      alt={related.title ?? "Blog post"}
+                      src={related.data.featuredImage}
+                      alt={related.data.title}
                       class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                       loading="lazy"
                       decoding="async"
@@ -191,14 +187,18 @@ Practical advice for contractors who would <span class="text-brand-accent">rathe
                 <div class="flex flex-col gap-3">
                   <div class="flex items-start justify-between gap-4">
                     <h3 class="text-xl font-medium leading-[30px] text-text-primary group-hover:text-brand-500 transition-colors">
-                      {related.title}
+                      {related.data.title}
                     </h3>
                     <svg class="w-5 h-5 flex-shrink-0 mt-1 text-[#A4A7AE] group-hover:text-brand-500 transition-colors" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M5.83333 14.1667L14.1667 5.83333M14.1667 5.83333H5.83333M14.1667 5.83333V14.1667" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                   </div>
                   <span class="text-sm leading-5 text-text-tertiary">
-                    {formatPostDateShort(related.publishedAt ?? related.date)}{related.category?.name ? ` · ${related.category.name}` : ""}
+                    {related.data.publishedAt.toLocaleDateString("en-US", {
+                      day: "numeric",
+                      month: "short",
+                      year: "numeric",
+                    })}{related.data.category && ` · ${related.data.category}`}
                   </span>
                 </div>
               </a>
@@ -207,7 +207,6 @@ Practical advice for contractors who would <span class="text-brand-accent">rathe
           <div class="mt-12 text-center">
             <a
               href="/blog"
-              data-astro-reload
               class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-brand-700 text-white font-medium text-base leading-6 shadow-[0px_1px_2px_0px_rgba(10,13,18,0.05),inset_0px_0px_0px_1px_rgba(10,13,18,0.18),inset_0px_-2px_0px_0px_rgba(10,13,18,0.05)] hover:bg-[#1a4a34] transition-all duration-150 cursor-pointer whitespace-nowrap"
             >
               View all posts

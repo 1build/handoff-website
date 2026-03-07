@@ -4,25 +4,23 @@ import Header from "@/components/sections/Header.astro";
 import Footer from "@/components/sections/Footer.astro";
 import CtaSystemsSection from "@/components/sections/CtaSystemsSection.astro";
 import { navItems, footerColumns } from "@/lib/navigation";
-import {
-  getCategories,
-  getAllPosts,
-  urlFor,
-  formatPostDate,
-  formatPostDateShort,
-  type SanityPostListItem,
-} from "@/lib/sanity";
+import { getCollection } from "astro:content";
 
-const [sanityCategories, allPostsRaw] = await Promise.all([getCategories(), getAllPosts()]);
-
-const posts: SanityPostListItem[] = allPostsRaw.filter((p) => p.slug);
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime(),
+);
 
 const [featuredPost, ...remainingPosts] = posts;
 
-const PER_PAGE = 9;
+const PER_PAGE = 3;
 const totalPages = Math.max(1, Math.ceil(remainingPosts.length / PER_PAGE));
 
-const categories = ["All", ...sanityCategories.map((c) => c.name)];
+// Build category tabs from actual post data — only show categories that have posts
+const categorySet = new Set<string>();
+posts.forEach((p) => {
+  if (p.data.category) categorySet.add(p.data.category);
+});
+const categories = ["All", ...Array.from(categorySet).sort()];
 ---
 
 <BaseLayout title="Blog — Handoff">
@@ -37,12 +35,12 @@ const categories = ["All", ...sanityCategories.map((c) => c.name)];
 
         {/* Featured Post */}
         {featuredPost && (
-          <a href={`/blog/${featuredPost.slug}`} class="group flex flex-col lg:flex-row lg:items-stretch gap-12 lg:gap-16 mb-16" data-animate="fade-up">
+          <a href={`/blog/${featuredPost.id.replace(/\.md$/, "")}`} class="group flex flex-col lg:flex-row lg:items-stretch gap-12 lg:gap-16 mb-16" data-animate="fade-up">
             <div class="w-full lg:flex-[1.5] aspect-[16/10] lg:aspect-auto lg:min-h-[400px] rounded-xl overflow-hidden">
-              {(featuredPost.featuredImage || featuredPost.thumbnailImage) ? (
+              {featuredPost.data.featuredImage ? (
                 <img
-                  src={urlFor(featuredPost.featuredImage ?? featuredPost.thumbnailImage).width(800).url()}
-                  alt={featuredPost.title ?? "Blog post"}
+                  src={featuredPost.data.featuredImage}
+                  alt={featuredPost.data.title}
                   class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   loading="lazy"
                   decoding="async"
@@ -53,31 +51,35 @@ const categories = ["All", ...sanityCategories.map((c) => c.name)];
             </div>
             <div class="flex-1 flex flex-col justify-center gap-5 max-w-[384px]">
               <h2 class="font-display text-[28px] lg:text-4xl font-medium leading-9 lg:leading-[44px] tracking-[-0.72px] text-text-primary group-hover:text-brand-500 transition-colors">
-                {featuredPost.title}
+                {featuredPost.data.title}
               </h2>
-              {featuredPost.excerpt && (
-                <p class="text-base leading-6 text-text-tertiary">{featuredPost.excerpt}</p>
+              {featuredPost.data.excerpt && (
+                <p class="text-base leading-6 text-text-tertiary">{featuredPost.data.excerpt}</p>
               )}
               <div class="flex items-center gap-3 mt-2">
-                {featuredPost.author?.avatar ? (
+                {featuredPost.data.authorAvatar ? (
                   <img
-                    src={urlFor(featuredPost.author.avatar).width(80).height(80).url()}
-                    alt={featuredPost.author.name ?? "Author"}
+                    src={featuredPost.data.authorAvatar}
+                    alt={featuredPost.data.author}
                     class="w-10 h-10 rounded-full object-cover"
                     loading="lazy"
                     decoding="async"
                   />
                 ) : (
                   <div class="w-10 h-10 rounded-full bg-brand-100 flex items-center justify-center">
-                    <span class="text-brand-700 font-medium">{featuredPost.author?.name?.charAt(0) ?? "H"}</span>
+                    <span class="text-brand-700 font-medium">{featuredPost.data.author?.charAt(0) || "H"}</span>
                   </div>
                 )}
                 <div class="flex flex-col">
-                  {featuredPost.author?.name && (
-                    <span class="text-sm font-medium text-text-primary">{featuredPost.author.name}</span>
+                  {featuredPost.data.author && (
+                    <span class="text-sm font-medium text-text-primary">{featuredPost.data.author}</span>
                   )}
                   <time class="text-sm text-text-quaternary">
-                    {formatPostDate(featuredPost.publishedAt ?? featuredPost.date)}
+                    {featuredPost.data.publishedAt.toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
                   </time>
                 </div>
               </div>
@@ -109,16 +111,16 @@ const categories = ["All", ...sanityCategories.map((c) => c.name)];
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-[opacity,max-height] duration-200 ease-in-out overflow-hidden" data-animate="stagger" id="posts-grid">
             {remainingPosts.map((post, index) => (
               <a
-                href={`/blog/${post.slug}`}
+                href={`/blog/${post.id.replace(/\.md$/, "")}`}
                 class="group flex flex-col gap-6"
-                data-post-category={post.category?.name ?? ""}
+                data-post-category={post.data.category || ""}
                 data-post-index={index}
               >
                 <div class="w-full h-[256px] rounded-md overflow-hidden">
-                  {(post.featuredImage || post.thumbnailImage) ? (
+                  {post.data.featuredImage ? (
                     <img
-                      src={urlFor(post.featuredImage ?? post.thumbnailImage).width(600).height(256).url()}
-                      alt={post.title ?? "Blog post"}
+                      src={post.data.featuredImage}
+                      alt={post.data.title}
                       class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                       loading="lazy"
                       decoding="async"
@@ -130,14 +132,18 @@ const categories = ["All", ...sanityCategories.map((c) => c.name)];
                 <div class="flex flex-col gap-3">
                   <div class="flex items-start justify-between gap-4">
                     <h2 class="text-xl font-medium leading-[30px] text-text-primary group-hover:text-brand-500 transition-colors">
-                      {post.title}
+                      {post.data.title}
                     </h2>
                     <svg class="w-5 h-5 flex-shrink-0 mt-1 text-text-primary group-hover:text-brand-500 transition-colors" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M5.83333 14.1667L14.1667 5.83333M14.1667 5.83333H5.83333M14.1667 5.83333V14.1667" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                   </div>
                   <span class="text-sm leading-5 text-text-tertiary">
-                    {formatPostDateShort(post.publishedAt ?? post.date)}{post.category?.name ? ` · ${post.category.name}` : ""}
+                    {post.data.publishedAt.toLocaleDateString("en-US", {
+                      day: "numeric",
+                      month: "short",
+                      year: "numeric",
+                    })}{post.data.category && ` · ${post.data.category}`}
                   </span>
                 </div>
               </a>
@@ -216,7 +222,7 @@ const categories = ["All", ...sanityCategories.map((c) => c.name)];
   const prevPageBtn = document.querySelector<HTMLButtonElement>("[data-page-prev]");
   const nextPageBtn = document.querySelector<HTMLButtonElement>("[data-page-next]");
 
-  const PER_PAGE = 9;
+  const PER_PAGE = 6;
   let currentCategory = "All";
   let currentPage = 1;
 

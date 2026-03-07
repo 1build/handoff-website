@@ -102,6 +102,55 @@ const ratings = [
       <!-- Ratings row -->
       <div class="flex flex-wrap items-center justify-between gap-6 mb-10">
         {ratings.map((r) => (
+          r.name === "Google Play" ? (
+            <a
+              href="https://play.google.com/store/apps/details?id=com.onebuild.handoff"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-4"
+            >
+              <div class="flex items-center gap-2.5">
+                <Fragment set:html={GooglePlayIcon()} />
+                <span class="text-base font-medium text-text-secondary">{r.name}</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="flex items-center gap-1">
+                  <Fragment set:html={StarIcon()} />
+                  <Fragment set:html={StarIcon()} />
+                  <Fragment set:html={StarIcon()} />
+                  <Fragment set:html={StarIcon()} />
+                  <Fragment set:html={StarIcon()} />
+                </div>
+                <span class="text-sm text-text-quaternary">
+                  <strong class="font-semibold">{r.score}</strong>/5
+                </span>
+              </div>
+            </a>
+          ) : r.name === "App Store" ? (
+            <a
+              href="https://apps.apple.com/am/app/handoff-ai-estimating-app/id6470666320"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-4"
+            >
+              <div class="flex items-center gap-2.5">
+                <img src={r.logoSrc} alt={r.name} class={`${r.logoHeight} w-auto`} />
+                <span class="text-base font-medium text-text-secondary">{r.name}</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="flex items-center gap-1">
+                  <Fragment set:html={StarIcon()} />
+                  <Fragment set:html={StarIcon()} />
+                  <Fragment set:html={StarIcon()} />
+                  <Fragment set:html={StarIcon()} />
+                  <Fragment set:html={StarIcon()} />
+                </div>
+                <span class="text-sm text-text-quaternary">
+                  <strong class="font-semibold">{r.score}</strong>/5
+                </span>
+              </div>
+            </a>
+          ) : (
           <div class="flex items-center gap-4">
             <div class="flex items-center gap-2.5">
               {r.logoSrc ? (
@@ -126,6 +175,7 @@ const ratings = [
               </span>
             </div>
           </div>
+          )
         ))}
       </div>
 

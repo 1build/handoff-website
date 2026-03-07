@@ -1,0 +1,176 @@
+---
+import avatar10 from "@/assets/images/avatar10.png";
+import storyimg from "@/assets/images/storyimg.png";
+import storyimg2 from "@/assets/images/storyimg2.png";
+
+const stories = [
+  {
+    headline: "Learn how EJ Elliot made $118,000 in his first month using Handoff",
+    highlight: "$118,000",
+    description:
+      "Handoff delivered a detailed estimate for a down-to-the-studs high-end remodel that enabled EJ to go from site visit to a $118,000 winning bid in under 24 hours.",
+    name: "EJ Elliot",
+    company: "Bellamore Contracting & Renovations",
+    avatar: avatar10.src,
+    initials: "EJ",
+    color: "#183f2e",
+    videoPoster: storyimg.src,
+    videoUrl: "#",
+  },
+  {
+    headline: "See how Handoff helps contractors win more bids",
+    highlight: "Handoff",
+    description:
+      "Forward-thinking teams use Handoff to move faster, protect margins, and scale without over-hiring. Get from site visit to winning bid in under 24 hours.",
+    name: "Sarah Chen",
+    company: "Peak Remodeling Co.",
+    avatar: null as string | null,
+    initials: "SC",
+    color: "#235f40",
+    videoPoster: storyimg2.src,
+    videoUrl: "#",
+  },
+];
+---
+
+<section
+  class="relative z-[2] py-12 md:pt-16 lg:pt-20"
+  data-animate="fade-up"
+  data-customer-story-section
+>
+  <div class="max-w-[1440px] mx-auto ">
+    {stories.length > 0 && (
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <!-- Left: headline, description, author, nav (first on mobile) -->
+        <div class="order-1 lg:order-1">
+          {stories.map((story, index) => (
+            <div
+              class={`customer-story-slide ${index === 0 ? "" : "hidden"}`}
+              data-slide
+              data-slide-index={index}
+            >
+              <h2 class="font-display text-2xl  md:text-5xl font-semibold leading-tight text-text-primary mb-4">
+                {story.headline.split(story.highlight)[0]}
+                <span class="font-bold">{story.highlight}</span>
+                {story.headline.split(story.highlight)[1]}
+              </h2>
+              <p class="text-base text-text-secondary leading-relaxed mb-6">
+                {story.description}
+              </p>
+              <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div class="flex items-center gap-3">
+                  {story.avatar ? (
+                    <img
+                      src={story.avatar}
+                      alt={story.name}
+                      class="w-12 h-12 rounded-full object-cover shrink-0"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div
+                      class="w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold text-sm shrink-0"
+                      style={`background-color: ${story.color}`}
+                    >
+                      {story.initials}
+                    </div>
+                  )}
+                  <div class="min-w-0">
+                    <p class="text-base font-semibold text-text-primary leading-5">
+                      {story.name}
+                    </p>
+                    <p class="text-sm text-text-tertiary">{story.company}</p>
+                  </div>
+                </div>
+                <!-- Slide controls: below author on mobile, to the right on desktop -->
+                <div class="flex items-center gap-2">
+                  <button
+                    type="button"
+                    aria-label="Previous story"
+                    data-customer-story-prev
+                    class="w-12 h-12 rounded-full border border-neutral-300 bg-white flex items-center justify-center text-neutral-600 hover:bg-neutral-50 transition-colors"
+                  >
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M15 8H1M1 8L8 15M1 8L8 1" stroke="#A4A7AE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+                  </button>
+                  <button
+                    type="button"
+                    aria-label="Next story"
+                    data-customer-story-next
+                    class="w-12 h-12 rounded-full border border-neutral-300 bg-white flex items-center justify-center text-neutral-600 hover:bg-neutral-50 transition-colors"
+                  >
+                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 8H15M15 8L8 1M15 8L8 15" stroke="#A4A7AE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="order-2 lg:order-2">
+          {stories.map((story, index) => (
+            <div
+              class={`customer-story-slide ${index === 0 ? "" : "hidden"}`}
+              data-slide
+              data-slide-index={index}
+            >
+              <a
+                href={story.videoUrl}
+                class="block relative md:min-h-[600px] rounded-2xl overflow-hidden border border-neutral-200 shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50 aspect-video w-full bg-[#b8d4c8]"
+                aria-label="Play video: {story.name}"
+              >
+                {story.videoPoster ? (
+                  <img
+                    src={story.videoPoster}
+                    alt=""
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                ) : null}
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <span
+                    class="flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white/30"
+                    aria-hidden="true"
+                  >
+                    <span
+                      class="w-0 h-0 ml-1 border-y-[10px] border-y-transparent border-l-[16px] border-l-white sm:border-y-[12px] sm:border-l-[20px]"
+                      aria-hidden="true"
+                    />
+                  </span>
+                </div>
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+  </div>
+</section>
+
+<script>
+  function initCustomerStoryCarousel() {
+    const section = document.querySelector("[data-customer-story-section]");
+    if (!section) return;
+    const prevBtns = section.querySelectorAll("[data-customer-story-prev]");
+    const nextBtns = section.querySelectorAll("[data-customer-story-next]");
+    const slides = section.querySelectorAll("[data-slide]");
+    const total = Math.max(1, slides.length / 2);
+    let current = 0;
+
+    function goTo(index: number) {
+      current = (index + total) % total;
+      section.querySelectorAll(".customer-story-slide").forEach((el) => el.classList.add("hidden"));
+      section.querySelectorAll(`[data-slide-index="${current}"]`).forEach((el) => el.classList.remove("hidden"));
+    }
+
+    prevBtns.forEach((btn) => btn.addEventListener("click", () => goTo(current - 1)));
+    nextBtns.forEach((btn) => btn.addEventListener("click", () => goTo(current + 1)));
+    goTo(0);
+  }
+  initCustomerStoryCarousel();
+  document.addEventListener("astro:page-load", initCustomerStoryCarousel);
+</script>
