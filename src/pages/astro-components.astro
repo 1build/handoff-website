@@ -3,6 +3,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import Header from "@/components/sections/Header.astro";
 import Footer from "@/components/sections/Footer.astro";
 import { navItems, footerColumns } from "@/lib/navigation";
+import { getPageSeo } from "@/lib/seo-pages";
 
 const atoms = [
   {
@@ -300,9 +301,10 @@ const levels = [
   { title: "Molecules", subtitle: "Composite components built from atoms — cards, rows, carousels", items: molecules, color: "text-highlight" },
   { title: "Organisms", subtitle: "Full-width page sections — heroes, features, footers", items: organisms, color: "brand-300" },
 ];
+const seo = getPageSeo(Astro.url.pathname);
 ---
 
-<BaseLayout title="Astro Components — Handoff Design System">
+<BaseLayout {...seo}>
   <Header navItems={navItems} />
 
   <main class="bg-bg-primary">

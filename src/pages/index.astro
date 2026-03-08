@@ -13,9 +13,12 @@ import TestimonialsGridSection from "@/components/sections/TestimonialsGridSecti
 import CtaSystemsSection from "@/components/sections/CtaSystemsSection.astro";
 
 import { navItems, footerColumns } from "@/lib/navigation";
+import { getPageSeo } from "@/lib/seo-pages";
+
+const seo = getPageSeo(Astro.url.pathname);
 ---
 
-<BaseLayout title="Handoff — Run Your Entire Contracting Business with AI">
+<BaseLayout {...seo}>
   <Header navItems={navItems} />
   <NewHeroSection />
   

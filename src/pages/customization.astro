@@ -6,6 +6,7 @@ import FaqSection from "@/components/sections/FaqSection.astro";
 import DetailRow from "@/components/sections/DetailRow.astro";
 import Button from "@/components/ui/Button.astro";
 import { navItems, footerColumns } from "@/lib/navigation";
+import { getPageSeo } from "@/lib/seo-pages";
 
 const faqItems = [
   {
@@ -76,9 +77,10 @@ const outcomes = [
     description: "Your pricing and processes stay consistent as your team grows, without extra oversight.",
   },
 ];
+const seo = getPageSeo(Astro.url.pathname);
 ---
 
-<BaseLayout title="Customization — Handoff">
+<BaseLayout {...seo}>
   <Header navItems={navItems} />
 
   <!-- Hero -->

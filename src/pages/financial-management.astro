@@ -8,6 +8,7 @@ import FaqSection from "@/components/sections/FaqSection.astro";
 import FinCtaSection from "@/components/sections/FinCtaSection.astro";
 import Footer from "@/components/sections/Footer.astro";
 import { navItems, footerColumns } from "@/lib/navigation";
+import { getPageSeo } from "@/lib/seo-pages";
 
 const faqItems = [
   {
@@ -31,9 +32,10 @@ const faqItems = [
     answer: "Handoff's trained AI tracks payment due dates and sends automated reminders. You can see invoices and payment status across all clients in one dashboard.",
   },
 ];
+const seo = getPageSeo(Astro.url.pathname);
 ---
 
-<BaseLayout title="Financial Management — Handoff">
+<BaseLayout {...seo}>
   <Header navItems={navItems} />
   <FinHeroSection />
   <FinFeaturesSection />

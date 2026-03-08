@@ -10,6 +10,7 @@ import BuiltOnDataSection from "@/components/sections/BuiltOnDataSection.astro";
 import EstimateMetricsTestimonialsSection from "@/components/sections/EstimateMetricsTestimonialsSection.astro";
 import EstimateCta from "@/components/sections/EstimateCta.astro";
 import { navItems, footerColumns } from "@/lib/navigation";
+import { getPageSeo } from "@/lib/seo-pages";
 
 const faqItems = [
   {
@@ -33,9 +34,10 @@ const faqItems = [
     answer: "Once your estimate looks good, send it directly from Handoff with one click. Clients get a clean, professional PDF and can approve it digitally.",
   },
 ];
+const seo = getPageSeo(Astro.url.pathname);
 ---
 
-<BaseLayout title="Estimating AI — Handoff">
+<BaseLayout {...seo}>
   <Header navItems={navItems} />
   <EstimateHero />
   <EstimateFeatures />

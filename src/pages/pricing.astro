@@ -8,9 +8,12 @@ import Footer from "@/components/sections/Footer.astro";
 import TestimonialsGridSectionPricing from "@/components/sections/TestimonialsGridSectionPricing.astro";
 import FaqSection from "@/components/sections/FaqSection.astro";
 import { navItems, footerColumns, faqItems } from "@/lib/navigation";
+import { getPageSeo } from "@/lib/seo-pages";
+
+const seo = getPageSeo(Astro.url.pathname);
 ---
 
-<BaseLayout title="Pricing — Handoff">
+<BaseLayout {...seo}>
   <Header navItems={navItems} />
   <PricingSection />
   <PricingCompareTable />

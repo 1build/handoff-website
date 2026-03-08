@@ -44,6 +44,7 @@ import SupplierLogosCarousel from "@/components/sections/SupplierLogosCarousel.a
 
 // Real data from the site
 import { navItems, footerColumns, faqItems } from "@/lib/navigation";
+import { getPageSeo } from "@/lib/seo-pages";
 
 const sectionComponents = [
   { id: "header", name: "Header" },
@@ -83,9 +84,10 @@ const uiComponents = [
   { id: "callout-banner", name: "CalloutBanner" },
   { id: "supplier-logos-carousel", name: "SupplierLogosCarousel" },
 ];
+const seo = getPageSeo(Astro.url.pathname);
 ---
 
-<BaseLayout title="Component Browser — Handoff">
+<BaseLayout {...seo}>
   <div class="flex min-h-screen bg-white" id="comp-root">
     <!-- Sidebar -->
     <nav class="comp-sidebar" id="comp-nav">

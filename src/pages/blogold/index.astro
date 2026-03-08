@@ -4,6 +4,7 @@ import Header from "@/components/sections/Header.astro";
 import Footer from "@/components/sections/Footer.astro";
 import CtaSystemsSection from "@/components/sections/CtaSystemsSection.astro";
 import { navItems, footerColumns } from "@/lib/navigation";
+import { getPageSeo } from "@/lib/seo-pages";
 import { getCollection } from "astro:content";
 
 const posts = (await getCollection("blog")).sort(
@@ -21,9 +22,10 @@ posts.forEach((p) => {
   if (p.data.category) categorySet.add(p.data.category);
 });
 const categories = ["All", ...Array.from(categorySet).sort()];
+const seo = getPageSeo(Astro.url.pathname);
 ---
 
-<BaseLayout title="Blog — Handoff">
+<BaseLayout {...seo}>
   <Header navItems={navItems} />
 
   <section class="relative z-[2] pt-32 pb-2 px-4 bg-brand-800">

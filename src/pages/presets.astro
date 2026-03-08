@@ -9,6 +9,7 @@ import PresetsValueProps from "@/components/sections/PresetsValueProps.astro";
 import DetailRow from "@/components/sections/DetailRow.astro";
 
 import { navItems, footerColumns } from "@/lib/navigation";
+import { getPageSeo } from "@/lib/seo-pages";
 
 const faqItems = [
   {
@@ -82,9 +83,10 @@ const features = [
     placeholder: "TBD",
   },
 ];
+const seo = getPageSeo(Astro.url.pathname);
 ---
 
-<BaseLayout title="Presets — Train an AI Teammate | Handoff">
+<BaseLayout {...seo}>
   <Header navItems={navItems} />
   <PresetsHero />
 <PresetsValueProps />

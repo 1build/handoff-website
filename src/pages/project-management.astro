@@ -15,6 +15,7 @@ import projectIcon1 from "@/assets/icons/projectIcon1.svg";
 import projectIcon2 from "@/assets/icons/clock-plus.svg";
 import projectIcon3 from "@/assets/icons/projectIcon3.svg";
 import { navItems, footerColumns } from "@/lib/navigation";
+import { getPageSeo } from "@/lib/seo-pages";
 import placeholder from "@/assets/images/placeholder-img.png";
 
 const faqItems = [
@@ -107,9 +108,10 @@ const outcomes = [
     description: "Your AI teammate learns your way of doing things and handles it on every project. Scale up without being in three places at once.",
   },
 ];
+const seo = getPageSeo(Astro.url.pathname);
 ---
 
-<BaseLayout title="Project management — Handoff">
+<BaseLayout {...seo}>
   <Header navItems={navItems} />
 
   <!-- Hero (matches solutions HeroSection pattern) -->

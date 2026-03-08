@@ -14,6 +14,7 @@ import iconFileCheck from "@/assets/icons/icon-file-check.svg";
 import iconBanknote from "@/assets/icons/icon-banknote.svg";
 import iconSend from "@/assets/icons/icon-send.svg";
 import { navItems, footerColumns } from "@/lib/navigation";
+import { getPageSeo } from "@/lib/seo-pages";
 
 const faqItems = [
   {
@@ -37,9 +38,10 @@ const faqItems = [
     answer: "You can set up approval rules, authorization levels, and workflows that match how you actually run projects.",
   },
 ];
+const seo = getPageSeo(Astro.url.pathname);
 ---
 
-<BaseLayout title="Remodelers — Handoff">
+<BaseLayout {...seo}>
   <Header navItems={navItems} />
 <!-- Hero -->
   <section id="hero" class="hero-fixed">

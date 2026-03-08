@@ -4,6 +4,7 @@ import Header from "@/components/sections/Header.astro";
 import Footer from "@/components/sections/Footer.astro";
 import WebinarsCta from "@/components/sections/WebinarsCta.astro";
 import { navItems, footerColumns } from "@/lib/navigation";
+import { getPageSeo } from "@/lib/seo-pages";
 import webinarHero from "@/assets/images/webinar-hero.png";
 import bgPattern from "@/assets/images/background-pattern-dots.png";
 import heroGlow from "@/assets/images/hero-glow-line.svg";
@@ -50,9 +51,10 @@ const registrationSessions = [
   { date: "Mar 11 • 9:00 AM CT", title: "The Modern Contractor Process Audit", checked: true },
   { date: "Mar 13 • 11:00 AM CT", title: "The Modern Contractor Marketing Playbook", checked: false },
 ];
+const seo = getPageSeo(Astro.url.pathname);
 ---
 
-<BaseLayout title="Live Webinars — Handoff">
+<BaseLayout {...seo}>
   <Header navItems={navItems} />
 
   <!-- ── Hero Section ── -->

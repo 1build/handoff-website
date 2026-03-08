@@ -3,6 +3,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import Header from "@/components/sections/Header.astro";
 import Footer from "@/components/sections/Footer.astro";
 import { navItems, footerColumns } from "@/lib/navigation";
+import { getPageSeo } from "@/lib/seo-pages";
 import bgPattern from "@/assets/images/background-pattern.png";
 import heroGlow from "@/assets/images/hero-glow-line.svg";
 import heroCareer from "@/assets/images/career-hero.png";
@@ -130,9 +131,10 @@ const cards = [
     desc: "We see a future where running a residential construction business is simpler and more transparent, opening doors for more contractors to enter the market.",
   },
 ];
+const seo = getPageSeo(Astro.url.pathname);
 ---
 
-<BaseLayout title="careers — Build the Future of Construction | Handoff">
+<BaseLayout {...seo}>
   <Header navItems={navItems} />
 
   <section id="hero">

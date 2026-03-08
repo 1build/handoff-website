@@ -7,9 +7,12 @@ import AppDownloadCtaSection from "@/components/sections/AppDownloadCtaSection.a
 import bgPattern from "@/assets/images/background-pattern.png";
 import heroGlow from "@/assets/images/hero-glow-line.svg";
 import { navItems, footerColumns } from "@/lib/navigation";
+import { getPageSeo } from "@/lib/seo-pages";
+
+const seo = getPageSeo(Astro.url.pathname);
 ---
 
-<BaseLayout title="Webinar — Contractors Love Handoff">
+<BaseLayout {...seo}>
   <Header navItems={navItems} />
 
   <!-- Hero Section -->

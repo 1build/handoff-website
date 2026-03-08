@@ -12,6 +12,7 @@ import {
   formatPostDateShort,
   type SanityPostListItem,
 } from "@/lib/sanity";
+import { getPageSeo } from "@/lib/seo-pages";
 
 const [sanityCategories, allPostsRaw] = await Promise.all([getCategories(), getAllPosts()]);
 
@@ -23,9 +24,10 @@ const PER_PAGE = 9;
 const totalPages = Math.max(1, Math.ceil(remainingPosts.length / PER_PAGE));
 
 const categories = ["All", ...sanityCategories.map((c) => c.name)];
+const seo = getPageSeo(Astro.url.pathname);
 ---
 
-<BaseLayout title="Blog — Handoff">
+<BaseLayout {...seo}>
   <Header navItems={navItems} />
 
   <section class="relative z-[2] pt-32 pb-2 px-4 bg-brand-800">

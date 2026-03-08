@@ -6,6 +6,7 @@ import FaqSection from "@/components/sections/FaqSection.astro";
 import DetailRow from "@/components/sections/DetailRow.astro";
 import Button from "@/components/ui/Button.astro";
 import { navItems, footerColumns } from "@/lib/navigation";
+import { getPageSeo } from "@/lib/seo-pages";
 
 const faqItems = [
   {
@@ -106,9 +107,10 @@ const outcomes = [
     description: "Bring your whole team into Handoff with confidence, knowing every role is protected from day one.",
   },
 ];
+const seo = getPageSeo(Astro.url.pathname);
 ---
 
-<BaseLayout title="Permissions & roles — Handoff">
+<BaseLayout {...seo}>
   <Header navItems={navItems} />
 
   <!-- Hero -->
