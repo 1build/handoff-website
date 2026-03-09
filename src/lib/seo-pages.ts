@@ -43,11 +43,7 @@ export const PAGE_SEO: Record<string, Partial<PageSeo> & { title: string }> = {
     description:
       "Join live Handoff webinars to learn proven systems for modern contractors. Get practical tips, Q&amp;A, and expert guidance to scale your business. Reserve your spot now!",
   },
-  "/sales-marketing-growth": {
-    title: "Handoff — Construction-Trained AI for Sales and Lead Intake",
-    description:
-      "Construction-trained AI for sales and lead intake. Turn leads into estimates faster.",
-  },
+
   "/instant-ai-estimates": {
     title: "Handoff AI Estimating | Instant AI Estimates",
     description:
@@ -58,24 +54,42 @@ export const PAGE_SEO: Record<string, Partial<PageSeo> & { title: string }> = {
     description: getDefaultDescription(),
   },
 
-  "/presets": {
-    title: "Presets — Train an AI Teammate | Handoff",
-    description:
-      "Train an AI teammate with presets. Set your rules once, apply them everywhere.",
-  },
 
   "/project-management": {
     title: "Project Management",
     description:
       "Handoff offers residential construction contractors an AI-agent that acts as an assistant for managing your projects from start to finish like generating estimates, sending proposals, and collecting invoices.",
   },
-  "/financial-management": {
-    title: "Financial Management — Handoff",
+  "/financial-business-solution": {
+    title: "Financial business solutions — Handoff",
     description:
-      "Financial management for contractors. Invoicing, payments, and reporting.",
+      "Financial business solutions for contractors. Invoicing, payments, and reporting.",
   },
- 
 
+  "/comparison": {
+    title: "Handoff vs JobTread — See Why Contractors Choose Handoff",
+    description:
+      "JobTread is best suited for commercial builders. Handoff is built for residential remodelers and handymen. Compare features, pricing, and more.",
+  },
+  "/ai-teammate": {
+    title: "Ai teammate",
+    description: "ai teammate - Handoff"
+      },
+  "/presets": {
+    title: "Presets",
+    description:
+      "Train an AI teammate to run your construction business",
+  },
+  "/sales-marketing-growth": {
+    title: "Sales & Marketing Growth",
+    description:
+      "Turn site visits into signed contracts faster than any competitor. Handoff captures every lead and generates complete estimates using trained AI built for construction",
+  },
+  "/careers/jobs": {
+    title: "Open Positions | Careers at Handoff",
+    description:
+      "Browse open roles at Handoff. Join a fast-growing team building AI-powered software for remodelers and handymen. Find your next opportunity and apply today.",
+  },
  
 };
 

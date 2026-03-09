@@ -77,34 +77,40 @@ const questionTags = [
 
 // Fetch open positions from Lever API at build time
 const LEVER_API_URL = "https://api.lever.co/v0/postings/handoff?mode=json";
-let jobs: { title: string; location: string; type: string; dept: string; url: string }[] = [];
+let jobs: { id: string; title: string; location: string; type: string; dept: string; url: string }[] = [];
 try {
   const res = await fetch(LEVER_API_URL);
   if (res.ok) {
     const postings = await res.json();
     jobs = (Array.isArray(postings) ? postings : []).map((p: {
+      id?: string;
       text?: string;
       categories?: { location?: string; team?: string };
       workplaceType?: string;
       hostedUrl?: string;
-    }) => ({
-      title: p.text ?? "Open position",
-      location: p.categories?.location ?? "",
-      type: (p.workplaceType === "hybrid" ? "Hybrid" : p.workplaceType === "remote" ? "Remote" : "Onsite") || "Onsite",
-      dept: p.categories?.team ?? "",
-      url: p.hostedUrl ?? "#",
-    }));
+    }) => {
+      const url = p.hostedUrl ?? "#";
+      const id = p.id ?? (url !== "#" ? new URL(url).pathname.split("/").filter(Boolean).pop() ?? "" : "");
+      return {
+        id,
+        title: p.text ?? "Open position",
+        location: p.categories?.location ?? "",
+        type: (p.workplaceType === "hybrid" ? "Hybrid" : p.workplaceType === "remote" ? "Remote" : "Onsite") || "Onsite",
+        dept: p.categories?.team ?? "",
+        url,
+      };
+    });
   }
 } catch (_) {
   // Fallback if fetch fails (e.g. offline build)
   jobs = [
-    { title: "Content Marketer", location: "Austin, US", type: "Onsite", dept: "Marketing", url: "https://jobs.lever.co/handoff" },
-    { title: "Customer Success Manager", location: "Austin, US", type: "Onsite", dept: "Customer Success", url: "https://jobs.lever.co/handoff" },
-    { title: "Head of Product", location: "Austin, US", type: "Onsite", dept: "Product", url: "https://jobs.lever.co/handoff" },
-    { title: "Senior Backend Engineer", location: "São Paulo, BR", type: "Hybrid", dept: "Engineering", url: "https://jobs.lever.co/handoff" },
-    { title: "Account Executive, SMB", location: "Buenos Aires, AR", type: "Hybrid", dept: "Sales", url: "https://jobs.lever.co/handoff" },
-    { title: "Senior Data Analyst", location: "São Paulo, BR", type: "Hybrid", dept: "Engineering", url: "https://jobs.lever.co/handoff" },
-    { title: "Staff AI/Machine Learning Engineer", location: "Austin, US", type: "Onsite", dept: "Engineering", url: "https://jobs.lever.co/handoff" },
+    { id: "content-marketer", title: "Content Marketer", location: "Austin, US", type: "Onsite", dept: "Marketing", url: "https://jobs.lever.co/handoff" },
+    { id: "customer-success-manager", title: "Customer Success Manager", location: "Austin, US", type: "Onsite", dept: "Customer Success", url: "https://jobs.lever.co/handoff" },
+    { id: "head-of-product", title: "Head of Product", location: "Austin, US", type: "Onsite", dept: "Product", url: "https://jobs.lever.co/handoff" },
+    { id: "senior-backend-engineer", title: "Senior Backend Engineer", location: "São Paulo, BR", type: "Hybrid", dept: "Engineering", url: "https://jobs.lever.co/handoff" },
+    { id: "account-executive-smb", title: "Account Executive, SMB", location: "Buenos Aires, AR", type: "Hybrid", dept: "Sales", url: "https://jobs.lever.co/handoff" },
+    { id: "senior-data-analyst", title: "Senior Data Analyst", location: "São Paulo, BR", type: "Hybrid", dept: "Engineering", url: "https://jobs.lever.co/handoff" },
+    { id: "staff-ai-ml-engineer", title: "Staff AI/Machine Learning Engineer", location: "Austin, US", type: "Onsite", dept: "Engineering", url: "https://jobs.lever.co/handoff" },
   ];
 }
 
@@ -362,9 +368,7 @@ OUR VALUES</p>
           <div class="flex flex-col overflow-hidden bg-white ">
             {jobs.map((job) => (
               <a
-                href={job.url}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={`/careers/jobs?id=${job.id}`}
                 class="group flex flex-col md:flex-row gap-8 items-center px-8 py-10 border-b border-[#D5D7DA] last:border-b-0 transition-colors hover:bg-[#F4F6F4]"
               >
                 <p class="flex-1 min-w-0 font-display text-center md:text-left font-medium text-xl leading-7 text-[#181D27] group-hover:text-neutral-900">

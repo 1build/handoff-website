@@ -1,0 +1,77 @@
+---
+import DetailRow from "./DetailRow.astro";
+
+const rows = [
+  {
+    eyebrow: "AI-Powered Contract & Documentation",
+    title: "No more chasing signed contracts",
+    description: "Proposals, invoices, and payments integrate without question. Get signatures faster so you're ready to build.",
+    bullets: [
+      "Takeoffs, estimates, contracts, schedules, and invoices all connected",
+      "Change orders tracked from request to payment",
+      "Every project document in one place",
+    ],
+    reverse: false,
+    visualType: "desktop" as const,
+    placeholder: "TBD",
+  },
+  {
+    eyebrow: "Intelligent Crew Scheduling",
+    title: "Everyone knows where to be and when",
+    description: "No more coordinating crews through texts. Have your AI Teammate set up schedules once, so everyone stays in the loop.",
+    bullets: [
+      "Everyone's schedule in one calendar",
+      "Crew schedules and walkthroughs are coordinated automatically",
+      "Everyone gets notified when schedules change",
+      "Your phone stops buzzing with scheduling questions",
+    ],
+    reverse: true,
+    visualType: "phones" as const,
+    placeholder: "TBD",
+  },
+  {
+    eyebrow: "Real-Time Project Alerts",
+    title: "Catch problems before they cost you",
+    description: "While your competition is still figuring out their pricing, you're already in the client's inbox.",
+    bullets: [
+      "Know when approvals are stuck before clients ask",
+      "Payment reminders so you stop chasing money",
+      "Handle change orders before they cause delays",
+      "Spot crew conflicts and timeline risks while you can still fix them",
+    ],
+    reverse: false,
+    visualType: "isometric" as const,
+    placeholder: "TBD",
+  },
+  {
+    eyebrow: "Role-Based Permissions",
+    title: "Keep your business information safe",
+    description: "Keep control of your business as your team grows. You decide who can see what, so the right people have access to the right information without oversight.",
+    bullets: [
+      "Crews see their schedules, not your markup",
+      "Project managers see what they need to manage project",
+      "Only authorized team members see markup and margin data",
+      "Set it once, never worry about information leaks",
+    ],
+    reverse: true,
+    visualType: "desktop" as const,
+    placeholder: "TBD",
+  },
+];
+---
+
+<section class="px-4 pt-4">
+  <div class="bg-white border border-black/[0.04] rounded-3xl overflow-hidden py-24 flex flex-col gap-20 lg:gap-40 items-center">
+    {rows.map((r) => (
+      <DetailRow
+        eyebrow={r.eyebrow}
+        title={r.title}
+        description={r.description}
+        bullets={r.bullets}
+        reverse={r.reverse}
+        visualType={r.visualType}
+        placeholder={r.placeholder}
+      />
+    ))}
+  </div>
+</section>

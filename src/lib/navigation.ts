@@ -2,12 +2,20 @@ export interface NavLink {
   label: string;
   href: string;
   description?: string;
+  iconName?: string;
+}
+
+export interface NavSection {
+  label: string;
+  items: NavLink[];
 }
 
 export interface NavDropdown {
   label: string;
   items: NavLink[];
   wide?: boolean;
+  features?: NavLink[];
+  sections?: NavSection[];
 }
 
 export type NavItem = NavLink | NavDropdown;
@@ -20,9 +28,9 @@ export const navItems: NavItem[] = [
   {
     label: "Who We Serve",
     items: [
-      { label: "Established Remodelers", href: "/remodelers" },
-      { label: "New & Small Remodeling Businesses", href: "/" },
-      { label: "Trade Contractors & Handymen", href: "/" },
+      { label: "Established remodelers", href: "/remodelers", description: "See how contractors win with Handoff", iconName: "book-closed" },
+      { label: "New and small remodeling businesses", href: "/", description: "Tips, trends, and product updates", iconName: "pencil-line" },
+      { label: "Trade contractors and handymen", href: "/", description: "Step by step playbooks for your business", iconName: "book-open-01" },
     ],
   },
   {
@@ -30,42 +38,92 @@ export const navItems: NavItem[] = [
     wide: true,
     items: [
       {
-        label: "Sales & Marketing Growth",
+        label: "Sales and marketing growth",
         href: "/sales-marketing-growth",
-        description: "Win more projects with AI-powered estimates and proposals that convert leads into clients faster.",
+        description: "Turn leads into signed contracts",
+        iconName: "book-closed",
       },
       {
-        label: "Project Management & Operations",
+        label: "Project management and operations",
         href: "/project-management",
-        description: "Streamline projects from estimate to completion with connected AI systems that save time and reduce errors.",
+        description: "One system from estimate to completion",
+        iconName: "stars-02",
       },
       {
-        label: "Financial & Business Management",
-        href: "/financial-management",
-        description: "Get paid faster with AI-powered digital invoicing, track profitability, and make data-driven decisions to grow your business.",
+        label: "Financial and business management",
+        href: "/financial-business-solution",
+        description: "Get paid faster. Know your numbers",
+        iconName: "play-circle",
       },
+      {
+        label: "AI teammate",
+        href: "/",
+        description: "Your always-on estimating partner",
+        iconName: "file-code",
+      },
+      {
+        label: "Integrations",
+        href: "/",
+        description: "Connect the tools you already use",
+        iconName: "link",
+      },
+    ],
+    features: [
+      { label: "Instant AI estimates", href: "/" },
+      { label: "Winning AI proposals", href: "/" },
+      { label: "Client management CRM", href: "/" },
+      { label: "Project management", href: "/" },
+      { label: "Change orders", href: "/" },
+      { label: "File management", href: "/" },
+      { label: "Estimates from files", href: "/" },
+      { label: "Invoicing", href: "/" },
+      { label: "Customer financing", href: "/" },
+      { label: "AI agent", href: "/" },
+      { label: "AI documents", href: "/" },
+      { label: "AI transcription", href: "/" },
     ],
   },
   { label: "Pricing", href: "/pricing" },
   {
     label: "Resources",
+    sections: [
+      {
+        label: "Learn",
+        items: [
+          { label: "Case studies", href: "/", description: "See how contractors win with Handoff", iconName: "book-closed" },
+          { label: "Blog", href: "/blog", description: "Tips, trends, and product updates", iconName: "pencil-line" },
+          { label: "Guides", href: "/", description: "Step by step playbooks for your business", iconName: "book-open-01" },
+          { label: "Webinars", href: "/contractor-webinars", description: "Live sessions with industry pros.", iconName: "play-circle" },
+        ],
+      },
+      {
+        label: "Community",
+        items: [
+          { label: "Testimonials", href: "/", description: "Real stories from real contractors", iconName: "message-text-circle-02" },
+          { label: "Platform updates", href: "/", description: "What's new in Handoff", iconName: "announcement-01" },
+          { label: "Contractor course", href: "/", description: "Level up your remodeling business", iconName: "graduation-hat-01" },
+          { label: "Careers", href: "/careers", description: "Build something that matters", iconName: "briefcase-02" },
+          { label: "Handoff Nation community", href: "/", description: "Connect with contractors like you", iconName: "users-plus" },
+        ],
+      },
+    ],
     items: [
-      { label: "Case Studies", href: "/" },
+      { label: "Case studies", href: "/" },
       { label: "Blog", href: "/blog" },
       { label: "Guides", href: "/" },
-      { label: "Webinars", href: "/" },
+      { label: "Webinars", href: "/contractor-webinars" },
       { label: "Testimonials", href: "/" },
-      { label: "Platform Updates", href: "/" },
-      { label: "Contractor Course", href: "/" },
-      { label: "Careers", href: "/" },
-      { label: "Handoff Nation Community", href: "/" },
+      { label: "Platform updates", href: "/" },
+      { label: "Contractor course", href: "/" },
+      { label: "Careers", href: "/careers" },
+      { label: "Handoff Nation community", href: "/" },
     ],
   },
   {
     label: "Support",
     items: [
-      { label: "Contact Us", href: "/" },
-      { label: "Help Center", href: "/" },
+      { label: "Contact us", href: "/", description: "We're here to help", iconName: "book-closed" },
+      { label: "Help center", href: "/", description: "Find answers fast", iconName: "pencil-line" },
     ],
   },
 ];
@@ -92,7 +150,7 @@ export const footerColumns: FooterColumn[] = [
     title: "Company",
     links: [
       { label: "About us", href: "/" },
-      { label: "Careers", href: "/" },
+      { label: "Careers", href: "/careers" },
       { label: "Press", href: "/" },
       { label: "News", href: "/" },
       { label: "Media kit", href: "/" },
