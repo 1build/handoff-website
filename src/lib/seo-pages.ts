@@ -90,6 +90,11 @@ export const PAGE_SEO: Record<string, Partial<PageSeo> & { title: string }> = {
     description:
       "Browse open roles at Handoff. Join a fast-growing team building AI-powered software for remodelers and handymen. Find your next opportunity and apply today.",
   },
+  "/construction-costs": {
+    title: "Construction Cost Calculators for Contractors — Handoff",
+    description:
+      "Train an AI teammate to run your construction business. Set your rules once — Handoff applies them automatically across every estimate, proposal, and change order.",
+  },
  
 };
 

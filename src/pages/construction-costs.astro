@@ -1,0 +1,18 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getPageSeo } from "@/lib/seo-pages";
+import Header from "@/components/sections/Header.astro";
+import Footer from "@/components/sections/Footer.astro";
+import CostCalculatorsHero from "@/components/sections/CostCalculatorsHero.astro";
+import CostCalculatorsList from "@/components/sections/CostCalculatorsList.astro";
+import { navItems, footerColumns } from "@/lib/navigation";
+
+const seo = getPageSeo(Astro.url.pathname);
+---
+
+<BaseLayout {...seo}>
+  <Header navItems={navItems} />
+  <CostCalculatorsHero />
+  <CostCalculatorsList />
+  <Footer columns={footerColumns} />
+</BaseLayout>
