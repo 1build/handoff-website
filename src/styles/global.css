@@ -126,7 +126,7 @@ html {
 .hero-fixed {
   position: sticky;
   top: 0;
-  overflow: visible;
+  overflow: hidden;
   padding: 8px 16px 0;
   padding-top: 80px;
   z-index: 0;
@@ -216,6 +216,7 @@ html {
   color: var(--color-text-primary);
   margin-top: 48px;
   margin-bottom: 24px;
+  word-wrap: break-word;
 }
 
 .article-body h3 {

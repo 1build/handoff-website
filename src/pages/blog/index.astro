@@ -149,7 +149,7 @@ const seo = getPageSeo(Astro.url.pathname);
 
         {/* Pagination */}
         {remainingPosts.length > PER_PAGE && (
-          <nav class="mt-10 flex items-center justify-between border-t border-t-[#E9EAEB] pt-5" aria-label="Blog pagination">
+          <nav class="mt-10 flex items-center justify-between border-t border-t-[#E9EAEB] pt-5 overflow-auto" aria-label="Blog pagination">
             <button
               type="button"
               data-page-prev

@@ -155,7 +155,7 @@ const seo = getPageSeo(Astro.url.pathname);
     </div>
 
     <!-- Content -->
-    <div id="hero-container" class="relative z-[1] max-w-[1440px] mx-auto px-8 py-24 flex flex-col lg:flex-row items-center gap-12 lg:gap-16 will-change-[opacity,transform]">
+    <div id="hero-container" class="relative z-[1] max-w-[1440px] mx-auto px-4 md:px-8 py-24 flex flex-col lg:flex-row items-center gap-12 lg:gap-16 will-change-[opacity,transform]">
       <!-- Left: Text -->
       <div class="flex-1 flex flex-col">
         <p class="font-mono text-sm font-semibold leading-6 tracking-[0.56px] uppercase text-text-on-brand-tertiary mb-3">
@@ -177,12 +177,12 @@ const seo = getPageSeo(Astro.url.pathname);
 
       <!-- Right: Hero visual -->
       <div class="flex-1 relative z-[2] flex items-center justify-center">
-        <div class="relative w-full max-w-[600px] h-[570px]">
+        <div class="relative w-full max-w-[600px]">
           <!-- Diamond contractor photo -->
           <img
             src={heroCareer?.src ?? heroCareer ?? ''}
             alt=""
-            class="w-[536px] h-[513px] object-contain mx-auto"
+            class="w-full object-contain mx-auto"
             loading="eager"
             decoding="async"
           />
@@ -229,7 +229,7 @@ const seo = getPageSeo(Astro.url.pathname);
   <!-- ─── Values Section ─── -->
   <div class="px-4 pb-4">
     <div class="relative rounded-3xl py-24 overflow-hidden bg-brand-800">
-      <div class="relative max-w-[1440px] mx-auto px-8 flex flex-col gap-16">
+      <div class="relative max-w-[1440px] mx-auto px-4 md:px-8 flex flex-col gap-16">
 
         <!-- Heading -->
         <div class="max-w-[768px] mx-auto text-center flex flex-col gap-5" data-animate="fade-up">
@@ -255,7 +255,7 @@ OUR VALUES</p>
         <div class="grid grid-col-1 md:grid-cols-2 gap-0">
           {values.map((value) => (
             <div
-              class="flex gap-6 items-center p-8"
+              class="flex gap-6 items-center p-5 md:p-8 flex-col md:flex-row"
               style="background: rgba(0, 0, 0, 0.12); border-width: 0px 1px 1px 0px; border-style: solid; border-color: rgba(255, 255, 255, 0.16); backdrop-filter: blur(4px);"
             >
               <img
@@ -265,11 +265,11 @@ OUR VALUES</p>
                 height="80"
                 class="rounded-xl object-cover shrink-0 w-20 h-20"
               />
-              <div class="flex flex-col gap-2 min-w-0">
+              <div class="flex flex-col gap-2 min-w-0 items-center md:items-start">
                 <h3 class="font-display font-medium text-lg leading-7 text-white">
                   {value.title}
                 </h3>
-                <p class="text-base leading-6 text-[#9FB1A5]">
+                <p class="text-base leading-6 text-[#9FB1A5] text-center md:text-left">
                   {value.desc}
                 </p>
               </div>
@@ -284,14 +284,14 @@ OUR VALUES</p>
   <!-- ─── Team & Open Positions Section ─── -->
   <div class="px-4 pb-4">
     <div class="bg-white border border-black/[0.04] rounded-3xl py-24 overflow-hidden">
-      <div class="max-w-[1440px] mx-auto px-8 flex flex-col gap-20">
+      <div class="max-w-[1440px] mx-auto px-4 md:px-8 flex flex-col gap-20">
 
         <!-- Our team heading -->
-        <div class="flex flex-col gap-5 max-w-[1024px]" data-animate="fade-up">
-          <h2 class="font-display font-medium text-[48px] leading-[60px] tracking-[-0.02em] text-text-primary">
+        <div class="flex flex-col gap-5 max-w-[1024px] items-center text-center md:items-start md:text-left" data-animate="fade-up">
+          <h2 class="font-display font-medium text-[36px] sm:text-[48px] leading-[1.25] sm:leading-[60px] tracking-[-0.02em] text-text-primary">
             Our team
           </h2>
-          <p class="text-xl leading-[30px] text-text-tertiary">
+          <p class="text-lg sm:text-xl leading-[1.6] sm:leading-[30px] text-text-tertiary">
             Our team is spread across three vibrant cities, São Paulo, Buenos Aires, and Austin,
             bringing together diverse perspectives and a shared passion for building something
             great. No matter the timezone, we move fast, collaborate closely, and show up for
@@ -306,7 +306,7 @@ OUR VALUES</p>
         </div>
 
         <!-- Questions about working at Handoff -->
-        <div class="flex flex-col gap-6" data-animate="fade-up">
+        <div class="flex flex-col gap-6 items-center text-center md:items-start md:text-left" data-animate="fade-up">
           <h3 class="font-display font-medium text-2xl leading-8 text-[#717680]">
             Questions about working for Handoff?
           </h3>
@@ -362,14 +362,14 @@ OUR VALUES</p>
 
         <!-- Open positions -->
         <div id="open-positions" class="flex flex-col gap-10" data-animate="fade-up">
-          <h2 class="font-display font-medium text-[48px] leading-[60px] tracking-[-0.02em] text-text-primary">
+          <h2 class="font-display font-medium text-[48px] leading-[60px] tracking-[-0.02em] text-text-primary text-center md:text-left">
             Open positions
           </h2>
           <div class="flex flex-col overflow-hidden bg-white ">
             {jobs.map((job) => (
               <a
                 href={`/careers/jobs?id=${job.id}`}
-                class="group flex flex-col md:flex-row gap-8 items-center px-8 py-10 border-b border-[#D5D7DA] last:border-b-0 transition-colors hover:bg-[#F4F6F4]"
+                class="group flex flex-col md:flex-row gap-5 md:gap-8 items-center px-3 py-3 md:px-8 md:py-10 border-b border-[#D5D7DA] last:border-b-0 transition-colors hover:bg-[#F4F6F4]"
               >
                 <p class="flex-1 min-w-0 font-display text-center md:text-left font-medium text-xl leading-7 text-[#181D27] group-hover:text-neutral-900">
                   {job.title}

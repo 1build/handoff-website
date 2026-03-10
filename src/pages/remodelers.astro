@@ -44,7 +44,7 @@ const seo = getPageSeo(Astro.url.pathname);
 <BaseLayout {...seo}>
   <Header navItems={navItems} />
 <!-- Hero -->
-  <section id="hero" class="hero-fixed">
+  <section id="hero" class="hero-fixed overflow-hidden">
     <!-- Background grid pattern -->
     <div class="absolute top-0 left-1/2 -translate-x-1/2 max-w-full w-[1920px] h-[1440px] pointer-events-none z-0">
       <img src={bgPattern.src} alt="" class="w-full h-full block object-contain object-top" />
@@ -56,7 +56,7 @@ const seo = getPageSeo(Astro.url.pathname);
     </div>
 
     <!-- Content -->
-    <div id="hero-container" class="relative z-[1] max-w-[1440px] mx-auto px-8 py-24 flex flex-col lg:flex-row items-center gap-12 lg:gap-16 will-change-[opacity,transform]">
+    <div id="hero-container" class="relative z-[1] max-w-[1440px] mx-auto px-4 md:px-8 py-24 flex flex-col lg:flex-row items-center gap-12 lg:gap-16 will-change-[opacity,transform]">
       <!-- Left: Text -->
       <div class="flex-1 flex flex-col">
         <p class="font-mono text-sm font-semibold leading-6 tracking-[0.56px] uppercase text-text-highlight mb-3">
@@ -77,12 +77,12 @@ const seo = getPageSeo(Astro.url.pathname);
 
       <!-- Right: Hero visual -->
       <div class="flex-1 relative z-[2] flex items-center justify-center">
-        <div class="relative w-full max-w-[600px] h-[570px]">
+        <div class="relative w-full max-w-[600px]">
           <!-- Diamond contractor photo -->
           <img
             src={heroRemodeler.src}
             alt="Remodeling contractor using Handoff on site"
-            class="w-[536px] h-[513px] object-contain mx-auto"
+            class="w-full object-contain mx-auto"
             loading="eager"
             decoding="async"
           />
