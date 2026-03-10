@@ -1,0 +1,160 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/sections/Header.astro";
+import Footer from "@/components/sections/Footer.astro";
+import FaqSection from "@/components/sections/FaqSection.astro";
+import RemodelersCta from "@/components/sections/RemodelersCta.astro";
+import FixAndFlipBenefitsSection from "@/components/sections/FixAndFlipBenefitsSection.astro";
+import FixAndFlipCommunitySection from "@/components/sections/FixAndFlipCommunitySection.astro";
+import bgPattern from "@/assets/images/background-pattern.png";
+import heroGlow from "@/assets/images/hero-glow-line.svg";
+import heroRemodeler from "@/assets/images/hero-remodeler.png";
+import iconFileCheck from "@/assets/icons/icon-file-check.svg";
+import iconBanknote from "@/assets/icons/icon-banknote.svg";
+import iconSend from "@/assets/icons/icon-send.svg";
+import { navItems, footerColumns } from "@/lib/navigation";
+import { getPageSeo } from "@/lib/seo-pages";
+
+const faqItems = [
+  {
+    question: "Where does your cost data come from?",
+    answer: "Our rates come from the supplier relationships we have formed to integrate with their catalogs. In addition, we track labor rates across the country to make sure we're staying up to date with the fluctuations. Our costs update on a daily basis for every single city in the US.",
+  },
+  {
+    question: "Can your pricing be localized to my area?",
+    answer: "Absolutely, your estimate will be localized to any location in the United States. When you create an estimate, we'll ask for your project location. Handoff will then generate your estimate with accurate rates specific to that location.",
+  },
+  {
+    question: "Does this work for my type of business?",
+    answer: "Handoff works for all contractors and trades! Our platform can generate AI construction estimates and manage the project workflows for remodelers, fix and flippers, handyman contractors, kitchen and bath contractors, general contractors, home builders, deck builders, painters, drywallers, framers, electricians, plumbers, finish carpenters, cabinet makers, countertop installers, HVAC contractors, roofing and siding contractors, doors and windows contractors, concrete and flatwork contractors, landscapers, insurance restoration businesses, property managers, design builders, ADA contractors, real estate investors, and many more!",
+  },
+  {
+    question: "When will you have a certain feature that I need?",
+    answer: "You can always find out what the Handoff team is working on by tracking our public roadmap. You can also request to add new features or recommend improvements. Custom plan users also get early access to our new features.",
+  },
+  {
+    question: "Do you have an online community for customers?",
+    answer: "Yes! Anyone can join our Facebook community called Handoff Nation.",
+  },
+  {
+    question: "Do you have an affiliate or ambassador program?",
+    answer: "We currently offer both an affiliate and ambassador program! Affiliate program — earn commission when a new user signs up through your link. Ambassador program — earn incentives like cash payments and gift cards for creating content for Handoff.",
+  },
+  {
+    question: "Do you offer homeowner financing options?",
+    answer: "Yes, Handoff's Pro and Custom plans users can offer homeowner financing options through our partner Acorn Finance, on every proposal. This is an optional offering at no cost to you!",
+  },
+  {
+    question: "Does your AI read my drawings, photos, and other files?",
+    answer: "Yes, Handoff users can upload almost any relevant file type like drawings, photos, and other documents. Our AI can extract important information from files such as square footage, quantities, material lists, and more. These can then be used to generate estimates more accurately.",
+  },
+];
+const seo = getPageSeo(Astro.url.pathname);
+---
+
+<BaseLayout {...seo}>
+  <Header navItems={navItems} />
+<!-- Hero -->
+  <section id="hero" class="hero-fixed">
+    <!-- Background grid pattern -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 max-w-full w-[1920px] h-[1440px] pointer-events-none z-0">
+      <img src={bgPattern.src} alt="" class="w-full h-full block object-contain object-top" />
+    </div>
+
+    <!-- Glow line -->
+    <div class="absolute -top-[24%] -left-[14%] -right-[14%] max-w-full -bottom-[24%] pointer-events-none z-[1]">
+      <img src={heroGlow.src} alt="" class="w-full h-full block" />
+    </div>
+
+    <!-- Content -->
+    <div id="hero-container" class="relative z-[1] max-w-[1440px] mx-auto px-8 py-24 flex flex-col lg:flex-row items-center gap-12 lg:gap-16 will-change-[opacity,transform]">
+      <!-- Left: Text -->
+      <div class="flex-1 flex flex-col">
+        <p class="font-mono text-sm font-semibold leading-6 tracking-[0.56px] uppercase text-text-highlight mb-3">
+          Fix and flip
+        </p>
+        <h1 class="font-display text-4xl sm:text-[44px] lg:text-[60px] xl:text-[72px] font-medium leading-[1.2] lg:leading-[1.25] tracking-[-1.44px] text-white mb-6">
+          A shortcut to growing your <span class="text-text-highlight">real estate empire</span>
+        </h1>
+        <p class="text-lg lg:text-xl font-medium leading-[30px] text-white max-w-[640px]">
+          Leverage AI-driven estimates to swiftly assess and execute profitable fix and flip projects.
+        </p>
+        <div class="mt-12 w-full">
+          <button class="inline-flex w-full md:w-auto items-center justify-center gap-1.5 font-medium text-base leading-6 rounded-xl px-5 py-2.5 h-12 whitespace-nowrap cursor-pointer bg-white/10 backdrop-blur-[4px] text-white transition-all duration-150 hover:bg-white/20">
+            See how it works
+          </button>
+        </div>
+      </div>
+
+      <!-- Right: Hero visual -->
+      <div class="flex-1 relative z-[2] flex items-center justify-center">
+        <div class="relative w-full max-w-[600px] h-[570px]">
+          <!-- Diamond contractor photo -->
+          <img
+            src={heroRemodeler.src}
+            alt="Fix and flip investor using Handoff on site"
+            class="w-[536px] h-[513px] object-contain mx-auto"
+            loading="eager"
+            decoding="async"
+          />
+
+          <!-- Notification cards -->
+          <div class="absolute bottom-[3px] left-[16px] w-[330px] flex flex-col gap-0">
+            <!-- Card 1: Proposal approved (top, solid white) -->
+            <div class="bg-white rounded-xl p-4 shadow-[0px_21px_25px_-4px_rgba(10,13,18,0.08),0px_8px_8px_-4px_rgba(10,13,18,0.03)] flex items-start gap-4 relative z-30">
+              <div class="bg-[rgba(213,222,216,0.3)] rounded-lg p-2 shrink-0">
+                <img src={iconFileCheck.src} alt="" class="w-6 h-6" />
+              </div>
+              <div class="flex flex-col gap-0.5 min-w-0">
+                <p class="text-sm font-medium leading-5 text-text-brand-secondary">
+                  Master Bath Remodel proposal <span class="font-bold">approved</span> by Sarah Miller
+                </p>
+                <p class="text-xs font-medium leading-[18px] text-text-quaternary">Just now</p>
+              </div>
+            </div>
+
+            <!-- Card 2: Deposit received (middle, solid white, offset right) -->
+            <div class="bg-white rounded-xl p-4 shadow-[0px_21px_25px_-4px_rgba(10,13,18,0.08),0px_8px_8px_-4px_rgba(10,13,18,0.03)] flex items-start gap-4 ml-8 -mt-1 relative z-20">
+              <div class="bg-[rgba(213,222,216,0.3)] rounded-lg p-2 shrink-0">
+                <img src={iconBanknote.src} alt="" class="w-6 h-6" />
+              </div>
+              <div class="flex flex-col gap-0.5 min-w-0">
+                <p class="text-sm font-medium leading-5 text-text-brand-secondary">
+                  Deposit of <span class="font-bold">$8,500 received</span> for Kitchen Remodel project
+                </p>
+                <p class="text-xs font-medium leading-[18px] text-text-quaternary">2m ago</p>
+              </div>
+            </div>
+
+            <!-- Card 3: Proposal sent (bottom, faded) -->
+            <div class="bg-gradient-to-b from-white from-[49%] to-transparent rounded-xl p-4 opacity-80 flex items-start gap-4 -mt-1 relative z-10">
+              <div class="bg-[rgba(213,222,216,0.3)] rounded-lg p-2 shrink-0">
+                <img src={iconSend.src} alt="" class="w-6 h-6" />
+              </div>
+              <div class="flex flex-col gap-0.5 min-w-0">
+                <p class="text-sm font-medium leading-5 text-text-brand-secondary">
+                  Kitchen Remodel <span class="font-bold">proposal sent</span> successfully to Olivia Rhye
+                </p>
+                <p class="text-xs font-medium leading-[18px] text-text-quaternary">15m ago</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <FixAndFlipBenefitsSection />
+  <FixAndFlipCommunitySection />
+  <FaqSection items={faqItems} />
+
+  <RemodelersCta />
+
+  <Footer columns={footerColumns} />
+</BaseLayout>
+
+<script>
+  import { initScrollAnimations } from "@/lib/animations";
+  import { initHeroScroll } from "@/lib/heroScroll";
+  initScrollAnimations();
+  initHeroScroll();
+</script>

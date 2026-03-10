@@ -49,6 +49,11 @@ const parts = highlightText && quote.includes(highlightText)
       <p class="text-lg font-semibold leading-7 text-text-primary">— {name}</p>
       <p class="text-base font-normal leading-6 text-text-tertiary">{role} • {source}</p>
     </div>
-    <Button variant="secondary-outline">View more testimonials</Button>
+    <a
+            href="/reviews"
+            class="inline-flex items-center justify-center gap-1.5 px-2 md:px-[18px] py-3 text-base font-medium leading-6 rounded-xl bg-white border border-border-primary text-text-secondary shadow-xs hover:bg-bg-secondary transition-colors duration-150 whitespace-nowrap"
+          >
+            View more testimonials
+          </a>
   </div>
 </div>

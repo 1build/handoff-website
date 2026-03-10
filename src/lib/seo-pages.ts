@@ -91,9 +91,9 @@ export const PAGE_SEO: Record<string, Partial<PageSeo> & { title: string }> = {
       "Browse open roles at Handoff. Join a fast-growing team building AI-powered software for remodelers and handymen. Find your next opportunity and apply today.",
   },
   "/construction-costs": {
-    title: "Construction Cost Calculators for Contractors — Handoff",
+    title: "Construction Costs for Contractors",
     description:
-      "Train an AI teammate to run your construction business. Set your rules once — Handoff applies them automatically across every estimate, proposal, and change order.",
+      "Use Handoff’s free construction costs database and estimating calculations to quickly get accurate construction costs for any project across US cities. From residential remodeling, new construction, repairs, roofing, electrical, and many more categories to plan your projects with confidence.",
   },
   "/comparison/handoff-vs-contractor-foreman": {
     title: "Handoff vs Contractor Foreman",
@@ -140,6 +140,15 @@ export const PAGE_SEO: Record<string, Partial<PageSeo> & { title: string }> = {
     title: "Handoff vs ChatGPT",
     description: "Handoff uses real-time, local construction pricing data from actual suppliers and construction professionals, to generate quick and accurate estimates. ChatGPT isn’t specifically trained on construction cost data, leading to very inaccurate and non-localized estimates."
  },
+ "/fix-and-flip": {
+    title: "Handoff AI Estimating | Fix and Flip",
+    description: "Boost your real estate business with Handoff AI&#x27;s Fix and Flip solutions. Get AI-driven project assessments and proposals for accurate estimates, manage contractor bids, and grow your portfolio. Start your 7-day free trial!"
+ },
+ "/handyman": {
+    title: "Handoff AI Estimating | Handyman",
+    description: "Become the best-paid handyman in your area with Handoff. Streamline your workflow, increase profitability, and manage projects effortlessly, all without adding more headcount."
+   },
+ 
 };
 
 /**

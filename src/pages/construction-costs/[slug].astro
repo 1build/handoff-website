@@ -260,9 +260,11 @@ const seo = {
               <!-- Group header row -->
               <div
                 class="flex items-center flex-col md:flex-row gap-2 border-b border-border-primary py-4"
+                id="materials-header"
               >
                 <span
-                  class="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-brand-accent"
+                  class="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-brand-accent cursor-pointer"
+                  id="materials-checkbox"
                 >
                   <svg
                     class="h-3 w-3 text-white"
@@ -288,10 +290,12 @@ const seo = {
               <!-- Sheet Vinyl Material row -->
               <div
                 class="flex items-center flex-col md:flex-row gap-2 border-b border-border-primary py-4"
+                id="mat1-row"
               >
                 <div class="flex flex-1 items-center gap-2">
                   <span
-                    class="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-brand-accent"
+                    class="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-brand-accent cursor-pointer"
+                    id="mat1-checkbox"
                   >
                     <svg
                       class="h-3 w-3 text-white"
@@ -339,10 +343,12 @@ const seo = {
               <!-- Installation Supplies row -->
               <div
                 class="flex items-center flex-col md:flex-row gap-2 border-b border-border-primary py-4"
+                id="mat2-row"
               >
                 <div class="flex flex-1 items-center gap-2">
                   <span
-                    class="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-brand-accent"
+                    class="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-brand-accent cursor-pointer"
+                    id="mat2-checkbox"
                   >
                     <svg
                       class="h-3 w-3 text-white"
@@ -394,10 +400,12 @@ const seo = {
               <!-- Group header -->
               <div
                 class="flex items-center flex-col md:flex-row gap-2 border-b border-border-primary py-4"
+                id="labor-header"
               >
                 <!-- Indeterminate checkbox (minus) -->
                 <span
-                  class="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-brand-accent"
+                  class="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-brand-accent cursor-pointer"
+                  id="labor-checkbox"
                 >
                   <svg
                     class="h-3 w-3 text-white"
@@ -422,10 +430,12 @@ const seo = {
               <!-- Installation Labor row -->
               <div
                 class="flex items-center flex-col md:flex-row gap-2 border-b border-border-primary py-4"
+                id="labor-main-row"
               >
                 <div class="flex flex-1 items-center gap-2">
                   <span
-                    class="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-brand-accent"
+                    class="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-brand-accent cursor-pointer"
+                    id="labor-main-checkbox"
                   >
                     <svg
                       class="h-3 w-3 text-white"
@@ -467,21 +477,36 @@ const seo = {
                 </div>
                 <span
                   class="w-[150px] shrink-0 text-center md:text-right text-base font-medium text-text-primary"
+                  id="labor-main-total"
                   >$2,000.00</span
                 >
               </div>
-              <!-- Floor Removal row (unchecked / crossed out) -->
+              <!-- Floor Removal row (optional) -->
               <div
                 class="flex items-center flex-col md:flex-row gap-2 border-b border-border-primary py-4"
+                id="floor-row"
               >
                 <div class="flex flex-1 items-center gap-2">
                   <span
-                    class="h-5 w-5 shrink-0 rounded border border-border-primary"
-                  ></span>
-                  <span
-                    class="whitespace-nowrap text-base font-medium text-text-quaternary line-through"
-                    >Floor Removal</span
+                    class="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-brand-accent cursor-pointer"
+                    id="floor-checkbox"
                   >
+                    <svg
+                      class="h-3 w-3 text-white opacity-0"
+                      viewBox="0 0 12 12"
+                      fill="none"
+                    >
+                      <path
+                        d="M2 6l3 3 5-5"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"></path>
+                    </svg>
+                  </span>
+                  <span class="whitespace-nowrap text-base font-medium text-text-primary" id="floor-label">
+                    Floor Removal
+                  </span>
                   <svg
                     class="h-4 w-4 shrink-0 text-text-quaternary"
                     viewBox="0 0 16 16"
@@ -498,15 +523,17 @@ const seo = {
                   </svg>
                 </div>
                 <div
-                  class="flex w-[150px] shrink-0 items-baseline gap-1 whitespace-nowrap text-base font-medium text-text-quaternary line-through"
+                  class="flex w-[150px] shrink-0 items-baseline gap-1 whitespace-nowrap text-base font-medium text-text-primary"
+                  id="floor-qty"
                 >
                   <span>$50.00</span>
                   <span class="no-underline">×</span>
                   <span>10 HR</span>
                 </div>
                 <span
-                  class="w-[150px] shrink-0 text-center md:text-right text-base font-medium text-text-quaternary line-through"
-                  >$500.00</span
+                  class="w-[150px] shrink-0 text-center md:text-right text-base font-medium text-text-primary"
+                  id="labor2-total"
+                  >$0.00</span
                 >
               </div>
             </div>
@@ -1049,8 +1076,7 @@ Conclusion
       locOptions.forEach((btn) => {
         btn.addEventListener("click", (e) => {
           e.stopPropagation();
-          const el = btn as HTMLButtonElement;
-          const loc = el.dataset.location ?? "";
+          const loc = (btn as HTMLElement).dataset.location ?? "";
           if (loc) {
             locDisplay.textContent = loc;
           }
@@ -1077,8 +1103,7 @@ Conclusion
       projOptions.forEach((btn) => {
         btn.addEventListener("click", (e) => {
           e.stopPropagation();
-          const el = btn as HTMLButtonElement;
-          const label = el.dataset.label ?? "";
+          const label = (btn as HTMLElement).dataset.label ?? "";
           if (label) {
             projDisplay.textContent = label;
           }
@@ -1102,11 +1127,273 @@ Conclusion
     projPanel?.addEventListener("click", (e) => e.stopPropagation());
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initDetailDropdowns);
-  } else {
-    initDetailDropdowns();
+  function initEstimateCalculator() {
+    if (document.body.dataset.costCalcEstimateInit === "1") return;
+    document.body.dataset.costCalcEstimateInit = "1";
+
+    const sizeInput = document.getElementById("project-size");
+    const markupInput = document.getElementById("markup-pct");
+    const finishSelect = document.getElementById("finish-level");
+
+    const sizeDisplay1 = document.getElementById("size-display-1");
+    const sizeDisplay2 = document.getElementById("size-display-2");
+
+    const mat1TotalEl = document.getElementById("mat1-total");
+    const mat2TotalEl = document.getElementById("mat2-total");
+    const materialsTotalEl = document.getElementById("materials-total");
+    const laborTotalEl = document.getElementById("labor-total");
+    const laborMainTotalEl = document.getElementById("labor-main-total");
+    const laborFloorTotalEl = document.getElementById("labor2-total");
+    const costsTotalEl = document.getElementById("costs-total");
+
+    const markupPctDisplay = document.getElementById("markup-pct-display");
+    const markupAmountEl = document.getElementById("markup-amount");
+    const markupBigEl = document.getElementById("markup-big");
+    const avgCostBigEl = document.getElementById("avg-cost-big");
+    const costPerSfEl = document.getElementById("cost-per-sf");
+
+    if (
+      !(sizeInput instanceof HTMLInputElement) ||
+      !(markupInput instanceof HTMLInputElement) ||
+      !(finishSelect instanceof HTMLSelectElement) ||
+      !sizeDisplay1 ||
+      !sizeDisplay2 ||
+      !mat1TotalEl ||
+      !mat2TotalEl ||
+      !materialsTotalEl ||
+      !laborTotalEl ||
+      !laborMainTotalEl ||
+      !laborFloorTotalEl ||
+      !costsTotalEl ||
+      !markupPctDisplay ||
+      !markupAmountEl ||
+      !markupBigEl ||
+      !avgCostBigEl ||
+      !costPerSfEl
+    ) {
+      return;
+    }
+
+    const MAT1_PRICE_PER_SF = 12; // Sheet vinyl material
+    const MAT2_PRICE_PER_SF = 0.5; // Installation supplies
+    const LABOR_TOTAL_BASE = 2000; // From 50 × 40 HR
+    const FLOOR_REMOVAL_BASE = 500; // From 50 × 10 HR
+    const EXTRA_FIXED_COST = 565; // Matches initial Costs total at size=20
+    const BASE_SIZE = 20;
+
+    const currency = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+
+    function formatCurrency(value) {
+      return currency.format(value);
+    }
+
+    const floorCheckbox = document.getElementById("floor-checkbox");
+    const floorRow = document.getElementById("floor-row");
+
+    const mat1Row = document.getElementById("mat1-row");
+    const mat2Row = document.getElementById("mat2-row");
+    const laborMainRow = document.getElementById("labor-main-row");
+
+    const mat1Checkbox = document.getElementById("mat1-checkbox");
+    const mat2Checkbox = document.getElementById("mat2-checkbox");
+    const laborMainCheckbox = document.getElementById("labor-main-checkbox");
+
+    const materialsHeader = document.getElementById("materials-header");
+    const materialsCheckbox = document.getElementById("materials-checkbox");
+    const laborHeader = document.getElementById("labor-header");
+    const laborCheckbox = document.getElementById("labor-checkbox");
+
+    let mat1Included = true;
+    let mat2Included = true;
+    let laborMainIncluded = true;
+    let floorIncluded = false;
+
+    function getFinishMultiplier() {
+      const value = finishSelect.value;
+      switch (value) {
+        case "Economy":
+          return 0.9;
+        case "Premium":
+          return 1.15;
+        case "Luxury":
+          return 1.3;
+        default:
+          return 1; // Mid-grade
+      }
+    }
+
+    function recalc() {
+      let size = parseFloat(sizeInput.value);
+      if (!Number.isFinite(size) || size <= 0) size = BASE_SIZE;
+
+      // Update size displays (e.g., "20 SF")
+      const sizeLabel = `${size} SF`;
+      sizeDisplay1.textContent = sizeLabel;
+      sizeDisplay2.textContent = sizeLabel;
+
+      // Base material totals, scaled by project size
+      const mat1Base = MAT1_PRICE_PER_SF * size;
+      const mat2Base = MAT2_PRICE_PER_SF * size;
+
+      const finishMultiplier = getFinishMultiplier();
+
+      // Apply finish multiplier to materials
+      const mat1AdjBase = mat1Base * finishMultiplier;
+      const mat2AdjBase = mat2Base * finishMultiplier;
+
+      const mat1Adj = mat1Included ? mat1AdjBase : 0;
+      const mat2Adj = mat2Included ? mat2AdjBase : 0;
+      const materialsTotal = mat1Adj + mat2Adj;
+
+      // Labor + optional floor removal + fixed extra costs
+      const laborMainAdjBase = LABOR_TOTAL_BASE * finishMultiplier;
+      const laborMainAdj = laborMainIncluded ? laborMainAdjBase : 0;
+      const floorAdj = floorIncluded ? FLOOR_REMOVAL_BASE * finishMultiplier : 0;
+      const laborTotal = laborMainAdj + floorAdj;
+      const extraCost = EXTRA_FIXED_COST * finishMultiplier;
+
+      const costsTotal = materialsTotal + laborTotal + extraCost;
+
+      // Markup
+      let markupPct = parseFloat(markupInput.value);
+      if (!Number.isFinite(markupPct) || markupPct < 0) markupPct = 0;
+      if (markupPct > 100) markupPct = 100;
+      markupInput.value = String(markupPct);
+      markupPctDisplay.textContent = String(markupPct);
+
+      const markupAmount = (costsTotal * markupPct) / 100;
+      const totalWithMarkup = costsTotal + markupAmount;
+      const costPerSf = size > 0 ? totalWithMarkup / size : 0;
+
+      // Write numbers back to the DOM
+      mat1TotalEl.textContent = formatCurrency(mat1Adj);
+      mat2TotalEl.textContent = formatCurrency(mat2Adj);
+      materialsTotalEl.textContent = formatCurrency(materialsTotal);
+      laborMainTotalEl.textContent = formatCurrency(laborMainAdj);
+      laborFloorTotalEl.textContent = formatCurrency(floorAdj);
+      laborTotalEl.textContent = formatCurrency(laborTotal);
+      costsTotalEl.textContent = formatCurrency(costsTotal);
+
+      markupAmountEl.textContent = formatCurrency(markupAmount);
+      markupBigEl.textContent = formatCurrency(markupAmount);
+      avgCostBigEl.textContent = formatCurrency(totalWithMarkup);
+      costPerSfEl.textContent = formatCurrency(costPerSf);
+
+      updateCheckboxVisuals();
+    }
+
+    function updateCheckboxVisuals() {
+      function applyState(checkboxEl, included) {
+        if (!checkboxEl) return;
+        checkboxEl.classList.toggle("bg-brand-accent", included);
+        checkboxEl.classList.toggle("border", !included);
+        checkboxEl.classList.toggle("border-border-primary", !included);
+        const icon = checkboxEl.querySelector("svg");
+        if (icon) {
+          icon.classList.toggle("opacity-0", !included);
+        }
+      }
+
+      function applyRow(rowEl, included) {
+        if (!rowEl) return;
+        rowEl.classList.toggle("opacity-60", !included);
+      }
+
+      applyState(mat1Checkbox, mat1Included);
+      applyRow(mat1Row, mat1Included);
+
+      applyState(mat2Checkbox, mat2Included);
+      applyRow(mat2Row, mat2Included);
+
+      applyState(laborMainCheckbox, laborMainIncluded);
+      applyRow(laborMainRow, laborMainIncluded);
+
+      if (floorCheckbox) {
+        applyState(floorCheckbox, floorIncluded);
+      }
+      applyRow(floorRow, floorIncluded);
+
+      // Group checkbox states
+      const materialsAll = mat1Included && mat2Included;
+      const materialsAny = mat1Included || mat2Included;
+      if (materialsCheckbox) {
+        materialsCheckbox.classList.toggle("bg-brand-accent", materialsAll);
+        materialsCheckbox.classList.toggle("border", !materialsAll);
+        materialsCheckbox.classList.toggle("border-border-primary", !materialsAll);
+        const icon = materialsCheckbox.querySelector("svg");
+        if (icon) {
+          icon.classList.toggle("opacity-0", !materialsAll);
+        }
+      }
+      const laborAll = laborMainIncluded && floorIncluded;
+      const laborAny = laborMainIncluded || floorIncluded;
+      if (laborCheckbox) {
+        laborCheckbox.classList.toggle("bg-brand-accent", laborAll);
+        laborCheckbox.classList.toggle("border", !laborAll);
+        laborCheckbox.classList.toggle("border-border-primary", !laborAll);
+        const icon = laborCheckbox.querySelector("svg");
+        if (icon) {
+          // Show minus when some but not all, hide when none, show full when all
+          icon.classList.toggle("opacity-0", !laborAny);
+        }
+      }
+    }
+
+    sizeInput.addEventListener("input", recalc);
+    markupInput.addEventListener("input", recalc);
+    finishSelect.addEventListener("change", recalc);
+
+    function attachToggle(rowEl, getIncluded, setIncluded) {
+      if (!rowEl) return;
+      rowEl.addEventListener("click", () => {
+        const next = !getIncluded();
+        setIncluded(next);
+        recalc();
+      });
+    }
+
+    attachToggle(mat1Row, () => mat1Included, (v) => (mat1Included = v));
+    attachToggle(mat2Row, () => mat2Included, (v) => (mat2Included = v));
+    attachToggle(laborMainRow, () => laborMainIncluded, (v) => (laborMainIncluded = v));
+    attachToggle(floorRow, () => floorIncluded, (v) => (floorIncluded = v));
+
+    // Group header toggles: Materials (all/none), Labor (all/none)
+    if (materialsHeader) {
+      materialsHeader.addEventListener("click", (event) => {
+        const next = !(mat1Included && mat2Included);
+        mat1Included = next;
+        mat2Included = next;
+        recalc();
+      });
+    }
+
+    if (laborHeader) {
+      laborHeader.addEventListener("click", () => {
+        const next = !(laborMainIncluded && floorIncluded);
+        laborMainIncluded = next;
+        floorIncluded = next;
+        recalc();
+      });
+    }
+
+    recalc();
   }
-  document.addEventListener("astro:page-load", initDetailDropdowns);
+
+  function initCostCalcDetailPage() {
+    initDetailDropdowns();
+    initEstimateCalculator();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initCostCalcDetailPage);
+  } else {
+    initCostCalcDetailPage();
+  }
+  document.addEventListener("astro:page-load", initCostCalcDetailPage);
 </script>
 

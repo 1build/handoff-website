@@ -43,7 +43,7 @@ const parts = highlightText && testimonialQuote.includes(highlightText)
   : [testimonialQuote];
 ---
 
-<section id="features" class="relative z-[2] px-4 py-8 bg-transparent transition-colors duration-300">
+<section id="features" class="relative z-[2] px-4 pb-4 bg-transparent transition-colors duration-300">
   <div class="max-w-[1920px] mx-auto bg-white rounded-3xl border border-black/[0.04] py-16 lg:py-24 overflow-hidden flex flex-col gap-12 lg:gap-20">
     <!-- Header -->
     <div class="max-w-[1440px] px-6 lg:px-8 mx-auto w-full flex flex-col gap-5">
@@ -97,7 +97,12 @@ const parts = highlightText && testimonialQuote.includes(highlightText)
           <p class="text-lg font-semibold leading-7 text-text-primary">— {testimonialName}</p>
           <p class="text-base font-normal leading-6 text-text-tertiary">{testimonialRole} • {testimonialSource}</p>
         </div>
-        <Button variant="secondary-outline">View more testimonials</Button>
+        <a
+            href="/reviews"
+            class="inline-flex items-center justify-center gap-1.5 px-2 md:px-[18px] py-3 text-base font-medium leading-6 rounded-xl bg-white border border-border-primary text-text-secondary shadow-xs hover:bg-bg-secondary transition-colors duration-150 whitespace-nowrap"
+          >
+            View more testimonials
+          </a>
       </div>
     </div>
     <SupplierLogosCarousel />
