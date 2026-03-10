@@ -61,3 +61,15 @@ Or without the config (e.g. blog post):
 - **Site URL** – `src/lib/seo.ts`: `SITE_URL = "https://handoff.ai"`.
 - **Per-page SEO** – `src/lib/seo-pages.ts`: `PAGE_SEO` and `getPageSeo(path)`.
 - **Sitemap** – Generated automatically; `astro.config.mjs` has `site: 'https://handoff.ai'` and `integrations: [sitemap()]`.
+
+## Sitemap automation
+
+The XML sitemap is **generated at build time** by `@astrojs/sitemap`. No manual file or cron is needed.
+
+- **When** – Every `npm run build` (and thus every Vercel deploy) produces `sitemap-index.xml` and segment sitemaps (e.g. `sitemap-0.xml`) in the build output.
+- **Where** – Live at `https://handoff.ai/sitemap-index.xml`. Crawlers discover it via `public/robots.txt` (`Sitemap: https://handoff.ai/sitemap-index.xml`).
+- **Config** – In `astro.config.mjs`, the sitemap integration:
+  - **Excludes** – `/components`, `/astro-components`, and `/blogold` so they are not included in the sitemap.
+  - **Serializes** – Sets `lastmod` to build date, and `changefreq` / `priority` by section (e.g. homepage `daily` / `1`, blog posts `weekly` / `0.8`).
+
+To change what’s excluded, edit the `filter` function in `astro.config.mjs`. To change `lastmod`/`changefreq`/`priority`, edit the `serialize` function.
