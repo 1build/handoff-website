@@ -1,0 +1,296 @@
+---
+import g2Logo from "@/assets/images/g2-logo.png";
+import appStoreIcon from "@/assets/images/app-store-icon.png";
+import capterraLogo from "@/assets/images/capterra-logo.png";
+import bgPattern from "@/assets/images/high-growth-bg.png";
+import avatar1 from "@/assets/images/avatar1.png";
+import avatar2 from "@/assets/images/avatar2.png";
+import avatar3 from "@/assets/images/avatar3.png";
+import avatar4 from "@/assets/images/avatar4.png";
+import avatar5 from "@/assets/images/avatar5.png";
+import avatar6 from "@/assets/images/avatar6.png";
+import avatar7 from "@/assets/images/avatar7.png";
+import avatar8 from "@/assets/images/avatar8.png";
+import avatar9 from "@/assets/images/avatar9.png";
+
+const testimonials = [
+  {
+    name: "Glenn",
+    title: "Glenn and Sons Remodel",
+    quote: "I'm very impressed. We won a $10,000 job with Handoff in our first month!",
+    avatar: avatar1.src,
+    initials: "G",
+    color: "#0f766e",
+  },
+  {
+    name: "Matt",
+    title: "UX Designer, Goodwell",
+    quote: "Handoff AI is a game changer in helping us develop our long term sales & operations plan… AI is the way of the future and this hits us in a very important part of our business.",
+    avatar: avatar2.src,
+    initials: "M",
+    color: "#2d7a52",
+  },
+  {
+    name: "Mathilde Lewis",
+    title: "Project Lead, Stack3d Lab",
+    quote: "Our workflow has improved dramatically since we started using Handoff and it's become an integral part of our workflow. It's easy to use, and the resources are top-notch. I recommend it to everyone!",
+    avatar: avatar3.src,
+    initials: "M",
+    color: "#0d9488",
+  },
+  {
+    name: "Matt",
+    title: "Equi-linc",
+    quote: "I've been so frustrated with estimating that I was ready to give it up. Handoff is like taking a 1,000-pound weight off my chest. I feel so much better now. I'm so glad I found you guys.",
+    avatar: avatar4.src,
+    initials: "M",
+    color: "#3b7dd8",
+  },
+  {
+    name: "Florence Shaw",
+    title: "Web Designer, Quixotic",
+    quote: "Handoff is hands down the best design library we've used. It has literally everything we need to get started for any possible project.",
+    avatar: avatar5.src,
+    initials: "F",
+    color: "#7c3aed",
+  },
+  {
+    name: "Stefan Sears",
+    title: "UI/UX Designer, Mangolia",
+    quote: "Handoff is an absolute game-changer for our projects. We can't imagine going back to how we used to work without it.",
+    avatar: avatar6.src,
+    initials: "S",
+    color: "#c2410c",
+  },
+  {
+    name: "Zaid Schwartz",
+    title: "Founder, Wildcrafted",
+    quote: "I've been so frustrated with estimating that I was ready to give it up. Handoff is like taking a 1,000-pound weight off my chest. I feel so much better now. I'm so glad I found you guys.",
+    avatar: avatar7.src,
+    initials: "Z",
+    color: "#7c3aed",
+  },
+  {
+    name: "Owen Garcia",
+    title: "CTO, Solaris Energy",
+    quote: "With Handoff, we can focus more on design and less on the tedious setup work. Best money ever spent.",
+    avatar: avatar8.src,
+    initials: "O",
+    color: "#ea580c",
+  },
+  {
+    name: "Harriet Rojas",
+    title: "Product Designer, Ikigai Labs",
+    quote: "Handoff has been a real time-saver for us. It's organized, efficient, and keeps us moving forward with every project.",
+    avatar: avatar9.src,
+    initials: "H",
+    color: "#2563eb",
+  },
+];
+---
+
+<section class="mx-4 rounded-3xl overflow-hidden relative" style="background: linear-gradient(180deg, #D5DED8 0%, #F4F6F4 80%, #FFFFFF 100%);">
+
+  <div class="absolute top-[0%] left-[10%] -bottom-[1%] pointer-events-none z-[2]">
+    <img src={bgPattern.src} alt="" class="w-full h-full block object-contain object-top" />
+  </div>
+  <div class="max-w-[1440px] mx-auto px-8 pt-24 pb-16">
+
+    <!-- Heading -->
+    <div class="flex flex-col items-center text-center gap-5 mb-16" data-animate="fade-up">
+      <h2 class="font-display text-5xl font-medium leading-[1.25] tracking-[-0.96px] text-text-primary max-w-[768px]">
+        What our clients are saying
+      </h2>
+      <p class="text-xl font-normal leading-[30px] text-text-secondary max-w-[768px]">
+        Forward-thinking teams use Handoff to move faster, protect margins, and scale without over-hiring.
+      </p>
+    </div>
+
+    <!-- Ratings bar -->
+    <div class="flex flex-wrap items-center justify-between gap-6 mb-14" data-animate="fade-up">
+      <!-- G2 -->
+      <div class="flex items-center gap-5">
+        <img src={g2Logo.src} alt="G2" class="h-6 w-auto" />
+        <div class="flex items-center gap-3">
+          <div class="flex items-center gap-1">
+            {[...Array(5)].map(() => (
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="shrink-0">
+                <path d="M8 1.5L9.854 5.258L14 5.867L11 8.79L11.708 12.918L8 10.965L4.292 12.918L5 8.79L2 5.867L6.146 5.258L8 1.5Z" fill="#FDB022" stroke="#FDB022" stroke-width="0.5" stroke-linejoin="round"/>
+              </svg>
+            ))}
+          </div>
+          <span class="text-sm leading-5 text-text-quaternary">
+            <span class="font-semibold text-text-quaternary">4.8</span><span class="font-normal">/5</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- App Store -->
+      <a
+        href="https://apps.apple.com/am/app/handoff-ai-estimating-app/id6470666320"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center gap-5"
+      >
+        <div class="flex items-center gap-2">
+          <img src={appStoreIcon.src} alt="App Store" class="h-6 w-6 rounded-md" />
+          <span class="text-base font-medium leading-6 text-text-secondary">App Store</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="flex items-center gap-1">
+            {[...Array(5)].map(() => (
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="shrink-0">
+                <path d="M8 1.5L9.854 5.258L14 5.867L11 8.79L11.708 12.918L8 10.965L4.292 12.918L5 8.79L2 5.867L6.146 5.258L8 1.5Z" fill="#FDB022" stroke="#FDB022" stroke-width="0.5" stroke-linejoin="round"/>
+              </svg>
+            ))}
+          </div>
+          <span class="text-sm leading-5 text-text-quaternary">
+            <span class="font-semibold">4.7</span><span class="font-normal">/5</span>
+          </span>
+        </div>
+      </a>
+
+      <!-- Google Play -->
+      <a
+        href="https://play.google.com/store/apps/details?id=com.onebuild.handoff"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center gap-5"
+      >
+        <div class="flex items-center gap-2">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="shrink-0">
+            <path d="M3.18 2.06C2.82 2.42 2.61 2.99 2.61 3.72V20.28C2.61 21.01 2.82 21.58 3.18 21.94L3.27 22.03L13.06 12.24V12L3.27 2.2L3.18 2.06Z" fill="url(#gp1)"/>
+            <path d="M16.31 15.48L13.06 12.24V12L16.31 8.76L16.42 8.83L20.26 11.01C21.35 11.63 21.35 12.63 20.26 13.25L16.42 15.41L16.31 15.48Z" fill="url(#gp2)"/>
+            <path d="M16.42 15.41L13.06 12.07L3.18 21.94C3.56 22.34 4.2 22.39 4.92 21.99L16.42 15.41Z" fill="url(#gp3)"/>
+            <path d="M3.18 2.06L13.06 11.93L16.42 8.59L4.92 2.01C4.2 1.61 3.56 1.66 3.18 2.06Z" fill="url(#gp4)"/>
+            <defs>
+              <linearGradient id="gp1" x1="12.36" y1="3.07" x2="-1.36" y2="12.13" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#00A0FF"/>
+                <stop offset="0.01" stop-color="#00A1FF"/>
+                <stop offset="0.26" stop-color="#00BEFF"/>
+                <stop offset="0.51" stop-color="#00D2FF"/>
+                <stop offset="0.76" stop-color="#00DFFF"/>
+                <stop offset="1" stop-color="#00E3FF"/>
+              </linearGradient>
+              <linearGradient id="gp2" x1="21.83" y1="12.13" x2="2.35" y2="12.13" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#FFE000"/>
+                <stop offset="0.41" stop-color="#FFBD00"/>
+                <stop offset="0.78" stop-color="#FFA500"/>
+                <stop offset="1" stop-color="#FF9C00"/>
+              </linearGradient>
+              <linearGradient id="gp3" x1="14.64" y1="14.34" x2="-4.6" y2="31.93" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#FF3A44"/>
+                <stop offset="1" stop-color="#C31162"/>
+              </linearGradient>
+              <linearGradient id="gp4" x1="0.26" y1="-4.19" x2="8.91" y2="4.18" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#32A071"/>
+                <stop offset="0.07" stop-color="#2DA771"/>
+                <stop offset="0.48" stop-color="#15CF74"/>
+                <stop offset="0.8" stop-color="#06E775"/>
+                <stop offset="1" stop-color="#00F076"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="text-base font-medium leading-6 text-text-secondary">Google Play</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="flex items-center gap-1">
+            {[...Array(5)].map(() => (
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="shrink-0">
+                <path d="M8 1.5L9.854 5.258L14 5.867L11 8.79L11.708 12.918L8 10.965L4.292 12.918L5 8.79L2 5.867L6.146 5.258L8 1.5Z" fill="#FDB022" stroke="#FDB022" stroke-width="0.5" stroke-linejoin="round"/>
+              </svg>
+            ))}
+          </div>
+          <span class="text-sm leading-5 text-text-quaternary">
+            <span class="font-semibold">4.7</span><span class="font-normal">/5</span>
+          </span>
+        </div>
+      </a>
+
+      <!-- Capterra -->
+      <div class="flex items-center gap-5">
+        <img src={capterraLogo.src} alt="Capterra" class="h-6 w-auto" />
+        <div class="flex items-center gap-3">
+          <div class="flex items-center gap-1">
+            {[...Array(5)].map(() => (
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="shrink-0">
+                <path d="M8 1.5L9.854 5.258L14 5.867L11 8.79L11.708 12.918L8 10.965L4.292 12.918L5 8.79L2 5.867L6.146 5.258L8 1.5Z" fill="#FDB022" stroke="#FDB022" stroke-width="0.5" stroke-linejoin="round"/>
+              </svg>
+            ))}
+          </div>
+          <span class="text-sm leading-5 text-text-quaternary">
+            <span class="font-semibold">4.5</span><span class="font-normal">/5</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonial grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-[12] pt-16">
+      {testimonials.map((t, i) => (
+        <article
+          class={`rounded-xl border border-[#E9EAEB] bg-white p-5 md:p-8 flex flex-col ${i >= 6 ? "hidden" : ""}`}
+          data-testimonial-more={i >= 6 ? "" : undefined}
+        >
+          <p class="text-base text-[#535862] leading-relaxed mb-5 flex-grow">{t.quote}</p>
+          <div class="flex items-center gap-3">
+            {t.avatar ? (
+              <img src={t.avatar} alt={t.name} class="w-10 h-10 rounded-full object-cover shrink-0" loading="lazy" />
+            ) : (
+              <div
+                class="w-10 h-10 rounded-full flex items-center justify-center text-white font-semibold text-sm shrink-0"
+                style={`background-color: ${t.color}`}
+              >
+                {t.initials}
+              </div>
+            )}
+            <div class="min-w-0">
+              <p class="text-base font-semibold text-text-primary leading-5 flex items-center gap-1.5">
+                {t.name}
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_comp_reviews)">
+                  <path d="M12.3553 2.83357C12.5073 3.20109 12.7989 3.49321 13.1662 3.64573L14.4541 4.17919C14.8217 4.33143 15.1137 4.62344 15.2659 4.99098C15.4182 5.35852 15.4182 5.77149 15.2659 6.13903L14.7328 7.42599C14.5805 7.7937 14.5803 8.20708 14.7333 8.57461L15.2655 9.86119C15.3409 10.0432 15.3798 10.2384 15.3798 10.4354C15.3799 10.6325 15.3411 10.8276 15.2657 11.0097C15.1902 11.1918 15.0797 11.3572 14.9403 11.4965C14.801 11.6358 14.6355 11.7463 14.4534 11.8217L13.1665 12.3547C12.7989 12.5067 12.5068 12.7984 12.3543 13.1657L11.8208 14.4536C11.6686 14.8211 11.3766 15.1131 11.009 15.2654C10.6415 15.4176 10.2285 15.4176 9.86099 15.2654L8.57403 14.7323C8.20648 14.5804 7.79366 14.5807 7.42634 14.7331L6.13845 15.2658C5.77111 15.4177 5.3585 15.4176 4.99126 15.2655C4.62402 15.1134 4.33217 14.8217 4.17982 14.4545L3.6462 13.1663C3.49424 12.7988 3.20256 12.5066 2.83527 12.3541L1.54739 11.8207C1.18 11.6685 0.88808 11.3767 0.735782 11.0093C0.583485 10.642 0.583278 10.2292 0.735208 9.86175L1.26829 8.57478C1.42015 8.20723 1.41984 7.79441 1.26742 7.42709L0.735111 6.13828C0.659639 5.95624 0.620778 5.76111 0.620746 5.56405C0.620714 5.36698 0.659514 5.17184 0.734926 4.98978C0.81034 4.80772 0.920888 4.6423 1.06026 4.50298C1.19962 4.36365 1.36508 4.25316 1.54716 4.1778L2.83413 3.64472C3.20132 3.4929 3.49327 3.20158 3.6459 2.83472L4.17936 1.54683C4.3316 1.17929 4.62361 0.887276 4.99115 0.735035C5.3587 0.582794 5.77166 0.582794 6.1392 0.735035L7.42617 1.26811C7.79372 1.41998 8.20654 1.41967 8.57386 1.26725L9.86229 0.735862C10.2298 0.583706 10.6427 0.583738 11.0101 0.735948C11.3776 0.888159 11.6696 1.18009 11.8218 1.54753L12.3555 2.8358L12.3553 2.83357Z" fill="#2E90FA"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M11.1333 5.90291C11.2401 5.73503 11.276 5.53157 11.2328 5.33728C11.1897 5.14299 11.0711 4.9738 10.9033 4.86691C10.7354 4.76003 10.5319 4.72422 10.3376 4.76735C10.1433 4.81048 9.97414 4.92903 9.86726 5.09691L6.93026 9.71191L5.58626 8.03191C5.46201 7.8765 5.2811 7.7768 5.08335 7.75477C4.88559 7.73273 4.68718 7.79016 4.53176 7.91441C4.37634 8.03867 4.27665 8.21957 4.25462 8.41733C4.23258 8.61508 4.29001 8.8135 4.41426 8.96891L6.41426 11.4689C6.4888 11.5622 6.58453 11.6363 6.6935 11.6852C6.80246 11.734 6.92152 11.7561 7.04075 11.7497C7.15998 11.7432 7.27595 11.7084 7.37901 11.6481C7.48207 11.5877 7.56923 11.5037 7.63326 11.4029L11.1333 5.90291Z" fill="white"/>
+                  </g>
+                  <defs>
+                  <clipPath id="clip0_comp_reviews">
+                  <rect width="16" height="16" fill="white"/>
+                  </clipPath>
+                  </defs>
+                </svg>
+              </p>
+              <p class="text-sm text-text-tertiary">{t.title}</p>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- View more reviews -->
+    <div id="comp-testimonials-more-toggle" class="flex justify-center mt-8 pb-8">
+      <button
+        type="button"
+        data-comp-testimonials-expand
+        class="px-6 py-3 text-base font-medium text-text-secondary border border-neutral-300 rounded-xl bg-white hover:bg-neutral-50 transition-colors"
+      >
+        View more reviews
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  function initCompTestimonialsMore() {
+    const btn = document.querySelector("[data-comp-testimonials-expand]");
+    const moreCards = document.querySelectorAll("[data-testimonial-more]");
+    const toggleWrap = document.getElementById("comp-testimonials-more-toggle");
+    if (!btn || !toggleWrap) return;
+    btn.addEventListener("click", () => {
+      moreCards.forEach((el) => el.classList.remove("hidden"));
+      toggleWrap.classList.add("hidden");
+    });
+  }
+  initCompTestimonialsMore();
+  document.addEventListener("astro:page-load", initCompTestimonialsMore);
+</script>

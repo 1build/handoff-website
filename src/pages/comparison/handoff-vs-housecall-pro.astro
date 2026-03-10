@@ -1,0 +1,281 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getPageSeo } from "@/lib/seo-pages";
+import Header from "@/components/sections/Header.astro";
+import Footer from "@/components/sections/Footer.astro";
+import Logo from "@/components/ui/Logo.astro";
+import ComparisonReviews from "@/components/sections/ComparisonReviews.astro";
+import FaqSection from "@/components/sections/FaqSection.astro";
+import housecall_pro from "@/assets/images/housecall_pro.png";
+
+const faqItems = [
+  {
+    question: "How accurate are AI-generated estimates?",
+    answer: "Handoff learns from your past projects and pricing rules, so estimates match how you actually build and price work. The more you use it, the smarter it gets.",
+  },
+  {
+    question: "Can I customize proposals and templates?",
+    answer: "Yes. Every proposal uses your branding, your pricing structure, and your preferred layout. You control what clients see.",
+  },
+  {
+    question: "What if my pricing is complex?",
+    answer: "Handoff handles multi-level markups, separate labor and material rates, room-by-room breakdowns, and custom pricing rules. If you can price it, Handoff can learn it.",
+  },
+  {
+    question: 'How long does setup take?',
+    answer: "Most contractors are up and running in under an hour. Import your pricing, connect your calendar, and start estimating.",
+  },
+  {
+    question: "Does this replace my estimators?",
+    answer: "No — it makes them faster. Handoff handles the repetitive work so your team can focus on accuracy, client relationships, and winning more projects.",
+  },
+];
+
+const features = [
+  {
+    label: "AI Estimating",
+    tooltip: "Whether the platform supports automated, AI-powered estimating instead of only manual estimate entry.",
+    handoff: "check",
+    jobtread: "Manual",
+  },
+  {
+    label: "AI Features",
+    tooltip: "Depth of AI-native capabilities for estimating and workflows.",
+    handoff: "AI-Native",
+    jobtread: "Limited AI",
+  },
+  {
+    label: "Real-time Pricing Data",
+    tooltip: "How frequently material and labor pricing is updated to reflect current market conditions.",
+    handoff: "check",
+    jobtread: "Outdated",
+  },
+  {
+    label: "Accurate Estimates",
+    tooltip: "How reliably the estimates reflect real-world project costs.",
+    handoff: "check",
+    jobtread: "Not accurate",
+  },
+  {
+    label: "User Interface",
+    tooltip: "How easy the software is to navigate day-to-day for contractors and office staff.",
+    handoff: "Simple",
+    jobtread: "Confusing",
+  },
+  {
+    label: "Mobile App",
+    tooltip: "How fully featured the mobile experience is compared to desktop.",
+    handoff: "Full Functionality",
+    jobtread: "Limited Features on Mobile",
+  },
+  {
+    label: "Made for Residential Contractors",
+    tooltip: "How well the platform is tailored to residential contractors versus broad audiences.",
+    handoff: "check",
+    jobtread: "x",
+  },
+  {
+    label: "Pricing",
+    tooltip: "Typical starting subscription cost for the platform.",
+    handoff: "Starts at $239/month",
+    jobtread: "Starts at $59/month",
+  },
+  {
+    label: "Ease of Use",
+    tooltip: "Whether common workflows are automated versus manual and multi-step.",
+    handoff: "Automated Project Management",
+    jobtread: "Manual, Multi-Step",
+  },
+  {
+    label: "Proposal Format",
+    tooltip: "How flexible proposal templates and layouts are.",
+    handoff: "Flexible",
+    jobtread: "Rigid",
+  },
+  {
+    label: "Customer Support",
+    tooltip: "Access to responsive support to help you set up, learn, and troubleshoot the product.",
+    handoff: "check",
+    jobtread: "x",
+  },
+  {
+    label: "Local Pricing Data",
+    tooltip: "Whether pricing is tuned to your local market versus generic national averages.",
+    handoff: "check",
+    jobtread: "Generic",
+  },
+  {
+    label: "Integration with Suppliers (Lowes, etc.)",
+    tooltip: "Built-in connections to major suppliers so material pricing stays accurate without manual updates.",
+    handoff: "check",
+    jobtread: "x",
+  },
+  {
+    label: "Pricing Data",
+    tooltip: "Whether the pricing engine uses real-time, local data versus static reference tables.",
+    handoff: "Real-time, Local",
+    jobtread: "Static",
+  },
+  {
+    label: "Project Complexity",
+    tooltip: "Whether the system is built to handle multi-trade projects versus single-trade workflows.",
+    handoff: "Multi-trade",
+    jobtread: "Single-trade",
+  },
+  {
+    label: "ACH Invoice Fee",
+    tooltip: "Fee charged when clients pay invoices via ACH bank transfer.",
+    handoff: "1% ($10 Max)",
+    jobtread: "1% (No Max Fee)",
+  },
+  {
+    label: "Credit Card Invoice Fee",
+    tooltip: "Fee charged when clients pay invoices via credit card.",
+    handoff: "3.35%",
+    jobtread: "2.95%",
+  },
+] as const;
+
+const seo = getPageSeo(Astro.url.pathname);
+---
+
+<BaseLayout {...seo}>
+  <Header />
+
+  <main class="pt-20">
+    <div class="px-4 pb-4">
+      <div class="bg-white border border-black/[0.04] rounded-[20px] overflow-hidden max-w-[1920px] mx-auto">
+
+        <!-- Heading -->
+        <div class="flex flex-col items-center gap-5 text-center pt-24 pb-24 px-4 max-w-3xl mx-auto">
+          <div class="flex flex-col items-center gap-3 w-full">
+            <p class="font-mono font-semibold text-sm leading-6 tracking-[0.04em] uppercase text-neutral-400">
+              Compare project management
+            </p>
+            <h1 class="font-display font-medium text-5xl leading-[1.2] tracking-[-0.02em] text-text-primary">
+              See why contractors choose <span class="text-brand-accent">Handoff</span> over <span class="text-neutral-500">Housecall Pro</span>
+            </h1>
+          </div>
+          <div class="text-xl leading-[1.5] text-text-tertiary font-body font-normal w-full space-y-5">
+            <p>Handoff is an AI-native solution offering automated estimates, proposals, and invoicing for residential remodelers and handymen. Instead, Housecall Pro targets recurring services and does not offer AI-powered estimates or real-time, localized pricing data.
+
+</p>
+          </div>
+        </div>
+
+        <!-- Comparison table -->
+        <div class="w-full px-4 sm:px-6 lg:px-8 max-w-[1440px] mx-auto pb-24 -mx-4 sm:mx-auto">
+          <div class="overflow-x-auto overscroll-x-contain" style="scrollbar-gutter: stable;">
+            <div class="min-w-[640px] w-full">
+
+          <!-- Logo header row -->
+          <div class="flex items-stretch w-full">
+            <div class="flex-1 min-w-[200px] sm:min-w-0 h-[140px] sm:h-[180px]"></div>
+
+            <!-- Handoff logo + CTA -->
+            <div class="flex-1 min-w-[160px] sm:min-w-0 flex flex-col items-center justify-center gap-3 sm:gap-6 h-[140px] sm:h-[180px] pt-4 sm:pt-6 px-3 sm:px-6">
+              <div class="flex items-center w-full max-w-[170px] h-8 sm:h-10 shrink-0">
+                <svg class="w-full h-auto" viewBox="0 0 186 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M65.9382 27.1833H56.8141C56.4624 27.1833 56.1772 27.4685 56.1772 27.8202V36.8754C56.1772 37.2268 55.8921 37.5119 55.5408 37.5119H51.9451C51.5937 37.5119 51.3086 37.2268 51.3086 36.8754V13.8745C51.3086 13.5232 51.5937 13.238 51.9451 13.238H55.5408C55.8921 13.238 56.1772 13.5232 56.1772 13.8745V22.5819C56.1772 22.9336 56.4624 23.2187 56.8141 23.2187H65.9382C66.2899 23.2187 66.5751 22.9336 66.5751 22.5819V13.8745C66.5751 13.5232 66.8602 13.238 67.2115 13.238H70.8072C71.1586 13.238 71.4437 13.5232 71.4437 13.8745V36.8758C71.4437 37.2272 71.1586 37.5123 70.8072 37.5123H67.2115C66.8602 37.5123 66.5751 37.2272 66.5751 36.8758V27.8206C66.5751 27.4689 66.2899 27.1837 65.9382 27.1837V27.1833Z" fill="black"/>
+<path d="M82.6777 17.9329C85.276 17.9329 87.1877 18.962 88.4136 20.2388C88.6421 20.4765 89.0417 20.3203 89.0417 19.9908V18.7917C89.0417 18.4901 89.2862 18.246 89.5874 18.246H93.3993C93.7009 18.246 93.9451 18.4905 93.9451 18.7917V36.9661C93.9451 37.2677 93.7006 37.5119 93.3993 37.5119H89.5874C89.2858 37.5119 89.0417 37.2673 89.0417 36.9661V35.7207C89.0417 35.3893 88.6379 35.2339 88.4109 35.4754C87.1701 36.7943 85.2133 37.8246 82.6429 37.8246C77.7743 37.8246 73.8789 33.8251 73.8789 27.8087C73.8789 21.7923 77.7739 17.9321 82.6773 17.9321L82.6777 17.9329ZM83.9296 22.2102C81.3214 22.2102 78.8524 24.1579 78.8524 27.8095C78.8524 31.461 81.3214 33.5476 83.9296 33.5476C86.5379 33.5476 89.0417 31.5307 89.0417 27.8791C89.0417 24.2276 86.6072 22.2106 83.9296 22.2106V22.2102Z" fill="black"/>
+<path d="M111.091 26.8703C111.091 23.7752 109.386 22.1058 106.813 22.1058C104.24 22.1058 102.466 23.7752 102.466 26.8703V36.8743C102.466 37.2264 102.181 37.512 101.829 37.512H98.2353C97.8832 37.512 97.5977 37.2264 97.5977 36.8743V18.8836C97.5977 18.5315 97.8832 18.246 98.2353 18.246H101.829C102.181 18.246 102.466 18.5315 102.466 18.8836V19.6916C102.466 20.0142 102.853 20.1761 103.085 19.9514C104.353 18.7217 106.176 17.9678 108.274 17.9678C112.76 17.9678 115.96 20.8891 115.96 26.2097V36.8755C115.96 37.2272 115.675 37.5123 115.323 37.5123H111.728C111.376 37.5123 111.091 37.2272 111.091 36.8755V26.8707L111.091 26.8703Z" fill="black"/>
+<path d="M127.232 17.9328C129.414 17.9328 131.518 18.8062 132.906 20.1997C133.135 20.4293 133.526 20.2663 133.526 19.9417V12.4151C133.526 12.0626 133.812 11.7771 134.164 11.7771H137.827C138.179 11.7771 138.465 12.0626 138.465 12.4151V36.8738C138.465 37.2263 138.179 37.5118 137.827 37.5118H134.164C133.812 37.5118 133.526 37.2263 133.526 36.8738V35.7299C133.526 35.3935 133.114 35.2404 132.888 35.4895C131.656 36.8486 129.731 37.8245 127.197 37.8245C122.293 37.8245 118.398 33.8251 118.398 27.8086C118.398 21.7922 122.293 17.9321 127.232 17.9321V17.9328ZM128.449 22.2102C125.84 22.2102 123.371 24.1578 123.371 27.8094C123.371 31.461 125.84 33.5476 128.449 33.5476C131.057 33.5476 133.561 31.5306 133.561 27.8791C133.561 24.2275 131.126 22.2105 128.449 22.2105V22.2102Z" fill="black"/>
+<path d="M150.667 37.8248C145.102 37.8248 140.895 33.9298 140.895 27.8786C140.895 21.8274 145.242 17.9324 150.806 17.9324C156.37 17.9324 160.717 21.7925 160.717 27.8786C160.717 33.9647 156.266 37.8248 150.667 37.8248ZM150.667 33.5823C153.24 33.5823 155.709 31.7043 155.709 27.879C155.709 24.0537 153.31 22.1756 150.736 22.1756C148.163 22.1756 145.833 24.0188 145.833 27.879C145.833 31.7391 148.058 33.5823 150.667 33.5823H150.667Z" fill="black"/>
+<path d="M168.185 17.2184C168.356 16.753 168.651 16.404 169.067 16.1705C169.484 15.9378 170.06 15.8211 170.795 15.8211H172.614C172.966 15.8211 173.251 15.536 173.251 15.1842V12.4137C173.251 12.062 172.966 11.7769 172.614 11.7769H170.273C168.631 11.7769 167.289 12.0344 166.247 12.5488C165.205 13.0636 164.427 13.8971 163.913 15.0488C163.398 16.2011 163.141 17.7206 163.141 19.6074V36.8747C163.141 37.2265 163.426 37.5116 163.777 37.5116H167.291C167.643 37.5116 167.928 37.2265 167.928 36.8747V24.4201C167.928 24.2188 168.091 24.0558 168.292 24.0558H172.473C172.825 24.0558 173.11 23.7707 173.11 23.4189V20.5301C173.11 20.1784 172.825 19.8933 172.473 19.8933H168.292C168.091 19.8933 167.928 19.7302 167.928 19.5289V19.0555C167.928 18.2962 168.013 17.683 168.185 17.2173V17.2184Z" fill="black"/>
+<path d="M180.728 17.2184C180.899 16.753 181.194 16.404 181.61 16.1705C182.027 15.9378 182.603 15.8211 183.338 15.8211H185.157C185.509 15.8211 185.794 15.536 185.794 15.1842V12.4137C185.794 12.062 185.509 11.7769 185.157 11.7769H182.816C181.174 11.7769 179.832 12.0344 178.79 12.5488C177.748 13.0636 176.97 13.8971 176.456 15.0488C175.941 16.2011 175.684 17.7206 175.684 19.6074V36.8747C175.684 37.2265 175.969 37.5116 176.32 37.5116H179.834C180.186 37.5116 180.471 37.2265 180.471 36.8747V24.4201C180.471 24.2188 180.634 24.0558 180.835 24.0558H185.016C185.368 24.0558 185.653 23.7707 185.653 23.4189V20.5301C185.653 20.1784 185.368 19.8933 185.016 19.8933H180.835C180.634 19.8933 180.471 19.7302 180.471 19.5289V19.0555C180.471 18.2962 180.556 17.683 180.728 17.2173V17.2184Z" fill="black"/>
+<path d="M24.198 29.667H17.3893C16.6438 29.667 16.0391 30.2713 16.0391 31.0169V39.9994H25.5478V31.0169C25.5478 30.2713 24.9431 29.667 24.1976 29.667H24.198Z" fill="#02B05E"/>
+<path d="M39.0122 9.01401L22.5876 0.441759C21.4589 -0.147253 20.1133 -0.147253 18.9846 0.441759L2.56081 9.01401C0.986662 9.83572 0 11.4638 0 13.2393V35.5819C0 38.0218 1.97792 39.9997 4.41778 39.9997H8.73835V14.6033C8.73835 13.8562 9.34382 13.2504 10.0913 13.2504H14.6889C15.436 13.2504 16.0415 13.8558 16.0415 14.6029V22.2364C16.0415 22.9834 16.647 23.5893 17.3944 23.5893H24.1973C24.9448 23.5893 25.5506 22.9834 25.5506 22.236V14.6033C25.5506 13.8562 26.1561 13.2504 26.9036 13.2504H31.5012C32.2483 13.2504 32.8538 13.8558 32.8538 14.6029V39.9993H37.2245C39.6268 39.9993 41.5741 38.052 41.5741 35.6497V13.2393C41.5741 11.4638 40.5871 9.83572 39.0133 9.01401H39.0122Z" fill="#02B05E"/>
+</svg>
+
+              </div>
+              <a
+                href="/"
+                class="inline-flex items-center justify-center px-3 sm:px-4 py-2 text-sm font-medium leading-5 text-text-secondary rounded-xl border border-border-primary bg-white shadow-xs whitespace-nowrap w-full max-w-[202px] hover:bg-bg-secondary transition-colors"
+              >
+                7 day free trial
+              </a>
+            </div>
+
+            <!-- JobTread logo -->
+            <div class="flex-1 min-w-[140px] sm:min-w-0 flex items-center justify-center h-[140px] sm:h-[180px] pb-6 sm:pb-9 px-3 sm:px-6">
+              <div class="flex items-center gap-2">
+                <img src={housecall_pro.src} alt="" />
+                <span class="font-display font-bold text-[22px] tracking-tight text-neutral-800">Housecall Pro</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- "Features:" label -->
+          <div class="flex items-center w-full pb-6 sm:pb-8 px-4 sm:px-6">
+            <div class="flex-1 min-w-0">
+              <p class="font-display font-medium text-xl sm:text-2xl leading-8 text-text-brand-secondary">Features:</p>
+            </div>
+          </div>
+
+          <!-- Feature comparison rows -->
+          <div class="flex w-full">
+
+            <!-- Feature labels -->
+            <div class="flex-1 min-w-[200px] sm:min-w-0 flex flex-col">
+              {features.map((row) => (
+                <div class="flex items-center gap-1.5 min-h-20 h-20 px-4 sm:px-6 border-b border-border-primary">
+                  <span class="font-body font-medium text-base sm:text-lg leading-6 sm:leading-7 text-text-primary">{row.label}</span>
+                  <div class="relative group shrink-0">
+                    <svg class="w-4 h-4 text-neutral-400 hover:text-neutral-600 transition-colors cursor-pointer" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/>
+                      <path d="M6.06 6a2 2 0 0 1 3.88.67c0 1.33-2 2-2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <circle cx="8" cy="11" r="0.75" fill="currentColor"/>
+                    </svg>
+                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-neutral-900 text-white text-xs font-medium rounded-lg whitespace-normal opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity z-10 max-w-[260px] sm:max-w-[220px] text-center leading-5">
+                      {row.tooltip}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <!-- Handoff values (highlighted bg) -->
+            <div class="flex-1 min-w-[120px] sm:min-w-0 flex flex-col bg-bg-secondary">
+              {features.map((row) => (
+                <div class="flex items-center justify-center min-h-20 h-20 px-3 sm:px-6 border-b border-border-primary">
+                  {row.handoff === "check" ? (
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M9.9987 0.833252C4.93609 0.833252 0.832031 4.93731 0.832031 9.99992C0.832031 15.0625 4.93609 19.1666 9.9987 19.1666C15.0613 19.1666 19.1654 15.0625 19.1654 9.99992C19.1654 4.93731 15.0613 0.833252 9.9987 0.833252ZM14.338 8.08917C14.6634 7.76374 14.6634 7.2361 14.338 6.91066C14.0125 6.58523 13.4849 6.58523 13.1594 6.91066L8.7487 11.3214L6.83795 9.41066C6.51252 9.08523 5.98488 9.08523 5.65944 9.41066C5.334 9.7361 5.334 10.2637 5.65944 10.5892L8.15944 13.0892C8.48488 13.4146 9.01252 13.4146 9.33795 13.0892L14.338 8.08917Z" fill="#183F2E"/>
+</svg>
+
+                  ) : (
+                    <span class="font-body font-medium text-sm sm:text-lg leading-6 sm:leading-7 text-brand-accent text-center break-words px-1">{row.handoff}</span>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            <!-- JobTread values -->
+            <div class="flex-1 min-w-[140px] sm:min-w-0 flex flex-col">
+              {features.map((row) => (
+                <div class="flex items-center justify-center min-h-20 h-20 px-3 sm:px-6 border-b border-border-primary">
+                  {row.jobtread === "x" ? (
+                    <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M11.6654 6.66659L6.66536 11.6666M6.66536 6.66659L11.6654 11.6666M17.4987 9.16659C17.4987 13.769 13.7677 17.4999 9.16536 17.4999C4.56299 17.4999 0.832031 13.769 0.832031 9.16659C0.832031 4.56421 4.56299 0.833252 9.16536 0.833252C13.7677 0.833252 17.4987 4.56421 17.4987 9.16659Z" stroke="#D2D6DB" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+                  ) : (
+                    <span class="font-body font-medium text-sm sm:text-lg leading-6 sm:leading-7 text-text-tertiary text-center break-words px-1">{row.jobtread}</span>
+                  )}
+                </div>
+              ))}
+            </div>
+
+          </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <ComparisonReviews />
+    <FaqSection items={faqItems} />
+  </main>
+
+  <Footer />
+</BaseLayout>

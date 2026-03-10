@@ -67,7 +67,7 @@ export const PAGE_SEO: Record<string, Partial<PageSeo> & { title: string }> = {
   },
 
   "/comparison": {
-    title: "Handoff vs JobTread — See Why Contractors Choose Handoff",
+    title: "Comparison",
     description:
       "JobTread is best suited for commercial builders. Handoff is built for residential remodelers and handymen. Compare features, pricing, and more.",
   },
@@ -95,7 +95,51 @@ export const PAGE_SEO: Record<string, Partial<PageSeo> & { title: string }> = {
     description:
       "Train an AI teammate to run your construction business. Set your rules once — Handoff applies them automatically across every estimate, proposal, and change order.",
   },
- 
+  "/comparison/handoff-vs-contractor-foreman": {
+    title: "Handoff vs Contractor Foreman",
+    description:
+      "Unlike Contractor Foreman&#x27;s complex interface requiring dozens of clicks, Handoff&#x27;s AI-native project management automates routine tasks and simplifies workflows, saving contractors 75-85% of administrative time while actually improving project oversight and client communication."
+  },
+ "/comparison/handoff-vs-jobtread": {
+    title: "Handoff vs Job Tread",
+    description: "JobTread is best suited for commercial builders and ground-up home builders. Handoff is developed primarily for Residential Remodelers and Handymen. With Handoff&#x27;s interfaced, residential general contractors won&#x27;t be overwhelmed with complexity that does not apply to their projects."
+ },
+ "/comparison/handoff-vs-markate": {
+    title: "Handoff vs Markate",
+    description: "Handoff is 100% developed and optimized for residential construction contractors, offering pricing accuracy and efficiency. Markate, although offering some overlapping features, primarily offers job management for home service businesses."
+ },
+ "/comparison/handoff-vs-simplywise": {
+    title: "Handoff vs SimplyWise",
+    description: "Handoff is 100% developed and optimized for remodeling contractors, offering pricing accuracy and efficiency. SimplyWise was not created for estimating purposes and the estimate is a random feature with no construction background in an invoicing App. Handoff, on the other hand, is an AI-driven estimating app that presents estimates supported by local, real-time construction databases."
+ },
+ "/comparison/handoff-vs-xactimate": {
+    title: "Handoff vs Xactimate",
+    description: "Handoff is more efficient and provides estimates quicker, Xactimate on the other hand is more complicated and time-consuming. Xactimate does not offer AI estimation, unlike Handoff, which speeds up the process with advanced technology. Xactimate is optimized for Insurance Adjusters, Public Adjusters, Restoration Companies, and General Contractors working with insurance claim settlements."
+ },
+ "/comparison/handoff-vs-houzz-pro": {
+    title: "Handoff vs Houzz Pro",
+    description: "Handoff is an AI-driven application that utilizes advanced algorithms and real-time data to produce estimates based on defined scopes of work. Houzz Pro&#x27;s AI features are extremely limited, and not useful for contractors. Plus, Houzz Pro includes features not essential for builders, such as mood boards and 3D planners, which can make the tool complex and expensive for those not using these features."
+ },
+ "/comparison/handoff-vs-housecall-pro": {
+    title: "Handoff vs Housecall Pro",
+    description: "Handoff is an AI-native solution offering automated estimates, proposals, and invoicing. Housecall Pro does not offer AI-powered estimates or real-time, localized pricing data. Plus, Handoff is specifically designed for remodelers and construction professionals, unlike Housecall Pro, which targets recurring services."
+ },
+ "/comparison/handoff-vs-jobber": {
+    title: "Handoff vs Jobber",
+    description: "Although Jobber offers an AI co-pilot, it is not a not AI-native platform like Handoff. Rather, Jobber&#x27;s co-pilot answers questions that ChatGPT will do for free. Handoff offers AI-generated estimates, reducing manual input and error compared to Jobber&#x27;s manual processes."
+ },
+ "/comparison/handoff-vs-joist": {
+    title: "Handoff vs Joist",
+    description: "Handoff offers AI-generated estimates, reducing manual input and error compared to Joist&#x27;s manual processes. Joist is limited to single-trade projects, while Handoff caters to complex, multi-trade construction projects. Joist also lacks a desktop version, restricting users to mobile devices, whereas Handoff provides full desktop support."
+ },
+ "/comparison/handoff-vs-homewyse": {
+    title: "Handoff vs Homewyse",
+    description: "Handoff uses real-time, local construction pricing data from actual supliers and construction professionals, to generate quick and accurate estimates with AI. Homewyse provides price books but does not automatically create estimates, proposals, and invoices with the click of a button."
+ },
+ "/comparison/handoff-vs-chatgpt": {
+    title: "Handoff vs ChatGPT",
+    description: "Handoff uses real-time, local construction pricing data from actual suppliers and construction professionals, to generate quick and accurate estimates. ChatGPT isn’t specifically trained on construction cost data, leading to very inaccurate and non-localized estimates."
+ },
 };
 
 /**
