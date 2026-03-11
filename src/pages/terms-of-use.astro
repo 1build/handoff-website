@@ -1,0 +1,542 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/sections/Header.astro";
+import Footer from "@/components/sections/Footer.astro";
+import { navItems, footerColumns } from "@/lib/navigation";
+import { getPageSeo } from "@/lib/seo-pages";
+
+const tocItems: [string, string, boolean?][] = [
+  ["preamble", "Preamble"],
+  ["the-services", "The Services"],
+  ["infringing-content", "Infringing Content; DMCA"],
+  ["intellectual-property", "Intellectual Property Rights; Feedback"],
+  ["user-conduct", "User Conduct and Content"],
+  ["electronic-signature", "Handoff and Electronic Signature"],
+  ["changes-to-services", "Changes to the Services"],
+  ["privacy", "Privacy"],
+  ["restrictions", "Restrictions"],
+  ["user-content", "User Content and Submissions"],
+  ["support", "Support"],
+  ["warranty-disclaimer", "Warranty Disclaimer"],
+  ["limitation-of-liability", "Limitation of Liability"],
+  ["indemnification", "Indemnification"],
+  ["amendment", "Amendment"],
+  ["general-terms", "General Terms"],
+  ["communication-terms", "Communication Terms"],
+];
+
+const seo = getPageSeo(Astro.url.pathname);
+---
+
+<BaseLayout {...seo}>
+  <Header navItems={navItems} />
+
+  <article class="relative z-[2] pt-32 pb-2 px-4 bg-brand-800">
+    <div class="max-w-[1920px] mx-auto bg-white rounded-3xl py-16 lg:py-24">
+
+      <!-- Page Header -->
+      <header class="max-w-[1280px] mx-auto px-6 lg:px-8" data-animate="fade-up">
+        <div class="max-w-[768px] mx-auto text-center flex flex-col items-center">
+          <span class="inline-flex items-center gap-1.5 text-sm font-semibold leading-5 text-brand-accent bg-brand-50 border border-brand-100 rounded-full px-3 py-1 mb-6">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="1" y="1" width="4" height="4" rx="0.5" fill="currentColor" opacity="0.4"/>
+              <rect x="7" y="1" width="4" height="4" rx="0.5" fill="currentColor"/>
+              <rect x="1" y="7" width="4" height="4" rx="0.5" fill="currentColor"/>
+              <rect x="7" y="7" width="4" height="4" rx="0.5" fill="currentColor" opacity="0.4"/>
+            </svg>
+            Legal
+          </span>
+          <h1 class="font-display text-4xl md:text-[52px] font-semibold leading-tight md:leading-[60px] tracking-[-1.04px] text-text-primary">
+            Terms of Use
+          </h1>
+          <p class="mt-5 text-lg font-normal leading-7 text-text-tertiary">
+            1build, Inc. dba Handoff &middot; Effective March 9, 2026
+          </p>
+          <p class="mt-4 text-base leading-6 text-text-secondary max-w-[560px]">
+            Please read these terms carefully before using the services offered by Handoff. By using the Handoff platform, you agree to these terms.
+          </p>
+        </div>
+      </header>
+
+      <!-- Divider -->
+      <div class="max-w-[1280px] mx-auto px-6 lg:px-8 mt-12">
+        <div class="border-t border-border-primary"></div>
+      </div>
+
+      <!-- Two-column layout: sticky TOC sidebar + article body -->
+      <div class="max-w-[1280px] mx-auto px-6 lg:px-8 mt-12" data-animate="fade-up">
+        <div class="flex gap-12 xl:gap-16 items-start">
+
+          <!-- Sticky TOC Sidebar (desktop only) -->
+          <aside
+            class="hidden lg:block w-56 xl:w-64 shrink-0 sticky top-28 self-start"
+            aria-label="Table of contents"
+          >
+            <p class="text-xs font-semibold text-text-quaternary uppercase tracking-widest mb-4 px-2">
+              Table of Contents
+            </p>
+            <nav>
+              <ol class="space-y-0.5 list-none p-0 m-0">
+                {tocItems.map(([id, label, isSubsection]) => (
+                  <li>
+                    <a
+                      href={`#${id}`}
+                      data-toc-link={id}
+                      class:list={[
+                        "toc-link flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm leading-5 transition-all duration-150 no-underline group",
+                        isSubsection ? "pl-5 text-xs" : ""
+                      ]}
+                    >
+                      <span
+                        class="toc-indicator w-0.5 h-4 rounded-full bg-transparent transition-all duration-150 shrink-0"
+                        aria-hidden="true"
+                      ></span>
+                      <span class="toc-label text-text-quaternary group-hover:text-text-primary transition-colors duration-150">{label}</span>
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+
+            <!-- Effective date badge at bottom of TOC -->
+            <div class="mt-8 px-2">
+              <div class="rounded-xl bg-brand-25 border border-brand-100 px-3 py-3">
+                <p class="text-xs font-medium text-text-quaternary mb-0.5">Last updated</p>
+                <p class="text-xs font-semibold text-text-secondary">March 9, 2026</p>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Main article content -->
+          <main class="flex-1 min-w-0 max-w-[720px]">
+
+            <!-- Mobile TOC (shows above content on small screens) -->
+            <details class="lg:hidden rounded-2xl border border-brand-100 bg-brand-25 p-5 mb-10 group">
+              <summary class="flex items-center justify-between cursor-pointer list-none text-sm font-semibold text-text-secondary select-none">
+                <span>Table of Contents</span>
+                <svg class="w-4 h-4 text-text-quaternary transition-transform duration-200 group-open:rotate-180" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </summary>
+              <ol class="mt-4 space-y-1 list-none p-0 m-0">
+                {tocItems.map(([id, label, isSubsection], i) => (
+                  <li class:list={["flex items-baseline gap-3", isSubsection ? "pl-4" : ""]}>
+                    <span class="text-xs font-mono text-brand-accent w-5 shrink-0 text-right">{String(i + 1).padStart(2, "0")}</span>
+                    <a href={`#${id}`} class="text-sm leading-5 text-text-secondary hover:text-brand-700 transition-colors no-underline">{label}</a>
+                  </li>
+                ))}
+              </ol>
+            </details>
+
+            <!-- Article body -->
+            <div class="article-body">
+
+              <!-- 1. Preamble -->
+              <h2 id="preamble">Preamble</h2>
+              <p>
+                Please read these terms carefully before using the services offered by 1build, Inc., a Delaware corporation doing business as "Handoff" ("Handoff"). By using the website handoff.ai (the "Site") and the services offered by Handoff (including, without limitation, the Site, Universal Catalog API, Handoff service, and any other services, collectively referred to as the "Services"), you are agreeing to these terms, including any other terms and conditions incorporated by reference, including, without limitation, the Privacy Policy (collectively, the "Terms"). If you do not agree to these Terms, please do not use the Site or Services.
+              </p>
+              <p>
+                If you do not agree to these Terms, you are free to reject them; unfortunately, that means you will not be able to use the Services. If you use the Services in any way, that means you agree to all of these Terms, and these Terms will remain in effect while you use the Services. These Terms include the provisions in this document, as well as those in the Privacy Policy.
+              </p>
+
+              <hr />
+
+              <!-- 2. The Services -->
+              <h2 id="the-services">The Services</h2>
+              <p>
+                As a condition to using the Services, you are required to open an account with Handoff and select a password and username, and to provide certain other information about yourself as prompted by the registration form. You represent and warrant that: (a) all required registration information you submit is truthful and accurate; (b) you will maintain the accuracy of such information. You may delete your account at any time, for any reason, by following the instructions on the Site. Handoff may suspend or terminate your account in accordance with the Terms.
+              </p>
+              <p>The Services provided by Handoff include, but are not limited to:</p>
+              <ul>
+                <li><strong>Universal Catalog API:</strong> This service provides direct API access to material prices. Users can integrate this API into their own systems to retrieve up-to-date pricing information for various construction materials.</li>
+                <li><strong>Handoff:</strong> This service allows users, who are general contractors, to generate estimates for their customers and electronically sign these estimates. The Handoff service streamlines the estimating process and facilitates secure, electronic agreement between contractors and their clients.</li>
+                <li><strong>Voice-to-Text Feature:</strong> This service allows users to create project descriptions and estimates using voice input, which is then transcribed into text.</li>
+              </ul>
+              <p>
+                You may not (i) select or use as a username or other identifier with the intent to impersonate another person; (ii) use as a username or other identifier a name subject to any rights of a person other than you without appropriate authorization; or (iii) use as a username or other identifier a name that is otherwise offensive, vulgar, or obscene.
+              </p>
+              <p>
+                You are solely responsible for the activity that occurs on your account, and for keeping your account password secure. You may never use another person's user account or registration information for the Services without permission. You must notify us immediately of any change in your eligibility to use the Services (including any changes to or revocation of any licenses from state authorities), breach of security or unauthorized use of your account. You should never publish, distribute or post login information for your account.
+              </p>
+              <p>
+                Your right to use the Services is subject to any limitations, conditions and restrictions established by us from time to time, in our sole discretion. We may alter, suspend or discontinue any aspect of the Services at any time, including the availability of any Service feature, database or content. We may also impose limits on certain features and aspects of the Services or restrict your access to parts or all of the Services without notice or liability.
+              </p>
+              <p>
+                Handoff uses reasonable efforts to ensure that the Services are available 24 hours a day, 7 days a week. However, there will be occasions when the Services will be interrupted for maintenance, upgrades and repairs, or as a result of failure of telecommunications links and equipment that are beyond the control of Handoff. Every reasonable step will be taken by Handoff to minimize such disruption where it is within the reasonable control of Handoff. You agree that Handoff shall not be liable to you for any modification, suspension or discontinuance of the Services.
+              </p>
+              <p>
+                You shall be responsible for obtaining and maintaining any equipment or ancillary services needed to connect to, access the Services or otherwise use the Services, including, without limitation, modems, hardware, software, and long distance or local telephone service. You shall be responsible for ensuring that such equipment or ancillary services are compatible with the Services.
+              </p>
+
+              <hr />
+
+              <!-- 3. Infringing Content; DMCA -->
+              <h2 id="infringing-content">Infringing Content; DMCA</h2>
+              <p>
+                If you believe that your copyright-protected work has been used on the Services in a way that constitutes copyright infringement, you may submit a notification pursuant to the Digital Millennium Copyright Act ("DMCA") to our designated agent. Notifications should be sent to <a href="mailto:support@handoff.ai">support@handoff.ai</a>. To be effective, your DMCA notification must include the following:
+              </p>
+              <ol>
+                <li>A physical or electronic signature of a person authorized to act on behalf of the owner of an exclusive right that is allegedly infringed;</li>
+                <li>Identification of the copyrighted work claimed to have been infringed, or, if multiple copyrighted works at a single online site are covered by a single notification, a representative list of such works at that site;</li>
+                <li>Identification of the material that is claimed to be infringing or to be the subject of infringing activity and that is to be removed or access to which is to be disabled, and information reasonably sufficient to permit us to locate the material;</li>
+                <li>Information reasonably sufficient to permit us to contact you, such as an address, telephone number, and, if available, an electronic mail address;</li>
+                <li>A statement that you have a good faith belief that use of the material in the manner complained of is not authorized by the copyright owner, its agent, or the law; and</li>
+                <li>A statement that the information in the notification is accurate, and under penalty of perjury, that you are authorized to act on behalf of the owner of an exclusive right that is allegedly infringed.</li>
+              </ol>
+              <p>
+                Upon receiving a proper DMCA notification, Handoff will take whatever action it deems appropriate, which may include the removal of the challenged content from the Services.
+              </p>
+
+              <hr />
+
+              <!-- 4. Intellectual Property Rights; Feedback -->
+              <h2 id="intellectual-property">Intellectual Property Rights; Feedback</h2>
+              <p>
+                Handoff, its affiliates, and licensors own all rights, titles, and interests in and to the Services, including all associated intellectual property rights. The Services are protected by copyright, trademark, and other laws of both the United States and foreign countries.
+              </p>
+              <p>
+                Our trademarks, service marks, graphics, and logos used in connection with the Services are trademarks or registered trademarks of Handoff. You are granted no right or license with respect to any of the aforesaid trademarks, and any use of such trademarks.
+              </p>
+              <p>
+                You agree not to copy, modify, create derivative works of, publicly display, publicly perform, republish, download, store, or transmit any of Handoff's material except to the extent necessary to use the Services for their intended purpose. Unauthorized use of Handoff's intellectual property may violate copyright, trademark, and other laws.
+              </p>
+              <p>
+                By using the voice-to-text feature, you grant Handoff the right to process and store your audio recordings for the purposes outlined in our Privacy Policy. This includes using the recordings and any data generated or derived from such content to improve our services and train AI models, which you agree are owned solely by Handoff.
+              </p>
+              <p>
+                Any feedback, comments, or suggestions you may provide regarding Handoff or the Services is entirely voluntary and we will be free to use such feedback, comments, or suggestions as we see fit and without any obligation to you.
+              </p>
+              <p>
+                Certain of the features and products that comprise the Services may be provided to you free of charge or for a fee, or on a trial basis. If you are using any Services on a trial basis, you are not entitled to any compensation for use of such Services. If you are paying a fee for use of any Services, you are entitled to use such Services for the period of time for which you have paid, beginning on the date on which we receive payment from you, or, if such Services are charged on a pay per use basis, only for the specific use for which you have paid. You may use the Services for your own personal use, and you may not resell any Services to a third party.
+              </p>
+              <p>
+                You understand that Handoff owns the Services and you will not (except as permitted by applicable law or as expressly permitted by Handoff) modify, publish, transmit, reverse engineer or create derivative works based on the Services.
+              </p>
+
+              <hr />
+
+              <!-- 5. User Conduct and Content -->
+              <h2 id="user-conduct">User Conduct and Content</h2>
+              <p>
+                You are responsible for the content you contribute in any manner to the Services, ensuring it is legal, reliable, and respectful of others' rights. This includes securing necessary rights for content you share and maintaining accuracy in information you provide.
+              </p>
+              <p>
+                The Services may link to third-party websites or services not owned or controlled by Handoff. Your use of these third-party sites or services is at your own risk and discretion. Handoff is not liable for any risks or liabilities arising from your interactions with these third-party entities.
+              </p>
+              <p>
+                While Handoff does not monitor or control content on third-party websites or services, we expect you to exercise judgment and caution when interacting through the Services. You release Handoff from liability related to your use of any third-party website or service.
+              </p>
+              <p>
+                Your dealings with organizations or individuals found through the Services, including payment and delivery of goods or services, are solely between you and such parties. Handoff is not responsible for any loss or damage incurred from these dealings.
+              </p>
+              <p>
+                In the event of a dispute with one or more users or third parties, Handoff is not obliged to become involved. You release Handoff, its officers, employees, agents, and successors from all claims, demands, and damages arising from such disputes.
+              </p>
+              <p>
+                You must not use the Services to transmit illegal, harmful, offensive, or infringing content. Respect the rights of others and do not engage in behavior that disrupts the service experience for other users.
+              </p>
+              <p>
+                When using the voice-to-text feature, you agree not to submit any sensitive personal information or confidential data through voice input, including but not limited to social security numbers, credit card numbers, or other financial information. You are responsible for reviewing and editing the transcribed text before submitting it as part of your project description or estimate.
+              </p>
+
+              <hr />
+
+              <!-- 6. Handoff and Electronic Signature -->
+              <h2 id="electronic-signature">Handoff and Electronic Signature</h2>
+              <p>
+                By using the Site and the Services, particularly the Handoff service, you expressly consent to the use of electronic signatures for the purpose of generating estimates for customers and electronically signing these estimates and other related documents.
+              </p>
+              <p>You acknowledge and agree that:</p>
+              <ul>
+                <li>Your electronic signature on documents is legally binding and has the same force and effect as a handwritten signature under the Electronic Signatures in Global and National Commerce Act (E-Sign Act), the Uniform Electronic Transactions Act (UETA), and other applicable state and federal laws.</li>
+                <li>You have the right to withdraw your consent to use electronic signatures at any time by contacting us at <a href="mailto:support@handoff.ai">support@handoff.ai</a>. However, if you withdraw your consent, you may not be able to use certain features of the Handoff service.</li>
+                <li>You have the right to receive any document in non-electronic form. You may request a paper copy of any electronically signed document by contacting us at <a href="mailto:support@handoff.ai">support@handoff.ai</a>. We may charge a reasonable fee for this service.</li>
+                <li>It is your responsibility to ensure that you have the necessary hardware, software, and access to email required to access electronic documents and provide electronic signatures. The minimum system requirements are: an internet-enabled device (laptop, tablet, or smartphone), a stable internet connection, and either (a) an up-to-date browser, or (b) the latest version of the Handoff app.</li>
+                <li>You are responsible for notifying us of any change in your email address. You may update your email address by: logging into the Handoff app or webapp, going to Settings, and changing your login email address.</li>
+                <li>You will take all reasonable steps to prevent unauthorized use of your electronic signature and will promptly notify us of any suspected unauthorized use or disclosure.</li>
+              </ul>
+              <p>By using the Handoff service, you confirm that:</p>
+              <ul>
+                <li>You can access and read this Electronic Signature Disclosure.</li>
+                <li>You consent to receive communications and to conduct transactions electronically with Handoff and any other parties involved in the Handoff service.</li>
+                <li>You agree to comply with any additional terms and conditions that you are made aware of with respect to the use of electronic signatures and the Handoff service.</li>
+              </ul>
+              <p>
+                Handoff reserves the right to modify, suspend, or discontinue the Handoff service and electronic signature functionality at any time. We will provide notice of any significant changes to these services.
+              </p>
+              <p>
+                If you have any questions about electronic signatures or the Handoff service, please contact us at <a href="mailto:support@handoff.ai">support@handoff.ai</a>.
+              </p>
+
+              <hr />
+
+              <!-- 7. Changes to the Services -->
+              <h2 id="changes-to-services">Changes to the Services</h2>
+              <p>
+                We may, without prior notice, change the Services; stop providing the Services or features of the Services, to you or to users generally; or create usage limits for the Services. We may permanently or temporarily terminate or suspend your access to the Services without notice and liability for any reason, including if in our sole determination you violate any provision of these Terms, the Privacy Policy, any agreement we may have in place with you or your organization, or for no reason. Upon termination for any reason or no reason, you continue to be bound by these Terms.
+              </p>
+
+              <hr />
+
+              <!-- 8. Privacy -->
+              <h2 id="privacy">Privacy</h2>
+              <p>
+                The Privacy Policy explains how we treat your personal data and protect your privacy when you use the Services. By using the Services, you agree that we can use such data in accordance with our Privacy Policy.
+              </p>
+
+              <hr />
+
+              <!-- 9. Restrictions -->
+              <h2 id="restrictions">Restrictions</h2>
+              <p>You agree not to, and will not assist, encourage, or enable others to use the Services to:</p>
+              <ul>
+                <li>Transmit, or cause to be transmitted, any communication or solicitation designed or intended to obtain password, account, or private information from any Handoff user.</li>
+                <li>Create or transmit unwanted 'spam' to any person or any URL.</li>
+                <li>Violate or breach the security of any network, servers, data, computers, or other hardware or software related to the Services.</li>
+                <li>Intentionally or unintentionally violate any applicable local, state, national, or international law.</li>
+                <li>Engage in or promote activities in connection with products, services, or materials that involve: spyware, adware, malicious programs or code, counterfeit goods, items under US embargo, hate materials, materials promoting terrorism or violence, goods made from protected animal/plant species, recalled goods, hacking/surveillance equipment, illegal drugs and paraphernalia, unlicensed sale of prescription drugs and medical devices, pornography, prostitution, body parts and bodily fluids, stolen products, items used for theft, explosives, hazardous materials, fake government IDs, police items, unlicensed stock and securities trading, gambling, professional services requiring state licenses, non-transferable items like airline or event tickets, weapons and accessories.</li>
+                <li>Sell, lease, loan, distribute, transfer, or sublicense any portion of the Services or access to the Services, or derive income from the use or provision of the Services, whether for direct commercial or monetary gain or otherwise, without Handoff's prior, express, written permission.</li>
+                <li>Use the Services in any manner that could interfere with, disrupt, negatively affect, or inhibit other users from fully enjoying the Services, or that could damage, disable, overburden, or impair the functioning of the Services in any manner.</li>
+                <li>Attempt to circumvent any content filtering techniques we employ, or attempt to access any service or area of the Services that you are not authorized to access.</li>
+                <li>Use any automated means or interfaces not provided by Handoff to access the Services or to extract data.</li>
+                <li>Use or attempt to use another user's account without authorization from that user and Handoff.</li>
+                <li>Use the voice-to-text feature to transmit any content that violates these Terms, including but not limited to sensitive personal information, confidential data, or any illegal or infringing content.</li>
+                <li>Engage in any harassing, intimidating, predatory, or stalking conduct.</li>
+                <li>Upload, post, transmit, distribute, store, create, or otherwise publish through the Services any content that is unlawful, libelous, defamatory, obscene, pornographic, indecent, lewd, suggestive, harassing, threatening, invasive of privacy or publicity rights, abusive, inflammatory, fraudulent, or otherwise objectionable.</li>
+              </ul>
+
+              <hr />
+
+              <!-- 10. User Content and Submissions -->
+              <h2 id="user-content">User Content and Submissions</h2>
+              <p>
+                When you use our Services, including the Handoff service and Universal Catalog API, you may submit or generate content such as estimates, project data, or custom material information ("User Submissions"). These submissions are used to provide and improve our Services.
+              </p>
+              <p>
+                By using our Services, you grant Handoff a limited license to access, process, store, and use these User Submissions to deliver and improve the Services. This includes analyzing, organizing, and presenting data in a meaningful way to enhance your experience and the functionality of our platform.
+              </p>
+              <p>
+                We do not claim ownership of your User Submissions. The license you grant us is for the sole purpose of operating, improving, and providing the Services. This license is royalty-free, non-exclusive, and encompasses the rights necessary for service provision.
+              </p>
+              <p>
+                Your User Submissions, particularly estimates generated through the Handoff service, may be shared with your designated clients or team members as part of the normal functioning of the service. The sharing of this information will be governed by your settings and explicit actions within the platform.
+              </p>
+              <p>
+                For data submitted through or used with the Universal Catalog API, we may use aggregated, anonymized data to improve our pricing models and material databases. However, we will not share your individual, identifiable data without your consent.
+              </p>
+              <p>
+                We are committed to maintaining the confidentiality and security of your User Submissions. We implement appropriate technical and organizational measures to protect your data against unauthorized or unlawful processing and against accidental loss, destruction, or damage.
+              </p>
+              <p>
+                Upon account deletion, we commit to ceasing the active use of your User Submissions and will take reasonable steps to remove them from our active systems. However, some data may be retained in our backup systems or as required by applicable laws and regulations.
+              </p>
+              <p>
+                You are responsible for ensuring that you have the necessary rights and permissions to grant us this license for any User Submissions you provide through our Services.
+              </p>
+
+              <hr />
+
+              <!-- 11. Support -->
+              <h2 id="support">Support</h2>
+              <p>
+                Handoff may elect to provide you with support or modifications for the Services (collectively, "Support"), in its sole discretion, and may terminate such Support at any time without notice to you. Handoff reserves the right to charge fees for Support. Any Support provided by Handoff shall be subject to these Terms.
+              </p>
+
+              <hr />
+
+              <!-- 12. Warranty Disclaimer -->
+              <h2 id="warranty-disclaimer">Warranty Disclaimer</h2>
+              <p>
+                Users of the Service may gain access to, or information from, third party websites or services. Handoff does not control such third party websites or services, and Handoff is not responsible for their content, policies, or practices. The inclusion of any link or service does not imply endorsement by Handoff of the third party website or service. Your use of any third party website or service is at your own risk and subject to the terms and conditions of use for such websites or services. Handoff does not make any representation or warranty whatsoever about any third party website or service that you may access through the Services.
+              </p>
+              <p>
+                Handoff has no special relationship with or fiduciary duty to you. You acknowledge that Handoff has no control over, and no duty to take any action regarding: which users gain access to the Services; what Content you access via the Services; what effects the Content may have on you; how you may interpret or use the Content; or what actions you may take as a result of having been exposed to the Content. You release Handoff from all liability for you having acquired or not acquired Content through the Services. Handoff makes no representations concerning any Content contained in or accessed through the Services, and Handoff will not be responsible or liable for the accuracy, copyright compliance, legality, or decency of material contained in or accessed through the Services.
+              </p>
+              <p>
+                <strong>HANDOFF DOES NOT REPRESENT OR WARRANT THAT THE SERVICE IS FREE OF INACCURACIES, ERRORS, BUGS, OR INTERRUPTIONS, OR ARE RELIABLE, ACCURATE, COMPLETE, OR OTHERWISE VALID.</strong>
+              </p>
+              <p>
+                <strong>THE SERVICES ARE PROVIDED "AS IS" WITH NO WARRANTY, EXPRESS OR IMPLIED, OF ANY KIND AND HANDOFF EXPRESSLY DISCLAIMS ANY AND ALL WARRANTIES AND CONDITIONS, INCLUDING, BUT NOT LIMITED TO, ANY IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AVAILABILITY, SECURITY, TITLE AND/OR NON-INFRINGEMENT. YOUR USE OF THE SERVICE IS AT YOUR OWN DISCRETION AND RISK, AND YOU WILL BE SOLELY RESPONSIBLE FOR ANY DAMAGE THAT RESULTS FROM THE USE OF ANY SERVICE INCLUDING, BUT NOT LIMITED TO, ANY DAMAGE TO YOUR COMPUTER SYSTEM OR LOSS OF DATA.</strong>
+              </p>
+
+              <hr />
+
+              <!-- 13. Limitation of Liability -->
+              <h2 id="limitation-of-liability">Limitation of Liability</h2>
+              <p>
+                <strong>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL HANDOFF, ITS AFFILIATES, DIRECTORS, EMPLOYEES OR ITS LICENSORS BE LIABLE FOR ANY DIRECT, INDIRECT, PUNITIVE, INCIDENTAL, SPECIAL, CONSEQUENTIAL OR EXEMPLARY DAMAGES, INCLUDING WITHOUT LIMITATION DAMAGES FOR LOSS OF PROFITS, GOODWILL, USE, DATA OR OTHER INTANGIBLE LOSSES, THAT RESULT FROM THE USE OF, OR INABILITY TO USE, THE SERVICE, WHETHER OR NOT HANDOFF HAS BEEN WARNED OF THE POSSIBILITY OF SUCH DAMAGES AND EVEN IF A REMEDY FAILS OF ITS ESSENTIAL PURPOSE. HANDOFF'S AGGREGATE LIABILITY FOR ALL CLAIMS RELATED TO THE SERVICE SHALL NOT EXCEED THE GREATER OF $100 OR THE AMOUNTS PAID BY YOU TO HANDOFF IN CONNECTION WITH YOUR USE OF THE SERVICE DURING THE TWELVE (12) MONTH PERIOD PRIOR TO THE CLAIM GIVING RISE TO SUCH LIABILITY.</strong>
+              </p>
+              <p>
+                <strong>YOU ACKNOWLEDGE AND AGREE THAT HANDOFF HAS OFFERED ITS SERVICES, SET ITS PRICES, AND ENTERED INTO THESE TERMS IN RELIANCE UPON THE WARRANTY DISCLAIMERS AND THE LIMITATIONS OF LIABILITY SET FORTH HEREIN, THAT THE WARRANTY DISCLAIMERS AND THE LIMITATIONS OF LIABILITY SET FORTH HEREIN REFLECT A REASONABLE AND FAIR ALLOCATION OF RISK BETWEEN YOU AND HANDOFF, AND THAT THE WARRANTY DISCLAIMERS AND THE LIMITATIONS OF LIABILITY SET FORTH HEREIN FORM AN ESSENTIAL BASIS OF THE BARGAIN BETWEEN YOU AND HANDOFF. HANDOFF WOULD NOT BE ABLE TO PROVIDE THE SERVICE TO YOU ON AN ECONOMICALLY REASONABLE BASIS WITHOUT THESE LIMITATIONS.</strong>
+              </p>
+              <p>
+                <strong>SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OF CERTAIN WARRANTIES OR THE LIMITATION OR EXCLUSION OF LIABILITY FOR INCIDENTAL OR CONSEQUENTIAL DAMAGES. ACCORDINGLY, SOME OF THE ABOVE LIMITATIONS MAY NOT APPLY TO YOU.</strong>
+              </p>
+
+              <hr />
+
+              <!-- 14. Indemnification -->
+              <h2 id="indemnification">Indemnification</h2>
+              <p>
+                To the maximum extent permitted by applicable law, you agree to indemnify, defend, and hold harmless Handoff, its affiliates, officers, directors, employees, agents, licensors, and suppliers from and against all claims, liabilities, damages, losses, costs, and expenses, including attorneys' fees, arising out of or in any way connected with (i) your access to or use of the Services; (ii) your violation of these Terms; or (iii) your violation of any rights of a third party.
+              </p>
+              <p>
+                These obligations include, but are not limited to, any behaviors, actions, or content transmitted through the Services that could infringe upon the intellectual property rights, privacy rights, or other rights of third parties. Handoff will make reasonable efforts to provide you with written notice of any such claim, suit, or action that falls under these indemnification terms.
+              </p>
+              <p>
+                You shall cooperate as fully as reasonably required in the defense of any such claim. To the extent permitted by applicable law, Handoff reserves the right, at its own expense, to assume the exclusive defense and control of any matter subject to indemnification by you.
+              </p>
+
+              <hr />
+
+              <!-- 15. Amendment -->
+              <h2 id="amendment">Amendment</h2>
+              <p>
+                Handoff reserves the right, at its sole discretion, to modify or replace these Terms at any time. If a revision is material, we will provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.
+              </p>
+              <p>
+                By continuing to access or use our Services after those revisions become effective, you agree to be bound by the revised terms. If you do not agree to the new terms, you are no longer authorized to use the Service.
+              </p>
+
+              <hr />
+
+              <!-- 16. General Terms -->
+              <h2 id="general-terms">General Terms</h2>
+              <p>
+                With respect to all purposes related to these Terms, You and Handoff shall act independently, not as partners, joint venturers, agents, employees, or employers of one another. You do not have any authority to assume or create obligations on Handoff's behalf, whether express or implied, nor to bind Handoff to any contract.
+              </p>
+              <p>
+                Should any provision of these Terms be deemed invalid by a court of competent jurisdiction, the parties agree that the court should give effect to the parties' intentions as reflected in the provision, while the remaining provisions of the Terms remain in full force and effect.
+              </p>
+              <p>
+                You are responsible for all taxes, duties, filings, and governmental assessments associated with your activity in connection with the Services, except where Handoff opts to handle such matters at its sole discretion.
+              </p>
+              <p>
+                You may not assign, delegate, or transfer these Terms, your rights or obligations hereunder, or your Service account, in any way (by operation of law or otherwise) without Handoff's prior written consent. Handoff may transfer, assign, or delegate these Terms and its rights and obligations without consent.
+              </p>
+              <p>
+                These Terms are governed by and construed under the laws of the State of Florida, without regard to its conflict of laws provisions. Disputes arising from these Terms will be settled in Hillsborough County, Florida, in English, through arbitration in accordance with the Streamlined Arbitration Rules and Procedures of JAMS. The arbitration will be conducted by a commercial arbitrator with relevant experience, selected from JAMS' arbitrators. The arbitrator's award may be enforced in any competent court. For injunctive or equitable relief, the parties consent to exclusive jurisdiction and venue in the state or federal courts in Hillsborough County, Florida. Any arbitration will occur on an individual basis; class arbitrations and class actions are not permitted. BY ENTERING INTO THESE TERMS, BOTH PARTIES WAIVE THE RIGHT TO A TRIAL BY JURY OR TO PARTICIPATE IN A CLASS ACTION. This waiver of jury trial may not be enforceable in some jurisdictions, and nothing in these Terms shall be interpreted as a waiver of any legal rights under the laws of such jurisdictions.
+              </p>
+              <p>
+                Handoff's failure to exercise or enforce any right or provision of these Terms shall not constitute a waiver of such right or provision. Notices to Handoff required or permitted by these Terms should be in writing and considered effective upon receipt, sent to <a href="mailto:support@handoff.ai">support@handoff.ai</a> or delivered to:
+              </p>
+              <p>
+                1build, Inc. (Handoff)<br />
+                1032 E Brandon Blvd #1126<br />
+                Brandon, FL 33511
+              </p>
+
+              <hr />
+
+              <!-- 17. Communication Terms -->
+              <h2 id="communication-terms">Communication Terms</h2>
+              <p>
+                Handoff AI is a construction project management, business management, and estimating platform. You can expect to receive messages about the status of your estimates, proposals, and similar documents. You can expect to be contacted by company representatives to provide guidance on using our platform.
+              </p>
+              <p>
+                You can cancel the SMS service at any time. Just text "STOP" to the short code. After you send the SMS message "STOP" to us, we will send you an SMS message to confirm that you have been unsubscribed. After this, you will no longer receive SMS messages from us. If you want to join again, just sign up as you did the first time and we will start sending SMS messages to you again. Msg frequency varies.
+              </p>
+              <p>
+                If you are experiencing issues with the messaging program you can reply with the keyword HELP for more assistance, or you can get help directly at <a href="mailto:support@handoff.ai">support@handoff.ai</a> or by contacting support inside the app under Settings.
+              </p>
+              <p>
+                Carriers are not liable for delayed or undelivered messages.
+              </p>
+              <p>
+                As always, message and data rates may apply for any messages sent to you from us and to us from you. If you have any questions about your text plan or data plan, it is best to contact your wireless provider.
+              </p>
+              <p>
+                If you have any questions regarding privacy, please read our privacy policy: <a href="/privacy-policy">handoff.ai/privacy-policy</a>
+              </p>
+
+            </div>
+            <!-- /article-body -->
+
+          </main>
+        </div>
+      </div>
+
+    </div>
+  </article>
+
+  <Footer columns={footerColumns} />
+</BaseLayout>
+
+<style>
+  /* Active TOC link state */
+  .toc-link.is-active .toc-label {
+    color: var(--color-brand-700);
+    font-weight: 500;
+  }
+  .toc-link.is-active .toc-indicator {
+    background-color: var(--color-brand-accent);
+  }
+  .toc-link:hover .toc-indicator {
+    background-color: var(--color-neutral-300);
+  }
+  .toc-link.is-active:hover .toc-indicator {
+    background-color: var(--color-brand-accent);
+  }
+</style>
+
+<script>
+  import { initScrollAnimations } from "@/lib/animations";
+
+  // Header scroll state
+  const header = document.getElementById("site-header");
+  window.addEventListener("scroll", () => {
+    if (header) {
+      header.classList.toggle("header-scrolled", window.scrollY > 40);
+    }
+  }, { passive: true });
+
+  initScrollAnimations();
+
+  // Active TOC link tracking via IntersectionObserver
+  const sections = document.querySelectorAll<HTMLElement>(".article-body h2[id], .article-body h3[id]");
+  const tocLinks = document.querySelectorAll<HTMLElement>("[data-toc-link]");
+
+  if (sections.length && tocLinks.length) {
+    let activeId = "";
+
+    const setActive = (id: string) => {
+      if (id === activeId) return;
+      activeId = id;
+      tocLinks.forEach((link) => {
+        const isActive = link.dataset.tocLink === id;
+        link.classList.toggle("is-active", isActive);
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+
+        if (visible.length > 0) {
+          setActive((visible[0].target as HTMLElement).id);
+        }
+      },
+      {
+        rootMargin: "-80px 0px -65% 0px",
+        threshold: 0,
+      }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach((section) => {
+        if (section.getBoundingClientRect().top <= 120) {
+          current = section.id;
+        }
+      });
+      if (current) setActive(current);
+    }, { passive: true });
+
+    if (sections[0]) setActive(sections[0].id);
+  }
+</script>

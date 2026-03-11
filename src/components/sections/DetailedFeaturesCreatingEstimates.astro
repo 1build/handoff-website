@@ -1,0 +1,45 @@
+---
+import DetailRowClientManagement from "./DetailRowClientManagement.astro";
+
+const rows = [
+  {
+    eyebrow: "Creating Estimates",
+    title: "Our AI reads drawings, photos, videos, audio & docs",
+    description: "Upload blueprints, progress photos, walkthrough videos, voice notes, or spreadsheets. Handoff uses AI to extract dimensions, count windows, transcribe audio, and auto‑tag files—then generates a detailed estimate using a simple prompt.",
+    reverse: false,
+    visualType: "desktop" as const,
+    placeholder: "Screenshot of AI estimate generation from files",
+  },
+  {
+    eyebrow: "Handoff Capabilities",
+    title: "Supported File Types",
+    description: "Handoff organizes all project file types, with AI processing for specific formats to enhance estimates. Handoff can analyze the following file types to create and edit estimates: PDF drawings, documents, spreadsheets, images, videos, and audio.",
+    reverse: true,
+    visualType: "phones" as const,
+    placeholder: "Screenshot of supported file types",
+  },
+  {
+    eyebrow: "File Upload Options",
+    title: "Two Methods to Upload Files and Create Estimates",
+    description: "Handoff offers two ways to create estimates from files:\nMethod 1: upload your files directly to the AI Chat. Best for small file sets.\nMethod 2: upload your files into your project, then talk to AI Chat. Best for analyzing a high volume of files at once.",
+    reverse: false,
+    visualType: "isometric" as const,
+    placeholder: "Screenshot of file upload methods",
+  },
+];
+---
+
+<section class="relative z-[2] px-4 pb-4 bg-brand-800">
+  <div class="max-w-[1920px] mx-auto bg-white rounded-3xl py-16 lg:py-24 overflow-hidden flex flex-col gap-20 lg:gap-40">
+    {rows.map((r) => (
+      <DetailRowClientManagement
+        eyebrow={r.eyebrow}
+        title={r.title}
+        description={r.description}
+        reverse={r.reverse}
+        visualType={r.visualType}
+        placeholder={r.placeholder}
+      />
+    ))}
+  </div>
+</section>

@@ -148,7 +148,59 @@ export const PAGE_SEO: Record<string, Partial<PageSeo> & { title: string }> = {
     title: "Handoff AI Estimating | Handyman",
     description: "Become the best-paid handyman in your area with Handoff. Streamline your workflow, increase profitability, and manage projects effortlessly, all without adding more headcount."
    },
- 
+   "/ai-agent": {
+    title: "AI Agent by Handoff – Automate Customer Conversations with Ease",
+    description: "Discover Handoff’s AI Agent: a smart, no-code solution for automating customer interactions across platforms. Boost efficiency, reduce workload, and deliver instant support 24/7."
+   },
+   "/ai-documents": {
+    title: "AI Documents – Turn Photos, Notes &amp; Estimates into Project Docs Instantly | Handoff",
+    description: "Generate scopes of work, punch-lists, material lists and daily logs in seconds using Handoff’s AI. Upload your notes, photos, or estimates and get polished, shareable documents—all organized under one project."
+   }, 
+   "/ai-transcription": {
+    title: "AI Transcription for Contractors | Handoff",
+    description: "Convert voice notes into organized documents instantly with Handoff’s AI transcription. Create estimates, reports, and checklists hands-free — built for busy construction teams."
+   },
+   "/change-orders": {
+    title: "Change Orders",
+    description: "We&#x27;ve included everything you need to know to be successful during your 7-day free trial of Handoff. You&#x27;ll be creating AI estimates, proposals, and invoices by the end of the tutorial!"
+   },
+   "/client-management-system": {
+    title: "Handoff AI Estimating | Client Management System",
+    description: "Efficiently manage client relationships with Handoff&#x27;s intuitive Client Management System. Track client details, project statuses, and streamline your business operations with integrated AI-driven estimates and proposals. Try our 7-day free trial now!"
+   },
+   "/contractor-course": {
+    title: "7-Day AI Contractor Course | Handoff Training Program for Remodelers",
+    description: "Master AI-powered estimating, project management, and client communication. Free 7-day course to help handymen increase profitability and streamline workflows."
+   },
+   "/creating-estimates-from-files": {
+    title: "Creating Estimates – Fast &amp; Accurate Quotes with Handoff",
+    description: "Streamline your sales process by creating professional estimates in minutes with Handoff. Customize pricing, add services, and send quotes that win business faster."
+   },
+   "/file-management": {
+    title: "File Management – Generate Estimates with Photos, Videos, and Files",
+    description: "Manage photos, videos, and other files with ease using Handoff’s AI-powered file management system. Use files to generate accurate project estimates in seconds"
+   },
+   "/homeowner-financing": {
+    title: "Homeowner Financing – Flexible Payment Solutions for Customers | Handoff",
+    description: "Empower your customers with flexible financing options through Handoff. Increase conversions and make high-ticket services more accessible with seamless payment plans."
+       },  
+       "/invoicing": {
+    title: "Handoff AI Estimating | Invoicing",
+    description: "Streamline your billing process with Handoff&#x27;s digital invoicing. Create and send invoices quickly, accept payments via credit card and ACH, and integrate with proposals for seamless project management. Try our 7-day free trial today!"
+       },  
+       "/privacy-policy": {
+    title: "Handoff AI Estimating | Privacy Policy",
+    description: "Learn how Handoff AI collects, uses, and safeguards your data. Read our privacy policy to understand your rights, data security measures, and how we handle personal information. Stay informed on privacy practices for using our AI-powered lead response and estimation services."
+       },
+       "/terms-of-use": {
+    title: "Handoff AI Estimating | Terms of Service",
+    description: "Understand the terms and conditions for using Handoff AI&#x27;s lead response and estimation services. Read our Terms of Service to learn about user responsibilities, intellectual property rights, payment terms, data privacy, and more. Stay informed about your obligations and our policies for a seamless experience with Handoff AI"
+       },
+"/winning-ai-proposals": {
+    title: "Handoff AI Estimating | Winning AI Proposals",
+    description: "Create impressive client proposals effortlessly with Handoff&#x27;s AI-powered tool. Transform your estimates into detailed, professional proposals that win deals, complete with file attachments and digital signatures. Start your 7-day free trial now!"
+},
+       
 };
 
 /**

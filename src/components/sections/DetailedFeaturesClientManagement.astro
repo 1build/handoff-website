@@ -1,0 +1,45 @@
+---
+import DetailRowClientManagement from "./DetailRowClientManagement.astro";
+
+const rows = [
+  {
+    eyebrow: "Client Profiles",
+    title: "Create detailed client profiles",
+    description: "With Handoff you can create new clients or upload existing clients from your phone book. Add their name, phone, email, and address to keep track of their most important details.",
+    reverse: false,
+    visualType: "desktop" as const,
+    placeholder: "Screenshot of client profile",
+  },
+  {
+    eyebrow: "Integrated CRM",
+    title: "Connect estimates & invoices",
+    description: "Your estimates and invoices will be linked to clients in your CRM. This means that you can see a complete record of work that has been done for a certain client as well as status of their ongoing projects.",
+    reverse: true,
+    visualType: "phones" as const,
+    placeholder: "Screenshot of linked estimates and invoices",
+  },
+  {
+    eyebrow: "Activity tracking",
+    title: "Always know their status",
+    description: "Whenever a client approves a proposal or pays an invoice you will be notified in an instant. The client records will always be updated to show the latest statuses of their estimates and invoices.",
+    reverse: false,
+    visualType: "isometric" as const,
+    placeholder: "Screenshot of activity tracking notifications",
+  },
+];
+---
+
+<section class="relative z-[2] px-4 pb-4 bg-brand-800">
+  <div class="max-w-[1920px] mx-auto bg-white rounded-3xl py-16 lg:py-24 overflow-hidden flex flex-col gap-20 lg:gap-40">
+    {rows.map((r) => (
+      <DetailRowClientManagement
+        eyebrow={r.eyebrow}
+        title={r.title}
+        description={r.description}
+        reverse={r.reverse}
+        visualType={r.visualType}
+        placeholder={r.placeholder}
+      />
+    ))}
+  </div>
+</section>

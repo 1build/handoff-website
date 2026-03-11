@@ -1,0 +1,505 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/sections/Header.astro";
+import Footer from "@/components/sections/Footer.astro";
+import { navItems, footerColumns } from "@/lib/navigation";
+import { getPageSeo } from "@/lib/seo-pages";
+
+const tocItems: [string, string, boolean?][] = [
+  ["introduction", "Introduction"],
+  ["information-collection", "Information Collection and Use"],
+  ["personal-data-collection", "Personal Data Collection"],
+  ["personal-data-use", "Personal Data Use"],
+  ["information-you-provide", "Information You Provide to Us"],
+  ["data-sharing", "Data Sharing and Disclosure"],
+  ["voice-to-text", "Voice-to-Text Feature"],
+  ["audio-retention", "Audio Data Retention", true],
+  ["contractor-responsibilities", "Contractor Responsibilities"],
+  ["data-storage", "Data Storage and Security"],
+  ["data-retention", "Data Retention"],
+  ["your-rights", "Your Data Rights"],
+  ["ccpa", "CCPA Compliance"],
+  ["sms-email", "SMS and Email Communications"],
+  ["cookies", "Cookies & Tracking"],
+  ["changes", "Changes to this Policy"],
+  ["contact", "Contact Us"],
+  ["definitions", "Definitions"],
+];
+
+const seo = getPageSeo(Astro.url.pathname);
+---
+
+<BaseLayout {...seo}>
+  <Header navItems={navItems} />
+
+  <article class="relative z-[2] pt-32 pb-2 px-4 bg-brand-800">
+    <!-- overflow-hidden removed so sticky TOC works; rounded corners apply to the element itself -->
+    <div class="max-w-[1920px] mx-auto bg-white rounded-3xl py-16 lg:py-24">
+
+      <!-- Page Header -->
+      <header class="max-w-[1280px] mx-auto px-6 lg:px-8" data-animate="fade-up">
+        <div class="max-w-[768px] mx-auto text-center flex flex-col items-center">
+          <span class="inline-flex items-center gap-1.5 text-sm font-semibold leading-5 text-brand-accent bg-brand-50 border border-brand-100 rounded-full px-3 py-1 mb-6">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="1" y="1" width="4" height="4" rx="0.5" fill="currentColor" opacity="0.4"/>
+              <rect x="7" y="1" width="4" height="4" rx="0.5" fill="currentColor"/>
+              <rect x="1" y="7" width="4" height="4" rx="0.5" fill="currentColor"/>
+              <rect x="7" y="7" width="4" height="4" rx="0.5" fill="currentColor" opacity="0.4"/>
+            </svg>
+            Legal
+          </span>
+          <h1 class="font-display text-4xl md:text-[52px] font-semibold leading-tight md:leading-[60px] tracking-[-1.04px] text-text-primary">
+            Privacy Policy
+          </h1>
+          <p class="mt-5 text-lg font-normal leading-7 text-text-tertiary">
+            1build, Inc. dba Handoff &middot; Effective March 9, 2026
+          </p>
+          <p class="mt-4 text-base leading-6 text-text-secondary max-w-[560px]">
+            We're committed to protecting your privacy. This policy explains how we collect, use, and safeguard your information when you use Handoff.
+          </p>
+        </div>
+      </header>
+
+      <!-- Divider -->
+      <div class="max-w-[1280px] mx-auto px-6 lg:px-8 mt-12">
+        <div class="border-t border-border-primary"></div>
+      </div>
+
+      <!-- Two-column layout: sticky TOC sidebar + article body -->
+      <div class="max-w-[1280px] mx-auto px-6 lg:px-8 mt-12" data-animate="fade-up">
+        <div class="flex gap-12 xl:gap-16 items-start">
+
+          <!-- Sticky TOC Sidebar (desktop only) -->
+          <aside
+            class="hidden lg:block w-56 xl:w-64 shrink-0 sticky top-28 self-start"
+            aria-label="Table of contents"
+          >
+            <p class="text-xs font-semibold text-text-quaternary uppercase tracking-widest mb-4 px-2">
+              Table of Contents
+            </p>
+            <nav>
+              <ol class="space-y-0.5 list-none p-0 m-0">
+                {tocItems.map(([id, label, isSubsection]) => (
+                  <li>
+                    <a
+                      href={`#${id}`}
+                      data-toc-link={id}
+                      class:list={[
+                        "toc-link flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm leading-5 transition-all duration-150 no-underline group",
+                        isSubsection ? "pl-5 text-xs" : ""
+                      ]}
+                    >
+                      <span
+                        class="toc-indicator w-0.5 h-4 rounded-full bg-transparent transition-all duration-150 shrink-0"
+                        aria-hidden="true"
+                      ></span>
+                      <span class="toc-label text-text-quaternary group-hover:text-text-primary transition-colors duration-150">{label}</span>
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+
+            <!-- Effective date badge at bottom of TOC -->
+            <div class="mt-8 px-2">
+              <div class="rounded-xl bg-brand-25 border border-brand-100 px-3 py-3">
+                <p class="text-xs font-medium text-text-quaternary mb-0.5">Last updated</p>
+                <p class="text-xs font-semibold text-text-secondary">March 9, 2026</p>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Main article content -->
+          <main class="flex-1 min-w-0 max-w-[720px]">
+
+            <!-- Mobile TOC (shows above content on small screens) -->
+            <details class="lg:hidden rounded-2xl border border-brand-100 bg-brand-25 p-5 mb-10 group">
+              <summary class="flex items-center justify-between cursor-pointer list-none text-sm font-semibold text-text-secondary select-none">
+                <span>Table of Contents</span>
+                <svg class="w-4 h-4 text-text-quaternary transition-transform duration-200 group-open:rotate-180" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </summary>
+              <ol class="mt-4 space-y-1 list-none p-0 m-0">
+                {tocItems.map(([id, label, isSubsection], i) => (
+                  <li class:list={["flex items-baseline gap-3", isSubsection ? "pl-4" : ""]}>
+                    <span class="text-xs font-mono text-brand-accent w-5 shrink-0 text-right">{String(i + 1).padStart(2, "0")}</span>
+                    <a href={`#${id}`} class="text-sm leading-5 text-text-secondary hover:text-brand-700 transition-colors no-underline">{label}</a>
+                  </li>
+                ))}
+              </ol>
+            </details>
+
+            <!-- Article body -->
+            <div class="article-body">
+
+              <!-- 1. Introduction -->
+              <h2 id="introduction">Introduction</h2>
+              <p>
+                1build, Inc., a Delaware corporation, doing business as "Handoff" ("Handoff"), is committed to protecting your privacy. This privacy policy ("Privacy Policy") describes how we treat the information we collect when you visit and use our website, <a href="https://www.handoff.ai">https://www.handoff.ai</a> (the "Site"), and the services offered by Handoff (including, without limitation, the Site, Universal Catalog API, Handoff service, and any other services, collectively referred to as the "Services").
+              </p>
+              <p>
+                Please read this Privacy Policy to learn more about the ways in which we collect, use, and protect your information. By visiting the Site or using the Services, you are agreeing to the terms of this Privacy Policy. If you do not agree to this Privacy Policy, please do not use the Site or Services.
+              </p>
+              <p>
+                The Site and Services are not intended for use by children. If you are under the age of 18, you may use the Site and Services only with the involvement of a parent or guardian. We do not knowingly collect personal information from children under the age of 13. If we learn that we have collected personal information from a child under the age of 13, we will delete that information as quickly as possible. If you believe that we might have any information from or about a child under 13, please contact us at <a href="mailto:support@handoff.ai">support@handoff.ai</a>.
+              </p>
+
+              <hr />
+
+              <!-- 2. Information Collection and Use -->
+              <h2 id="information-collection">Information Collection and Use</h2>
+              <p>
+                We collect certain non-personal information from you when you visit the Site, such as your IP address, browser type, operating system, the specific web pages visited during your connection, and the domain name from which you accessed the Site. We use this information to monitor the usage of the Site and improve our Services.
+              </p>
+              <p>
+                We use analytics services to help analyze how users use the Site. These analytics services use cookies to collect and store anonymous information such as time of visit, pages visited, time spent on each page of the Site, IP address, and type of operating system used. We use this information to improve the Site and Services.
+              </p>
+              <p>We may collect the following types of information when you interact with us:</p>
+              <ul>
+                <li><strong>Personal Information:</strong> Name, phone number, email address, mailing address, or other contact details.</li>
+                <li><strong>Usage Data:</strong> Information about how you use our website, services, or communications.</li>
+                <li><strong>Device Information:</strong> IP address, browser type, operating system, and other technical details.</li>
+              </ul>
+
+              <hr />
+
+              <!-- 3. Personal Data Collection -->
+              <h2 id="personal-data-collection">Personal Data Collection</h2>
+              <p>We collect the following types of information from you when you use the Services:</p>
+              <ul>
+                <li>Your name, email address, and other contact information;</li>
+                <li>Your username and password;</li>
+                <li>Your correspondence through the Services, and correspondence sent to us;</li>
+                <li>Information you provide to us when you use the Services;</li>
+                <li>Information you enter into our system when using the Services, such as contact information, project management information, and material pricing data.</li>
+              </ul>
+              <p>We use this information to provide you with and to improve the Services.</p>
+              <p>Information we automatically collect when you use the Services:</p>
+              <ul>
+                <li>IP address;</li>
+                <li>Device identifiers;</li>
+                <li>Browser type;</li>
+                <li>Operating system;</li>
+                <li>Cookies and other tracking tools;</li>
+                <li>The specific web pages visited during your connection;</li>
+                <li>The time and date you accessed the Services;</li>
+                <li>The links on which you clicked;</li>
+                <li>Audio recordings when using the voice-to-text feature.</li>
+              </ul>
+
+              <hr />
+
+              <!-- 4. Personal Data Use -->
+              <h2 id="personal-data-use">Personal Data Use</h2>
+              <p>We use the information we collect to provide, maintain, and improve the Services, including the Universal Catalog API and Handoff service. We also use the information we collect to:</p>
+              <ul>
+                <li>Send you technical notices, updates, security alerts, and support and administrative messages;</li>
+                <li>Communicate with you about products, services, offers, and events offered by Handoff;</li>
+                <li>Monitor and analyze trends, usage, and activities in connection with the Services;</li>
+                <li>Detect, investigate, and prevent fraudulent transactions and other illegal activities;</li>
+                <li>Personalize and improve the Services, including the Universal Catalog API and Handoff service.</li>
+              </ul>
+              <p>
+                We will only process your Personal Data if we have a lawful basis for doing so, such as consent, contractual necessity, or our legitimate interests.
+              </p>
+              <p>We use your information for purposes such as:</p>
+              <ul>
+                <li>Providing and improving our services.</li>
+                <li>Responding to your inquiries and requests.</li>
+                <li>Sending you updates, promotions, and relevant communications (with your consent).</li>
+                <li>Ensuring compliance with applicable laws and regulations.</li>
+              </ul>
+
+              <hr />
+
+              <!-- 5. Information You Provide to Us -->
+              <h2 id="information-you-provide">Information You Provide to Us</h2>
+              <p>
+                We receive and store information you enter into the Service or provide to us in any way. This may include information necessary for using the Universal Catalog API or generating estimates through the Handoff service. You can choose not to provide us with certain information, but then you may not be able to take full advantage of our Services.
+              </p>
+              <p>
+                It is your responsibility to ensure that you have shared the proper information with us and that you have obtained the proper consent from your contacts to share their information with us, especially when using the Handoff service to generate estimates for your customers.
+              </p>
+
+              <hr />
+
+              <!-- 6. Data Sharing and Disclosure -->
+              <h2 id="data-sharing">Data Sharing and Disclosure</h2>
+              <p>We share Personal Data with vendors and service providers who work on our behalf and provide us with services related to the purposes described in this Privacy Policy or our Terms of Service. These parties include:</p>
+              <ul>
+                <li>Payment processors;</li>
+                <li>Fraud prevention service providers;</li>
+                <li>Analytics service providers;</li>
+                <li>Hosting service providers;</li>
+                <li>Other service providers who assist us in providing the Services.</li>
+              </ul>
+              <p>We do not sell or rent your personal information. We may share your data only in the following situations:</p>
+              <ul>
+                <li>With trusted partners or service providers who help us deliver our services.</li>
+                <li>To comply with legal obligations or lawful requests from authorities.</li>
+                <li>To protect our rights, safety, or property.</li>
+              </ul>
+              <p>
+                We also share Personal Data when necessary to complete a transaction initiated or authorized by you or provide you with a product or service you have requested. This includes sharing information with other users when you use the Handoff service to generate and share estimates. As a contractor using our Handoff service, you are responsible for obtaining necessary permissions from your clients before sharing their data with us. Please refer to the "Contractor Responsibilities" section for more details.
+              </p>
+              <p>
+                We may also share Personal Data when we believe it is necessary to comply with applicable law, enforce our terms of service, or protect our rights, property, or safety.
+              </p>
+
+              <hr />
+
+              <!-- 7. Voice-to-Text Feature -->
+              <h2 id="voice-to-text">Voice-to-Text Feature</h2>
+              <p>
+                We collect and process audio recordings when you use our voice-to-text feature. By agreeing to these terms and using Handoff, you agree that you are opting into usage of the voice-to-text feature in the Handoff service, you consent to the collection and processing of your audio recordings for transcription purposes and understand that the audio recordings will be sent to a third-party speech-to-text API provider for transcription. Audio recordings are stored on our servers after transcription is complete and are used for quality control and improvement of our transcription services.
+              </p>
+              <p>
+                When you use the voice-to-text feature, your audio is recorded and sent to our third-party speech-to-text API providers (currently Google's Speech to Text API and OpenAI's Whisper API) for transcription. After transcription, the text is sent back to our servers and stored in your account. We may use the recordings to:
+              </p>
+              <ul>
+                <li>Improve transcription accuracy for project descriptions and AI editing instructions;</li>
+                <li>Analyze audio details (e.g., session length, pauses, hesitations, repetitions) to identify challenges in creating project descriptions;</li>
+                <li>Train AI models to assist with contractor-client conversations for estimating, call answering, client outreach, and document management.</li>
+              </ul>
+              <p>
+                You have the right to request deletion of your audio recordings and may do so by contacting us at <a href="mailto:support@handoff.ai">support@handoff.ai</a>.
+              </p>
+
+              <h3 id="audio-retention">How Long Do We Retain Your Audio Data?</h3>
+              <p>
+                We retain Audio Data for 12 months from the date of collection. However, if you use features that depend on historical audio data, then we may retain the relevant Audio Data longer to maintain these features.
+              </p>
+              <p>
+                If you request data deletion or do not consent to audio data collection, please note that certain features and products may become unavailable or function with reduced capabilities. These may include voice recognition, personalized responses, and other audio-dependent features.
+              </p>
+
+              <hr />
+
+              <!-- 8. Contractor Responsibilities -->
+              <h2 id="contractor-responsibilities">Contractor Responsibilities</h2>
+              <p>
+                As a contractor using our Handoff service, you may be collecting and inputting data from your clients into our system. It is your responsibility to ensure that you have the proper authorization and consent from your clients to collect, use, and share their data with Handoff through our Services.
+              </p>
+              <p>You agree to:</p>
+              <ol>
+                <li>Obtain all necessary consents and permissions from your clients before inputting their data into our Services.</li>
+                <li>Inform your clients about how their data will be used within the Handoff Services, including the Handoff service.</li>
+                <li>Use the data collected from your clients only for the purposes of utilizing our Services and as agreed upon with your clients.</li>
+                <li>Comply with all applicable data protection and privacy laws when collecting, using, and sharing your clients' data.</li>
+                <li>Respond to any requests from your clients regarding their data, including requests for access, correction, or deletion, in accordance with applicable laws.</li>
+                <li>Notify Handoff immediately if you receive any complaints or requests from your clients regarding their data as it relates to our Services.</li>
+                <li>Indemnify and hold Handoff harmless from any claims, damages, or losses arising from your failure to obtain proper consent or your misuse of client data in connection with our Services.</li>
+              </ol>
+              <p>
+                Handoff provides the Handoff service as a tool for contractors, but we do not control or monitor the data you input. You are solely responsible for ensuring that your use of client data within our Services complies with all applicable laws and agreements you have with your clients.
+              </p>
+
+              <hr />
+
+              <!-- 9. Data Storage and Security -->
+              <h2 id="data-storage">Data Storage and Security</h2>
+              <p>
+                At Handoff, we employ industry-standard security measures to protect your personal information. We use Secure Socket Layer (SSL) encryption to safeguard the transmission of your personal information.
+              </p>
+              <p>
+                We restrict access to personal information to employees who need that information to perform specific job functions. Our employees are trained on our privacy and security practices.
+              </p>
+              <p>
+                We implement reasonable technical and organizational measures to protect your information from unauthorized access, use, or disclosure.
+              </p>
+              <p>
+                You play a crucial role in protecting your account. We advise you to safeguard your passwords and ensure you log off after using a shared computer. You are responsible for all actions taken with your User ID and password.
+              </p>
+
+              <hr />
+
+              <!-- 10. Data Retention -->
+              <h2 id="data-retention">Data Retention</h2>
+              <p>
+                We will retain your Personal Data for as long as you maintain an account or as otherwise necessary to provide you the Services. We will also retain your Personal Data as necessary to comply with our legal obligations, resolve disputes, and enforce our agreements.
+              </p>
+              <p>
+                We retain your personal information only as long as necessary for the purposes stated in this policy or as required by law.
+              </p>
+              <p>
+                We may retain Non-Personal Data indefinitely.
+              </p>
+
+              <hr />
+
+              <!-- 11. Your Data Rights -->
+              <h2 id="your-rights">Your Data Rights</h2>
+              <p>
+                You have certain rights regarding the Personal Data we hold about you. These may include the rights to access, correct, delete, restrict processing of, and obtain a copy of your Personal Data. To exercise any of these rights, please contact us at <a href="mailto:support@handoff.ai">support@handoff.ai</a>.
+              </p>
+              <p>Please note that these rights may be limited in some circumstances by local law requirements. Depending on your location, you may have rights such as:</p>
+              <ul>
+                <li>Accessing the personal information we hold about you.</li>
+                <li>Requesting corrections or deletion of your data.</li>
+                <li>Withdrawing your consent to receive communications.</li>
+              </ul>
+
+              <hr />
+
+              <!-- 12. CCPA Compliance -->
+              <h2 id="ccpa">CCPA Compliance</h2>
+              <p>
+                If you are a California resident, you have certain rights regarding your personal information under the California Consumer Privacy Act (CCPA). These rights include the ability to request access to your personal information, the right to request that Handoff deletes your personal information, and the right to know what personal information is being collected about you and the purpose for such collection.
+              </p>
+              <p>
+                To exercise these rights, California residents may contact us at <a href="mailto:support@handoff.ai">support@handoff.ai</a>. Handoff will not discriminate against any user for exercising their CCPA rights.
+              </p>
+
+              <hr />
+
+              <!-- 13. SMS and Email Communications -->
+              <h2 id="sms-email">SMS and Email Communications</h2>
+              <p>
+                By providing your phone number and by opting in for SMS communication, you consent to receive SMS messages related to our services.
+              </p>
+              <p>
+                You may opt out of SMS or email communications at any time by following the unsubscribe instructions included in those communications.
+              </p>
+              <p>
+                We do not sell SMS consent or share your mobile information with third parties for marketing purposes.
+              </p>
+
+              <hr />
+
+              <!-- 14. Cookies & Tracking -->
+              <h2 id="cookies">Cookies &amp; Tracking</h2>
+              <p>
+                Our website may use cookies or similar technologies to enhance user experience. Cookies are small data files placed on your device that help us understand how you interact with our Site and Services.
+              </p>
+              <p>
+                You can control cookies through your browser settings. Please note that disabling cookies may affect the functionality of certain parts of the Site.
+              </p>
+
+              <hr />
+
+              <!-- 15. Changes to this Privacy Policy -->
+              <h2 id="changes">Changes to this Privacy Policy</h2>
+              <p>
+                We may amend this Privacy Policy from time to time. If we make changes in the way we collect or use information, we will notify you by posting an announcement on the Services or sending you an email. Your continued use of the Services after any changes to this Privacy Policy constitutes your acceptance of such changes.
+              </p>
+              <p>
+                The updated version will be posted on this page with a revised effective date.
+              </p>
+
+              <hr />
+
+              <!-- 16. Contact Us -->
+              <h2 id="contact">Contact Us</h2>
+              <p>
+                If you have any questions or concerns regarding our privacy policies or how we handle your data, please send us a detailed message to:
+              </p>
+              <p>
+                <a href="mailto:support@handoff.ai">support@handoff.ai</a>
+              </p>
+
+              <hr />
+
+              <!-- 17. Definitions -->
+              <h2 id="definitions">Definitions</h2>
+              <ul>
+                <li><strong>"Personal Data"</strong> means any information relating to an identified or identifiable natural person.</li>
+                <li><strong>"Site"</strong> means the website <a href="https://www.handoff.ai">www.handoff.ai</a>.</li>
+                <li><strong>"Services"</strong> include the Site, Universal Catalog API, Handoff service, and any other services provided by Handoff.</li>
+                <li><strong>"User Agreement"</strong> means the agreement between you and Handoff governing your use of the Services.</li>
+              </ul>
+
+            </div>
+            <!-- /article-body -->
+
+          </main>
+        </div>
+      </div>
+
+    </div>
+  </article>
+
+  <Footer columns={footerColumns} />
+</BaseLayout>
+
+<style>
+  /* Active TOC link state */
+  .toc-link.is-active .toc-label {
+    color: var(--color-brand-700);
+    font-weight: 500;
+  }
+  .toc-link.is-active .toc-indicator {
+    background-color: var(--color-brand-accent);
+  }
+  .toc-link:hover .toc-indicator {
+    background-color: var(--color-neutral-300);
+  }
+  .toc-link.is-active:hover .toc-indicator {
+    background-color: var(--color-brand-accent);
+  }
+</style>
+
+<script>
+  import { initScrollAnimations } from "@/lib/animations";
+
+  // Header scroll state
+  const header = document.getElementById("site-header");
+  window.addEventListener("scroll", () => {
+    if (header) {
+      header.classList.toggle("header-scrolled", window.scrollY > 40);
+    }
+  }, { passive: true });
+
+  initScrollAnimations();
+
+  // Active TOC link tracking via IntersectionObserver
+  const sections = document.querySelectorAll<HTMLElement>(".article-body h2[id], .article-body h3[id]");
+  const tocLinks = document.querySelectorAll<HTMLElement>("[data-toc-link]");
+
+  if (sections.length && tocLinks.length) {
+    let activeId = "";
+
+    const setActive = (id: string) => {
+      if (id === activeId) return;
+      activeId = id;
+      tocLinks.forEach((link) => {
+        const isActive = link.dataset.tocLink === id;
+        link.classList.toggle("is-active", isActive);
+      });
+    };
+
+    // Use rootMargin to trigger when heading enters the top 25% of viewport
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Find the topmost intersecting section
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+
+        if (visible.length > 0) {
+          setActive((visible[0].target as HTMLElement).id);
+        }
+      },
+      {
+        rootMargin: "-80px 0px -65% 0px",
+        threshold: 0,
+      }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    // Also track on scroll for the case where no intersection fires (fast scrolls)
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach((section) => {
+        if (section.getBoundingClientRect().top <= 120) {
+          current = section.id;
+        }
+      });
+      if (current) setActive(current);
+    }, { passive: true });
+
+    // Set first item active on load
+    if (sections[0]) setActive(sections[0].id);
+  }
+</script>

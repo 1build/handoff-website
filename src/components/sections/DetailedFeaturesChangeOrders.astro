@@ -1,0 +1,45 @@
+---
+import DetailRowClientManagement from "./DetailRowClientManagement.astro";
+
+const rows = [
+  {
+    eyebrow: "Update project scopes",
+    title: "Use AI to generate change orders in seconds",
+    description: "Generate change orders using the same advanced generative AI technology that Handoff uses to create accurate, localized estimates. Change orders work like mini-estimates, clearly highlighting the differences between the original agreement and the updated project scope.",
+    reverse: false,
+    visualType: "desktop" as const,
+    placeholder: "Screenshot of AI change order generation",
+  },
+  {
+    eyebrow: "Convert to Proposals",
+    title: "Send change orders to clients for signature",
+    description: "Handoff change orders can be sent just like the original proposal. Require client signatures, attach photos documenting the change in scope, and keep everything tied back to the original job.",
+    reverse: true,
+    visualType: "phones" as const,
+    placeholder: "Screenshot of change order signature flow",
+  },
+  {
+    eyebrow: "Flexible invoicing",
+    title: "Get paid for your change orders",
+    description: "Handoff's flexible invoicing tools allow you to collect digital payments on change orders directly through the platform. Use built-in payment processing to keep billing simple and connected to the job.\n\nPayment terms vary by plan.",
+    reverse: false,
+    visualType: "isometric" as const,
+    placeholder: "Screenshot of change order payment flow",
+  },
+];
+---
+
+<section class="relative z-[2] px-4 pb-4 bg-brand-800">
+  <div class="max-w-[1920px] mx-auto bg-white rounded-3xl py-16 lg:py-24 overflow-hidden flex flex-col gap-20 lg:gap-40">
+    {rows.map((r) => (
+      <DetailRowClientManagement
+        eyebrow={r.eyebrow}
+        title={r.title}
+        description={r.description}
+        reverse={r.reverse}
+        visualType={r.visualType}
+        placeholder={r.placeholder}
+      />
+    ))}
+  </div>
+</section>
