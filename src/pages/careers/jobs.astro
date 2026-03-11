@@ -155,7 +155,7 @@ const shareBase = getCanonicalUrl("/careers/jobs");
   <main class="pt-20 flex flex-col items-center px-4 pb-4 gap-4">
 
     <!-- ── Job Post Content Card ─────────────────────────────────── -->
-    <div class="w-full max-w-[1920px] bg-bg-primary rounded-[20px] border border-black/[0.04] py-24 flex flex-col gap-20 items-center overflow-hidden">
+    <div class="w-full max-w-[1920px] bg-bg-primary rounded-[20px] border border-black/[0.04] py-24 flex flex-col gap-20 items-center overflow-visible">
 
       <!-- Job Header -->
       <div class="w-full max-w-[1440px] px-8 flex flex-wrap items-center justify-between gap-6">
@@ -202,18 +202,51 @@ const shareBase = getCanonicalUrl("/careers/jobs");
       <!-- Divider -->
       <div class="w-full h-px bg-neutral-200"></div>
 
-      <!-- Why Join Us (2-col with sidebar) -->
-      <div class="w-full max-w-[1440px] px-8 flex flex-wrap lg:flex-nowrap gap-12 justify-between items-start">
+      <!-- Why Join Us + job details (2-col with sticky sidebar) -->
+      <div class="w-full max-w-[1440px] px-8 grid gap-16 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] items-start">
         <!-- Left: Content -->
-        <div class="w-full max-w-[768px] flex flex-col gap-5">
-          <h2 class="font-display font-medium text-[36px] leading-[44px] tracking-[-0.72px] text-text-primary">Why join us?</h2>
-          <div class="text-xl font-medium leading-[30px] text-text-tertiary space-y-5">
-            <p>Handoff is the AI agent that runs a construction company. We help remodelers automate estimating, streamline operations, and win more work — backed by real-time cost data, intuitive design, and workflows that "speak contractor." With over 10,000 monthly active users and $6B in annualized project volume already flowing through our platform, we're becoming the trusted partner for the people who build our homes.</p>
-            <p>We are backed by $25M+ raised from Y Combinator, Initialized, and Greycroft. Our team is distributed across hubs in Austin, São Paulo, and Buenos Aires, and we are deeply focused on building intuitive, high-impact solutions that make a real difference for our users.</p>
-          </div>
+        <div class="flex flex-col gap-12 max-w-[768px]">
+          <!-- Why Join Us copy -->
+          <section class="flex flex-col gap-5">
+            <h2 class="font-display font-medium text-[36px] leading-[44px] tracking-[-0.72px] text-text-primary">Why join us?</h2>
+            <div class="text-xl font-medium leading-[30px] text-text-tertiary space-y-5">
+              <p>Handoff is the AI agent that runs a construction company. We help remodelers automate estimating, streamline operations, and win more work — backed by real-time cost data, intuitive design, and workflows that "speak contractor." With over 10,000 monthly active users and $6B in annualized project volume already flowing through our platform, we're becoming the trusted partner for the people who build our homes.</p>
+              <p>We are backed by $25M+ raised from Y Combinator, Initialized, and Greycroft. Our team is distributed across hubs in Austin, São Paulo, and Buenos Aires, and we are deeply focused on building intuitive, high-impact solutions that make a real difference for our users.</p>
+            </div>
+          </section>
+
+          <!-- Job description (from Lever; includes role intro text) -->
+          <section class="flex flex-col gap-5">
+            <div data-job-description class="text-xl font-medium leading-[30px] text-text-tertiary prose prose-p:my-4" set:html={job?.description ? job.description.trim().replace(/\n/g, "<br/>") : ""} />
+          </section>
+
+          <!-- What you'll do, About you, What we offer (from Lever lists) -->
+          <section data-job-lists class="flex flex-col gap-16">
+            {job?.lists && job.lists.length > 0 ? job.lists.map((list) => {
+              const contentIsHtml = list.content.includes("</li>");
+              return (
+                <div class="max-w-[768px] flex flex-col gap-5">
+                  <h2 class="font-display font-medium text-[36px] leading-[44px] tracking-[-0.72px] text-text-primary">{list.text}</h2>
+                  {contentIsHtml ? (
+                    <ul class="list-disc pl-7 flex flex-col gap-4 text-xl font-medium leading-[30px] text-text-tertiary" set:html={list.content.trim()} />
+                  ) : (
+                    <ul class="list-disc pl-7 flex flex-col gap-4 text-xl font-medium leading-[30px] text-text-tertiary">
+                      {(list.items && list.items.length > 0 ? list.items : [list.content]).map((item) => <li set:html={item} />)}
+                    </ul>
+                  )}
+                </div>
+              );
+            }) : null}
+          </section>
+
+          <!-- Closing paragraph (CTA + EEO from Lever additional) -->
+          <section class="flex flex-col gap-5">
+            <div data-job-additional class={`max-w-[768px] text-xl font-medium leading-[30px] text-text-tertiary prose prose-p:my-4 ${job?.additional ? "" : "hidden"}`} set:html={job?.additional ? job.additional.trim().replace(/\n/g, "<br/>") : ""} />
+          </section>
         </div>
-        <!-- Right: CTA Card -->
-        <div class="shrink-0 w-full lg:w-[437px] bg-bg-secondary rounded-[24px] p-8 flex flex-col gap-6">
+
+        <!-- Right: CTA Card (sticky on desktop) -->
+        <div class="shrink-0 w-full lg:w-full bg-bg-secondary rounded-[24px] p-8 flex flex-col gap-6 lg:sticky lg:top-28">
           <div class="flex flex-col gap-4">
             <div class="flex flex-col gap-2">
               <p class="font-mono text-sm font-semibold leading-6 tracking-[0.56px] uppercase text-text-on-brand-tertiary">JOIN US</p>
@@ -242,60 +275,29 @@ const shareBase = getCanonicalUrl("/careers/jobs");
               onclick="navigator.clipboard.writeText(document.querySelector('[data-share-url]')?.getAttribute('data-share-url') || window.location.href)"
             >
               <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="8" y="8" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                <rect x="8" y="8" width="13" height="13" rx="2"/><path d="M5 15H4a 2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
               </svg>
               Copy link
             </button>
-                        <span class="flex gap-3 items-center ">
-            <a data-share-twitter href="https://twitter.com/intent/tweet" target="_blank" rel="noopener" class="w-10 h-10 flex items-center justify-center bg-bg-primary border border-border-primary rounded-xl hover:bg-bg-secondary transition-colors duration-150" style="box-shadow: 0px 1px 2px rgba(10,13,18,0.05);">
-              <svg class="w-[18px] h-[18px] text-text-primary" viewBox="0 0 24 24" fill="currentColor" aria-label="Share on X">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.261 5.635 5.903-5.635zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-              </svg>
-            </a>
-            <a data-share-facebook href="https://www.facebook.com/sharer/sharer.php" target="_blank" rel="noopener" class="w-10 h-10 flex items-center justify-center bg-bg-primary border border-border-primary rounded-xl hover:bg-bg-secondary transition-colors duration-150" style="box-shadow: 0px 1px 2px rgba(10,13,18,0.05);">
-              <svg class="w-[18px] h-[18px] text-text-primary" viewBox="0 0 24 24" fill="currentColor" aria-label="Share on Facebook">
-                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-              </svg>
-            </a>
-            <a data-share-linkedin href="https://www.linkedin.com/shareArticle" target="_blank" rel="noopener" class="w-10 h-10 flex items-center justify-center bg-bg-primary border border-border-primary rounded-xl hover:bg-bg-secondary transition-colors duration-150" style="box-shadow: 0px 1px 2px rgba(10,13,18,0.05);">
-              <svg class="w-[18px] h-[18px] text-text-primary" viewBox="0 0 24 24" fill="currentColor" aria-label="Share on LinkedIn">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-              </svg>
-            </a>
+            <span class="flex gap-3 items-center ">
+              <a data-share-twitter href="https://twitter.com/intent/tweet" target="_blank" rel="noopener" class="w-10 h-10 flex items-center justify-center bg-bg-primary border border-border-primary rounded-xl hover:bg-bg-secondary transition-colors duration-150" style="box-shadow: 0px 1px 2px rgba(10,13,18,0.05);">
+                <svg class="w-[18px] h-[18px] text-text-primary" viewBox="0 0 24 24" fill="currentColor" aria-label="Share on X">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.261 5.635 5.903-5.635zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
+              <a data-share-facebook href="https://www.facebook.com/sharer/sharer.php" target="_blank" rel="noopener" class="w-10 h-10 flex items-center justify-center bg-bg-primary border border-border-primary rounded-xl hover:bg-bg-secondary transition-colors duration-150" style="box-shadow: 0px 1px 2px rgba(10,13,18,0.05);">
+                <svg class="w-[18px] h-[18px] text-text-primary" viewBox="0 0 24 24" fill="currentColor" aria-label="Share on Facebook">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+              </a>
+              <a data-share-linkedin href="https://www.linkedin.com/shareArticle" target="_blank" rel="noopener" class="w-10 h-10 flex items-center justify-center bg-bg-primary border border-border-primary rounded-xl hover:bg-bg-secondary transition-colors duration-150" style="box-shadow: 0px 1px 2px rgba(10,13,18,0.05);">
+                <svg class="w-[18px] h-[18px] text-text-primary" viewBox="0 0 24 24" fill="currentColor" aria-label="Share on LinkedIn">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+              </a>
             </span>
           </div>
         </div>
-      </div>
-
-      <!-- Job description (from Lever; includes role intro text) -->
-      <div class="w-full max-w-[1440px] px-8">
-        <div class="max-w-[768px] flex flex-col gap-5">
-          <div data-job-description class="text-xl font-medium leading-[30px] text-text-tertiary prose prose-p:my-4" set:html={job?.description ? job.description.trim().replace(/\n/g, "<br/>") : ""} />
-        </div>
-      </div>
-
-      <!-- What you'll do, About you, What we offer (from Lever lists) -->
-      <div data-job-lists class="w-full max-w-[1440px] px-8 flex flex-col gap-16">
-        {job?.lists && job.lists.length > 0 ? job.lists.map((list) => {
-          const contentIsHtml = list.content.includes("</li>");
-          return (
-            <div class="max-w-[768px] flex flex-col gap-5">
-              <h2 class="font-display font-medium text-[36px] leading-[44px] tracking-[-0.72px] text-text-primary">{list.text}</h2>
-              {contentIsHtml ? (
-                <ul class="list-disc pl-7 flex flex-col gap-4 text-xl font-medium leading-[30px] text-text-tertiary" set:html={list.content.trim()} />
-              ) : (
-                <ul class="list-disc pl-7 flex flex-col gap-4 text-xl font-medium leading-[30px] text-text-tertiary">
-                  {(list.items && list.items.length > 0 ? list.items : [list.content]).map((item) => <li set:html={item} />)}
-                </ul>
-              )}
-            </div>
-          );
-        }) : null}
-      </div>
-
-      <!-- Closing paragraph (CTA + EEO from Lever additional) -->
-      <div class="w-full max-w-[1440px] px-8">
-        <div data-job-additional class={`max-w-[768px] text-xl font-medium leading-[30px] text-text-tertiary prose prose-p:my-4 ${job?.additional ? "" : "hidden"}`} set:html={job?.additional ? job.additional.trim().replace(/\n/g, "<br/>") : ""} />
       </div>
 
       <!-- Share this article -->
