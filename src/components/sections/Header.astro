@@ -134,7 +134,11 @@ const solutionIcons: Record<string, string> = {
                   <p class="text-sm font-semibold leading-5 text-[#335645]">{item.label}</p>
                   <div class="flex flex-col gap-2">
                     {getChildren(item).map((link: any) => (
-                      <a href={link.href || "/"} class="solutions-link flex gap-3 items-start p-3 rounded-lg transition-colors hover:bg-[#fafafa]">
+                      <a
+                        href={link.href || "/"}
+                        class="solutions-link flex gap-3 items-start p-3 rounded-lg transition-colors hover:bg-[#fafafa]"
+                        data-features={JSON.stringify(link.features || getFeatures(item))}
+                      >
                         {link.iconName && solutionIcons[link.iconName] && (
                           <div class="shrink-0 pt-0.5 text-[#079455]" set:html={solutionIcons[link.iconName]} />
                         )}
@@ -150,7 +154,7 @@ const solutionIcons: Record<string, string> = {
                 </div>
                 <div class="solutions-features flex-col gap-2 p-6 w-[300px] shrink-0 bg-[#f4f6f4] self-stretch">
                   <p class="text-sm font-semibold leading-5 text-[#335645]">Features</p>
-                  <div class="flex flex-col gap-3">
+                  <div class="solutions-features-list flex flex-col gap-3">
                     {getFeatures(item).map((feat: any) => (
                       <a href={feat.href || "/"} class="text-base font-medium leading-6 text-[#535862] hover:text-[#181d27] transition-colors px-1">
                         {feat.label}
@@ -305,10 +309,10 @@ const solutionIcons: Record<string, string> = {
     right: auto !important;
   }
   .dropdown-panel-solutions {
-    transition: width 180ms ease-out;
+    transition: width 260ms ease-in-out;
   }
   .dropdown-panel-solutions .solutions-features {
-    transition: opacity 180ms ease-out;
+    transition: opacity 260ms ease-in-out;
   }
 </style>
 
@@ -328,11 +332,24 @@ const solutionIcons: Record<string, string> = {
   }
 
   function initSolutionsFeatures() {
+    if (document.body.dataset.solutionsMenuInit === "1") return;
+    document.body.dataset.solutionsMenuInit = "1";
+
     const menus = document.querySelectorAll(".dropdown-panel-solutions");
     menus.forEach((menu) => {
       if (!(menu instanceof HTMLElement)) return;
       const features = menu.querySelector(".solutions-features");
       if (!(features instanceof HTMLElement)) return;
+      const list = features.querySelector(".solutions-features-list");
+      if (!(list instanceof HTMLElement)) return;
+
+      const escapeHtml = (s) =>
+        String(s)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+
       // Initial state: only solutions column visible
       menu.style.width = "400px";
       features.style.display = "none";
@@ -340,6 +357,28 @@ const solutionIcons: Record<string, string> = {
       const links = menu.querySelectorAll(".solutions-link");
       links.forEach((link) => {
         link.addEventListener("mouseenter", () => {
+          if (link instanceof HTMLElement) {
+            const raw = link.getAttribute("data-features");
+            if (raw) {
+              try {
+                const feats = JSON.parse(raw);
+                if (Array.isArray(feats)) {
+                  list.innerHTML = feats
+                    .map(
+                      (feat) =>
+                        `<a href="${escapeHtml(
+                          feat.href || "/"
+                        )}" class="text-base font-medium leading-6 text-[#535862] hover:text-[#181d27] transition-colors px-1">${escapeHtml(
+                          feat.label || ""
+                        )}</a>`
+                    )
+                    .join("");
+                }
+              } catch {
+                // ignore bad JSON
+              }
+            }
+          }
           menu.style.width = "700px";
           features.style.display = "flex";
           requestAnimationFrame(() => {

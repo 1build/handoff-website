@@ -3,6 +3,8 @@ export interface NavLink {
   href: string;
   description?: string;
   iconName?: string;
+  /** Optional feature list for this nav item (used by Solutions menu) */
+  features?: NavLink[];
 }
 
 export interface NavSection {
@@ -24,6 +26,58 @@ export function isDropdown(item: NavItem): item is NavDropdown {
   return "items" in item;
 }
 
+// Base features list used to derive per-solution feature groups.
+const solutionsBaseFeatures: NavLink[] = [
+  { label: "Instant AI estimates", href: "/instant-ai-estimates" },
+  { label: "Winning AI proposals", href: "/winning-ai-proposals" },
+  { label: "Client management CRM", href: "/client-management-system" },
+  { label: "Project management", href: "/project-management" },
+  { label: "Change orders", href: "/change-orders" },
+  { label: "File management", href: "/file-management" },
+  { label: "Estimates from files", href: "/creating-estimates-from-files" },
+  { label: "Invoicing", href: "/invoicing" },
+  { label: "Customer financing", href: "/homeowner-financing" },
+  { label: "AI agent", href: "/ai-agent" },
+  { label: "AI documents", href: "/ai-documents" },
+  { label: "AI transcription", href: "/ai-transcription" },
+];
+
+// Per-solution feature groups (currently overlapping / similar,
+// but structured so they can diverge later without code changes).
+const salesAndMarketingFeatures: NavLink[] = [
+  solutionsBaseFeatures[0], // Instant AI estimates
+  solutionsBaseFeatures[1], // Winning AI proposals
+  solutionsBaseFeatures[2], // Client management CRM
+  solutionsBaseFeatures[3], // Project management
+  solutionsBaseFeatures[4], // Change orders
+  solutionsBaseFeatures[5], // File management
+  solutionsBaseFeatures[6], // Estimates from files
+  solutionsBaseFeatures[7], // Customer financing
+  solutionsBaseFeatures[8], // Customer financing
+  solutionsBaseFeatures[9],  // AI agent
+  solutionsBaseFeatures[10], // AI documents
+  solutionsBaseFeatures[11], // AI transcription
+];
+
+const projectManagementFeatures: NavLink[] = [
+  solutionsBaseFeatures[3], // Project management
+  solutionsBaseFeatures[4], // Change orders
+  solutionsBaseFeatures[5], // File management
+  solutionsBaseFeatures[6], // Estimates from files
+];
+
+const financialBusinessFeatures: NavLink[] = [
+  solutionsBaseFeatures[7], // Invoicing
+  solutionsBaseFeatures[8], // Customer financing
+];
+
+const aiTeammateFeatures: NavLink[] = [
+  solutionsBaseFeatures[9],  // AI agent
+  solutionsBaseFeatures[10], // AI documents
+  solutionsBaseFeatures[11], // AI transcription
+  solutionsBaseFeatures[0],  // Instant AI estimates
+];
+
 export const navItems: NavItem[] = [
   {
     label: "Who We Serve",
@@ -42,41 +96,33 @@ export const navItems: NavItem[] = [
         href: "/sales-marketing-growth",
         description: "Turn leads into signed contracts",
         iconName: "book-closed",
+        features: salesAndMarketingFeatures,
       },
       {
         label: "Project management and operations",
         href: "/project-management",
         description: "One system from estimate to completion",
         iconName: "stars-02",
+        features: projectManagementFeatures,
       },
       {
         label: "Financial and business management",
         href: "/financial-business-solution",
         description: "Get paid faster. Know your numbers",
         iconName: "play-circle",
+        features: financialBusinessFeatures,
       },
       {
         label: "AI teammate",
         href: "/ai-teammate",
         description: "Your always-on estimating partner",
         iconName: "file-code",
+        features: aiTeammateFeatures,
       },
       
     ],
-    features: [
-      { label: "Instant AI estimates", href: "/instant-ai-estimates" },
-      { label: "Winning AI proposals", href: "/winning-ai-proposals" },
-      { label: "Client management CRM", href: "/client-management-system" },
-      { label: "Project management", href: "/project-management" },
-      { label: "Change orders", href: "/change-orders" },
-      { label: "File management", href: "/file-management" },
-      { label: "Estimates from files", href: "/creating-estimates-from-files" },
-      { label: "Invoicing", href: "/invoicing" },
-      { label: "Customer financing", href: "/homeowner-financing" },
-      { label: "AI agent", href: "/ai-agent" },
-      { label: "AI documents", href: "/ai-documents" },
-      { label: "AI transcription", href: "/ai-transcription" },
-    ],
+    // Default/fallback features list shown when no specific solution is hovered.
+    features: solutionsBaseFeatures,
   },
   { label: "Pricing", href: "/pricing" },
   {
