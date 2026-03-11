@@ -89,7 +89,7 @@ const seo = getPageSeo(Astro.url.pathname);
 
         {/* Category Tabs */}
         {categories.length > 1 && (
-          <div class="flex items-center gap-2 border-b border-neutral-200 overflow-x-auto mb-12">
+          <div id="blog-list" class="flex items-center gap-2 border-b border-neutral-200 overflow-x-auto mb-12">
             {categories.map((cat, i) => (
               <button
                 class:list={[

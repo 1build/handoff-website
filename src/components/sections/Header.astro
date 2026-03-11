@@ -128,38 +128,43 @@ const solutionIcons: Record<string, string> = {
               </div>
             </div>
           ) : getFeatures(item).length > 0 ? (
-            <div class="dropdown-panel absolute top-full left-1/2 -translate-x-1/2 w-[700px] bg-white border border-black/[0.08] rounded-2xl shadow-[0px_12px_16px_-4px_rgba(10,13,18,0.08),0px_4px_6px_-2px_rgba(10,13,18,0.03),0px_2px_2px_-1px_rgba(10,13,18,0.04)] flex overflow-hidden">
-              <div class="flex flex-col gap-2 p-6 w-[400px] shrink-0">
-                <p class="text-sm font-semibold leading-5 text-[#335645]">{item.label}</p>
-                <div class="flex flex-col gap-2">
-                  {getChildren(item).map((link: any) => (
-                    <a href={link.href || "/"} class="flex gap-3 items-start p-3 rounded-lg transition-colors hover:bg-[#fafafa]">
-                      {link.iconName && solutionIcons[link.iconName] && (
-                        <div class="shrink-0 pt-0.5 text-[#079455]" set:html={solutionIcons[link.iconName]} />
-                      )}
-                      <div class="flex flex-col gap-0.5 min-w-0">
-                        <span class="font-medium text-base leading-6 text-[#181d27]">{link.label}</span>
-                        {link.description && (
-                          <span class="text-sm leading-5 text-[#535862]">{link.description}</span>
+            <div class="dropdown-panel dropdown-panel-solutions absolute top-full left-1/2 -translate-x-1/2 bg-white border border-black/[0.08] rounded-2xl shadow-[0px_12px_16px_-4px_rgba(10,13,18,0.08),0px_4px_6px_-2px_rgba(10,13,18,0.03),0px_2px_2px_-1px_rgba(10,13,18,0.04)] overflow-hidden">
+              <div class="flex w-full">
+                <div class="flex flex-col gap-2 p-6 w-[400px] shrink-0">
+                  <p class="text-sm font-semibold leading-5 text-[#335645]">{item.label}</p>
+                  <div class="flex flex-col gap-2">
+                    {getChildren(item).map((link: any) => (
+                      <a href={link.href || "/"} class="solutions-link flex gap-3 items-start p-3 rounded-lg transition-colors hover:bg-[#fafafa]">
+                        {link.iconName && solutionIcons[link.iconName] && (
+                          <div class="shrink-0 pt-0.5 text-[#079455]" set:html={solutionIcons[link.iconName]} />
                         )}
-                      </div>
-                    </a>
-                  ))}
+                        <div class="flex flex-col gap-0.5 min-w-0">
+                          <span class="font-medium text-base leading-6 text-[#181d27]">{link.label}</span>
+                          {link.description && (
+                            <span class="text-sm leading-5 text-[#535862]">{link.description}</span>
+                          )}
+                        </div>
+                      </a>
+                    ))}
+                  </div>
                 </div>
-              </div>
-              <div class="flex flex-col gap-2 p-6 w-[300px] shrink-0 bg-[#f4f6f4] self-stretch">
-                <p class="text-sm font-semibold leading-5 text-[#335645]">Features</p>
-                <div class="flex flex-col gap-3">
-                  {getFeatures(item).map((feat: any) => (
-                    <a href={feat.href || "/"} class="text-base font-medium leading-6 text-[#535862] hover:text-[#181d27] transition-colors px-1">
-                      {feat.label}
-                    </a>
-                  ))}
+                <div class="solutions-features flex-col gap-2 p-6 w-[300px] shrink-0 bg-[#f4f6f4] self-stretch">
+                  <p class="text-sm font-semibold leading-5 text-[#335645]">Features</p>
+                  <div class="flex flex-col gap-3">
+                    {getFeatures(item).map((feat: any) => (
+                      <a href={feat.href || "/"} class="text-base font-medium leading-6 text-[#535862] hover:text-[#181d27] transition-colors px-1">
+                        {feat.label}
+                      </a>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
           ) : hasIconItems(item) ? (
-            <div class="dropdown-panel absolute top-full left-1/2 -translate-x-1/2 min-w-[420px] bg-white border border-black/[0.08] rounded-xl p-6 flex flex-col gap-2 shadow-[0px_12px_16px_-4px_rgba(10,13,18,0.08),0px_4px_6px_-2px_rgba(10,13,18,0.03),0px_2px_2px_-1px_rgba(10,13,18,0.04)]">
+            <div
+              class="dropdown-panel absolute top-full left-1/2 -translate-x-1/2 min-w-[420px] bg-white border border-black/[0.08] rounded-xl p-6 flex flex-col gap-2 shadow-[0px_12px_16px_-4px_rgba(10,13,18,0.08),0px_4px_6px_-2px_rgba(10,13,18,0.03),0px_2px_2px_-1px_rgba(10,13,18,0.04)]"
+              style={item.label === "Support" ? "min-width:260px" : undefined}
+            >
               {getChildren(item).map((link: any) => (
                 <a href={link.href || "/"} class="flex gap-3 items-start p-3 rounded-lg transition-colors hover:bg-[#fafafa]">
                   {link.iconName && solutionIcons[link.iconName] && (
@@ -253,6 +258,20 @@ const solutionIcons: Record<string, string> = {
                     </a>
                   </li>
                 ))}
+                {getFeatures(item).length > 0 && (
+                  <>
+                    <li class="mt-2 mb-1 px-3 text-xs font-semibold uppercase tracking-[0.08em] text-white/60">
+                      Features
+                    </li>
+                    {getFeatures(item).map((feat: any) => (
+                      <li>
+                        <a href={feat.href || "/"} class="mobile-menu-link block px-3 py-1.5 rounded-md text-white/80 text-sm font-medium hover:bg-white/10 hover:text-white transition-colors">
+                          {feat.label}
+                        </a>
+                      </li>
+                    ))}
+                  </>
+                )}
               </ul>
             </details>
           ) : (
@@ -285,6 +304,12 @@ const solutionIcons: Record<string, string> = {
     transform: none !important;
     right: auto !important;
   }
+  .dropdown-panel-solutions {
+    transition: width 180ms ease-out;
+  }
+  .dropdown-panel-solutions .solutions-features {
+    transition: opacity 180ms ease-out;
+  }
 </style>
 
 <script>
@@ -300,6 +325,36 @@ const solutionIcons: Record<string, string> = {
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
+  }
+
+  function initSolutionsFeatures() {
+    const menus = document.querySelectorAll(".dropdown-panel-solutions");
+    menus.forEach((menu) => {
+      if (!(menu instanceof HTMLElement)) return;
+      const features = menu.querySelector(".solutions-features");
+      if (!(features instanceof HTMLElement)) return;
+      // Initial state: only solutions column visible
+      menu.style.width = "400px";
+      features.style.display = "none";
+      features.style.opacity = "0";
+      const links = menu.querySelectorAll(".solutions-link");
+      links.forEach((link) => {
+        link.addEventListener("mouseenter", () => {
+          menu.style.width = "700px";
+          features.style.display = "flex";
+          requestAnimationFrame(() => {
+            features.style.opacity = "1";
+          });
+        });
+      });
+      menu.addEventListener("mouseleave", () => {
+        menu.style.width = "400px";
+        features.style.opacity = "0";
+        setTimeout(() => {
+          features.style.display = "none";
+        }, 180);
+      });
+    });
   }
 
   function initMobileMenu() {
@@ -392,6 +447,7 @@ const solutionIcons: Record<string, string> = {
 
   function init() {
     initHeader();
+    initSolutionsFeatures();
     initMobileMenu();
   }
   if (document.readyState === "loading") {

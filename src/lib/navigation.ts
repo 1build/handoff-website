@@ -61,12 +61,7 @@ export const navItems: NavItem[] = [
         description: "Your always-on estimating partner",
         iconName: "file-code",
       },
-      {
-        label: "Integrations",
-        href: "/",
-        description: "Connect the tools you already use",
-        iconName: "link",
-      },
+      
     ],
     features: [
       { label: "Instant AI estimates", href: "/instant-ai-estimates" },
@@ -90,9 +85,9 @@ export const navItems: NavItem[] = [
       {
         label: "Learn",
         items: [
-          { label: "Case studies", href: "/", description: "See how contractors win with Handoff", iconName: "book-closed" },
+          { label: "Case studies", href: "/blog#blog-list", description: "See how contractors win with Handoff", iconName: "book-closed" },
           { label: "Blog", href: "/blog", description: "Tips, trends, and product updates", iconName: "pencil-line" },
-          { label: "Guides", href: "/", description: "Step by step playbooks for your business", iconName: "book-open-01" },
+          { label: "Guides", href: "/blog#blog-list", description: "Step by step playbooks for your business", iconName: "book-open-01" },
           { label: "Webinars", href: "/contractor-webinars", description: "Live sessions with industry pros.", iconName: "play-circle" },
         ],
       },
@@ -100,7 +95,7 @@ export const navItems: NavItem[] = [
         label: "Community",
         items: [
           { label: "Testimonials", href: "/reviews", description: "Real stories from real contractors", iconName: "message-text-circle-02" },
-          { label: "Platform updates", href: "/", description: "What's new in Handoff", iconName: "announcement-01" },
+          { label: "Platform updates", href: "/blog#blog-list", description: "What's new in Handoff", iconName: "announcement-01" },
           { label: "Contractor course", href: "/contractor-course", description: "Level up your remodeling business", iconName: "graduation-hat-01" },
           { label: "Careers", href: "/careers", description: "Build something that matters", iconName: "briefcase-02" },
           { label: "Handoff Nation community", href: "/", description: "Connect with contractors like you", iconName: "users-plus" },
