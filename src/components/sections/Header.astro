@@ -159,7 +159,7 @@ const solutionIcons: Record<string, string> = {
               </div>
             </div>
           ) : hasIconItems(item) ? (
-            <div class="dropdown-panel absolute top-full left-1/2 -translate-x-1/2 min-w-[300px] bg-white border border-black/[0.08] rounded-xl p-6 flex flex-col gap-2 shadow-[0px_12px_16px_-4px_rgba(10,13,18,0.08),0px_4px_6px_-2px_rgba(10,13,18,0.03),0px_2px_2px_-1px_rgba(10,13,18,0.04)]">
+            <div class="dropdown-panel absolute top-full left-1/2 -translate-x-1/2 min-w-[420px] bg-white border border-black/[0.08] rounded-xl p-6 flex flex-col gap-2 shadow-[0px_12px_16px_-4px_rgba(10,13,18,0.08),0px_4px_6px_-2px_rgba(10,13,18,0.03),0px_2px_2px_-1px_rgba(10,13,18,0.04)]">
               {getChildren(item).map((link: any) => (
                 <a href={link.href || "/"} class="flex gap-3 items-start p-3 rounded-lg transition-colors hover:bg-[#fafafa]">
                   {link.iconName && solutionIcons[link.iconName] && (
@@ -199,10 +199,12 @@ const solutionIcons: Record<string, string> = {
     <!-- Actions (desktop) + Mobile menu button -->
     <div class="flex items-center gap-3">
       <div class="hidden lg:flex items-center gap-3">
-        <a href="https://app.handoff.ai/login/" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 text-base font-medium leading-6 rounded-xl transition-all duration-150 whitespace-nowrap bg-white/10 backdrop-blur-md text-white hover:bg-black/30">
+        <a href="https://app.handoff.ai/login/"
+         class="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 text-base font-medium leading-6 rounded-xl transition-all duration-150 whitespace-nowrap bg-white/10 backdrop-blur-md text-white hover:bg-black/30">
           Log in
         </a>
-        <a href="https://app.handoff.ai/sign-up/?af_xp=custom&source_caller=ui&pid=handoff_landing&af_js_web=true&shortlink=landing&deep_link_value=%2Festimates&af_ss_ui=true&c=landing_default&af_ss_ver=2_8_1" target="_blank" class="relative inline-flex items-center justify-center gap-1.5 px-5 py-2.5 text-base font-medium leading-6 rounded-xl transition-all duration-150 whitespace-nowrap bg-brand-accent text-white shadow-[0px_1px_2px_0px_rgba(10,13,18,0.05)] hover:bg-brand-500">
+        <a href="https://app.handoff.ai/sign-up/?af_xp=custom&source_caller=ui&pid=handoff_landing&af_js_web=true&shortlink=landing&deep_link_value=%2Festimates&af_ss_ui=true&c=landing_default&af_ss_ver=2_8_1"
+         class="relative inline-flex items-center justify-center gap-1.5 px-5 py-2.5 text-base font-medium leading-6 rounded-xl transition-all duration-150 whitespace-nowrap bg-brand-accent text-white shadow-[0px_1px_2px_0px_rgba(10,13,18,0.05)] hover:bg-brand-500">
           Sign up
           <span class="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_0px_0px_1px_rgba(10,13,18,0.18),inset_0px_-2px_0px_0px_rgba(10,13,18,0.05)]"></span>
         </a>

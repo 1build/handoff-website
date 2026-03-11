@@ -1,4 +1,3 @@
 {
-  "_comment": "Redirects for Vercel. Example entry: { \"source\": \"/blogold/:slug\", \"destination\": \"/blog/:slug\", \"permanent\": true }",
   "redirects": []
 }

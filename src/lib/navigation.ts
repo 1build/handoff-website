@@ -29,7 +29,7 @@ export const navItems: NavItem[] = [
     label: "Who We Serve",
     items: [
       { label: "Established remodelers", href: "/remodelers", description: "See how contractors win with Handoff", iconName: "book-closed" },
-      { label: "New and small remodeling businesses", href: "/fix-and-flip", description: "Tips, trends, and product updates", iconName: "pencil-line" },
+      { label: "New and small remodeling businesses", href: "/", description: "Tips, trends, and product updates", iconName: "pencil-line" },
       { label: "Trade contractors and handymen", href: "/handyman", description: "Step by step playbooks for your business", iconName: "book-open-01" },
     ],
   },
@@ -69,7 +69,7 @@ export const navItems: NavItem[] = [
       },
     ],
     features: [
-      { label: "Instant AI estimates", href: "/" },
+      { label: "Instant AI estimates", href: "/instant-ai-estimates" },
       { label: "Winning AI proposals", href: "/" },
       { label: "Client management CRM", href: "/" },
       { label: "Project management", href: "/" },
@@ -123,7 +123,7 @@ export const navItems: NavItem[] = [
     label: "Support",
     items: [
       { label: "Contact us", href: "/", description: "We're here to help", iconName: "book-closed" },
-      { label: "Help center", href: "https://help.handoff.ai/en/", description: "Find answers fast", iconName: "pencil-line" },
+      { label: "Help center", href: "/", description: "Find answers fast", iconName: "pencil-line" },
     ],
   },
 ];
@@ -163,7 +163,7 @@ export const footerColumns: FooterColumn[] = [
       { label: "Blog", href: "/blog" },
       { label: "Newsletter", href: "/" },
       { label: "Events", href: "/" },
-      { label: "Help centre", href: "https://help.handoff.ai/en/" },
+      { label: "Help centre", href: "/" },
       { label: "Tutorials", href: "/" },
       { label: "Support", href: "/" },
     ],
