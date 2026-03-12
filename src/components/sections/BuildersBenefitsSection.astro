@@ -1,0 +1,310 @@
+---
+import iconLayout from "@/assets/icons/icon-layout.svg";
+import seeInActionHero from "@/assets/images/see-in-action-hero.png";
+import featureCrm from "@/assets/images/feature-crm.png";
+import featureProposals from "@/assets/images/feature-proposals.png";
+import featureInvoicing from "@/assets/images/feature-invoicing.png";
+import logoLowes from "@/assets/images/logo-lowes.png";
+import logoHomedepot from "@/assets/images/logo-homedepot.png";
+import avatarEjElliot from "@/assets/images/avatar-ej-elliot.png";
+import testimonialEjElliot from "@/assets/images/testimonial-ej-elliot.png";
+import BulletIcon from "@/components/ui/BulletIcon.astro";
+import CustomerStorySection from "@/components/sections/CustomerStorySection.astro";
+
+const benefits = [
+  {
+    title: "AI takeoffs that match your scope",
+    description: "Describe the build, upload your plans, or walk through the home. Handoff generates a complete, line-item takeoff in minutes — organized by trade, ready to review.",
+  },
+  {
+    title: "Win the bid before you leave the lot",
+    description: "Turn your takeoff into a professional proposal in one click. Hand it to your client while you're still on site. No waiting, no follow-up emails, no lost jobs to a faster competitor.",
+  },
+  {
+    title: "One place for the whole project",
+    description: "From signed contract to final payment, every estimate, change order, invoice, and document lives in one system. You always know where things stand.",
+  },
+  {
+    title: "Protect your margins on every job",
+    description: "Pricing that syncs with local material costs means your estimates reflect what things actually cost today — not what they cost six months ago.",
+  },
+];
+
+const estimateRows = [
+  { num: "2.1", name: "Ceramic Wall Tile, Standard Grade", qty: "30", unit: "SF", unitCost: "4.88", type: "Material", subtotal: "146.40" },
+  { num: "2.2", name: "Modified Thinset Mortar, Gray", qty: "2", unit: "BG", unitCost: "26.97", type: "Material", subtotal: "53.94" },
+  { num: "2.3", name: "Sanded Tile Grout, Premium Grade", qty: "1", unit: "BG", unitCost: "12.99", type: "Material", subtotal: "12.99" },
+  { num: "2.4", name: "Aluminum Tile Edge Trim", qty: "10", unit: "LF", unitCost: "14.82", type: "Material", subtotal: "148.20" },
+  { num: "2.5", name: "Tile Installation Labor", qty: "30", unit: "SF", unitCost: "19.96", type: "Labor", subtotal: "598.80" },
+];
+
+const features = [
+  {
+    eyebrow: "GENERATING",
+    title: "AI Estimates",
+    description: "Handoff builds line-item estimates organized by trade — foundation, framing, plumbing, electrical, finishes. Every number is traceable. Every cost is defensible.",
+    bullets: [
+      "Upload plans or describe the project in plain language",
+      "AI generates scope across every trade automatically",
+      "Material pricing pulls from your local Lowe's and Home Depot",
+      "Adjust any line item before sending",
+    ],
+    reverse: false,
+    visualType: "estimates" as const,
+  },
+  {
+    eyebrow: "GENERATING",
+    title: "Proposals",
+    description: "One click converts your estimate into a polished proposal. Your client reads it, signs it, and pays the deposit — all in the same sitting.",
+    bullets: [
+      "Professional layout, your branding",
+      "AI writes the project description for you",
+      "Attach photos, plans, and documents",
+      "Collect e-signatures from any device",
+    ],
+    reverse: true,
+    visualType: "screenshot" as const,
+    image: featureProposals,
+  },
+  {
+    eyebrow: "GENERATING",
+    title: "Change Orders",
+    description: "Scope creep is the #1 way custom builders lose money. Handoff makes it easy to document every change, price it correctly, and get it approved before work starts.",
+    bullets: [
+      "Create change orders directly from any project",
+      "Client approves with a signature — no disputes later",
+      "Budget and timeline update automatically",
+      "Full audit trail of every change",
+    ],
+    reverse: false,
+    visualType: "screenshot" as const,
+    image: featureCrm,
+  },
+  {
+    eyebrow: "GENERATING",
+    title: "Invoicing",
+    description: "Custom builds are paid in draws. Handoff ties your invoices to project milestones so you get paid on schedule without chasing clients.",
+    bullets: [
+      "Milestone-based invoicing built into the project",
+      "Accept credit card, ACH, or check",
+      "Payment hits your account directly",
+      "Full payment history in one place",
+    ],
+    reverse: true,
+    visualType: "screenshot" as const,
+    image: featureInvoicing,
+  },
+];
+---
+
+<section class="relative z-[2] px-4 bg-bg-brand-dark">
+  <div class="max-w-[1920px] mx-auto bg-white rounded-[20px] border border-[rgba(0,0,0,0.04)] overflow-hidden py-24 flex flex-col">
+
+    <!-- Key Benefits -->
+    <div class="max-w-[1440px] mx-auto w-full px-8 flex flex-col gap-32 pb-32">
+      <!-- Header -->
+      <div class="flex flex-col gap-5 max-w-[1024px]">
+        <h2 class="font-display text-[48px] font-medium leading-[60px] tracking-[-0.96px] text-text-primary">
+          Custom homes are complex. Your estimating tool should keep up.
+        </h2>
+        <p class="text-xl leading-[30px] text-text-tertiary">
+          Most builders still price jobs by hand or lean on gut feel. Handoff changes that — without requiring you to become a software expert.
+        </p>
+      </div>
+
+      <!-- Benefit Cards -->
+      <div class="flex flex-col sm:flex-row flex-wrap lg:flex-nowrap gap-8">
+        {benefits.map((b) => (
+          <div class="bg-bg-secondary rounded-xl p-6 flex flex-1 flex-col gap-8 h-auto items-start">
+            <div class="bg-white rounded-md p-3 shadow-3xl overflow-clip">
+              <img src={iconLayout.src} alt="" class="w-6 h-6" />
+            </div>
+            <div class="flex flex-col gap-4 w-full">
+              <h3 class="font-display text-2xl font-medium leading-8 text-text-primary">
+                {b.title}
+              </h3>
+              <p class="text-lg leading-7 text-text-tertiary">
+                {b.description}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <svg class="w-full h-[3px] shrink-0" preserveAspectRatio="none" viewBox="0 0 1568 3.55" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0.1 0.5C22.2 5.1 1054.6 2.4 1568.1 0.5" stroke="#D5D7DA"/>
+    </svg>
+
+    <!-- See In Action -->
+    <div class="max-w-[1440px] mx-auto w-full flex flex-col gap-16 mt-32">
+      <!-- Header -->
+      <div class="flex flex-col gap-6 items-center text-center px-8 max-w-[768px] mx-auto">
+        <div class="flex flex-col gap-3 items-center">
+          <p class="font-mono text-sm font-semibold leading-6 tracking-[0.56px] uppercase text-text-quaternary">
+            SEE IN ACTION
+          </p>
+          <h2 class="font-display text-[48px] font-medium leading-[60px] tracking-[-0.96px] text-text-primary">
+            Modern Builders move faster
+          </h2>
+        </div>
+        <p class="text-xl leading-[30px] text-text-tertiary">
+          See how top builders use Handoff to run their day-to-day on connected systems and AI, not sticky notes and memory.
+        </p>
+      </div>
+
+      <!-- Hero Image -->
+      <div class="px-8">
+        <div class="w-full h-[600px] rounded-xl overflow-hidden bg-neutral-300">
+          <img
+            src={seeInActionHero.src}
+            alt="Modern home builder using Handoff on their phone"
+            class="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <svg class="w-full h-[3px] shrink-0 mt-32" preserveAspectRatio="none" viewBox="0 0 1568 3.55" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0.1 0.5C22.2 5.1 1054.6 2.4 1568.1 0.5" stroke="#D5D7DA"/>
+    </svg>
+
+    <!-- Feature Rows -->
+    {features.map((f) => (
+      <div class={`max-w-[1440px] mx-auto w-full px-8 flex flex-col lg:flex-row gap-24 items-center mt-32 ${f.reverse ? "lg:flex-row-reverse" : ""}`}>
+        <!-- Text Content -->
+        <div class="flex-1 flex flex-col gap-0 py-6">
+          <div class="flex flex-col gap-5">
+            <div class="flex flex-col gap-3">
+              <p class="font-mono text-sm font-semibold leading-6 tracking-[0.56px] uppercase text-text-quaternary">
+                {f.eyebrow}
+              </p>
+              <h3 class="font-display text-4xl font-medium leading-[44px] tracking-[-0.72px] text-text-primary">
+                {f.title}
+              </h3>
+            </div>
+            <p class="text-xl font-medium leading-[30px] text-text-tertiary">
+              {f.description}
+            </p>
+          </div>
+          {f.bullets && (
+            <ul class="flex flex-col gap-4 mt-auto pt-8">
+              {f.bullets.map((b) => (
+                <li class="flex items-center gap-3 text-lg font-medium leading-7 text-text-quaternary">
+                  <BulletIcon />
+                  {b}
+                </li>
+              ))}
+            </ul>
+          )}
+          <div class="mt-8">
+            <a
+              href="/signup"
+              class="inline-flex items-center justify-center gap-1.5 font-medium text-base leading-6 rounded-xl px-[22px] py-3 w-fit whitespace-nowrap bg-white border border-border-primary text-text-secondary shadow-xs transition-all duration-150 hover:bg-neutral-50"
+            >
+              Start free trial
+            </a>
+          </div>
+        </div>
+
+        <!-- Visual -->
+        {f.visualType === "estimates" ? (
+          <div class="flex-1 w-full lg:w-auto h-[512px] bg-brand-50 rounded-xl overflow-hidden relative">
+            <!-- Background Grid Pattern -->
+            <div class="absolute inset-0 pointer-events-none opacity-[0.06]" style="background-image: radial-gradient(circle, currentColor 1px, transparent 1px); background-size: 24px 24px;"></div>
+
+            <!-- Connecting Lines -->
+            <svg class="absolute left-[130px] top-[190px] w-[130px] h-[50px] z-[5] pointer-events-none" viewBox="0 0 130 50" fill="none">
+              <path d="M0 20 C50 20, 70 4, 130 4" stroke="rgba(155,161,161,0.3)" stroke-width="1.2" stroke-dasharray="5 4" />
+              <path d="M0 30 C50 30, 70 46, 130 46" stroke="rgba(155,161,161,0.3)" stroke-width="1.2" stroke-dasharray="5 4" />
+            </svg>
+
+            <!-- Supplier Logos -->
+            <div class="absolute left-[48px] z-10 flex flex-col">
+              <!-- Lowe's -->
+              <div class="w-[84px] h-[84px] bg-white rounded-[18px] border-[7px] border-white/10 shadow-lg overflow-hidden ml-6 mt-[88px] flex items-center justify-center">
+                <img src={logoLowes.src} alt="Lowe's" class="w-full h-full object-cover" />
+              </div>
+              <!-- Home Depot -->
+              <div class="w-[84px] h-[84px] bg-white rounded-[18px] border-[7px] border-white/10 shadow-lg overflow-hidden mt-[64px] flex items-center justify-center">
+                <img src={logoHomedepot.src} alt="Home Depot" class="w-full h-full object-cover" />
+              </div>
+            </div>
+
+            <!-- Estimate Table -->
+            <div class="absolute top-[85px] left-[220px] w-[500px] bg-white rounded-xl border-[9px] border-white/10 shadow-xl overflow-hidden">
+              <!-- Group Header -->
+              <div class="bg-[rgba(155,161,161,0.08)] border-b border-[rgba(155,161,161,0.24)] flex items-center h-[52px]">
+                <div class="flex items-center w-[60px] pl-3">
+                  <span class="text-xs text-[#899090] font-medium">2</span>
+                </div>
+                <div class="flex-1 flex items-center px-3 border-r border-[rgba(155,161,161,0.24)] h-full">
+                  <span class="text-sm text-[#686e6e] font-medium">Tile</span>
+                </div>
+                <div class="w-[80px] flex items-center px-3 border-r border-[rgba(155,161,161,0.24)] h-full">
+                  <span class="text-xs text-[#899090] font-medium">5 items</span>
+                </div>
+                <div class="w-[72px] border-r border-[rgba(155,161,161,0.24)] h-full"></div>
+                <div class="w-[72px] border-r border-[rgba(155,161,161,0.24)] h-full"></div>
+                <div class="w-[90px] flex items-center justify-end gap-0.5 px-3 border-r border-[rgba(155,161,161,0.24)] h-full">
+                  <span class="text-xs text-[#899090] font-medium">$</span>
+                  <span class="text-xs text-[#686e6e] font-medium">960.37</span>
+                </div>
+              </div>
+
+              <!-- Row Items -->
+              {estimateRows.map((row) => (
+                <div class="flex items-center h-[45px] border-b border-[rgba(155,161,161,0.12)]">
+                  <div class="flex items-center w-[60px] pl-3">
+                    <span class="text-xs text-[#899090] font-medium">{row.num}</span>
+                  </div>
+                  <div class="flex-1 flex items-center px-3 border-r border-[rgba(155,161,161,0.24)] h-full min-w-0">
+                    <span class="text-sm text-[#131515] font-medium truncate">{row.name}</span>
+                  </div>
+                  <div class="w-[80px] flex items-center gap-1 px-2 border-r border-[rgba(155,161,161,0.24)] h-full shrink-0">
+                    <span class="text-xs text-[#131515] font-medium">{row.qty}</span>
+                    <span class="text-[10px] text-[#131515] font-medium bg-[rgba(155,161,161,0.08)] border border-[rgba(155,161,161,0.12)] rounded px-1 py-px">{row.unit}</span>
+                  </div>
+                  <div class="w-[72px] flex items-center justify-end gap-px px-2 border-r border-[rgba(155,161,161,0.24)] h-full shrink-0">
+                    <span class="text-[10px] text-[#899090] font-medium">$</span>
+                    <span class="text-xs text-[#131515] font-medium">{row.unitCost}</span>
+                  </div>
+                  <div class="w-[72px] flex items-center px-2 border-r border-[rgba(155,161,161,0.24)] h-full shrink-0">
+                    <span class="text-[10px] text-[#131515] font-medium bg-[rgba(155,161,161,0.08)] border border-[rgba(155,161,161,0.12)] rounded px-1 py-px">{row.type}</span>
+                  </div>
+                  <div class="w-[90px] flex items-center justify-end gap-px px-3 border-r border-[rgba(155,161,161,0.24)] h-full shrink-0">
+                    <span class="text-[10px] text-[#899090] font-medium">$</span>
+                    <span class="text-xs text-[#686e6e] font-medium">{row.subtotal}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : f.visualType === "screenshot" && f.image ? (
+          <div class="flex-1 w-full lg:w-auto h-[512px] bg-brand-50 rounded-xl overflow-hidden relative flex items-center justify-center">
+            <img
+              src={f.image.src}
+              alt={`${f.title} screenshot`}
+              class="w-[496px] max-w-[90%] rounded-[20px] object-cover"
+              loading="lazy"
+            />
+          </div>
+        ) : (
+          <div class="flex-1 w-full lg:w-auto h-[512px] bg-brand-50 rounded-xl overflow-hidden relative flex items-center justify-center">
+            <p class="text-text-tertiary text-lg font-medium">TBD</p>
+          </div>
+        )}
+      </div>
+    ))}
+
+    <!-- Divider -->
+    <svg class="w-full h-[3px] shrink-0 mt-32" preserveAspectRatio="none" viewBox="0 0 1568 3.55" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0.1 0.5C22.2 5.1 1054.6 2.4 1568.1 0.5" stroke="#D5D7DA"/>
+    </svg>
+
+    <CustomerStorySection />
+  </div>
+</section>
