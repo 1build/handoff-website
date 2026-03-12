@@ -1,0 +1,324 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/sections/Header.astro";
+import Footer from "@/components/sections/Footer.astro";
+import { navItems, footerColumns } from "@/lib/navigation";
+import card3Image from "@/assets/images/Card 3.png";
+---
+
+<BaseLayout
+  title="1build — AI for Construction"
+  description="1build is a team of engineers, data scientists, and company builders working on AI that can run a construction company."
+>
+  <Header navItems={navItems} />
+
+  <article class="relative z-[2] pt-32 pb-2 px-4 bg-brand-800">
+    <div class="max-w-[1920px] mx-auto bg-white rounded-3xl py-16 lg:py-24">
+
+      <!-- Page Header — 1build brand -->
+      <header class="max-w-[1280px] mx-auto px-6 lg:px-8" data-animate="fade-up">
+        <div class="flex items-end justify-between">
+
+          <!-- Left: Brand name + login button + description -->
+          <div class="flex flex-col gap-4 items-start">
+            <!-- Row 1: Brand name + login button -->
+            <div class="flex flex-wrap gap-5 items-center">
+              <h1 class="font-display text-[40px] font-bold leading-[48px] tracking-[-2.56px] text-[#0f0f0f]">
+                1build
+              </h1>
+              <a
+                href="https://app2.1build.com/public/login"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 border border-[rgba(15,15,15,0.1)] rounded-full px-[21px] py-[14px] text-[13px] font-medium uppercase tracking-[1.12px] text-[#0f0f0f] leading-[1.4] whitespace-nowrap hover:bg-[rgba(15,15,15,0.05)] transition-colors duration-200"
+              >
+                Login to 1build
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M2.5 11.5L11.5 2.5M11.5 2.5H4.5M11.5 2.5V9.5" stroke="#0f0f0f" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+
+            <!-- Row 2: Description paragraphs -->
+            <div class="flex flex-col gap-4 items-start max-w-[640px]">
+              <p class="text-[20px] font-normal leading-[28px] text-[#6f6f6f]">
+                1build is a team of engineers, data scientists, and company builders.
+              </p>
+              <p class="text-[20px] font-normal leading-[28px] text-[#6f6f6f]">
+                We&rsquo;re working on AI that can run a construction company, so contractors can
+                focus on what they do best: building beautiful spaces for their clients.
+              </p>
+            </div>
+          </div>
+
+          <!-- Right: Carousel navigation -->
+          <div class="flex items-center gap-8 shrink-0 pb-1">
+            <button
+              id="carousel-prev"
+              aria-label="Previous slide"
+              class="flex items-center justify-center w-11 h-11 rounded-full border border-[rgba(15,15,15,0.1)] transition-opacity duration-200"
+              style="opacity:0.3"
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M10 12L6 8L10 4" stroke="#0f0f0f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+
+            <div class="flex gap-2 items-center" id="carousel-dots">
+              <button class="h-1.5 rounded-full transition-all duration-300" style="width:18px;background:#079455" data-index="0" aria-label="Go to slide 1"></button>
+              <button class="h-1.5 w-1.5 rounded-full transition-all duration-300" style="background:rgba(15,15,15,0.1)" data-index="1" aria-label="Go to slide 2"></button>
+              <button class="h-1.5 w-1.5 rounded-full transition-all duration-300" style="background:rgba(15,15,15,0.1)" data-index="2" aria-label="Go to slide 3"></button>
+            </div>
+
+            <button
+              id="carousel-next"
+              aria-label="Next slide"
+              class="flex items-center justify-center w-11 h-11 rounded-full border border-[rgba(15,15,15,0.1)] hover:bg-[rgba(15,15,15,0.04)] transition-colors duration-200"
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M6 12L10 8L6 4" stroke="#0f0f0f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+
+        </div>
+      </header>
+
+      <!-- Divider -->
+      <div class="max-w-[1280px] mx-auto px-6 lg:px-8 mt-12">
+        <div class="border-t border-border-primary"></div>
+      </div>
+
+      <!-- Carousel of product cards -->
+      <div class="relative mt-10" data-animate="fade-up">
+
+        <!-- Carousel viewport: overflow hidden, left-padded to match header -->
+        <div class="overflow-hidden">
+          <div class="pl-6 lg:pl-[max(1.5rem,calc((100%-1280px)/2+2rem))]">
+            <div
+              id="carousel-track"
+              class="flex gap-6"
+              style="transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); will-change: transform;"
+            >
+
+              <!-- Card 1: Handoff (green) -->
+              <div class="shrink-0 w-[800px] h-[420px] rounded-[20px] relative overflow-hidden isolate flex" style="background:#183f2e">
+                <!-- Text content -->
+                <div class="relative z-10 flex flex-col justify-between p-8 shrink-0 w-[368px]">
+                  <span class="text-[20px] font-bold leading-[28px] tracking-[-0.48px] text-white">Handoff</span>
+                  <div class="flex flex-col gap-6">
+                    <h2 class="text-[28px] font-bold leading-[39.2px] tracking-[-0.56px] text-white m-0">
+                      Instantly create<br><span class="whitespace-nowrap">construction estimates</span><br>with AI.
+                    </h2>
+                    <a
+                      href="https://app.handoff.ai/sign-up"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-2 bg-white rounded-full pl-6 pr-4 py-2 text-[16px] font-bold text-[#0f0f0f] leading-[24px] w-fit no-underline hover:bg-[rgba(255,255,255,0.9)] transition-colors duration-200"
+                    >
+                      Start an estimate
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M3 13L13 3M13 3H6M13 3V10" stroke="#0f0f0f" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+                <!-- Decorative SVG behind mockup -->
+                <div class="absolute z-[1] pointer-events-none" aria-hidden="true" style="left:333px;top:-15px;width:500px;height:540px;">
+                  <svg width="500" height="540" viewBox="0 0 500 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <mask id="mask0_10186_63807" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="4" y="0" width="492" height="532">
+                      <path d="M68.9727 199.684C147.931 137.191 173.197 119.662 197.06 104.617C301.034 39.0671 278.246 74.5113 335.06 78.7255C357.753 80.4087 381.209 88.4711 393.119 110.264C403.43 129.132 376.146 151.862 365.31 162.081C315.018 209.513 254.721 247.031 198.953 286.821C172.383 305.778 144.84 325.134 126.991 353.886C109.148 382.63 97.1998 425.442 140.95 427.951C173.164 429.799 206.014 406.794 231.993 389.252C263.008 368.307 291.343 342.97 322.418 322.131C345.585 306.596 371.441 301.517 397.958 305.831C437.336 312.238 436.857 378.985 421.341 405.807C410.878 423.893 386.492 444.859 384.183 466.94" fill="#7ED6AC"/>
+                      <path d="M68.9727 199.684C147.931 137.191 173.197 119.662 197.06 104.617C301.034 39.0671 278.246 74.5113 335.06 78.7255C357.753 80.4087 381.209 88.4711 393.119 110.264C403.43 129.132 376.146 151.862 365.31 162.081C315.018 209.513 254.721 247.031 198.953 286.821C172.383 305.778 144.84 325.134 126.991 353.886C109.148 382.63 97.1998 425.442 140.95 427.951C173.164 429.799 206.014 406.794 231.993 389.252C263.008 368.307 291.343 342.97 322.418 322.131C345.585 306.596 371.441 301.517 397.958 305.831C437.336 312.238 436.857 378.985 421.341 405.807C410.878 423.893 386.492 444.859 384.183 466.94" stroke="#7ED6AC" stroke-width="129.225" stroke-linecap="round"/>
+                    </mask>
+                    <g mask="url(#mask0_10186_63807)">
+                      <path d="M615.86 -110.107L529.565 714.882L-401.063 617.536L-314.768 -207.452L615.86 -110.107Z" fill="#079455" stroke="#079455" stroke-width="0.994036"/>
+                    </g>
+                  </svg>
+                </div>
+
+                <!-- Product screenshot -->
+                <div class="absolute right-0 bottom-0 z-[2] pointer-events-none" aria-hidden="true" style="width:420px;height:420px;overflow:hidden;">
+                  <img
+                    src="https://www.figma.com/api/mcp/asset/e44c119f-9c6d-4b12-ad22-28801bf64b96"
+                    alt="Handoff app showing a construction estimate"
+                    class="absolute bottom-0 right-0 h-[372px] w-auto max-w-none object-contain object-bottom-right"
+                    style="object-position:bottom right;"
+                  />
+                </div>
+              </div>
+
+              <!-- Card 2: 1build Estimating Service (navy) -->
+              <div class="shrink-0 w-[800px] h-[420px] rounded-[20px] relative overflow-hidden isolate flex" style="background:#1e2644">
+                <!-- Text content -->
+                <div class="relative z-10 flex flex-col justify-between p-8 shrink-0 w-[368px]">
+                  <span class="text-[20px] font-bold leading-[28px] tracking-[-0.48px] text-white">1build Estimating Service</span>
+                  <div class="flex flex-col gap-6">
+                    <h2 class="text-[28px] font-bold leading-[39.2px] tracking-[-0.56px] text-white m-0">
+                      <span class="whitespace-nowrap">Let our estimators help</span><br>with your bids.
+                    </h2>
+                    <a
+                      href="https://estimating.1build.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-2 bg-white rounded-full pl-6 pr-4 py-2 text-[16px] font-bold text-[#0f0f0f] leading-[24px] w-fit no-underline hover:bg-[rgba(255,255,255,0.9)] transition-colors duration-200"
+                    >
+                      Hire an estimator
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M3 13L13 3M13 3H6M13 3V10" stroke="#0f0f0f" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+                <!-- Decorative SVG behind mockup -->
+                <div class="absolute z-[1] pointer-events-none" aria-hidden="true" style="left:361px;top:-105px;width:750px;height:503.878px;">
+                  <svg width="750" height="503.878" viewBox="-7 -104.939 750 503.878" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#card2-clip0)">
+                      <g clip-path="url(#card2-clip1)">
+                        <g clip-path="url(#card2-clip2)">
+                          <path d="M110.212 232.863L145.014 212.588M110.212 232.863L75.5145 212.588V172.351M110.212 232.863V192.418M145.014 212.588V172.351M145.014 212.588L179.941 232.863M75.5145 172.351L110.212 152.076M75.5145 172.351L110.212 192.418M75.5145 172.351L74.8462 131.761M75.5145 172.351L40.1858 192.418M110.212 192.418L145.014 172.351M145.014 172.351L110.212 152.076M145.014 172.351L179.941 152.076M145.014 172.351L179.941 192.418M179.941 232.863L214.602 212.588M179.941 232.863V192.418M110.212 152.076L145.014 131.761M110.212 152.076L74.8462 131.761M179.941 152.076L214.602 172.351M179.941 152.076L145.014 131.761M179.941 152.076L214.602 131.761M179.941 192.418L214.602 172.351M145.014 131.761L110.212 111.569M145.014 131.761V91.8535M145.014 131.761L179.941 111.569M74.8462 131.761L110.212 111.569M74.8462 131.761L40.1858 152.076M74.8462 131.761L40.1858 111.569L5.20703 131.761M40.1858 192.418V152.076M40.1858 192.418L5.20703 172.351V131.761M214.602 212.588V172.351M214.602 212.588L249.739 232.863M214.602 172.351L249.739 192.418M214.602 172.351L249.739 152.076M214.602 172.351V131.761M249.739 232.863L285.195 212.588V172.351M249.739 232.863V192.418M249.739 192.418L285.195 172.351M249.739 152.076L214.602 131.761M249.739 152.076L285.195 131.761M249.739 152.076L285.195 172.351M214.602 131.761L179.941 111.569M214.602 131.761L249.739 111.569M110.212 111.569V71.9794M145.014 91.8535L110.212 71.9794M145.014 91.8535L179.941 71.9794M179.941 111.569V71.9794M179.941 111.569L214.602 91.8535M110.212 71.9794L145.014 51.1512M40.1858 152.076L5.20703 131.761M145.014 51.1512L179.941 71.9794M145.014 51.1512V11.8299M179.941 71.9794L214.602 50.829M179.941 71.9794V32.0522M145.014 11.8299L179.941 32.0522M145.014 11.8299L179.941 -8.87292L214.602 11.8299M214.602 50.829V91.8535M214.602 50.829L249.739 32.0522L285.195 52.0328M214.602 50.829L249.739 71.9794M214.602 50.829V11.8299M179.941 32.0522L214.602 11.8299M214.602 91.8535L249.739 111.569M249.739 111.569L285.195 131.761M249.739 111.569V71.9794M249.739 111.569L285.195 91.8535M285.195 131.761V172.351M285.195 131.761L320.554 152.076M285.195 131.761L320.554 111.569M249.739 71.9794L285.195 52.0328M285.195 91.8535L320.554 111.569M285.195 91.8535L320.554 72.0134L355.221 91.5134M285.195 91.8535V52.0328M285.195 172.351L320.554 192.418M320.554 152.076V192.418M320.554 152.076L355.221 131.761M320.554 111.569L355.221 131.761M320.554 111.569L355.221 91.5134M320.554 192.418L355.221 172.351M355.221 131.761V172.351M355.221 131.761L389.886 111.569L424.793 131.761M355.221 131.761L389.886 152.076M355.221 131.761V91.5134M355.221 172.351L389.886 192.418M389.886 192.418L424.793 172.351V131.761M389.886 192.418V152.076M424.793 131.761L389.886 152.076" stroke="url(#card2-paint0)" stroke-opacity="0.15" stroke-width="0.894988"/>
+                          <path d="M427.935 133.52L462.737 113.245M427.935 133.52L393.237 113.245V73.0078M427.935 133.52V93.0743M462.737 113.245V73.0078M462.737 113.245L497.664 133.52M393.237 73.0078L427.935 52.7327M393.237 73.0078L427.935 93.0743M393.237 73.0078L392.569 32.4174M393.237 73.0078L357.908 93.0743M427.935 93.0743L462.737 73.0078M462.737 73.0078L427.935 52.7327M462.737 73.0078L497.664 52.7327M462.737 73.0078L497.664 93.0743M497.664 133.52L532.325 113.245M497.664 133.52V93.0743M427.935 52.7327L462.737 32.4174M427.935 52.7327L392.569 32.4174M497.664 52.7327L532.325 73.0078M497.664 52.7327L462.737 32.4174M497.664 52.7327L532.325 32.4174M497.664 93.0743L532.325 73.0078M462.737 32.4174L427.935 12.2255M462.737 32.4174V-7.49016M462.737 32.4174L497.664 12.2255M392.569 32.4174L427.935 12.2255M392.569 32.4174L357.908 52.7327M392.569 32.4174L357.908 12.2255L322.93 32.4174M357.908 93.0743V52.7327M357.908 93.0743L322.93 73.0078V32.4174M532.325 113.245V73.0078M532.325 113.245L567.462 133.52M532.325 73.0078L567.462 93.0743M532.325 73.0078L567.462 52.7327M532.325 73.0078V32.4174M567.462 133.52L602.918 113.245V73.0078M567.462 133.52V93.0743M567.462 93.0743L602.918 73.0078M567.462 52.7327L532.325 32.4174M567.462 52.7327L602.918 32.4174M567.462 52.7327L602.918 73.0078M532.325 32.4174L497.664 12.2255M532.325 32.4174L567.462 12.2255M427.935 12.2255V-27.3644M462.737 -7.49016L427.935 -27.3644M462.737 -7.49016L497.664 -27.3644M497.664 12.2255V-27.3644M497.664 12.2255L532.325 -7.49016M427.935 -27.3644L462.737 -48.1926M357.908 52.7327L322.93 32.4174M462.737 -48.1926L497.664 -27.3644M462.737 -48.1926V-87.5135M497.664 -27.3644L532.325 -48.5145M497.664 -27.3644V-67.2918M462.737 -87.5135L497.664 -67.2918M462.737 -87.5135L497.664 -108.217L532.325 -87.5135M532.325 -48.5145V-7.49016M532.325 -48.5145L567.462 -67.2918L602.918 -47.3109M532.325 -48.5145L567.462 -27.3644M532.325 -48.5145V-87.5135M497.664 -67.2918L532.325 -87.5135M532.325 -7.49016L567.462 12.2255M567.462 12.2255L602.918 32.4174M567.462 12.2255V-27.3644M567.462 12.2255L602.918 -7.49016M602.918 32.4174V73.0078M602.918 32.4174L638.277 52.7327M602.918 32.4174L638.277 12.2255M567.462 -27.3644L602.918 -47.3109M602.918 -7.49016L638.277 12.2255M602.918 -7.49016L638.277 -27.3299L672.943 -7.83026M602.918 -7.49016V-47.3109M602.918 73.0078L638.277 93.0743M638.277 52.7327V93.0743M638.277 52.7327L672.943 32.4174M638.277 12.2255L672.943 32.4174M638.277 12.2255L672.943 -7.83026M638.277 93.0743L672.943 73.0078M672.943 32.4174V73.0078M672.943 32.4174L707.609 12.2255L742.515 32.4174M672.943 32.4174L707.609 52.7327M672.943 32.4174V-7.83026M672.943 73.0078L707.609 93.0743M707.609 93.0743L742.515 73.0078V32.4174M707.609 93.0743V52.7327M742.515 32.4174L707.609 52.7327" stroke="url(#card2-paint1)" stroke-opacity="0.15" stroke-width="0.894988"/>
+                          <path d="M98.8999 398.044L133.702 377.769M98.8999 398.044L64.202 377.769V337.532M98.8999 398.044V357.599M133.702 377.769V337.532M133.702 377.769L168.628 398.044M64.202 337.532L98.8999 317.257M64.202 337.532L98.8999 357.599M64.202 337.532L63.5336 296.942M64.202 337.532L28.8732 357.599M98.8999 357.599L133.702 337.532M133.702 337.532L98.8999 317.257M133.702 337.532L168.628 317.257M133.702 337.532L168.628 357.599M168.628 398.044L203.29 377.769M168.628 398.044V357.599M98.8999 317.257L133.702 296.942M98.8999 317.257L63.5336 296.942M168.628 317.257L203.29 337.532M168.628 317.257L133.702 296.942M168.628 317.257L203.29 296.942M168.628 357.599L203.29 337.532M133.702 296.942L98.8999 276.75M133.702 296.942V257.034M133.702 296.942L168.628 276.75M63.5336 296.942L98.8999 276.75M63.5336 296.942L28.8732 317.257M63.5336 296.942L28.8732 276.75L-6.10547 296.942M28.8732 357.599V317.257M28.8732 357.599L-6.10547 337.532V296.942M203.29 377.769V337.532M203.29 377.769L238.427 398.044M203.29 337.532L238.427 357.599M203.29 337.532L238.427 317.257M203.29 337.532V296.942M238.427 398.044L273.883 377.769V337.532M238.427 398.044V357.599M238.427 357.599L273.883 337.532M238.427 317.257L203.29 296.942M238.427 317.257L273.883 296.942M238.427 317.257L273.883 337.532M203.29 296.942L168.628 276.75M203.29 296.942L238.427 276.75M98.8999 276.75V237.16M133.702 257.034L98.8999 237.16M133.702 257.034L168.628 237.16M168.628 276.75V237.16M168.628 276.75L203.29 257.034M98.8999 237.16L133.702 216.332M28.8732 317.257L-6.10547 296.942M133.702 216.332L168.628 237.16M133.702 216.332V177.011M168.628 237.16L203.29 216.01M168.628 237.16V197.233M133.702 177.011L168.628 197.233M133.702 177.011L168.628 156.308L203.29 177.011M203.29 216.01V257.034M203.29 216.01L238.427 197.233L273.883 217.214M203.29 216.01L238.427 237.16M203.29 216.01V177.011M168.628 197.233L203.29 177.011M203.29 257.034L238.427 276.75M238.427 276.75L273.883 296.942M238.427 276.75V237.16M238.427 276.75L273.883 257.034M273.883 296.942V337.532M273.883 296.942L309.242 317.257M273.883 296.942L309.242 276.75M238.427 237.16L273.883 217.214M273.883 257.034L309.242 276.75M273.883 257.034L309.242 237.194L343.907 256.694M273.883 257.034V217.214M273.883 337.532L309.242 357.599M309.242 317.257V357.599M309.242 317.257L343.907 296.942M309.242 276.75L343.907 296.942M309.242 276.75L343.907 256.694M309.242 357.599L343.907 337.532M343.907 296.942V337.532M343.907 296.942L378.574 276.75L413.48 296.942M343.907 296.942L378.574 317.257M343.907 296.942V256.694M343.907 337.532L378.574 357.599M378.574 357.599L413.48 337.532V296.942M378.574 357.599V317.257M413.48 296.942L378.574 317.257" stroke="url(#card2-paint2)" stroke-opacity="0.15" stroke-width="0.894988"/>
+                        </g>
+                      </g>
+                    </g>
+                    <defs>
+                      <linearGradient id="card2-paint0" x1="214.999" y1="62.4397" x2="214.999" y2="292.24" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="white" stop-opacity="0.65"/>
+                        <stop offset="1" stop-color="white" stop-opacity="0"/>
+                      </linearGradient>
+                      <linearGradient id="card2-paint1" x1="532.722" y1="-36.9044" x2="532.722" y2="192.896" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="white" stop-opacity="0.65"/>
+                        <stop offset="1" stop-color="white" stop-opacity="0"/>
+                      </linearGradient>
+                      <linearGradient id="card2-paint2" x1="203.687" y1="227.621" x2="203.687" y2="457.42" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="white" stop-opacity="0.65"/>
+                        <stop offset="1" stop-color="white" stop-opacity="0"/>
+                      </linearGradient>
+                      <clipPath id="card2-clip0">
+                        <rect x="-7" y="-104.939" width="750" height="503.878" fill="white"/>
+                      </clipPath>
+                      <clipPath id="card2-clip1">
+                        <rect width="750" height="630" fill="white" transform="translate(-7 -168)"/>
+                      </clipPath>
+                      <clipPath id="card2-clip2">
+                        <rect width="750" height="503.878" fill="white" transform="translate(-7 -104.939)"/>
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </div>
+
+                <!-- Product screenshot -->
+                <div class="absolute right-0 bottom-0 z-[2] pointer-events-none overflow-hidden" aria-hidden="true" style="width:400px;height:420px;">
+                  <img
+                    src="https://www.figma.com/api/mcp/asset/635aa556-7973-4fbb-a5ce-1e463593c554"
+                    alt="1build estimating service interface"
+                    class="absolute max-w-none object-cover"
+                    style="width:499.98px;height:631.31px;left:10px;top:-126.26px;"
+                  />
+                </div>
+              </div>
+
+              <!-- Card 3: 1build API (light) -->
+              <div class="shrink-0 w-[800px] h-[420px] rounded-[20px] relative overflow-hidden isolate flex" style="background:#EDEDED">
+                <!-- Red decorative circles -->
+                <div class="absolute z-[1] pointer-events-none" aria-hidden="true" style="left:390px;top:-72px;width:220px;height:220px;border-radius:50%;border:2px solid rgba(210,45,25,0.65);"></div>
+                <div class="absolute z-[1] pointer-events-none" aria-hidden="true" style="left:488px;bottom:-52px;width:160px;height:160px;border-radius:50%;border:2px solid rgba(210,45,25,0.65);"></div>
+                <!-- Text content -->
+                <div class="relative z-10 flex flex-col justify-between p-8 shrink-0 w-[368px] h-full">
+                  <span class="text-[20px] font-bold leading-[28px] tracking-[-0.48px] text-[#0f0f0f]">1build API</span>
+                  <div class="flex flex-col gap-6">
+                    <h2 class="text-[28px] font-bold leading-[39.2px] tracking-[-0.56px] text-[#0f0f0f] m-0">
+                      Embed real time<br>construction costs in<br>your application.
+                    </h2>
+                    <a
+                      href="https://uy83jp615hl.typeform.com/to/j7bL1QHr?typeform-source=app2.1build.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-2 bg-[#0f0f0f] rounded-full pl-6 pr-4 py-2 text-[16px] font-bold text-white leading-[24px] w-fit no-underline hover:bg-[#333] transition-colors duration-200"
+                    >
+                      Join waitlist
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M3 13L13 3M13 3H6M13 3V10" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+                <!-- Product mockup image -->
+                <div class="absolute right-0 top-0 z-[2] pointer-events-none" aria-hidden="true" style="width:400px;height:420px;overflow:hidden;">
+                  <img
+                    src={card3Image.src}
+                    alt="1build API pricing interface showing construction cost rates"
+                    class="absolute top-0 right-0 w-[400px] max-w-none h-auto"
+                  />
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- /carousel -->
+
+    </div>
+  </article>
+
+  <Footer columns={footerColumns} />
+</BaseLayout>
+
+<script>
+  import { initScrollAnimations } from "@/lib/animations";
+
+  // Header scroll state
+  const header = document.getElementById("site-header");
+  window.addEventListener("scroll", () => {
+    if (header) {
+      header.classList.toggle("header-scrolled", window.scrollY > 40);
+    }
+  }, { passive: true });
+
+  initScrollAnimations();
+
+  // Carousel
+  const track = document.getElementById("carousel-track") as HTMLElement | null;
+  const prevBtn = document.getElementById("carousel-prev") as HTMLButtonElement | null;
+  const nextBtn = document.getElementById("carousel-next") as HTMLButtonElement | null;
+  const dots = document.querySelectorAll<HTMLButtonElement>("#carousel-dots button");
+
+  const TOTAL_SLIDES = 3;
+  const CARD_WIDTH = 800;
+  const GAP = 24;
+  let current = 0;
+
+  function updateCarousel() {
+    if (!track) return;
+    track.style.transform = `translateX(-${current * (CARD_WIDTH + GAP)}px)`;
+
+    dots.forEach((dot, i) => {
+      if (i === current) {
+        dot.style.width = "18px";
+        dot.style.background = "#079455";
+      } else {
+        dot.style.width = "6px";
+        dot.style.background = "rgba(15,15,15,0.1)";
+      }
+    });
+
+    if (prevBtn) prevBtn.style.opacity = current === 0 ? "0.3" : "1";
+    if (nextBtn) nextBtn.style.opacity = current === TOTAL_SLIDES - 1 ? "0.3" : "1";
+  }
+
+  prevBtn?.addEventListener("click", () => {
+    if (current > 0) { current--; updateCarousel(); }
+  });
+
+  nextBtn?.addEventListener("click", () => {
+    if (current < TOTAL_SLIDES - 1) { current++; updateCarousel(); }
+  });
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener("click", () => { current = i; updateCarousel(); });
+  });
+
+  updateCarousel();
+</script>
