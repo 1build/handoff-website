@@ -92,21 +92,21 @@ export const navItems: NavItem[] = [
     wide: true,
     items: [
       {
-        label: "Sales and marketing growth",
+        label: "Sales & marketing growth",
         href: "/sales-marketing-growth",
         description: "Turn leads into signed contracts",
         iconName: "book-closed",
         features: salesAndMarketingFeatures,
       },
       {
-        label: "Project management and operations",
+        label: "Project management & operations",
         href: "/project-management",
         description: "One system from estimate to completion",
         iconName: "stars-02",
         features: projectManagementFeatures,
       },
       {
-        label: "Financial and business management",
+        label: "Financial & business management",
         href: "/financial-business-solution",
         description: "Get paid faster. Know your numbers",
         iconName: "play-circle",

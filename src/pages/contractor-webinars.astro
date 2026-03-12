@@ -21,10 +21,10 @@ import checkIcon from "@/assets/icons/check-icon.svg";
 
 
 const sessions = [
-  { date: "Mar 3", day: "Tuesday", time: "9:30 AM", title: "The Modern Contractor Marketing Playbook", ended: true },
-  { date: "Mar 5", day: "Thursday", time: "10:00 AM", title: "The Modern Contractor Marketing Playbook", ended: false },
-  { date: "Mar 11", day: "Wednesday", time: "9:00 AM", title: "The Modern Contractor Process Audit", ended: false },
-  { date: "Mar 13", day: "Friday", time: "11:00 AM", title: "The Modern Contractor Marketing Playbook", ended: false },
+  { date: "March 17th", day: "Tuesday", time: "9:00 AM", title: "How Disorganized Jobsites Kill Margins", ended: false },
+  { date: "March 19th", day: "Thursday", time: "11:00 AM", title: "How Disorganized Jobsites Kill Margins", ended: false },
+  { date: "March 25th", day: "Wednesday", time: "9:00 AM", title: "Modern Contractor Guide To Sales", ended: false },
+  { date: "March 27th", day: "Friday", time: "10:00 AM", title: "Modern Contractor Guide To Sales", ended: false },
 ];
 
 const expectItems = [
@@ -47,9 +47,10 @@ const expectItems = [
 ];
 
 const registrationSessions = [
-  { date: "Mar 5 • 10:00 AM CT", title: "The Modern Contractor Marketing Playbook", checked: true },
-  { date: "Mar 11 • 9:00 AM CT", title: "The Modern Contractor Process Audit", checked: true },
-  { date: "Mar 13 • 11:00 AM CT", title: "The Modern Contractor Marketing Playbook", checked: false },
+  { date: "March 17th • 9:00 AM CT", title: "How Disorganized Jobsites Kill Margins", checked: true },
+  { date: "March 19th • 11:00 AM CT", title: "How Disorganized Jobsites Kill Margins", checked: true },
+  { date: "March 25th • 9:00 AM CT", title: "Modern Contractor Guide To Sales", checked: false },
+  { date: "March 27th • 10:00 AM CT", title: "Modern Contractor Guide To Sales", checked: false },
 ];
 const seo = getPageSeo(Astro.url.pathname);
 ---
@@ -63,7 +64,7 @@ const seo = getPageSeo(Astro.url.pathname);
     <img src={bgPattern.src} alt="" class="w-full h-full block object-contain object-top" />
   </div>
 
-  <div class="absolute -top-[24%] -left-[14%] -right-[14%] -bottom-[24%] pointer-events-none z-[12]">
+  <div class="absolute -top-[24%] -left-[14%] -right-[14%] -bottom-[24%] pointer-events-none z-[1]">
     <img src={heroGlow.src} alt="" class="w-full h-full block" />
   </div>
     <div class="relative z-[2] mx-auto max-w-[1440px] px-8 pt-16 pb-0">
@@ -105,7 +106,7 @@ const seo = getPageSeo(Astro.url.pathname);
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {sessions.map((session) => (
             session.ended ? (
-              <div class="flex flex-col justify-between p-6 rounded-3xl backdrop-blur-sm bg-white/8 border border-white/10">
+              <div class="flex flex-col justify-between p-6 rounded-3xl bg-white border border-border-primary shadow-xs">
                 <div class="flex flex-col gap-6">
                   <div class="flex flex-col gap-1 text-text-on-brand-tertiary">
                     <p class="font-display text-[30px] font-medium leading-[38px] line-through">{session.date}</p>
@@ -366,18 +367,22 @@ const seo = getPageSeo(Astro.url.pathname);
                 Register for the times and dates that work best for you
               </p>
 
+              <!-- Form -->
+              <form id="webinar-registration-form" class="flex flex-col gap-5">
+
               <!-- Session checkboxes -->
               <div class="flex flex-col gap-5">
                 {registrationSessions.map((s) => (
-                  <label class="flex items-start gap-3 cursor-pointer">
-                    <div class="flex items-center justify-center pt-0.5 shrink-0">
-                      {s.checked ? (
-                        <div class="w-5 h-5 rounded-md bg-brand-700 overflow-hidden flex items-center justify-center shrink-0">
-                          <img src={checkIcon.src} alt="" class="w-3 h-3" />
-                        </div>
-                      ) : (
-                        <div class="w-5 h-5 rounded-md bg-white border border-border-primary shrink-0"></div>
-                      )}
+                  <label class="flex items-start gap-3 cursor-pointer select-none">
+                    <input
+                      type="checkbox"
+                      name="sessions"
+                      value={`${s.date} | ${s.title}`}
+                      class="sr-only peer"
+                      checked={s.checked}
+                    />
+                    <div class="mt-0.5 w-5 h-5 rounded-md flex items-center justify-center shrink-0 transition-colors bg-white border border-border-primary peer-checked:bg-brand-700 peer-checked:border-brand-700">
+                      <img src={checkIcon.src} alt="" class="webinar-check-icon w-3 h-3" style="opacity:0" />
                     </div>
                     <div class="flex flex-col gap-0.5">
                       <span class="text-base font-medium leading-6 text-text-secondary">{s.date}</span>
@@ -386,24 +391,23 @@ const seo = getPageSeo(Astro.url.pathname);
                   </label>
                 ))}
               </div>
-
-              <!-- Form -->
-              <form class="flex flex-col gap-5">
                 <div class="grid grid-cols-2 gap-5">
                   <div class="flex flex-col gap-1.5">
-                    <label class="text-sm font-medium leading-5 text-text-secondary">First name</label>
+                    <label class="text-sm font-medium leading-5 text-text-secondary">First name <span class="text-red-500">*</span></label>
                     <input
                       type="text"
                       name="first_name"
+                      required
                       class="w-full px-3.5 py-2.5 rounded-md bg-white border border-border-primary text-base text-text-primary placeholder:text-text-quaternary focus:outline-none focus:ring-2 focus:ring-brand-accent focus:border-brand-accent transition"
                       placeholder="John"
                     />
                   </div>
                   <div class="flex flex-col gap-1.5">
-                    <label class="text-sm font-medium leading-5 text-text-secondary">Last name</label>
+                    <label class="text-sm font-medium leading-5 text-text-secondary">Last name <span class="text-red-500">*</span></label>
                     <input
                       type="text"
                       name="last_name"
+                      required
                       class="w-full px-3.5 py-2.5 rounded-md bg-white border border-border-primary text-base text-text-primary placeholder:text-text-quaternary focus:outline-none focus:ring-2 focus:ring-brand-accent focus:border-brand-accent transition"
                       placeholder="Smith"
                     />
@@ -411,22 +415,22 @@ const seo = getPageSeo(Astro.url.pathname);
                 </div>
 
                 <div class="flex flex-col gap-1.5">
-                  <label class="text-sm font-medium leading-5 text-text-secondary">Email</label>
+                  <label class="text-sm font-medium leading-5 text-text-secondary">Email <span class="text-red-500">*</span></label>
                   <input
                     type="email"
                     name="email"
+                    required
                     class="w-full px-3.5 py-2.5 rounded-md bg-white border border-border-primary text-base text-text-primary placeholder:text-text-quaternary focus:outline-none focus:ring-2 focus:ring-brand-accent focus:border-brand-accent transition"
                     placeholder="john@example.com"
                   />
                 </div>
 
                 <div class="flex flex-col gap-1.5">
-                  <label class="text-sm font-medium leading-5 text-text-secondary">
-                    Phone number <span class="font-normal">(Optional)</span>
-                  </label>
+                  <label class="text-sm font-medium leading-5 text-text-secondary">Phone number <span class="text-red-500">*</span></label>
                   <input
                     type="tel"
                     name="phone"
+                    required
                     class="w-full px-3.5 py-2.5 rounded-md bg-white border border-border-primary text-base text-text-primary placeholder:text-text-quaternary focus:outline-none focus:ring-2 focus:ring-brand-accent focus:border-brand-accent transition"
                     placeholder="+1 (555) 123-4567"
                   />
@@ -450,4 +454,95 @@ const seo = getPageSeo(Astro.url.pathname);
   <WebinarsCta />
 
   <Footer columns={footerColumns} />
+
+  <script>
+    const checkboxes = Array.from(document.querySelectorAll<HTMLInputElement>('input[name="sessions"]'));
+
+    const updateIcon = (cb: HTMLInputElement) => {
+      const icon = cb.nextElementSibling?.querySelector('.webinar-check-icon') as HTMLElement | null;
+      if (icon) icon.style.opacity = cb.checked ? '1' : '0';
+    };
+
+    checkboxes.forEach((cb) => {
+      updateIcon(cb);
+      cb.addEventListener('change', () => {
+        const checkedCount = checkboxes.filter(c => c.checked).length;
+        if (checkedCount === 0) {
+          cb.checked = true;
+        }
+        updateIcon(cb);
+      });
+    });
+
+    const form = document.getElementById('webinar-registration-form') as HTMLFormElement | null;
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const portalId = '44330500';
+      const formGuid = '2e44baa1-c09e-4948-9c32-b0cd44c6564f';
+
+      const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      const originalText = btn.textContent ?? 'Register';
+      btn.disabled = true;
+      btn.textContent = 'Submitting…';
+
+      const selectedSessions = checkboxes
+        .filter(cb => cb.checked)
+        .map(cb => cb.value)
+        .join('; ');
+
+      const payload = {
+        fields: [
+          { name: 'firstname', value: (form.elements.namedItem('first_name') as HTMLInputElement)?.value },
+          { name: 'lastname',  value: (form.elements.namedItem('last_name')  as HTMLInputElement)?.value },
+          { name: 'email',     value: (form.elements.namedItem('email')      as HTMLInputElement)?.value },
+          { name: 'phone',     value: (form.elements.namedItem('phone')      as HTMLInputElement)?.value },
+          { name: 'message',   value: selectedSessions },
+        ].filter(f => f.value),
+        context: {
+          pageUri: window.location.href,
+          pageName: document.title,
+        },
+      };
+
+      let errorEl = form.querySelector<HTMLElement>('.hs-error');
+      if (!errorEl) {
+        errorEl = document.createElement('p');
+        errorEl.className = 'hs-error text-sm text-red-600 mt-1';
+        form.appendChild(errorEl);
+      }
+      errorEl.textContent = '';
+
+      try {
+        const res = await fetch(
+          `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formGuid}`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          }
+        );
+
+        if (!res.ok) {
+          const err = await res.json().catch(() => ({}));
+          throw new Error((err as any).message || 'Submission failed');
+        }
+
+        const card = form.closest('.bg-brand-100');
+        if (card) {
+          card.innerHTML = `
+            <div class="flex flex-col gap-4 py-8 text-center">
+              <p class="font-display text-2xl font-medium text-text-primary">You're registered! See you at the webinar.</p>
+              <p class="text-lg text-text-tertiary">A confirmation will arrive shortly. We'll see you at the session you selected.</p>
+            </div>
+          `;
+        }
+      } catch (err: any) {
+        errorEl.textContent = err.message || 'Something went wrong. Please try again.';
+        btn.disabled = false;
+        btn.textContent = originalText;
+      }
+    });
+  </script>
 </BaseLayout>

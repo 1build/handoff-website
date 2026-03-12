@@ -292,7 +292,7 @@ const seo = getPageSeo(Astro.url.pathname);
               <hr class="border-0 border-t border-white/20 w-20" />
 
               <p class="text-xl font-medium leading-[30px] text-white max-w-[560px]">
-                In these live sessions, you'll see how modern contractors step back, audit how work actually gets done, and replace informal processes with structure.
+                The business side doesn't have to cost you nights, weekends, or constant stress anymore.
               </p>
             </div>
           </div>
@@ -301,26 +301,28 @@ const seo = getPageSeo(Astro.url.pathname);
           <div class="flex-1 min-w-0 max-w-[560px] w-full">
             <div class="bg-brand-100 rounded-2xl p-5 md:p-10 flex flex-col gap-10">
               <p class="font-display text-2xl font-medium leading-8 text-text-primary max-w-[384px]">
-                Register for the times and dates that work best for you
+                Sign Up for the 7-Day AI-Powered Contractor Course
               </p>
 
               <!-- Form -->
               <form id="construction-course-form" class="flex flex-col gap-5">
                 <div class="grid grid-cols-2 gap-5">
                   <div class="flex flex-col gap-1.5">
-                    <label class="text-sm font-medium leading-5 text-text-secondary">First name</label>
+                    <label class="text-sm font-medium leading-5 text-text-secondary">First name <span class="text-red-500">*</span></label>
                     <input
                       type="text"
                       name="first_name"
+                      required
                       class="w-full px-3.5 py-2.5 rounded-md bg-white border border-border-primary text-base text-text-primary placeholder:text-text-quaternary focus:outline-none focus:ring-2 focus:ring-brand-accent focus:border-brand-accent transition"
                       placeholder="John"
                     />
                   </div>
                   <div class="flex flex-col gap-1.5">
-                    <label class="text-sm font-medium leading-5 text-text-secondary">Last name</label>
+                    <label class="text-sm font-medium leading-5 text-text-secondary">Last name <span class="text-red-500">*</span></label>
                     <input
                       type="text"
                       name="last_name"
+                      required
                       class="w-full px-3.5 py-2.5 rounded-md bg-white border border-border-primary text-base text-text-primary placeholder:text-text-quaternary focus:outline-none focus:ring-2 focus:ring-brand-accent focus:border-brand-accent transition"
                       placeholder="Smith"
                     />
@@ -328,22 +330,22 @@ const seo = getPageSeo(Astro.url.pathname);
                 </div>
 
                 <div class="flex flex-col gap-1.5">
-                  <label class="text-sm font-medium leading-5 text-text-secondary">Email</label>
+                  <label class="text-sm font-medium leading-5 text-text-secondary">Email <span class="text-red-500">*</span></label>
                   <input
                     type="email"
                     name="email"
+                    required
                     class="w-full px-3.5 py-2.5 rounded-md bg-white border border-border-primary text-base text-text-primary placeholder:text-text-quaternary focus:outline-none focus:ring-2 focus:ring-brand-accent focus:border-brand-accent transition"
                     placeholder="john@example.com"
                   />
                 </div>
 
                 <div class="flex flex-col gap-1.5">
-                  <label class="text-sm font-medium leading-5 text-text-secondary">
-                    Phone number <span class="font-normal">(Optional)</span>
-                  </label>
+                  <label class="text-sm font-medium leading-5 text-text-secondary">Phone number <span class="text-red-500">*</span></label>
                   <input
                     type="tel"
                     name="phone"
+                    required
                     class="w-full px-3.5 py-2.5 rounded-md bg-white border border-border-primary text-base text-text-primary placeholder:text-text-quaternary focus:outline-none focus:ring-2 focus:ring-brand-accent focus:border-brand-accent transition"
                     placeholder="+1 (555) 123-4567"
                   />
@@ -376,7 +378,7 @@ const seo = getPageSeo(Astro.url.pathname);
     e.preventDefault();
 
     const portalId = '44330500';
-    const formGuid = 'b229b25-6964-4bbd-8f11-6d06f7bba650';
+    const formGuid = '3b229b25-6964-4bbd-8f11-6d06f7bba650';
 
     const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
     const originalText = btn.textContent ?? 'Register';
@@ -424,8 +426,9 @@ const seo = getPageSeo(Astro.url.pathname);
       if (card) {
         card.innerHTML = `
           <div class="flex flex-col gap-4 py-8 text-center">
-            <p class="font-display text-2xl font-medium text-text-primary">You're registered!</p>
-            <p class="text-lg text-text-tertiary">We'll send you the details shortly. See you there.</p>
+            <p class="font-display text-2xl font-medium text-text-primary">You're in! Your Day 1 lesson is on its way.</p>
+            <p class="text-lg text-text-tertiary">A better way to handle the business side is possible.</p>
+            <p class="text-lg text-text-tertiary">Your first lesson will arrive shortly. Follow along over the next seven days at your own pace.</p>
           </div>
         `;
       }

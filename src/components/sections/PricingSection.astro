@@ -10,6 +10,7 @@ interface PricingTier {
   priceLabel?: string;
   description: string;
   cta: { label: string; primary: boolean; href: string };
+  modal?: boolean;
   featuresLabel?: { prefix: string; highlight: string; suffix: string };
   features: string[];
 }
@@ -57,7 +58,8 @@ const tiers: PricingTier[] = [
     annualPrice: null,
     priceLabel: "Contact us",
     description: "API integrations and custom setup for large or multi-location operations.",
-    cta: { label: "Get in touch", primary: false, href: "https://app.tryhandoff.com/demo" },
+    cta: { label: "Get in touch", primary: false, href: "#" },
+    modal: true,
     featuresLabel: { prefix: "All ", highlight: "Pro", suffix: " features plus:" },
     features: [
       "API access",
@@ -167,17 +169,27 @@ const tiers: PricingTier[] = [
             <p class="text-sm font-medium leading-5 text-text-tertiary mt-auto">{tier.description}</p>
 
             <!-- CTA Button -->
-            <a
-              href={tier.cta.href}
-              class:list={[
-                "w-full py-3 px-[18px] rounded-xl text-base font-medium leading-6 text-center transition-colors shadow-xs mt-6",
-                tier.cta.primary
-                  ? "bg-bg-brand-solid text-white hover:bg-brand-800"
-                  : "bg-bg-primary text-text-secondary border border-border-primary hover:bg-bg-secondary",
-              ]}
-            >
-              {tier.cta.label}
-            </a>
+            {tier.modal ? (
+              <button
+                id="enterprise-cta"
+                type="button"
+                class="w-full py-3 px-[18px] rounded-xl text-base font-medium leading-6 text-center transition-colors shadow-xs mt-6 bg-bg-primary text-text-secondary border border-border-primary hover:bg-bg-secondary cursor-pointer"
+              >
+                {tier.cta.label}
+              </button>
+            ) : (
+              <a
+                href={tier.cta.href}
+                class:list={[
+                  "w-full py-3 px-[18px] rounded-xl text-base font-medium leading-6 text-center transition-colors shadow-xs mt-6",
+                  tier.cta.primary
+                    ? "bg-bg-brand-solid text-white hover:bg-brand-800"
+                    : "bg-bg-primary text-text-secondary border border-border-primary hover:bg-bg-secondary",
+                ]}
+              >
+                {tier.cta.label}
+              </a>
+            )}
           </div>
 
           <!-- Card Content / Features -->
@@ -219,6 +231,73 @@ const tiers: PricingTier[] = [
   </div>
   </div>
 </section>
+
+<!-- Enterprise Contact Modal -->
+<div
+  id="contact-modal"
+  class="fixed inset-0 bg-black/60 items-center justify-center z-[9999] hidden"
+  aria-modal="true"
+  role="dialog"
+  aria-labelledby="modal-title"
+>
+  <div class="bg-bg-primary rounded-2xl shadow-xl w-[90%] max-w-[480px] relative p-8">
+    <button
+      id="modal-close"
+      type="button"
+      aria-label="Close modal"
+      class="absolute top-3 right-4 text-2xl leading-none text-text-tertiary hover:text-text-primary bg-transparent border-0 cursor-pointer"
+    >&times;</button>
+
+    <form id="enterprise-form" novalidate>
+      <label class="block mb-1 text-xs font-medium text-text-secondary">Work Email <span class="text-red-500">*</span></label>
+      <input
+        type="email" name="email" placeholder="you@company.com" required
+        class="w-full px-4 py-3 mb-3 border border-border-primary rounded-xl text-sm text-text-primary bg-bg-primary placeholder:text-text-quaternary focus:outline-none focus:ring-2 focus:ring-brand-500"
+      />
+      <div class="grid grid-cols-2 gap-3 mb-3">
+        <div>
+          <label class="block mb-1 text-xs font-medium text-text-secondary">First Name <span class="text-red-500">*</span></label>
+          <input
+            type="text" name="firstName" placeholder="Jane" required
+            class="w-full px-4 py-3 border border-border-primary rounded-xl text-sm text-text-primary bg-bg-primary placeholder:text-text-quaternary focus:outline-none focus:ring-2 focus:ring-brand-500"
+          />
+        </div>
+        <div>
+          <label class="block mb-1 text-xs font-medium text-text-secondary">Last Name <span class="text-red-500">*</span></label>
+          <input
+            type="text" name="lastName" placeholder="Smith" required
+            class="w-full px-4 py-3 border border-border-primary rounded-xl text-sm text-text-primary bg-bg-primary placeholder:text-text-quaternary focus:outline-none focus:ring-2 focus:ring-brand-500"
+          />
+        </div>
+      </div>
+      <label class="block mb-1 text-xs font-medium text-text-secondary">Company <span class="text-red-500">*</span></label>
+      <input
+        type="text" name="company" placeholder="Acme Construction" required
+        class="w-full px-4 py-3 mb-3 border border-border-primary rounded-xl text-sm text-text-primary bg-bg-primary placeholder:text-text-quaternary focus:outline-none focus:ring-2 focus:ring-brand-500"
+      />
+      <label class="block mb-1 text-xs font-medium text-text-secondary">Phone</label>
+      <input
+        type="tel" name="phone" placeholder="(555) 000-0000"
+        class="w-full px-4 py-3 mb-3 border border-border-primary rounded-xl text-sm text-text-primary bg-bg-primary placeholder:text-text-quaternary focus:outline-none focus:ring-2 focus:ring-brand-500"
+      />
+      <label class="block mb-1 text-xs font-medium text-text-secondary">How can we help?</label>
+      <textarea
+        name="message" placeholder="Tell us about your needs..." rows="3"
+        class="w-full px-4 py-3 mb-4 border border-border-primary rounded-xl text-sm text-text-primary bg-bg-primary placeholder:text-text-quaternary focus:outline-none focus:ring-2 focus:ring-brand-500 resize-none"
+      ></textarea>
+      <button
+        type="submit"
+        class="w-full py-3 px-[18px] rounded-xl text-base font-medium text-white bg-bg-brand-solid hover:bg-brand-800 transition-colors shadow-xs cursor-pointer"
+      >
+        Submit
+      </button>
+    </form>
+
+    <div id="form-success" class="hidden text-center py-4">
+      <p class="text-text-primary font-medium">Thanks! Our enterprise team will be in touch shortly.</p>
+    </div>
+  </div>
+</div>
 
 <script>
   let isAnnual = true;
@@ -300,4 +379,82 @@ const tiers: PricingTier[] = [
 
   heroToggle?.addEventListener("click", toggleBilling);
   compareToggle?.addEventListener("click", toggleBilling);
+
+  // ─── Enterprise modal ────────────────────────────────────────────────────
+  const modal = document.getElementById('contact-modal') as HTMLElement | null;
+  const enterpriseCta = document.getElementById('enterprise-cta');
+  const modalClose = document.getElementById('modal-close');
+  const enterpriseForm = document.getElementById('enterprise-form') as HTMLFormElement | null;
+  const formSuccess = document.getElementById('form-success') as HTMLElement | null;
+
+  function openModal() {
+    if (!modal) return;
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    if (!modal) return;
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    document.body.style.overflow = '';
+  }
+
+  enterpriseCta?.addEventListener('click', openModal);
+  modalClose?.addEventListener('click', closeModal);
+
+  modal?.addEventListener('click', (e) => {
+    if ((e.target as HTMLElement).id === 'contact-modal') closeModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  enterpriseForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+
+    const payload = {
+      fields: [
+        { name: 'email', value: (form.elements.namedItem('email') as HTMLInputElement).value },
+        { name: 'firstname', value: (form.elements.namedItem('firstName') as HTMLInputElement).value },
+        { name: 'lastname', value: (form.elements.namedItem('lastName') as HTMLInputElement).value },
+        { name: 'company', value: (form.elements.namedItem('company') as HTMLInputElement).value },
+        { name: 'phone', value: (form.elements.namedItem('phone') as HTMLInputElement).value },
+        { name: 'message', value: (form.elements.namedItem('message') as HTMLTextAreaElement).value },
+      ].filter(f => f.value),
+      context: {
+        pageUri: window.location.href,
+        pageName: 'Pricing - Enterprise',
+      },
+    };
+
+    try {
+      const response = await fetch(
+        'https://api.hsforms.com/submissions/v3/integration/submit/44330500/b0ac6b7e-d6ee-414f-a227-7ec78cddf839',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      if (response.ok) {
+        if (enterpriseForm) enterpriseForm.style.display = 'none';
+        if (formSuccess) formSuccess.classList.remove('hidden');
+        setTimeout(closeModal, 2000);
+      } else {
+        throw new Error('Submission failed');
+      }
+    } catch {
+      alert('Something went wrong. Please try again.');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit';
+    }
+  });
 </script>
