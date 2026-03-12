@@ -35,6 +35,23 @@ const defaultSchema = getDefaultJsonLd(canonicalUrl);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <!-- Google Tag Manager -->
+    <script is:inline>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+          "gtm.start": new Date().getTime(),
+          event: "gtm.js",
+        });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-TNM9XR5T");
+    </script>
+    <!-- End Google Tag Manager -->
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" type="image/png" href="/favicon.png" />
@@ -67,6 +84,16 @@ const defaultSchema = getDefaultJsonLd(canonicalUrl);
     <ViewTransitions />
   </head>
   <body class="min-h-screen bg-brand-800 overflow-x-hidden animate-fade-in">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-TNM9XR5T"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"
+      ></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <slot />
     <SpeedInsights />
   </body>
