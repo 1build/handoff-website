@@ -136,6 +136,7 @@ export const navItems: NavItem[] = [
           { label: "Guides", href: "/blog#blog-list", description: "Step by step playbooks for your business", iconName: "book-open-01" },
           { label: "Webinars", href: "/contractor-webinars", description: "Live sessions with industry pros.", iconName: "play-circle" },
           { label: "Comparisons", href: "/comparison", description: "Compare Handoff to the competition", iconName: "compare" },
+          { label: "Construction Costs", href: "/construction-costs", description: "Accurate construction cost estimates", iconName: "tag-01" },
         ],
       },
       {
@@ -144,7 +145,7 @@ export const navItems: NavItem[] = [
           { label: "Testimonials", href: "/reviews", description: "Real stories from real contractors", iconName: "message-text-circle-02" },
           { label: "Platform updates", href: "/blog#blog-list", description: "What's new in Handoff", iconName: "announcement-01" },
           { label: "Contractor course", href: "/contractor-course", description: "Level up your remodeling business", iconName: "graduation-hat-01" },
-          { label: "Handoff Nation community", href: "/", description: "Connect with contractors like you", iconName: "users-plus" },
+          { label: "Handoff Nation community", href: "https://www.facebook.com/groups/820048150161667/", description: "Connect with contractors like you", iconName: "users-plus" },
         ],
       },
     ],
@@ -157,7 +158,7 @@ export const navItems: NavItem[] = [
       { label: "Platform updates", href: "/" },
       { label: "Contractor course", href: "/" },
       { label: "Careers", href: "/careers" },
-      { label: "Handoff Nation community", href: "/" },
+      { label: "Handoff Nation community", href: "https://www.facebook.com/groups/820048150161667/" },
     ],
   },
   {

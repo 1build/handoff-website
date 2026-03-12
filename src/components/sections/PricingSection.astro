@@ -8,6 +8,7 @@ interface PricingTier {
   monthlyPrice: string | null;
   annualPrice: string | null;
   priceLabel?: string;
+  priceSublabel?: string;
   description: string;
   cta: { label: string; primary: boolean; href: string };
   modal?: boolean;
@@ -21,34 +22,33 @@ const tiers: PricingTier[] = [
     badge: { label: "7-day free trial", color: "green" },
     monthlyPrice: "$149",
     annualPrice: "$119",
-    description: "Fast, professional estimates, proposals and invoicing for small crews.",
+    description: "Estimating takes too long. Get accurate bids out the door the same day you walk the job.",
     cta: { label: "Start free trial", primary: true, href: "https://app.handoff.ai/sign-up/" },
     features: [
-      "50 AI credits",
-      "3 AI Estimating from PDFs",
-      "1 service catalog",
-      "AI-generated scopes & proposals",
+      "50 AI usage credits",
+      "1 custom pricing catalog",
+      "AI-generated proposals",
       "Client financing",
       "Mobile & desktop access",
-      "2 seats included",
+      "2 users included",
     ],
   },
   {
     name: "Pro",
-    badge: { label: "Contract required", color: "gray" },
+    badge: { label: "12-month commitment", color: "gray" },
     monthlyPrice: "$299",
     annualPrice: "$239",
-    description: "Unlimited AI and a smoother client experience for growing teams.",
-    cta: { label: "Book a demo", primary: false, href: "https://app.tryhandoff.com/demo" },
+    description: "You're running more projects than one person can track. Handoff is built around your workflow, your pricing, and your crew - with hands-on setup to match.",
+    cta: { label: "Start free trial", primary: true, href: "https://app.handoff.ai/sign-up/" },
     featuresLabel: { prefix: "All ", highlight: "Flex", suffix: " features plus:" },
     features: [
-      "Unlimited AI credits",
-      "Unlimited service catalogs",
-      "AI transcription and site walkthroughs",
+      "Unlimited AI usage credits",
+      "Unlimited custom pricing catalogs",
+      "Voice Transcription To Estimate",
+      "AI site walkthroughs",
       "Client portal",
-      "File storage and job documentation",
-      "5 seats + add more",
-      "Success Coach onboarding",
+      "5 users included + add more",
+      "Dedicated Success Coach onboarding",
     ],
   },
   {
@@ -57,15 +57,17 @@ const tiers: PricingTier[] = [
     monthlyPrice: null,
     annualPrice: null,
     priceLabel: "Contact us",
-    description: "API integrations and custom setup for large or multi-location operations.",
+    priceSublabel: "for pricing",
+    description: "Multi-location or API-level needs. Let's build something that fits.",
     cta: { label: "Get in touch", primary: false, href: "#" },
     modal: true,
-    featuresLabel: { prefix: "All ", highlight: "Pro", suffix: " features plus:" },
+    featuresLabel: { prefix: "", highlight: "Get in touch", suffix: "" },
     features: [
       "API access",
       "Custom integrations",
       "Advanced security",
       "Uptime SLA",
+      "Security Compliance",
     ],
   },
 ];
@@ -96,7 +98,7 @@ const tiers: PricingTier[] = [
         Stop Paying for Five Tools. Handoff Does It All with an AI Teammate.
       </h1>
       <div class="text-lg lg:text-xl font-normal leading-[28px] lg:leading-[30px] text-text-on-brand-tertiary flex flex-col gap-1 mt-6">
-        <p>Start Free for 7 Days. Your First Estimate</p>
+        <p>Start Free for 7 Days. Your First Estimate Is On Us.</p>
       </div>
     </div>
 
@@ -148,9 +150,14 @@ const tiers: PricingTier[] = [
               <!-- Price -->
               <div class="flex flex-col gap-1">
                 {tier.priceLabel ? (
-                  <p class="font-display text-4xl font-medium leading-[44px] tracking-[-0.72px] text-text-primary">
-                    {tier.priceLabel}
-                  </p>
+                  <div class="flex flex-col gap-1">
+                    <p class="font-display text-4xl font-medium leading-[44px] tracking-[-0.72px] text-text-primary">
+                      {tier.priceLabel}
+                    </p>
+                    {tier.priceSublabel && (
+                      <p class="text-base font-medium text-text-tertiary">{tier.priceSublabel}</p>
+                    )}
+                  </div>
                 ) : (
                   <>
                     <p class="font-display text-4xl font-medium leading-[44px] tracking-[-0.72px] text-text-primary relative overflow-hidden h-[44px]">
@@ -173,7 +180,7 @@ const tiers: PricingTier[] = [
               <button
                 id="enterprise-cta"
                 type="button"
-                class="w-full py-3 px-[18px] rounded-xl text-base font-medium leading-6 text-center transition-colors shadow-xs mt-6 bg-bg-primary text-text-secondary border border-border-primary hover:bg-bg-secondary cursor-pointer"
+                class="w-full py-3 px-[18px] rounded-xl text-base font-medium leading-6 text-center transition-colors shadow-xs mt-6 bg-bg-brand-solid text-white hover:bg-brand-800 cursor-pointer"
               >
                 {tier.cta.label}
               </button>

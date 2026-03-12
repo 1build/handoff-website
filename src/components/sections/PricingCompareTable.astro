@@ -29,16 +29,16 @@ const plans = [
     badge: { label: "7-day free trial", color: "green" },
     annualPrice: "$119",
     monthlyPrice: "$149",
-    description: "Fast, professional estimates, proposals and invoicing for small crews.",
+    description: "Estimating takes too long. Get accurate bids out the door the same day you walk the job.",
     cta: { label: "Start free trial", href: "https://app.handoff.ai/sign-up/", primary: true },
   },
   {
     name: "Pro",
-    badge: { label: "Contract", color: "gray" },
+    badge: { label: "12-month commitment", color: "gray" },
     annualPrice: "$239",
     monthlyPrice: "$299",
-    description: "Unlimited AI and a smoother client experience for growing teams.",
-    cta: { label: "Book a demo", href: "https://app.tryhandoff.com/demo", primary: false },
+    description: "You're running more projects than one person can track. Handoff is built around your workflow, your pricing, and your crew - with hands-on setup to match.",
+    cta: { label: "Start free trial", href: "https://app.handoff.ai/sign-up/", primary: true },
   },
 ];
 
@@ -47,9 +47,9 @@ const tableGroups: TableGroup[] = [
     title: "CRM & Pipeline Management",
     rows: [
       { label: "AI Usage Credits", flex: text("50 credits"), pro: text("Unlimited") },
-      { label: "AI Estimating", flex: text("3"), pro: text("Unlimited") },
+      { label: "AI Estimating", flex: check, pro: check },
       { label: "AI Proposals", flex: check, pro: check },
-      { label: "AI Voice Transcription", flex: x, pro: check },
+      { label: "AI Voice Transcription", flex: check, pro: check },
       { label: "AI Site Walkthroughs", flex: x, pro: text("Unlimited") },
       { label: "AI presets", flex: text("Standard"), pro: text("Advanced") },
       { label: "AI-Powered Material Lists", flex: check, pro: check },

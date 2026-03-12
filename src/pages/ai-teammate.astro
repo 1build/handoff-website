@@ -4,11 +4,8 @@ import { getPageSeo } from "@/lib/seo-pages";
 import Header from "@/components/sections/Header.astro";
 import AiTeammateHero from "@/components/sections/AiTeammateHero.astro";
 import AiTeammateValueProps from "@/components/sections/AiTeammateValueProps.astro";
-import AiTeammateFeatures from "@/components/sections/AiTeammateFeatures.astro";
 import Footer from "@/components/sections/Footer.astro";
-import AiTeammateFeatures from "@/components/sections/AiTeammateFeatures.astro";
 import FaqSection from "@/components/sections/FaqSection.astro";
-import AiTeammateValueProps from "@/components/sections/AiTeammateValueProps.astro";
 import ProjectManagementCta from "@/components/sections/ProjectManagementCta.astro";
 import { navItems, footerColumns } from "@/lib/navigation";
 
@@ -41,10 +38,9 @@ const seo = getPageSeo(Astro.url.pathname);
 <BaseLayout {...seo}>
   <Header navItems={navItems} />
   <AiTeammateHero />
- <AiTeammateValueProps />
-  <AiTeammateFeatures />
+  <AiTeammateValueProps />
   <FaqSection items={faqItems} />
-   <ProjectManagementCta />
+  <ProjectManagementCta />
   <Footer columns={footerColumns} />
 </BaseLayout>
 
