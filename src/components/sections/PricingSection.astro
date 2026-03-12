@@ -103,7 +103,7 @@ const tiers: PricingTier[] = [
     </div>
 
     <!-- Billing Toggle -->
-    <div class="flex items-center justify-center gap-3 mt-20" data-animate="fade-up">
+    <div class="flex items-center justify-center gap-3 mt-10 lg:mt-20" data-animate="fade-up">
       <button
         id="billing-toggle"
         role="switch"
@@ -129,7 +129,7 @@ const tiers: PricingTier[] = [
           i < tiers.length - 1 ? "border-b lg:border-b-0 lg:border-r border-border-primary" : "",
         ]}>
           <!-- Card Header -->
-          <div class="flex flex-col h-[328px] px-8 pt-8 pb-8">
+          <div class="flex flex-col h-auto lg:h-[328px] px-5 md:px-8 pt-8 pb-8">
             <!-- Heading and price -->
             <div class="flex flex-col gap-5">
               <!-- Name + Badge -->
@@ -200,7 +200,7 @@ const tiers: PricingTier[] = [
           </div>
 
           <!-- Card Content / Features -->
-          <div class="flex flex-col gap-6 px-8 pt-5 pb-12 flex-1">
+          <div class="flex flex-col gap-6 px-5 md:px-8 pt-5 pb-12 flex-1">
             <!-- Features label -->
             <p class="text-base font-semibold leading-6">
               {tier.featuresLabel ? (
