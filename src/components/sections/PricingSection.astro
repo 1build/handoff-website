@@ -18,8 +18,8 @@ const tiers: PricingTier[] = [
   {
     name: "Flex",
     badge: { label: "7-day free trial", color: "green" },
-    monthlyPrice: "$185",
-    annualPrice: "$149",
+    monthlyPrice: "$149",
+    annualPrice: "$119",
     description: "Fast, professional estimates, proposals and invoicing for small crews.",
     cta: { label: "Start free trial", primary: true, href: "https://app.handoff.ai/sign-up/" },
     features: [
@@ -35,8 +35,8 @@ const tiers: PricingTier[] = [
   {
     name: "Pro",
     badge: { label: "Contract required", color: "gray" },
-    monthlyPrice: "$375",
-    annualPrice: "$299",
+    monthlyPrice: "$299",
+    annualPrice: "$239",
     description: "Unlimited AI and a smoother client experience for growing teams.",
     cta: { label: "Book a demo", primary: false, href: "https://app.tryhandoff.com/demo" },
     featuresLabel: { prefix: "All ", highlight: "Flex", suffix: " features plus:" },
@@ -51,31 +51,14 @@ const tiers: PricingTier[] = [
     ],
   },
   {
-    name: "Custom",
-    badge: { label: "Contract required", color: "gray" },
-    monthlyPrice: "$749",
-    annualPrice: "$599",
-    description: "Advanced features, more control, and support for high-volume contractors.",
-    cta: { label: "Book a demo", primary: false, href: "https://app.tryhandoff.com/demo" },
-    featuresLabel: { prefix: "All ", highlight: "Pro", suffix: " features plus:" },
-    features: [
-      "Advanced Takeoffs (coming soon)",
-      "Cost codes (coming soon)",
-      "Client financing",
-      "Priority feature requests",
-      "Custom onboarding",
-      "Dedicated support",
-    ],
-  },
-  {
     name: "Enterprise",
     badge: undefined,
     monthlyPrice: null,
     annualPrice: null,
     priceLabel: "Contact us",
     description: "API integrations and custom setup for large or multi-location operations.",
-    cta: { label: "Book a demo", primary: false, href: "https://app.tryhandoff.com/demo" },
-    featuresLabel: { prefix: "All ", highlight: "Custom", suffix: " features plus:" },
+    cta: { label: "Get in touch", primary: false, href: "https://app.tryhandoff.com/demo" },
+    featuresLabel: { prefix: "All ", highlight: "Pro", suffix: " features plus:" },
     features: [
       "API access",
       "Custom integrations",
@@ -108,11 +91,10 @@ const tiers: PricingTier[] = [
         PRICING
       </p>
       <h1 class="font-display text-4xl lg:text-[48px] font-medium leading-[44px] lg:leading-[60px] tracking-[-0.96px] text-white max-w-[800px] mt-3">
-        Everything you need to grow your contracting business with AI
+        Stop Paying for Five Tools. Handoff Does It All with an AI Teammate.
       </h1>
       <div class="text-lg lg:text-xl font-normal leading-[28px] lg:leading-[30px] text-text-on-brand-tertiary flex flex-col gap-1 mt-6">
-        <p>Pay for one system. Automate your business. Upgrade anytime.</p>
-        <p>Try the Flex plan free for 7 days</p>
+        <p>Start Free for 7 Days. Your First Estimate</p>
       </div>
     </div>
 
@@ -136,7 +118,7 @@ const tiers: PricingTier[] = [
     </div>
 
     <!-- Pricing Cards Grid -->
-    <div class="rounded-2xl border border-border-primary overflow-hidden shadow-xs grid grid-cols-1 lg:grid-cols-4 mt-8 w-full" data-animate="stagger">
+    <div class="rounded-2xl border border-border-primary overflow-hidden shadow-xs grid grid-cols-1 lg:grid-cols-3 mt-8 w-full" data-animate="stagger">
       {tiers.map((tier, i) => (
         <div class:list={[
           "flex flex-col bg-bg-primary",

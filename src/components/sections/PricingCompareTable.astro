@@ -10,8 +10,6 @@ interface TableRow {
   label: string;
   flex: CellValue;
   pro: CellValue;
-  custom: CellValue;
-  enterprise: CellValue;
 }
 
 interface TableGroup {
@@ -29,95 +27,69 @@ const plans = [
   {
     name: "Flex",
     badge: { label: "7-day free trial", color: "green" },
-    annualPrice: "$149",
-    monthlyPrice: "$185",
+    annualPrice: "$119",
+    monthlyPrice: "$149",
     description: "Fast, professional estimates, proposals and invoicing for small crews.",
     cta: { label: "Start free trial", href: "https://app.handoff.ai/sign-up/", primary: true },
   },
   {
     name: "Pro",
     badge: { label: "Contract", color: "gray" },
-    annualPrice: "$299",
-    monthlyPrice: "$375",
+    annualPrice: "$239",
+    monthlyPrice: "$299",
     description: "Unlimited AI and a smoother client experience for growing teams.",
     cta: { label: "Book a demo", href: "https://app.tryhandoff.com/demo", primary: false },
-  },
-  {
-    name: "Custom",
-    badge: { label: "Contract", color: "gray" },
-    annualPrice: "$599",
-    monthlyPrice: "$749",
-    description: "Advanced features, more control, and support for high-volume contractors.",
-    cta: { label: "Contact sales", href: "https://app.tryhandoff.com/demo", primary: false },
-  },
-  {
-    name: "Enterprise",
-    badge: undefined,
-    annualPrice: null,
-    monthlyPrice: null,
-    priceLabel: "Contact us",
-    description: "API integrations and custom setup for large or multi-location operations.",
-    cta: { label: "Contact sales", href: "https://app.tryhandoff.com/demo", primary: false },
   },
 ];
 
 const tableGroups: TableGroup[] = [
   {
-    title: "AI Features",
+    title: "CRM & Pipeline Management",
     rows: [
-      { label: "AI Agent Credits", flex: text("50 credits"), pro: text("Unlimited"), custom: text("Unlimited"), enterprise: text("Unlimited") },
-      { label: "AI Estimating from PDFs", flex: text("3 PDFs"), pro: text("Unlimited"), custom: text("Unlimited"), enterprise: text("Unlimited") },
-      { label: "AI Scopes and Proposals", flex: check, pro: check, custom: check, enterprise: check },
-      { label: "Voice Transcription", flex: x, pro: check, custom: check, enterprise: check },
-      { label: "AI Site Walkthroughs", flex: x, pro: check, custom: check, enterprise: check },
-      { label: "AI presets", flex: text("Standard"), pro: text_badge("Advanced", "Coming soon"), custom: text_badge("Advanced", "Coming soon"), enterprise: text_badge("Advanced", "Coming soon") },
-      { label: "Advanced Takeoff", flex: x, pro: check, custom: check, enterprise: check },
-      { label: "AI Localize Costs", flex: text("Standard"), pro: text_badge("Advanced", "Coming soon"), custom: text_badge("Advanced", "Coming soon"), enterprise: text_badge("Advanced", "Coming soon") },
-      { label: "AI Estimate Updates", flex: x, pro: check, custom: check, enterprise: check },
+      { label: "AI Usage Credits", flex: text("50 credits"), pro: text("Unlimited") },
+      { label: "AI Estimating", flex: text("3"), pro: text("Unlimited") },
+      { label: "AI Proposals", flex: check, pro: check },
+      { label: "AI Voice Transcription", flex: x, pro: check },
+      { label: "AI Site Walkthroughs", flex: x, pro: text("Unlimited") },
+      { label: "AI presets", flex: text("Standard"), pro: text("Advanced") },
+      { label: "AI-Powered Material Lists", flex: check, pro: check },
+      { label: "AI Takeoffs", flex: check, pro: check },
+      { label: "Client Portal", flex: x, pro: badge("Coming soon") },
+      { label: "Track Client Activity", flex: check, pro: check },
     ],
   },
   {
-    title: "Documents & Job Management",
+    title: "Project Management",
     rows: [
-      { label: "File to Job Documentation", flex: check, pro: check, custom: check, enterprise: check },
-      { label: "Photos & Files Storage", flex: check, pro: check, custom: check, enterprise: check },
-      { label: "Digital Signatures", flex: check, pro: check, custom: check, enterprise: check },
-      { label: "Service Catalog", flex: text("1 catalog"), pro: text("Unlimited"), custom: text("Unlimited"), enterprise: text("Unlimited") },
-      { label: "Cost Codes", flex: x, pro: x, custom: badge("Coming soon"), enterprise: badge("Coming soon") },
-      { label: "Daily Log", flex: x, pro: x, custom: badge("Coming soon"), enterprise: badge("Coming soon") },
-      { label: "Schedule", flex: x, pro: x, custom: badge("Coming soon"), enterprise: badge("Coming soon") },
-      { label: "Tasks", flex: x, pro: x, custom: badge("Coming soon"), enterprise: badge("Coming soon") },
+      { label: "Digital Signatures", flex: check, pro: check },
+      { label: "Custom Pricing Catalogs", flex: text("1"), pro: text("Unlimited") },
+      { label: "AI Meeting Recording", flex: x, pro: badge("Coming soon") },
+      { label: "Daily Logs", flex: x, pro: badge("Coming soon") },
+      { label: "Scheduling", flex: x, pro: badge("Coming soon") },
     ],
   },
   {
-    title: "Customer Experience & Visibility",
+    title: "Financial Management",
     rows: [
-      { label: "Client Portal", flex: x, pro: check, custom: check, enterprise: check },
-      { label: "Track Customer Activity", flex: check, pro: check, custom: check, enterprise: check },
-      { label: "Client Financing", flex: check, pro: check, custom: check, enterprise: check },
-    ],
-  },
-  {
-    title: "Payments & Invoicing",
-    rows: [
-      { label: "Invoices & Payments", flex: check, pro: check, custom: check, enterprise: check },
-      { label: "Progress Payments", flex: check, pro: check, custom: check, enterprise: check },
-      { label: "Card Fees to Client", flex: text("3.3%"), pro: text("2.85%"), custom: text("2.85%"), enterprise: text("2.85%") },
-      { label: "ACH Fees to Client", flex: text("1% ($10 cap)"), pro: text("1% ($10 cap)"), custom: text("1% ($10 cap)"), enterprise: text("1% ($10 cap)") },
+      { label: "Invoices & Payments", flex: check, pro: check },
+      { label: "Milestone Invoicing", flex: check, pro: check },
+      { label: "Quickbooks Integration", flex: check, pro: check },
+      { label: "Credit Card Fees", flex: text("3.35%"), pro: text("2.85%") },
+      { label: "ACH Fees", flex: text("1% ($10 cap)"), pro: text("1% ($10 cap)") },
+      { label: "Budgeting & Expense Tracking", flex: x, pro: badge("Coming soon") },
+      { label: "Client Financing", flex: x, pro: check },
     ],
   },
   {
     title: "Team, Access & Support",
     rows: [
-      { label: "Custom Roles", flex: x, pro: badge("Coming soon"), custom: badge("Coming soon"), enterprise: badge("Coming soon") },
-      { label: "Seat Management", flex: text("2 seats"), pro: text("5 included + add more"), custom: text("5 included + add more"), enterprise: text("5 included + add more") },
-      { label: "Onboarding", flex: text("Standard"), pro: text("Success Coach (AI Trainer & Setup)"), custom: text("Success Coach (AI Trainer & Setup)"), enterprise: text("Success Coach (AI Trainer & Setup)") },
-      { label: "Support channels", flex: check, pro: check, custom: check, enterprise: check },
-      { label: "Book an expert call", flex: check, pro: check, custom: check, enterprise: check },
-      { label: "New Feature Request", flex: check, pro: check, custom: check, enterprise: check },
-      { label: "Desktop App", flex: check, pro: check, custom: check, enterprise: check },
-      { label: "iOS App", flex: check, pro: check, custom: check, enterprise: check },
-      { label: "Android App", flex: check, pro: check, custom: check, enterprise: check },
+      { label: "Custom Roles", flex: x, pro: check },
+      { label: "Included Users", flex: text("2"), pro: text("5+") },
+      { label: "Dedicated Onboarding", flex: text("Standard"), pro: text("Success Coach (AI Trainer & Setup)") },
+      { label: "Realtime Support (email, live chat, phone)", flex: check, pro: check },
+      { label: "Desktop App", flex: check, pro: check },
+      { label: "iOS App", flex: check, pro: check },
+      { label: "Android App", flex: check, pro: check },
     ],
   },
 ];
@@ -225,7 +197,7 @@ const tableGroups: TableGroup[] = [
               ))}
             </div>
             {/* Value columns */}
-            {(["flex", "pro", "custom", "enterprise"] as const).map((key) => (
+            {(["flex", "pro"] as const).map((key) => (
               <div class="flex-1 flex flex-col">
                 {group.rows.map((row, ri) => {
                   const cell = row[key];

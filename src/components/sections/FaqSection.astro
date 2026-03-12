@@ -18,10 +18,7 @@ const faqItems = items?.length ? items : localFaqItems;
           Frequently Asked Questions
         </h2>
         <p class="text-lg font-normal leading-7 text-text-tertiary">
-          Everything you need to know about the product and billing. Can't find the answer you're looking for? Please{" "}
-          <a href="/" class="underline text-text-tertiary hover:text-text-primary transition-colors">
-            chat to our friendly team
-          </a>.
+          Everything you need to know about the product and billing.
         </p>
       </div>
 
@@ -41,9 +38,7 @@ const faqItems = items?.length ? items : localFaqItems;
             </summary>
             <div class="grid grid-rows-[0fr] group-open:grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-in-out">
               <div class="overflow-hidden">
-                <p class="text-base font-normal leading-6 text-text-tertiary mt-1 pr-10">
-                  {item.answer}
-                </p>
+                <div class="text-base font-normal leading-6 text-text-tertiary mt-1 pr-10" set:html={item.answer} />
               </div>
             </div>
           </details>

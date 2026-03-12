@@ -7,7 +7,8 @@ import PricingMetricsSection from "@/components/sections/PricingMetricsSection.a
 import Footer from "@/components/sections/Footer.astro";
 import TestimonialsGridSectionPricing from "@/components/sections/TestimonialsGridSectionPricing.astro";
 import FaqSection from "@/components/sections/FaqSection.astro";
-import { navItems, footerColumns, faqItems } from "@/lib/navigation";
+import CtaSystemsSection from "@/components/sections/CtaSystemsSection.astro";
+import { navItems, footerColumns, pricingFaqItems } from "@/lib/navigation";
 import { getPageSeo } from "@/lib/seo-pages";
 
 const seo = getPageSeo(Astro.url.pathname);
@@ -18,6 +19,7 @@ const seo = getPageSeo(Astro.url.pathname);
   <PricingSection />
   <PricingCompareTable />
   <TestimonialsGridSectionPricing />
-  <FaqSection items={faqItems} />
+  <FaqSection items={pricingFaqItems} />
+  <CtaSystemsSection />
   <Footer columns={footerColumns} />
 </BaseLayout>
