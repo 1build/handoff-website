@@ -15,17 +15,9 @@ import avatar2 from "@/assets/images/avatar1.png";
 import avatar3 from "@/assets/images/avatar11.png";
 import avatar4 from "@/assets/images/avatar2.png";
 import avatar5 from "@/assets/images/avatar12.png";
-import checkIcon from "@/assets/icons/check-icon.svg";
 
 
 
-
-const sessions = [
-  { date: "Mar 3", day: "Tuesday", time: "9:30 AM", title: "The Modern Contractor Marketing Playbook", ended: true },
-  { date: "Mar 5", day: "Thursday", time: "10:00 AM", title: "The Modern Contractor Marketing Playbook", ended: false },
-  { date: "Mar 11", day: "Wednesday", time: "9:00 AM", title: "The Modern Contractor Process Audit", ended: false },
-  { date: "Mar 13", day: "Friday", time: "11:00 AM", title: "The Modern Contractor Marketing Playbook", ended: false },
-];
 
 const expectItems = [
   {
@@ -46,11 +38,6 @@ const expectItems = [
   },
 ];
 
-const registrationSessions = [
-  { date: "Mar 5 • 10:00 AM CT", title: "The Modern Contractor Marketing Playbook", checked: true },
-  { date: "Mar 11 • 9:00 AM CT", title: "The Modern Contractor Process Audit", checked: true },
-  { date: "Mar 13 • 11:00 AM CT", title: "The Modern Contractor Marketing Playbook", checked: false },
-];
 const seo = getPageSeo(Astro.url.pathname);
 ---
 
@@ -95,55 +82,6 @@ const seo = getPageSeo(Astro.url.pathname);
         </div>
       </div>
 
-      <!-- Upcoming sessions -->
-      <div class="flex flex-col gap-8 pb-16">
-        <div class="flex items-center justify-between">
-          <p class="font-mono text-sm font-semibold tracking-[0.56px] uppercase text-white">UPCOMING SESSIONS</p>
-          <p class="text-base font-medium text-neutral-300">Sessions rotate every 2 weeks</p>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {sessions.map((session) => (
-            session.ended ? (
-              <div class="flex flex-col justify-between p-6 rounded-3xl backdrop-blur-sm bg-white/8 border border-white/10">
-                <div class="flex flex-col gap-6">
-                  <div class="flex flex-col gap-1 text-text-on-brand-tertiary">
-                    <p class="font-display text-[30px] font-medium leading-[38px] line-through">{session.date}</p>
-                    <div class="flex items-center gap-2 text-base font-medium">
-                      <span>{session.day}</span>
-                      <span>•</span>
-                      <span>{session.time}</span>
-                    </div>
-                  </div>
-                  <hr class="border-0 border-t border-white/20 w-20" />
-                  <p class="text-xl font-medium leading-[30px] text-text-on-brand-tertiary">{session.title}</p>
-                </div>
-                <p class="text-sm font-medium text-text-on-brand-tertiary mt-4">This session has ended</p>
-              </div>
-            ) : (
-              <div class="flex flex-col justify-between p-6 rounded-3xl bg-white border border-border-primary shadow-xs">
-                <div class="flex flex-col gap-6">
-                  <div class="flex flex-col gap-1">
-                    <p class="font-display text-[30px] font-medium leading-[38px] text-text-primary">{session.date}</p>
-                    <div class="flex items-center gap-2 text-base font-medium text-text-quaternary">
-                      <span>{session.day}</span>
-                      <span>•</span>
-                      <span>{session.time}</span>
-                    </div>
-                  </div>
-                  <hr class="border-0 border-t border-border-primary w-20" />
-                  <p class="text-xl font-medium leading-[30px] text-text-quaternary">{session.title}</p>
-                </div>
-                <div class="mt-6">
-                  <a href="#register" class="inline-flex items-center justify-center px-[18px] py-3 text-base font-medium leading-6 rounded-xl bg-white border border-border-primary shadow-xs text-text-secondary hover:bg-bg-secondary transition-colors">
-                    Register
-                  </a>
-                </div>
-              </div>
-            )
-          ))}
-        </div>
-      </div>
     </div>
   </section>
 
@@ -164,7 +102,7 @@ const seo = getPageSeo(Astro.url.pathname);
 
         <!-- Video -->
         <div class="w-full rounded-xl overflow-hidden flex justify-center">
-       <iframe width="1080" height="607" src="https://www.youtube.com/embed/Df9PsBlugWQ" title="The Modern Contractor Webinar | Handoff" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+       <iframe width="1080" height="607" src="https://www.youtube.com/embed/RpBA-wUCraI" title="The Modern Contractor Webinar | Handoff" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
 
         <!-- Feature cards grid -->
@@ -366,29 +304,8 @@ const seo = getPageSeo(Astro.url.pathname);
                 Register for the times and dates that work best for you
               </p>
 
-              <!-- Session checkboxes -->
-              <div class="flex flex-col gap-5">
-                {registrationSessions.map((s) => (
-                  <label class="flex items-start gap-3 cursor-pointer">
-                    <div class="flex items-center justify-center pt-0.5 shrink-0">
-                      {s.checked ? (
-                        <div class="w-5 h-5 rounded-md bg-brand-700 overflow-hidden flex items-center justify-center shrink-0">
-                          <img src={checkIcon.src} alt="" class="w-3 h-3" />
-                        </div>
-                      ) : (
-                        <div class="w-5 h-5 rounded-md bg-white border border-border-primary shrink-0"></div>
-                      )}
-                    </div>
-                    <div class="flex flex-col gap-0.5">
-                      <span class="text-base font-medium leading-6 text-text-secondary">{s.date}</span>
-                      <span class="text-base leading-6 text-text-tertiary">{s.title}</span>
-                    </div>
-                  </label>
-                ))}
-              </div>
-
               <!-- Form -->
-              <form class="flex flex-col gap-5">
+              <form id="construction-course-form" class="flex flex-col gap-5">
                 <div class="grid grid-cols-2 gap-5">
                   <div class="flex flex-col gap-1.5">
                     <label class="text-sm font-medium leading-5 text-text-secondary">First name</label>
@@ -451,3 +368,71 @@ const seo = getPageSeo(Astro.url.pathname);
 
   <Footer columns={footerColumns} />
 </BaseLayout>
+
+<script>
+  const form = document.getElementById('construction-course-form') as HTMLFormElement | null;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const portalId = '44330500';
+    const formGuid = 'b229b25-6964-4bbd-8f11-6d06f7bba650';
+
+    const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const originalText = btn.textContent ?? 'Register';
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+
+    const payload = {
+      fields: [
+        { name: 'firstname', value: (form.elements.namedItem('first_name') as HTMLInputElement)?.value },
+        { name: 'lastname',  value: (form.elements.namedItem('last_name')  as HTMLInputElement)?.value },
+        { name: 'email',     value: (form.elements.namedItem('email')      as HTMLInputElement)?.value },
+        { name: 'phone',     value: (form.elements.namedItem('phone')      as HTMLInputElement)?.value },
+      ].filter(f => f.value),
+      context: {
+        pageUri: window.location.href,
+        pageName: document.title,
+      },
+    };
+
+    let errorEl = form.querySelector<HTMLElement>('.hs-error');
+    if (!errorEl) {
+      errorEl = document.createElement('p');
+      errorEl.className = 'hs-error text-sm text-red-600 mt-1';
+      form.appendChild(errorEl);
+    }
+    errorEl.textContent = '';
+
+    try {
+      const res = await fetch(
+        `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formGuid}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error((err as any).message || 'Submission failed');
+      }
+
+      // Replace form with success message
+      const card = form.closest('.bg-brand-100');
+      if (card) {
+        card.innerHTML = `
+          <div class="flex flex-col gap-4 py-8 text-center">
+            <p class="font-display text-2xl font-medium text-text-primary">You're registered!</p>
+            <p class="text-lg text-text-tertiary">We'll send you the details shortly. See you there.</p>
+          </div>
+        `;
+      }
+    } catch (err: any) {
+      errorEl.textContent = err.message || 'Something went wrong. Please try again.';
+      btn.disabled = false;
+      btn.textContent = originalText;
+    }
+  });
+</script>

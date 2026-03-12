@@ -2,6 +2,7 @@
 import { ViewTransitions } from "astro:transitions";
 import SpeedInsights from "@vercel/speed-insights/astro";
 import "../styles/global.css";
+import CookieNotice from "@/components/ui/CookieNotice.astro";
 import {
   getCanonicalUrl,
   getDefaultDescription,
@@ -95,6 +96,7 @@ const defaultSchema = getDefaultJsonLd(canonicalUrl);
     </noscript>
     <!-- End Google Tag Manager (noscript) -->
     <slot />
+    <CookieNotice />
     <SpeedInsights />
   </body>
 </html>

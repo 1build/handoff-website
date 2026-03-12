@@ -1,32 +1,28 @@
 ---
 import platform1Img from "@/assets/images/platform1.png";
 
-const platformImages = [platform1Img, platform1Img, platform1Img, platform1Img, platform1Img, platform1Img];
+const platformImages = [platform1Img, platform1Img, platform1Img, platform1Img, platform1Img];
 
 const features = [
   {
-    title: "Estimate from anything",
-    description: "AI generates accurate estimates from photos, plans, or voice notes",
+    title: "Lock In Your Process",
+    description: "Your AI Teammate runs every estimate through your rates, markup rules, and approval steps. New hire? They estimate like a 10-year veteran on day one. No guesswork. No margin leaks.",
   },
   {
-    title: "Scope that writes itself",
-    description: "Turn estimates into professional scope documents automatically",
+    title: "Coordinate Without the Chaos",
+    description: "Walkthroughs, project phases, and crew schedules in one place. Less phone tag. Fewer delays. More jobs done and billed.",
   },
   {
-    title: "learns how you work",
-    description: "Pricing, preferences, and labor rates improve with every project",
+    title: "Stay One Step Ahead",
+    description: "Real-time alerts when approvals stall, change orders come in, or a project needs attention. You never have to micromanage what your AI Teammate is already watching.",
   },
   {
-    title: "Built-in supplier pricing",
-    description: "Real costs from Lowe's and Home Depot, updated automatically",
+    title: "Go from First Contact to Signed Proposal in Under 24 Hours",
+    description: "Your AI Teammate handles the estimate while you're still on the drive home. Your crew starts while your competition is still writing up the bid.",
   },
   {
-    title: "Scope and materials",
-    description: "Material lists and labor requirements generated together",
-  },
-  {
-    title: "Proposals that close",
-    description: "Send professional proposals clients can sign and approve",
+    title: "Grow Without Losing Control",
+    description: "Role-based permissions keep your markup, approvals, and workflows locked as your team grows. Bigger business, same margins, less chaos.",
   },
 ];
 ---
@@ -37,17 +33,17 @@ const features = [
     <div class="flex flex-col gap-4 mb-8 md:mb-10 md:flex-row md:items-end md:justify-between md:gap-8">
       <div class="flex flex-col gap-2">
         <h2 class="font-display text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight tracking-[-0.02em] text-text-primary">
-          Everything you need, in one platform
+          The Contractors Winning Right Now All Have<br />One Thing in Common.
         </h2>
         <p class="text-base text-text-tertiary leading-relaxed max-w-[560px]">
-          One platform. No tool-stitching, no workarounds, no re-keying.
+          It's not that they work harder. They move faster. First to bid. First to win. First payment collected. Handoff is that edge.
         </p>
       </div>
       <a
         href="#"
         class="inline-flex items-center justify-center shrink-0 w-full md:w-auto px-5 py-3 text-base font-medium text-white rounded-xl bg-brand-700 border border-brand-600 hover:bg-brand-800 transition-colors duration-150"
       >
-        See the full list
+        Start Free Trial
       </a>
     </div>
 
@@ -63,27 +59,14 @@ const features = [
               decoding="async"
             />
           </div>
-          <div class="p-4 sm:py-6 bg-[#F4F6F4]">
-            <div class="flex items-end justify-between gap-4">
-              <div>
-                <p class="text-sm font-semibold text-text-quaternary uppercase mb-1">
-                  {feature.title}
-                </p>
-                <p class="text-base md:text-lg text-text-primary leading-relaxed">
-                  {feature.description}
-                </p>
-              </div>
-              <button
-                type="button"
-                class="hidden sm:inline-flex items-center justify-center w-12 h-12 rounded-full border border-[#E9EAEB] bg-transparent text-neutral-700 hover:bg-white transition-colors"
-                aria-hidden="true"
-                tabIndex={-1}
-              >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M9 18L15 12L9 6" stroke="#414651" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-
-              </button>
+          <div class="p-4 sm:py-6 bg-[#F4F6F4] flex-1">
+            <div>
+              <p class="text-sm font-semibold text-text-quaternary uppercase mb-1">
+                {feature.title}
+              </p>
+              <p class="text-base md:text-lg text-text-primary leading-relaxed">
+                {feature.description}
+              </p>
             </div>
           </div>
         </article>

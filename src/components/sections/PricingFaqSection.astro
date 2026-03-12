@@ -39,7 +39,7 @@ const faqItems = [
     <!-- FAQ items -->
     <div class="flex flex-col max-w-[768px] mx-auto w-full" data-animate="stagger">
       {faqItems.map((item, i) => (
-        <details class="faq-item group border-t border-border-secondary py-6" open={i === 0}>
+        <details class="faq-item group border-t border-border-secondary py-6">
           <summary class="flex items-start justify-between gap-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-base font-semibold leading-6 text-text-primary">
               {item.question}

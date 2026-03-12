@@ -12,51 +12,51 @@ import avatar9 from "@/assets/images/avatar9.png";
 
 const testimonials = [
   {
-    name: "Glenn",
-    title: "Glenn and Sons Remodel",
-    quote: "I'm very impressed. We won a $10,000 job with Handoff in our first month!",
+    name: "Scott",
+    title: "MCM Homes | Omaha, NE",
+    quote: "I can genuinely trust the numbers I'm getting. Since I've been introduced to Handoff, there hasn't been a single job where I haven't checked my numbers against it. I've got a number in my head, and Handoff gives me the same scope — that's incredibly comfortable.",
     avatar: avatar1.src,
-    initials: "G",
+    initials: "S",
     color: "#0f766e",
   },
   {
-    name: "Matt",
-    title: "UX Designer, Goodwell",
-    quote: "Handoff AI is a game changer in helping us develop our long term sales & operations plan… AI is the way of the future and this hits us in a very important part of our business.",
+    name: "Glenn",
+    title: "Glenn and Sons Remodel | Dallas, TX",
+    quote: "We won a $10,000 job with Handoff in our first month!",
     avatar: avatar2.src,
-    initials: "M",
+    initials: "G",
     color: "#2d7a52",
   },
   {
-    name: "Mathilde Lewis",
-    title: "Project Lead, Stack3d Lab",
-    quote: "Our workflow has improved dramatically since we started using Handoff and it's become an integral part of our workflow. It's easy to use, and the resources are top-notch. I recommend it to everyone!",
+    name: "Todd",
+    title: "GoHome LLC | Chester, VA",
+    quote: "I've been so frustrated with estimating that I was ready to give it up. Handoff is like taking a 1,000-pound weight off my chest.",
     avatar: avatar3.src,
-    initials: "M",
+    initials: "T",
     color: "#0d9488",
   },
   {
-    name: "Matt",
-    title: "Equi-linc",
-    quote: "I've been so frustrated with estimating that I was ready to give it up. Handoff is like taking a 1,000-pound weight off my chest. I feel so much better now. I'm so glad I found you guys.",
+    name: "Heath",
+    title: "Mayfield Construction | Bowie, TX",
+    quote: "I am very surprised at how close to my numbers the AI is. I really like the app.",
     avatar: avatar4.src,
-    initials: "M",
+    initials: "H",
     color: "#3b7dd8",
   },
   {
-    name: "Florence Shaw",
-    title: "Web Designer, Quixotic",
-    quote: "Handoff is hands down the best design library we've used. It has literally everything we need to get started for any possible project.",
+    name: "Francisco Z.",
+    title: "Estimator | Small Business",
+    quote: "Handoff completely changed the game for our handyman business. The AI estimates are fast, accurate, and detailed — it saves us hours of manual work every week.",
     avatar: avatar5.src,
     initials: "F",
     color: "#7c3aed",
   },
   {
-    name: "Stefan Sears",
-    title: "UI/UX Designer, Mangolia",
-    quote: "Handoff is an absolute game-changer for our projects. We can't imagine going back to how we used to work without it.",
+    name: "Harold Bailey",
+    title: "Owner at Mr. Fix-It",
+    quote: "Best Estimating System Out There. Very good, definitely a time saver. Cut my estimating time down by 75%. Its been a game changer for me and our profit is up due to Handoff. We switched from Jobber because Handoff is easier to use and navigate, and it's cheaper.",
     avatar: avatar6.src,
-    initials: "S",
+    initials: "H",
     color: "#c2410c",
   },
   {
@@ -102,13 +102,13 @@ const visibleOnMobile = 6;
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-[12]">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-[12] items-start">
       {testimonials.map((t, i) => (
         <article
             class={`rounded-xl border border-[#E9EAEB] bg-white p-5 md:p-8 flex flex-col ${i >= 6 ? "hidden" : ""}`}
             data-testimonial-more={i >= 6 ? "" : undefined}
           >
-          <p class="text-base text-[#535862] leading-relaxed mb-5 flex-grow">{t.quote}</p>
+          <p class="text-base text-[#535862] leading-relaxed mb-5">{t.quote}</p>
           <div class="flex items-center gap-3">
             {t.avatar ? (
               <img src={t.avatar} alt={t.name} class="w-10 h-10 rounded-full object-cover shrink-0" loading="lazy" />

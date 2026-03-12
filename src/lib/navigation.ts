@@ -82,9 +82,9 @@ export const navItems: NavItem[] = [
   {
     label: "Who We Serve",
     items: [
-      { label: "Established remodelers", href: "/remodelers", description: "See how contractors win with Handoff", iconName: "book-closed" },
-      { label: "New and small remodeling businesses", href: "/fix-and-flip", description: "Tips, trends, and product updates", iconName: "pencil-line" },
-      { label: "Trade contractors and handymen", href: "/handyman", description: "Step by step playbooks for your business", iconName: "book-open-01" },
+      { label: "Home Builders", href: "/builders", iconName: "book-closed" },
+      { label: "Remodelers", href: "/remodelers", iconName: "pencil-line" },
+      { label: "Trade Contractors & Handymen", href: "/handyman", iconName: "book-open-01" },
     ],
   },
   {
@@ -135,6 +135,7 @@ export const navItems: NavItem[] = [
           { label: "Blog", href: "/blog", description: "Tips, trends, and product updates", iconName: "pencil-line" },
           { label: "Guides", href: "/blog#blog-list", description: "Step by step playbooks for your business", iconName: "book-open-01" },
           { label: "Webinars", href: "/contractor-webinars", description: "Live sessions with industry pros.", iconName: "play-circle" },
+          { label: "Comparisons", href: "/comparison", description: "Compare Handoff to the competition", iconName: "compare" },
         ],
       },
       {
@@ -143,7 +144,6 @@ export const navItems: NavItem[] = [
           { label: "Testimonials", href: "/reviews", description: "Real stories from real contractors", iconName: "message-text-circle-02" },
           { label: "Platform updates", href: "/blog#blog-list", description: "What's new in Handoff", iconName: "announcement-01" },
           { label: "Contractor course", href: "/contractor-course", description: "Level up your remodeling business", iconName: "graduation-hat-01" },
-          { label: "Careers", href: "/careers", description: "Build something that matters", iconName: "briefcase-02" },
           { label: "Handoff Nation community", href: "/", description: "Connect with contractors like you", iconName: "users-plus" },
         ],
       },
@@ -163,10 +163,10 @@ export const navItems: NavItem[] = [
   {
     label: "Support",
     items: [
-      { label: "Contact us", href: "/", description: "We're here to help", iconName: "book-closed" },
       { label: "Help center", href: "https://help.handoff.ai/en/", description: "Find answers fast", iconName: "pencil-line" },
     ],
   },
+  { label: "We're Hiring", href: "/careers" },
 ];
 
 export interface FooterColumn {
@@ -177,36 +177,52 @@ export interface FooterColumn {
 
 export const footerColumns: FooterColumn[] = [
   {
-    title: "Product",
+    title: "Useful Links",
     links: [
-      { label: "Overview", href: "/" },
-      { label: "Features", href: "/" },
-      { label: "Solutions", href: "/", badge: "New" },
-      { label: "Tutorials", href: "/" },
+      { label: "Home", href: "/" },
       { label: "Pricing", href: "/pricing" },
-      { label: "Releases", href: "/" },
-    ],
-  },
-  {
-    title: "Company",
-    links: [
-      { label: "About us", href: "/" },
-      { label: "Careers", href: "/careers" },
-      { label: "Press", href: "/" },
-      { label: "News", href: "/" },
-      { label: "Media kit", href: "/" },
-      { label: "Contact", href: "/" },
-    ],
-  },
-  {
-    title: "Resources",
-    links: [
+      { label: "Compare", href: "/comparison", badge: "New" },
       { label: "Blog", href: "/blog" },
-      { label: "Newsletter", href: "/" },
-      { label: "Events", href: "/" },
-      { label: "Help centre", href: "https://help.handoff.ai/en/" },
-      { label: "Tutorials", href: "/" },
-      { label: "Support", href: "/" },
+      { label: "Careers", href: "/careers" },
+      { label: "1build", href: "/1build" },
+      { label: "Construction Costs", href: "/construction-costs" },
+      { label: "Become an Affiliate", href: "/affiliate" },
+      { label: "Contractor Webinars", href: "/contractor-webinars" },
+    ],
+  },
+  {
+    title: "Features",
+    links: [
+      { label: "Instant AI Estimates", href: "/instant-ai-estimates" },
+      { label: "CRM", href: "/client-management-system" },
+      { label: "Winning AI Proposals", href: "/winning-ai-proposals" },
+      { label: "Invoicing", href: "/invoicing" },
+      { label: "Project Management", href: "/project-management" },
+      { label: "Change Orders", href: "/change-orders" },
+      { label: "AI Agent", href: "/ai-agent" },
+      { label: "File Management", href: "/file-management" },
+      { label: "Customer Financing", href: "/homeowner-financing" },
+      { label: "Creating Estimates from Files", href: "/creating-estimates-from-files" },
+      { label: "AI Documents", href: "/ai-documents" },
+      { label: "AI Transcription", href: "/ai-transcription" },
+    ],
+  },
+  {
+    title: "Who We Serve",
+    links: [
+      { label: "Remodelers", href: "/remodelers" },
+      { label: "Handyman", href: "/handyman" },
+      { label: "Builders", href: "/builders" },
+      { label: "Fix and Flip", href: "/fix-and-flip" },
+    ],
+  },
+  {
+    title: "Blog Categories",
+    links: [
+      { label: "Case Studies", href: "/blog#case-studies" },
+      { label: "Updates", href: "/blog#updates" },
+      { label: "Resources", href: "/resources" },
+      { label: "Guides", href: "/blog#guides" },
     ],
   },
   {
@@ -215,20 +231,9 @@ export const footerColumns: FooterColumn[] = [
       { label: "Twitter", href: "https://twitter.com/HandoffAI" },
       { label: "LinkedIn", href: "https://www.linkedin.com/company/handoff-ai/" },
       { label: "Facebook", href: "https://facebook.com/handoffai" },
-      { label: "GitHub", href: "/" },
-      { label: "AngelList", href: "/" },
-      { label: "Dribbble", href: "/" },
-    ],
-  },
-  {
-    title: "Legal",
-    links: [
-      { label: "Terms", href: "/terms-of-use" },
-      { label: "Privacy", href: "/privacy-policy" },
-      { label: "Cookies", href: "/" },
-      { label: "Licenses", href: "/" },
-      { label: "Settings", href: "/" },
-      { label: "Contact", href: "/" },
+      { label: "Instagram", href: "https://www.instagram.com/handoffai/" },
+      { label: "Youtube", href: "https://www.youtube.com/@HandoffAI" },
+      { label: "Tik Tok", href: "https://www.tiktok.com/@handoffai" },
     ],
   },
 ];

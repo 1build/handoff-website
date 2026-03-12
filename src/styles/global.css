@@ -97,6 +97,10 @@ html {
     color: var(--color-text-primary);
     background-color: var(--color-bg-brand-dark);
   }
+
+  a {
+    color: var(--color-brand-accent);
+  }
 }
 
 /* ─── Header Scroll State ─── */
@@ -290,7 +294,7 @@ html {
 }
 
 .article-body a {
-  color: var(--color-brand-700);
+  color: var(--color-brand-accent);
   text-decoration: none;
 }
 

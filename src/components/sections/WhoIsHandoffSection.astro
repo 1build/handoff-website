@@ -1,64 +1,108 @@
 ---
 import Remodelers1 from "@/assets/images/Remodelers1.webp";
 
-const features = [
+const cards = [
   {
-    title: "Remodelers",
-    description: "Growth your business without adding overhead",
+    label: "Home Builders",
+    description:
+      "From blueprint takeoffs to final walkthroughs, your AI Teammate handles the business side of every ground-up build. Estimating, project management, and day-to-day admin so your crew stays focused on building. Handoff handles the rest.",
   },
   {
-    title: "Remodelers",
-    description: "Growth your business without adding overhead",
+    label: "Remodelers",
+    description:
+      "Bid faster, take on more, and protect your margin on every job. Your AI Teammate handles estimating, project tracking, change orders, and client follow-up. Keep your focus on winning work and building your reputation.",
+  },
+  {
+    label: "Trade Contractors & Handymen",
+    description:
+      "Run like a professional operation without hiring office staff. Your AI Teammate automates quotes, proposals, and invoices using your pricing. Win the job before the contractor next door finishes writing his.",
   },
 ];
-
 ---
+
 <section class="px-4 pt-4">
-<div class="relative z-[2] py-10 md:py-16 lg:py-20 bg-white rounded-3xl" data-animate="fade-up">
-  <div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8">
-    <div class="text-center max-w-[720px] mx-auto mb-8 md:mb-12">
-      <h2 class="font-display text-3xl sm:text-4xl md:text-[2.5rem] font-semibold leading-tight tracking-[-0.02em] text-text-primary mb-4">
-        Who is Handoff for?
-      </h2>
-      <p class="text-base md:text-lg leading-relaxed text-text-secondary">
-        If you are an owner of a residential construction business, Handoff is for you. Supercharge your growth and let us handle your operations on autopilot.
-      </p>
-    </div>
+  <div
+    class="relative z-[2] py-10 md:py-16 lg:py-24 bg-white rounded-3xl"
+    data-animate="fade-up"
+  >
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8">
+      <!-- Section heading -->
+      <div class="text-center max-w-[768px] mx-auto mb-12 md:mb-16">
+        <h2
+          class="font-display text-3xl sm:text-4xl md:text-[2.25rem] font-semibold leading-tight tracking-[-0.02em] text-text-primary"
+        >
+          Built and Trained for Residential Construction
+        </h2>
+      </div>
 
-     <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
-      {features.map((feature, i) => (
-        <article class="flex flex-col rounded-2xl border border-[#E9EAEB] bg-[#F4F6F4] overflow-hidden">
-          <div class="h-[260px] overflow-hidden">
-            <img 
-            src={Remodelers1.src}
-             alt="" class="w-full h-full object-cover max-h-[260px]" loading="lazy" decoding="async">
-          </div>
-          <div class="p-4 sm:py-6 bg-[#F4F6F4]">
-            <div class="flex items-end justify-between gap-4">
-              <div>
-                <p class="text-sm font-semibold text-text-quaternary capitalize mb-1">
-                  {feature.title}
-                </p>
-                <p class="text-base md:text-lg text-text-primary leading-relaxed">
-                  {feature.description}
-                </p>
-              </div>
-              <button
-                type="button"
-                class="hidden sm:inline-flex items-center justify-center w-12 h-12 rounded-full border border-[#E9EAEB] bg-transparent text-neutral-700 hover:bg-white transition-colors"
-                aria-hidden="true"
-                tabIndex={-1}
+      <!-- Cards grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {
+          cards.map((card) => (
+            <article class="flex flex-col rounded-2xl border border-neutral-200 bg-bg-secondary overflow-hidden">
+              <!-- Card header: green bg with tilted mockup -->
+              <div
+                class="relative h-40 overflow-hidden flex-shrink-0"
+                style="background-color: #9fb1a5;"
               >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M9 18L15 12L9 6" stroke="#414651" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
+                <div
+                  class="absolute"
+                  style="left: 15px; top: -65px; width: 760px; height: 520px; transform: rotate(-17.6deg) skewX(12.4deg) scaleY(0.98);"
+                >
+                  <div
+                    class="relative overflow-hidden rounded-lg"
+                    style="width: 594px; height: 395px; border: 3.9px solid #e9eaeb; opacity: 0.94;"
+                  >
+                    <img
+                      src={Remodelers1.src}
+                      alt=""
+                      class="absolute inset-0 w-full h-full object-cover"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                </div>
+              </div>
 
-              </button>
-            </div>
-          </div>
-        </article>
-      ))}
+              <!-- Card body -->
+              <div class="flex flex-col flex-1 gap-2 p-6">
+                <p
+                  class="font-mono text-sm font-semibold tracking-[0.04em] uppercase text-text-quaternary"
+                >
+                  {card.label}
+                </p>
+                <div class="flex items-start justify-between gap-4 flex-1">
+                  <p class="text-xl font-medium leading-[1.5] text-text-primary">
+                    {card.description}
+                  </p>
+                  <button
+                    type="button"
+                    class="flex-shrink-0 self-end inline-flex items-center justify-center w-14 h-14 rounded-full border border-neutral-200 bg-transparent text-neutral-700 hover:bg-neutral-50 transition-colors"
+                    aria-hidden="true"
+                    tabindex="-1"
+                  >
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M9 18L15 12L9 6"
+                        stroke="#414651"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </article>
+          ))
+        }
+      </div>
     </div>
-  </div>
   </div>
 </section>
