@@ -233,7 +233,7 @@ export const footerColumns: FooterColumn[] = [
       { label: "Facebook", href: "https://facebook.com/handoffai" },
       { label: "Instagram", href: "https://www.instagram.com/handoffai/" },
       { label: "Youtube", href: "https://www.youtube.com/@HandoffAI" },
-      { label: "Tik Tok", href: "https://www.tiktok.com/@handoffai" },
+      { label: "TikTok", href: "https://www.tiktok.com/@handoffai" },
     ],
   },
 ];

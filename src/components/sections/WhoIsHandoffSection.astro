@@ -6,16 +6,19 @@ const cards = [
     label: "Home Builders",
     description:
       "From blueprint takeoffs to final walkthroughs, your AI Teammate handles the business side of every ground-up build. Estimating, project management, and day-to-day admin so your crew stays focused on building. Handoff handles the rest.",
+    href: "/builders",
   },
   {
     label: "Remodelers",
     description:
       "Bid faster, take on more, and protect your margin on every job. Your AI Teammate handles estimating, project tracking, change orders, and client follow-up. Keep your focus on winning work and building your reputation.",
+    href: "/remodelers",
   },
   {
     label: "Trade Contractors & Handymen",
     description:
       "Run like a professional operation without hiring office staff. Your AI Teammate automates quotes, proposals, and invoices using your pricing. Win the job before the contractor next door finishes writing his.",
+    href: "/handyman",
   },
 ];
 ---
@@ -75,11 +78,10 @@ const cards = [
                   <p class="text-xl font-medium leading-[1.5] text-text-primary">
                     {card.description}
                   </p>
-                  <button
-                    type="button"
+                  <a
+                    href={card.href}
                     class="flex-shrink-0 self-end inline-flex items-center justify-center w-14 h-14 rounded-full border border-neutral-200 bg-transparent text-neutral-700 hover:bg-neutral-50 transition-colors"
-                    aria-hidden="true"
-                    tabindex="-1"
+                    aria-label={`Learn more about ${card.label}`}
                   >
                     <svg
                       width="24"
@@ -96,7 +98,7 @@ const cards = [
                         stroke-linejoin="round"
                       />
                     </svg>
-                  </button>
+                  </a>
                 </div>
               </div>
             </article>
