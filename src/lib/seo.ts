@@ -6,7 +6,7 @@
 export const SITE_URL = "https://handoff.ai";
 
 const DEFAULT_DESCRIPTION =
-  "Train an AI teammate to run your construction business. Set your rules once — Handoff applies them automatically across every estimate, proposal, and change order.";
+  "Train an AI Teammate to run your construction business. Set your rules once — Handoff applies them automatically across every estimate, proposal, and change order.";
 
 /** Build absolute canonical URL for a path (e.g. /blog/my-post) */
 export function getCanonicalUrl(path: string): string {

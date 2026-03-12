@@ -290,8 +290,8 @@ const solutionIcons: Record<string, string> = {
     </ul>
   </nav>
   <div class="shrink-0 p-4 border-t border-white/10 flex flex-col gap-2">
-    <a href="/" class="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 text-base font-medium leading-6 rounded-xl bg-white/10 text-white hover:bg-white/20 transition-colors">Log in</a>
-    <a href="/" class="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 text-base font-medium leading-6 rounded-xl bg-brand-accent text-white hover:bg-brand-500 transition-colors">Sign up</a>
+    <a href="/" class="mobile-menu-link inline-flex items-center justify-center gap-1.5 px-5 py-2.5 text-base font-medium leading-6 rounded-xl bg-white/10 text-white hover:bg-white/20 transition-colors">Log in</a>
+    <a href="/" class="mobile-menu-link inline-flex items-center justify-center gap-1.5 px-5 py-2.5 text-base font-medium leading-6 rounded-xl bg-brand-accent text-white hover:bg-brand-500 transition-colors">Sign up</a>
   </div>
 </div>
 </div>
@@ -319,6 +319,9 @@ const solutionIcons: Record<string, string> = {
 </style>
 
 <script>
+  let mobileMenuInitialized = false;
+  let solutionsMenuInitialized = false;
+
   function initHeader() {
     const header = document.getElementById("site-header");
     if (!header) return;
@@ -334,8 +337,8 @@ const solutionIcons: Record<string, string> = {
   }
 
   function initSolutionsFeatures() {
-    if (document.body.dataset.solutionsMenuInit === "1") return;
-    document.body.dataset.solutionsMenuInit = "1";
+    if (solutionsMenuInitialized) return;
+    solutionsMenuInitialized = true;
 
     const menus = document.querySelectorAll(".dropdown-panel-solutions");
     menus.forEach((menu) => {
@@ -401,8 +404,25 @@ const solutionIcons: Record<string, string> = {
   function initMobileMenu() {
     // Use event delegation so the toggle works regardless of init order and duplicate Headers.
     // Guard so we don't attach listeners twice (e.g. on astro:page-load).
-    if (document.body.dataset.mobileMenuInit === "1") return;
-    document.body.dataset.mobileMenuInit = "1";
+    if (mobileMenuInitialized) return;
+    mobileMenuInitialized = true;
+
+    // Reset all menu state before each View Transition swap to prevent
+    // residual body overflow or open class bleeding into the new page.
+    document.addEventListener("astro:before-swap", () => {
+      document.body.style.overflow = "";
+      const wrapper = document.querySelector(".header-wrapper.mobile-menu-open");
+      if (!wrapper) return;
+      const panel = wrapper.querySelector(".mobile-menu-panel");
+      const toggle = wrapper.querySelector("#mobile-menu-toggle");
+      const iconOpen = wrapper.querySelector("#mobile-menu-icon-open");
+      const iconClose = wrapper.querySelector("#mobile-menu-icon-close");
+      wrapper.classList.remove("mobile-menu-open");
+      panel?.classList.add("translate-x-full");
+      if (toggle) toggle.setAttribute("aria-expanded", "false");
+      if (iconOpen) iconOpen.classList.remove("hidden");
+      if (iconClose) iconClose.classList.add("hidden");
+    });
 
     document.addEventListener("click", (e) => {
       const toggle = e.target instanceof Element && e.target.closest("#mobile-menu-toggle");
