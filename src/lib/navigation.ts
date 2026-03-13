@@ -40,17 +40,23 @@ const solutionsBaseFeatures: NavLink[] = [
   { label: "AI agent", href: "/ai-agent" },
   { label: "AI documents", href: "/ai-documents" },
   { label: "AI transcription", href: "/ai-transcription" },
+  { label: "Client portal", href: "/client-portal" },
 ];
 
 // Per-solution feature groups
 const crmPipelineFeatures: NavLink[] = [
-  solutionsBaseFeatures[2], // Client management CRM
+  solutionsBaseFeatures[0],  // Instant AI estimates
+  solutionsBaseFeatures[12], // Client portal
+  solutionsBaseFeatures[1],  // Winning AI proposals
+  solutionsBaseFeatures[6],  // Estimates from files
+  solutionsBaseFeatures[10], // AI documents
 ];
 
 const projectManagementFeatures: NavLink[] = [
-  solutionsBaseFeatures[4], // Change orders
-  solutionsBaseFeatures[5], // File management
-  solutionsBaseFeatures[6], // Estimates from files
+  solutionsBaseFeatures[12], // Client portal
+  solutionsBaseFeatures[5],  // File management
+  solutionsBaseFeatures[1],  // Winning AI proposals
+  solutionsBaseFeatures[4],  // Change orders
 ];
 
 const financialBusinessFeatures: NavLink[] = [
@@ -59,10 +65,7 @@ const financialBusinessFeatures: NavLink[] = [
 ];
 
 const aiTeammateFeatures: NavLink[] = [
-  solutionsBaseFeatures[0], // Instant AI estimates
-  solutionsBaseFeatures[1], // Winning AI proposals
   solutionsBaseFeatures[9],  // AI agent
-  solutionsBaseFeatures[10], // AI documents
   solutionsBaseFeatures[11], // AI transcription
 ];
 
@@ -199,7 +202,7 @@ export const footerColumns: FooterColumn[] = [
   {
     title: "Who We Serve",
     links: [
-      { label: "Builders", href: "/builders" },
+      { label: "Home Builders", href: "/builders" },
       { label: "Remodelers", href: "/remodelers" },
       { label: "Handyman", href: "/handyman" },
       { label: "Fix and Flip", href: "/fix-and-flip" },

@@ -130,7 +130,7 @@ const solutionIcons: Record<string, string> = {
               </div>
             </div>
           ) : getFeatures(item).length > 0 ? (
-            <div class="dropdown-panel dropdown-panel-solutions absolute top-full left-1/2 -translate-x-1/2 bg-white border border-black/[0.08] rounded-2xl shadow-[0px_12px_16px_-4px_rgba(10,13,18,0.08),0px_4px_6px_-2px_rgba(10,13,18,0.03),0px_2px_2px_-1px_rgba(10,13,18,0.04)] overflow-hidden">
+            <div class="dropdown-panel dropdown-panel-solutions absolute top-full bg-white border border-black/[0.08] rounded-2xl shadow-[0px_12px_16px_-4px_rgba(10,13,18,0.08),0px_4px_6px_-2px_rgba(10,13,18,0.03),0px_2px_2px_-1px_rgba(10,13,18,0.04)] overflow-hidden">
               <div class="flex w-full">
                 <div class="flex flex-col gap-2 p-6 w-[400px] shrink-0">
                   <p class="text-sm font-semibold leading-5 text-[#335645]">{item.label}</p>
@@ -305,16 +305,19 @@ const solutionIcons: Record<string, string> = {
   .header-wrapper.mobile-menu-open .mobile-menu-panel {
     transform: translateX(0) !important;
   }
-  .header-wrapper .nav-dropdown .dropdown-panel {
+  .header-wrapper .nav-dropdown .dropdown-panel:not(.dropdown-panel-solutions) {
     left: auto !important;
     transform: none !important;
     right: auto !important;
   }
-  .dropdown-panel-solutions {
-    transition: width 260ms ease-in-out;
+  .header-wrapper .nav-dropdown .dropdown-panel-solutions {
+    left: 0;
+    transform: none;
   }
   .dropdown-panel-solutions .solutions-features {
-    transition: opacity 260ms ease-in-out;
+    display: none;
+    opacity: 0;
+    transition: opacity 180ms ease-in-out;
   }
 </style>
 
@@ -353,10 +356,6 @@ const solutionIcons: Record<string, string> = {
           .replace(/>/g, "&gt;")
           .replace(/"/g, "&quot;");
 
-      // Initial state: only solutions column visible
-      menu.style.width = "400px";
-      features.style.display = "none";
-      features.style.opacity = "0";
       const links = menu.querySelectorAll(".solutions-link");
       links.forEach((link) => {
         link.addEventListener("mouseenter", () => {
@@ -382,7 +381,6 @@ const solutionIcons: Record<string, string> = {
               }
             }
           }
-          menu.style.width = "700px";
           features.style.display = "flex";
           requestAnimationFrame(() => {
             features.style.opacity = "1";
@@ -390,7 +388,6 @@ const solutionIcons: Record<string, string> = {
         });
       });
       menu.addEventListener("mouseleave", () => {
-        menu.style.width = "400px";
         features.style.opacity = "0";
         setTimeout(() => {
           features.style.display = "none";
