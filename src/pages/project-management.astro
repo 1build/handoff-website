@@ -16,7 +16,7 @@ import projectIcon2 from "@/assets/icons/clock-plus.svg";
 import projectIcon3 from "@/assets/icons/projectIcon3.svg";
 import { navItems, footerColumns } from "@/lib/navigation";
 import { getPageSeo } from "@/lib/seo-pages";
-import placeholder from "@/assets/images/placeholder-img.png";
+import heroImage from "@/assets/images/Heros/Project Management.webp";
 
 const faqItems = [
   {
@@ -119,7 +119,7 @@ const seo = getPageSeo(Astro.url.pathname);
   <Header navItems={navItems} />
 
   <!-- Hero (matches solutions HeroSection pattern) -->
-  <section id="hero" class="hero-fixed oveflow-hidden relative">
+  <section id="hero" class="hero-fixed overflow-x-hidden relative">
     <!-- Background grid pattern -->
     <div class="absolute top-0 left-1/2 -translate-x-1/2 max-w-full w-[1920px] h-[1440px] pointer-events-none z-0">
       <img src={bgPattern.src} alt="" class="w-full h-full block object-contain object-top" />
@@ -151,17 +151,16 @@ const seo = getPageSeo(Astro.url.pathname);
         </div>
       </div>
 
-      <!-- Hero visual placeholder -->
-      <div class="flex-1 relative z-[2] bg-[rgba(255,255,255,0.1)] backdrop-blur-[4px] rounded-3xl p-6">
-      <img
-                src={placeholder.src}
-                alt=""
-                class="w-full h-auto rounded-xl"
-                loading="lazy"
-                decoding="async"
-              />
-              
-    </div>
+      <!-- Hero visual -->
+      <div class="flex-1 relative z-[2] self-end">
+        <img
+          src={heroImage.src}
+          alt="Project management dashboard"
+          class="w-full h-auto translate-y-[16%]"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
     </div>
   </section>
 

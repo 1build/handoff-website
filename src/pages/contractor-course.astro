@@ -5,7 +5,7 @@ import Footer from "@/components/sections/Footer.astro";
 import WebinarsCta from "@/components/sections/WebinarsCta.astro";
 import { navItems, footerColumns } from "@/lib/navigation";
 import { getPageSeo } from "@/lib/seo-pages";
-import webinarHero from "@/assets/images/webinar-hero.png";
+import webinarHero from "@/assets/images/Heros/Course.webp";
 import bgPattern from "@/assets/images/background-pattern-dots.png";
 import heroGlow from "@/assets/images/hero-glow-line.svg";
 import iconLayout from "@/assets/icons/icon-layout.svg";
@@ -50,10 +50,10 @@ const seo = getPageSeo(Astro.url.pathname);
     <img src={bgPattern.src} alt="" class="w-full h-full block object-contain object-top" />
   </div>
 
-  <div class="absolute -top-[24%] -left-[14%] -right-[14%] -bottom-[24%] pointer-events-none z-[12]">
+  <div class="absolute -top-[24%] -left-[14%] -right-[14%] -bottom-[24%] pointer-events-none z-[1]">
     <img src={heroGlow.src} alt="" class="w-full h-full block" />
   </div>
-    <div class="relative z-[2] mx-auto max-w-[1440px] px-8 pt-16 pb-0">
+    <div class="relative z-[20] mx-auto max-w-[1440px] px-8 pt-16 pb-0">
       <!-- Hero content row -->
       <div class="flex flex-col lg:flex-row items-start gap-16 pb-16">
         <!-- Left: copy -->
@@ -77,7 +77,7 @@ const seo = getPageSeo(Astro.url.pathname);
         </div>
 
         <!-- Right: photo -->
-        <div class="hidden lg:flex items-center justify-center w-[600px] h-[570px] shrink-0 overflow-hidden">
+        <div class="hidden lg:flex items-center justify-center w-[600px] h-[570px] shrink-0 overflow-hidden relative z-[20]">
           <img src={webinarHero.src} alt="Contractors reviewing plans" class="w-[536px] h-auto object-contain" />
         </div>
       </div>

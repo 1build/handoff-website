@@ -2,7 +2,7 @@
 import Button from "@/components/ui/Button.astro";
 import bgPattern from "@/assets/images/background-pattern.png";
 import heroGlow from "@/assets/images/hero-glow-line.svg";
-import placeholder from "@/assets/images/placeholder-img.png";
+import heroImage from "@/assets/images/Heros/AI Agent.webp";
 
 
 const eyebrow = "AI Agent";
@@ -43,16 +43,17 @@ const ctaText = "See how it works";
       </div>
     </div>
 
-    <!-- Hero visual placeholder -->
-    <div class="flex-1 relative z-[2] bg-[rgba(255,255,255,0.1)] backdrop-blur-[4px] rounded-3xl p-6">
-      <img
-                src={placeholder.src}
-                alt=""
-                class="w-full h-auto rounded-xl"
-                loading="lazy"
-                decoding="async"
-              />
-
+    <!-- Hero visual -->
+    <div class="flex-1 h-[550px] relative z-[2]">
+      <div class="absolute left-1/2 -translate-x-1/2 top-0 w-[440px] h-[672px] overflow-clip rounded-tl-[32px] rounded-tr-[32px]">
+        <img
+          src={heroImage.src}
+          alt="AI Agent"
+          class="w-full h-full object-cover object-top"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
     </div>
   </div>
 </section>

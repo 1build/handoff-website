@@ -131,7 +131,7 @@ export const navItems: NavItem[] = [
         label: "Community",
         items: [
           { label: "Testimonials", href: "/reviews", description: "Real stories from real contractors", iconName: "message-text-circle-02" },
-          { label: "Platform updates", href: "/blog#blog-list", description: "What's new in Handoff", iconName: "announcement-01" },
+          { label: "Platform updates", href: "/blog?category=Updates", description: "What's new in Handoff", iconName: "announcement-01" },
           { label: "Contractor course", href: "/contractor-course", description: "Level up your remodeling business", iconName: "graduation-hat-01" },
           { label: "Handoff Nation community", href: "https://www.facebook.com/groups/820048150161667/", description: "Connect with contractors like you", iconName: "users-plus" },
         ],
@@ -143,7 +143,7 @@ export const navItems: NavItem[] = [
       { label: "Guides", href: "/blog?category=Guides" },
       { label: "Webinars", href: "/contractor-webinars" },
       { label: "Testimonials", href: "/" },
-      { label: "Platform updates", href: "/" },
+      { label: "Platform updates", href: "/blog?category=Updates" },
       { label: "Contractor course", href: "/" },
       { label: "Careers", href: "/careers" },
       { label: "Handoff Nation community", href: "https://www.facebook.com/groups/820048150161667/" },
