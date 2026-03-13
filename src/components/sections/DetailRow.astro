@@ -11,9 +11,10 @@ interface Props {
   visualType: "desktop" | "phones" | "isometric";
   visualImages?: ImageMetadata[];
   placeholder?: string;
+  ctaHref?: string;
 }
 
-const { eyebrow, title, description, bullets, reverse = false, visualType, visualImages, placeholder } = Astro.props;
+const { eyebrow, title, description, bullets, reverse = false, visualType, visualImages, placeholder, ctaHref = "https://app.handoff.ai/sign-up/" } = Astro.props;
 
 const images: string[] = (visualImages || []).map((img) => img.src);
 ---
@@ -42,7 +43,7 @@ const images: string[] = (visualImages || []).map((img) => img.src);
       ))}
     </ul>
     <div class="mt-8">
-      <a href="https://app.handoff.ai/sign-up/" class="inline-flex items-center justify-center gap-1.5 font-medium text-base leading-6 rounded-xl transition-all duration-150 whitespace-nowrap cursor-pointer bg-white text-text-secondary border border-border-primary shadow-xs hover:bg-neutral-50 px-5 py-2.5 ">Get started</a>
+      <a href={ctaHref} class="inline-flex items-center justify-center gap-1.5 font-medium text-base leading-6 rounded-xl transition-all duration-150 whitespace-nowrap cursor-pointer bg-white text-text-secondary border border-border-primary shadow-xs hover:bg-neutral-50 px-5 py-2.5 ">Get started</a>
     </div>
   </div>
 

@@ -42,25 +42,12 @@ const solutionsBaseFeatures: NavLink[] = [
   { label: "AI transcription", href: "/ai-transcription" },
 ];
 
-// Per-solution feature groups (currently overlapping / similar,
-// but structured so they can diverge later without code changes).
-const salesAndMarketingFeatures: NavLink[] = [
-  solutionsBaseFeatures[0], // Instant AI estimates
-  solutionsBaseFeatures[1], // Winning AI proposals
+// Per-solution feature groups
+const crmPipelineFeatures: NavLink[] = [
   solutionsBaseFeatures[2], // Client management CRM
-  solutionsBaseFeatures[3], // Project management
-  solutionsBaseFeatures[4], // Change orders
-  solutionsBaseFeatures[5], // File management
-  solutionsBaseFeatures[6], // Estimates from files
-  solutionsBaseFeatures[7], // Customer financing
-  solutionsBaseFeatures[8], // Customer financing
-  solutionsBaseFeatures[9],  // AI agent
-  solutionsBaseFeatures[10], // AI documents
-  solutionsBaseFeatures[11], // AI transcription
 ];
 
 const projectManagementFeatures: NavLink[] = [
-  solutionsBaseFeatures[3], // Project management
   solutionsBaseFeatures[4], // Change orders
   solutionsBaseFeatures[5], // File management
   solutionsBaseFeatures[6], // Estimates from files
@@ -72,10 +59,11 @@ const financialBusinessFeatures: NavLink[] = [
 ];
 
 const aiTeammateFeatures: NavLink[] = [
+  solutionsBaseFeatures[0], // Instant AI estimates
+  solutionsBaseFeatures[1], // Winning AI proposals
   solutionsBaseFeatures[9],  // AI agent
   solutionsBaseFeatures[10], // AI documents
   solutionsBaseFeatures[11], // AI transcription
-  solutionsBaseFeatures[0],  // Instant AI estimates
 ];
 
 export const navItems: NavItem[] = [
@@ -96,7 +84,7 @@ export const navItems: NavItem[] = [
         href: "/crm-pipeline-management",
         description: "Turn leads into signed contracts",
         iconName: "book-closed",
-        features: salesAndMarketingFeatures,
+        features: crmPipelineFeatures,
       },
       {
         label: "Project Management",
@@ -211,9 +199,9 @@ export const footerColumns: FooterColumn[] = [
   {
     title: "Who We Serve",
     links: [
+      { label: "Builders", href: "/builders" },
       { label: "Remodelers", href: "/remodelers" },
       { label: "Handyman", href: "/handyman" },
-      { label: "Builders", href: "/builders" },
       { label: "Fix and Flip", href: "/fix-and-flip" },
     ],
   },

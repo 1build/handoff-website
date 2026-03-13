@@ -7,22 +7,27 @@ const features = [
   {
     title: "Lock In Your Process",
     description: "Your AI Teammate runs every estimate through your rates, markup rules, and approval steps. New hire? They estimate like a 10-year veteran on day one. No guesswork. No margin leaks.",
+    href: "/instant-ai-estimates",
   },
   {
     title: "Coordinate Without the Chaos",
     description: "Walkthroughs, project phases, and crew schedules in one place. Less phone tag. Fewer delays. More jobs done and billed.",
+    href: "/crm-pipeline-management",
   },
   {
     title: "Stay One Step Ahead",
     description: "Real-time alerts when approvals stall, change orders come in, or a project needs attention. You never have to micromanage what your AI Teammate is already watching.",
+    href: "/project-management",
   },
   {
     title: "Go from First Contact to Signed Proposal in Under 24 Hours",
     description: "Your AI Teammate handles the estimate while you're still on the drive home. Your crew starts while your competition is still writing up the bid.",
+    href: "/winning-ai-proposals",
   },
   {
     title: "Grow Without Losing Control",
     description: "Role-based permissions keep your markup, approvals, and workflows locked as your team grows. Bigger business, same margins, less chaos.",
+    href: "/project-management",
   },
 ];
 ---
@@ -69,8 +74,8 @@ const features = [
                   {feature.description}
                 </p>
               </div>
-              <button
-                type="button"
+              <a
+                href={feature.href}
                 class="flex-shrink-0 self-end inline-flex items-center justify-center w-14 h-14 rounded-full border border-neutral-200 bg-transparent text-neutral-700 hover:bg-neutral-50 transition-colors"
               >
                 <svg
@@ -88,7 +93,7 @@ const features = [
                     stroke-linejoin="round"
                   />
                 </svg>
-              </button>
+              </a>
             </div>
           </div>
         </article>

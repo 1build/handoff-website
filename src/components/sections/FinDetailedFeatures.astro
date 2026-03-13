@@ -13,6 +13,7 @@ const rows = [
     reverse: false,
     visualType: "desktop" as const,
     placeholder: "Screenshot of payment automation workflow",
+    ctaHref: "/invoicing",
   },
   {
     eyebrow: "schedules & milestone billing",
@@ -26,6 +27,7 @@ const rows = [
     reverse: true,
     visualType: "phones" as const,
     placeholder: "Screenshot of milestone billing setup",
+    ctaHref: "/invoicing",
   },
   {
     eyebrow: "Pricing & markup logic",
@@ -39,6 +41,7 @@ const rows = [
     reverse: false,
     visualType: "isometric" as const,
     placeholder: "Screenshot of pricing standardization rules",
+    ctaHref: "/invoicing",
   },
   {
     eyebrow: "Financial visibility",
@@ -52,6 +55,7 @@ const rows = [
     reverse: true,
     visualType: "phones" as const,
     placeholder: "Screenshot of financial reporting dashboard",
+    ctaHref: "/homeowner-financing",
   },
 ];
 ---
@@ -67,6 +71,7 @@ const rows = [
         reverse={r.reverse}
         visualType={r.visualType}
         placeholder={r.placeholder}
+        ctaHref={r.ctaHref}
       />
     ))}
   </div>

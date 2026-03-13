@@ -52,6 +52,7 @@ const features = [
       "Every project document in one place",
     ],
     placeholder: "Screenshot of contract generation",
+    ctaHref: "/ai-documents",
   },
   {
     eyebrow: "Intelligent crew scheduling",
@@ -64,6 +65,7 @@ const features = [
       "Your phone stops buzzing with scheduling questions",
     ],
     placeholder: "Screenshot of crew scheduling calendar",
+    ctaHref: "https://app.handoff.ai/sign-up/",
   },
   {
     eyebrow: "Real-time project alerts",
@@ -76,6 +78,7 @@ const features = [
       "Spot crew conflicts and timeline risks while you can still fix them",
     ],
     placeholder: "Screenshot of real-time project alerts",
+    ctaHref: "/client-management-system",
   },
   {
     eyebrow: "Role-based permissions",
@@ -88,6 +91,7 @@ const features = [
       "Set it once, never worry about information leaks",
     ],
     placeholder: "Screenshot of role-based permissions settings",
+    ctaHref: "https://app.handoff.ai/sign-up/",
   },
 ];
 
@@ -236,6 +240,7 @@ const seo = getPageSeo(Astro.url.pathname);
           reverse={i % 2 !== 0}
           visualType="desktop"
           placeholder={f.placeholder}
+          ctaHref={f.ctaHref}
         />
       ))}
     </div>

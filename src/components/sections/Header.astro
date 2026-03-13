@@ -169,7 +169,7 @@ const solutionIcons: Record<string, string> = {
           ) : hasIconItems(item) ? (
             <div
               class="dropdown-panel absolute top-full left-1/2 -translate-x-1/2 min-w-[420px] bg-white border border-black/[0.08] rounded-xl p-6 flex flex-col gap-2 shadow-[0px_12px_16px_-4px_rgba(10,13,18,0.08),0px_4px_6px_-2px_rgba(10,13,18,0.03),0px_2px_2px_-1px_rgba(10,13,18,0.04)]"
-              style={item.label === "Support" ? "min-width:260px" : undefined}
+              style={item.label === "Support" ? "min-width:260px" : item.label === "Who We Serve" ? "min-width:340px" : undefined}
             >
               {getChildren(item).map((link: any) => (
                 <a href={link.href || "/"} class="flex gap-3 items-start p-3 rounded-lg transition-colors hover:bg-[#fafafa]">
@@ -320,7 +320,6 @@ const solutionIcons: Record<string, string> = {
 
 <script>
   let mobileMenuInitialized = false;
-  let solutionsMenuInitialized = false;
 
   function initHeader() {
     const header = document.getElementById("site-header");
@@ -337,11 +336,10 @@ const solutionIcons: Record<string, string> = {
   }
 
   function initSolutionsFeatures() {
-    if (solutionsMenuInitialized) return;
-    solutionsMenuInitialized = true;
-
     const menus = document.querySelectorAll(".dropdown-panel-solutions");
     menus.forEach((menu) => {
+      if (menu.dataset.solutionsInit) return;
+      menu.dataset.solutionsInit = "1";
       if (!(menu instanceof HTMLElement)) return;
       const features = menu.querySelector(".solutions-features");
       if (!(features instanceof HTMLElement)) return;
