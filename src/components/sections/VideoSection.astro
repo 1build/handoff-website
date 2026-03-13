@@ -1,4 +1,5 @@
 ---
+import videoThumbnail from "@/assets/images/See In Action Video Thumbnail.webp";
 interface Props {
   videoSrc?: string;
 }
@@ -23,6 +24,7 @@ const { videoSrc = "https://www.handoff.ai/assets/hndf-delivery-video.webm" } = 
         controls
         playsinline
         preload="auto"
+        poster={videoThumbnail.src}
       >
         <source src={videoSrc} type="video/webm" />
         Your browser does not support the video tag.
