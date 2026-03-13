@@ -40,7 +40,7 @@ const solutionsBaseFeatures: NavLink[] = [
   { label: "AI agent", href: "/ai-agent" },
   { label: "AI documents", href: "/ai-documents" },
   { label: "AI transcription", href: "/ai-transcription" },
-  { label: "Client portal", href: "/client-portal" },
+  { label: "Client portal", href: "/client-management-system" },
 ];
 
 // Per-solution feature groups

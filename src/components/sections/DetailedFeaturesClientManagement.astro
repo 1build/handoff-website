@@ -1,5 +1,8 @@
 ---
 import DetailRowClientManagement from "./DetailRowClientManagement.astro";
+import knowTheStatus2 from "@/assets/images/Client Management/Know the status-2@2x.webp";
+import addClientImg from "@/assets/images/Client Management/Add a client@2x.webp";
+import clientDetailsImg from "@/assets/images/Client Management/Client details + activity@2x.webp";
 
 const rows = [
   {
@@ -8,7 +11,7 @@ const rows = [
     description: "With Handoff you can create new clients or upload existing clients from your phone book. Add their name, phone, email, and address to keep track of their most important details.",
     reverse: false,
     visualType: "desktop" as const,
-    placeholder: "Screenshot of client profile",
+    visualImages: [clientDetailsImg],
   },
   {
     eyebrow: "Integrated CRM",
@@ -16,15 +19,15 @@ const rows = [
     description: "Your estimates and invoices will be linked to clients in your CRM. This means that you can see a complete record of work that has been done for a certain client as well as status of their ongoing projects.",
     reverse: true,
     visualType: "phones" as const,
-    placeholder: "Screenshot of linked estimates and invoices",
+    visualImages: [addClientImg],
   },
   {
     eyebrow: "Activity tracking",
     title: "Always know their status",
     description: "Whenever a client approves a proposal or pays an invoice you will be notified in an instant. The client records will always be updated to show the latest statuses of their estimates and invoices.",
     reverse: false,
-    visualType: "isometric" as const,
-    placeholder: "Screenshot of activity tracking notifications",
+    visualType: "desktop" as const,
+    visualImages: [knowTheStatus2],
   },
 ];
 ---
@@ -38,6 +41,7 @@ const rows = [
         description={r.description}
         reverse={r.reverse}
         visualType={r.visualType}
+        visualImages={r.visualImages}
         placeholder={r.placeholder}
       />
     ))}

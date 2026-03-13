@@ -1,5 +1,10 @@
 ---
 import DetailRow from "./DetailRow.astro";
+import transcribingImg from "@/assets/images/AI Transcription/Transcribing@2x.webp";
+import proposalImg from "@/assets/images/Proposals/Proposal@2x.webp";
+import proposalSignatureImg from "@/assets/images/Proposals/Proposal + Signature@2x.webp";
+import aiEstimatesImg from "@/assets/images/Instant Estimates/AI estimates.webp";
+import clientDetailsImg from "@/assets/images/Client Management/Client details + activity@2x.webp";
 
 const rows = [
   {
@@ -13,7 +18,8 @@ const rows = [
     ],
     reverse: false,
     visualType: "desktop" as const,
-    placeholder: "Screenshot of lead intake pipeline dashboard",
+    visualImages: [transcribingImg],
+    imageFill: true,
     ctaHref: "/blog/ai-site-walkthrough-turn-site-visits-into-jobs",
   },
   {
@@ -26,8 +32,9 @@ const rows = [
       "Trained on 100,000+ real contractor data",
     ],
     reverse: true,
-    visualType: "phones" as const,
-    placeholder: "Screenshot of AI estimating on mobile",
+    visualType: "desktop" as const,
+    visualImages: [aiEstimatesImg],
+    imageFill: true,
     ctaHref: "/instant-ai-estimates",
   },
   {
@@ -39,8 +46,9 @@ const rows = [
       "Your branding, your pricing, and your way of doing business",
     ],
     reverse: false,
-    visualType: "isometric" as const,
-    placeholder: "Screenshot of branded proposal templates",
+    visualType: "desktop" as const,
+    visualImages: [proposalImg],
+    imageFill: true,
     ctaHref: "/winning-ai-proposals",
   },
   {
@@ -53,8 +61,9 @@ const rows = [
       "Turn more leads into signed proposals",
     ],
     reverse: true,
-    visualType: "phones" as const,
-    placeholder: "Screenshot of automated follow-up notifications",
+    visualType: "desktop" as const,
+    visualImages: [clientDetailsImg],
+    imageFill: true,
     ctaHref: "/client-management-system",
   },
   {
@@ -67,8 +76,9 @@ const rows = [
       "Manage markups at the line, room, or job level",
     ],
     reverse: false,
-    visualType: "isometric" as const,
-    placeholder: "Screenshot of pricing configuration panel",
+    visualType: "desktop" as const,
+    visualImages: [proposalSignatureImg],
+    imageFill: true,
     ctaHref: "/winning-ai-proposals",
   },
 ];
@@ -84,6 +94,8 @@ const rows = [
         bullets={r.bullets}
         reverse={r.reverse}
         visualType={r.visualType}
+        visualImages={r.visualImages}
+        imageFill={r.imageFill}
         placeholder={r.placeholder}
         ctaHref={r.ctaHref}
       />

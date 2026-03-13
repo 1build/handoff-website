@@ -1,5 +1,8 @@
 ---
 import DetailRowClientManagement from "./DetailRowClientManagement.astro";
+import filesInChat from "@/assets/images/Creating Estimates From Files/Files in chat@2x.webp";
+import attachFromProjectFiles from "@/assets/images/Creating Estimates From Files/Attach from project files@2x.webp";
+import projectFilesOrganized from "@/assets/images/Creating Estimates From Files/Project files organized@2x.webp";
 
 const rows = [
   {
@@ -8,7 +11,7 @@ const rows = [
     description: "Upload blueprints, progress photos, walkthrough videos, voice notes, or spreadsheets. Handoff uses AI to extract dimensions, count windows, transcribe audio, and auto‑tag files—then generates a detailed estimate using a simple prompt.",
     reverse: false,
     visualType: "desktop" as const,
-    placeholder: "Screenshot of AI estimate generation from files",
+    visualImages: [filesInChat],
   },
   {
     eyebrow: "Handoff Capabilities",
@@ -16,15 +19,15 @@ const rows = [
     description: "Handoff organizes all project file types, with AI processing for specific formats to enhance estimates. Handoff can analyze the following file types to create and edit estimates: PDF drawings, documents, spreadsheets, images, videos, and audio.",
     reverse: true,
     visualType: "phones" as const,
-    placeholder: "Screenshot of supported file types",
+    visualImages: [projectFilesOrganized],
   },
   {
     eyebrow: "File Upload Options",
     title: "Two Methods to Upload Files and Create Estimates",
     description: "Handoff offers two ways to create estimates from files:\nMethod 1: upload your files directly to the AI Chat. Best for small file sets.\nMethod 2: upload your files into your project, then talk to AI Chat. Best for analyzing a high volume of files at once.",
     reverse: false,
-    visualType: "isometric" as const,
-    placeholder: "Screenshot of file upload methods",
+    visualType: "desktop" as const,
+    visualImages: [attachFromProjectFiles],
   },
 ];
 ---
@@ -38,6 +41,7 @@ const rows = [
         description={r.description}
         reverse={r.reverse}
         visualType={r.visualType}
+        visualImages={r.visualImages}
         placeholder={r.placeholder}
       />
     ))}

@@ -1,5 +1,8 @@
 ---
 import DetailRowClientManagement from "./DetailRowClientManagement.astro";
+import fileManagementImg from "@/assets/images/File Management/File upload@2x.webp";
+import aiCaptionsImg from "@/assets/images/File Management/Create estimates using photos & drawings@2x.webp";
+import aiFileTaggingImg from "@/assets/images/File Management/AI file tagging@2x.webp";
 
 const rows = [
   {
@@ -8,7 +11,7 @@ const rows = [
     description: "Just drag and drop. Snap a site photo, upload your drawings, or drop in a walkthrough video. Handoff accepts almost any file type and keeps it organized by project.\n\nYou can reuse those files in estimates, attach them to proposals, or just keep them handy for later. No renaming, no folder chaos.",
     reverse: false,
     visualType: "desktop" as const,
-    placeholder: "Screenshot of file upload interface",
+    visualImages: [fileManagementImg],
   },
   {
     eyebrow: "ai-powered captions",
@@ -16,15 +19,15 @@ const rows = [
     description: "Handoff instantly scans every file and writes the notes for you.\n\nUpload a site photo or drawing, and our AI gets to work, pulling out key details like room dimensions, ceiling heights, materials, square footage, even window and door counts.\n\nEvery file is automatically captioned, tagged, and searchable, so you can skip the manual input and find what you need fast.",
     reverse: true,
     visualType: "phones" as const,
-    placeholder: "Screenshot of AI-powered file captions",
+    visualImages: [aiCaptionsImg],
   },
   {
     eyebrow: "Stay organized",
     title: "Stay Organized Without The Chaos",
     description: "Handoff keeps every file in order, automatically.\n\nFrom site photos and blueprints to videos and contracts, our AI tags every upload so it's easy to find what you need in seconds.\n\nNo more scrolling through cluttered folders or guessing filenames. Just smart search, clean results, and more time for the work that matters.",
     reverse: false,
-    visualType: "isometric" as const,
-    placeholder: "Screenshot of organized file library",
+    visualType: "desktop" as const,
+    visualImages: [aiFileTaggingImg],
   },
 ];
 ---
@@ -38,6 +41,7 @@ const rows = [
         description={r.description}
         reverse={r.reverse}
         visualType={r.visualType}
+        visualImages={r.visualImages}
         placeholder={r.placeholder}
       />
     ))}

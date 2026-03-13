@@ -1,5 +1,9 @@
 ---
 import DetailRowClientManagement from "./DetailRowClientManagement.astro";
+import attachmentsImg from "@/assets/images/Invoice/Attachments@2x.webp";
+import milestoneImg from "@/assets/images/Invoice/Trasparent billing@2x.webp";
+import builtForRealImg from "@/assets/images/Invoice/Paid as you go@2x.webp";
+import transparentBillingImg from "@/assets/images/Invoice/Built for real project@2x.webp";
 
 const rows = [
   {
@@ -8,23 +12,23 @@ const rows = [
     description: "Attach photos, videos, or PDFs to show what's been completed at each milestone. Clients see progress and pay with confidence.",
     reverse: false,
     visualType: "desktop" as const,
-    placeholder: "Screenshot of proof of work attachments",
+    visualImages: [attachmentsImg],
   },
   {
     eyebrow: "Milestone Payments",
     title: "Get paid as you go",
     description: "Break your project into stages and collect payments for each completed phase.\n\nNo waiting until the end to get paid.",
     reverse: true,
-    visualType: "phones" as const,
-    placeholder: "Screenshot of milestone payment flow",
+    visualType: "desktop" as const,
+    visualImages: [milestoneImg],
   },
   {
     eyebrow: "Transparent Billing",
     title: "Keep clients informed and confident",
     description: "Each invoice clearly lists completed work and costs. Clients know exactly what they're paying for, which means faster approvals and fewer disputes.",
     reverse: false,
-    visualType: "isometric" as const,
-    placeholder: "Screenshot of transparent billing view",
+    visualType: "desktop" as const,
+    visualImages: [transparentBillingImg],
   },
   {
     eyebrow: "Built for Real Projects",
@@ -32,7 +36,7 @@ const rows = [
     description: "Remodelers, design-build firms, and specialty trades all use Milestone Invoicing to stay organized, transparent, and paid on time.",
     reverse: true,
     visualType: "desktop" as const,
-    placeholder: "Screenshot of contractor invoicing dashboard",
+    visualImages: [builtForRealImg],
   },
 ];
 ---
@@ -46,6 +50,7 @@ const rows = [
         description={r.description}
         reverse={r.reverse}
         visualType={r.visualType}
+        visualImages={r.visualImages}
         placeholder={r.placeholder}
       />
     ))}

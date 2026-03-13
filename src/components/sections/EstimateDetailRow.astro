@@ -6,7 +6,7 @@ interface Props {
   title: string;
   bullets: string[];
   reverse?: boolean;
-  visualType: "desktop" | "phones" | "isometric";
+  visualType: "desktop" | "phones" | "isometric" | "fill";
   visualImages?: ImageMetadata[];
   placeholder?: string;
 }
@@ -68,6 +68,10 @@ const images: string[] = (visualImages || []).map((img) => img.src);
         <img src={images[1]} alt="" class="absolute w-[240px] h-auto top-[120px] right-0 iso-card z-[2] rounded-xl object-cover shadow-[0_32px_64px_-12px_rgba(10,13,18,0.18)]" loading="lazy" decoding="async" />
         <img src={images[2]} alt="" class="absolute w-[220px] h-auto bottom-10 left-5 iso-card z-[1] rounded-xl object-cover shadow-[0_32px_64px_-12px_rgba(10,13,18,0.18)]" loading="lazy" decoding="async" />
       </div>
+    )}
+
+    {visualType === "fill" && images[0] && (
+      <img src={images[0]} alt="" class="w-full h-full object-cover" loading="lazy" decoding="async" />
     )}
 
     {placeholder && !images.length && (

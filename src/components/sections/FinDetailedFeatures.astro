@@ -1,5 +1,9 @@
 ---
 import DetailRow from "./DetailRow.astro";
+import proposalSignatureImg from "@/assets/images/Proposals/Proposal + Signature@2x.webp";
+import attachmentsImg from "@/assets/images/Invoice/Attachments@2x.webp";
+import financialVisibilityImg from "@/assets/images/Client Financing/Estimate Financing approved@2x.webp";
+import paidAsYouGoImg from "@/assets/images/Invoice/Paid as you go@2x.webp";
 
 const rows = [
   {
@@ -12,7 +16,8 @@ const rows = [
     ],
     reverse: false,
     visualType: "desktop" as const,
-    placeholder: "Screenshot of payment automation workflow",
+    visualImages: [proposalSignatureImg],
+    imageFill: true,
     ctaHref: "/invoicing",
   },
   {
@@ -25,8 +30,9 @@ const rows = [
       "Get paid as work progresses instead of financing the project",
     ],
     reverse: true,
-    visualType: "phones" as const,
-    placeholder: "Screenshot of milestone billing setup",
+    visualType: "desktop" as const,
+    visualImages: [paidAsYouGoImg],
+    imageFill: true,
     ctaHref: "/invoicing",
   },
   {
@@ -39,8 +45,9 @@ const rows = [
       "Protect against accidentally underpricing work",
     ],
     reverse: false,
-    visualType: "isometric" as const,
-    placeholder: "Screenshot of pricing standardization rules",
+    visualType: "desktop" as const,
+    visualImages: [attachmentsImg],
+    imageFill: true,
     ctaHref: "/invoicing",
   },
   {
@@ -53,8 +60,9 @@ const rows = [
       "Track which clients owe money and when payments are due",
     ],
     reverse: true,
-    visualType: "phones" as const,
-    placeholder: "Screenshot of financial reporting dashboard",
+    visualType: "desktop" as const,
+    visualImages: [financialVisibilityImg],
+    imageFill: true,
     ctaHref: "/homeowner-financing",
   },
 ];
@@ -70,6 +78,8 @@ const rows = [
         bullets={r.bullets}
         reverse={r.reverse}
         visualType={r.visualType}
+        visualImages={r.visualImages}
+        imageFill={r.imageFill}
         placeholder={r.placeholder}
         ctaHref={r.ctaHref}
       />

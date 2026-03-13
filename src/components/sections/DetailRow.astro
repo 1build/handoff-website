@@ -12,9 +12,10 @@ interface Props {
   visualImages?: ImageMetadata[];
   placeholder?: string;
   ctaHref?: string;
+  imageFill?: boolean;
 }
 
-const { eyebrow, title, description, bullets, reverse = false, visualType, visualImages, placeholder, ctaHref = "https://app.handoff.ai/sign-up/" } = Astro.props;
+const { eyebrow, title, description, bullets, reverse = false, visualType, visualImages, placeholder, ctaHref = "https://app.handoff.ai/sign-up/", imageFill = false } = Astro.props;
 const ctaText = ctaHref === "https://app.handoff.ai/sign-up/" ? "Get started" : "Learn More";
 
 const images: string[] = (visualImages || []).map((img) => img.src);
@@ -50,12 +51,16 @@ const images: string[] = (visualImages || []).map((img) => img.src);
 
   <!-- Visual -->
   <div class="flex-1 min-w-0 rounded-xl overflow-hidden h-[400px] lg:h-[512px] bg-detail-visual-bg relative">
-    {visualType === "desktop" && images[0] && (
+    {visualType === "desktop" && images[0] && !imageFill && (
       <div class="w-full h-full relative overflow-hidden">
         <div class="desktop-screen">
           <img src={images[0]} alt="Dashboard screenshot" loading="lazy" decoding="async" />
         </div>
       </div>
+    )}
+
+    {visualType === "desktop" && images[0] && imageFill && (
+      <img src={images[0]} alt="Dashboard screenshot" class="w-full h-full object-cover" loading="lazy" decoding="async" />
     )}
 
     {visualType === "phones" && images[0] && (

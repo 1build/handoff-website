@@ -1,5 +1,8 @@
 ---
 import DetailRowClientManagement from "./DetailRowClientManagement.astro";
+import flexibleInvoicingImg from "@/assets/images/Change Orders/Audio-powered documents@2x-1.webp";
+import audioDocImg from "@/assets/images/Change Orders/Audio-powered documents@2x.webp";
+import coDeclinedImg from "@/assets/images/Change Orders/CO declined@2x.webp";
 
 const rows = [
   {
@@ -8,6 +11,7 @@ const rows = [
     description: "Generate change orders using the same advanced generative AI technology that Handoff uses to create accurate, localized estimates. Change orders work like mini-estimates, clearly highlighting the differences between the original agreement and the updated project scope.",
     reverse: false,
     visualType: "desktop" as const,
+    visualImages: [audioDocImg],
     placeholder: "Screenshot of AI change order generation",
   },
   {
@@ -16,15 +20,15 @@ const rows = [
     description: "Handoff change orders can be sent just like the original proposal. Require client signatures, attach photos documenting the change in scope, and keep everything tied back to the original job.",
     reverse: true,
     visualType: "phones" as const,
-    placeholder: "Screenshot of change order signature flow",
+    visualImages: [coDeclinedImg],
   },
   {
     eyebrow: "Flexible invoicing",
     title: "Get paid for your change orders",
     description: "Handoff's flexible invoicing tools allow you to collect digital payments on change orders directly through the platform. Use built-in payment processing to keep billing simple and connected to the job.\n\nPayment terms vary by plan.",
     reverse: false,
-    visualType: "isometric" as const,
-    placeholder: "Screenshot of change order payment flow",
+    visualType: "desktop" as const,
+    visualImages: [flexibleInvoicingImg],
   },
 ];
 ---
@@ -38,6 +42,7 @@ const rows = [
         description={r.description}
         reverse={r.reverse}
         visualType={r.visualType}
+        visualImages={r.visualImages}
         placeholder={r.placeholder}
       />
     ))}
