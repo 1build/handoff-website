@@ -1,5 +1,6 @@
 ---
 import EstimateDetailedFeatures from "@/components/sections/EstimateDetailedFeatures.astro";
+import videoThumbnail from "@/assets/images/See In Action Video Thumbnail.webp";
 interface Props {
   videoSrc?: string;
 }
@@ -27,6 +28,7 @@ SEE IN ACTION
         controls
         playsinline
         preload="auto"
+        poster={videoThumbnail.src}
       >
         <source src={videoSrc} type="video/webm" />
         Your browser does not support the video tag.

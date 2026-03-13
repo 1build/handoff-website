@@ -8,6 +8,7 @@ import logoLowes from "@/assets/images/logo-lowes.png";
 import logoHomedepot from "@/assets/images/logo-homedepot.png";
 import avatarEjElliot from "@/assets/images/avatar-ej-elliot.png";
 import testimonialEjElliot from "@/assets/images/testimonial-ej-elliot.png";
+import videoThumbnail from "@/assets/images/See In Action Video Thumbnail.webp";
 import BulletIcon from "@/components/ui/BulletIcon.astro";
 import CustomerStorySection from "@/components/sections/CustomerStorySection.astro";
 
@@ -138,6 +139,7 @@ const features = [
             controls
             playsinline
             preload="auto"
+            poster={videoThumbnail.src}
           >
             <source src="https://www.handoff.ai/assets/hndf-delivery-video.webm" type="video/webm" />
             Your browser does not support the video tag.

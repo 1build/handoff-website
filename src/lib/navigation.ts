@@ -131,9 +131,9 @@ export const navItems: NavItem[] = [
       {
         label: "Learn",
         items: [
-          { label: "Case studies", href: "/blog#blog-list", description: "See how contractors win with Handoff", iconName: "book-closed" },
+          { label: "Case studies", href: "/blog?category=Case Studies", description: "See how contractors win with Handoff", iconName: "book-closed" },
           { label: "Blog", href: "/blog", description: "Tips, trends, and product updates", iconName: "pencil-line" },
-          { label: "Guides", href: "/blog#blog-list", description: "Step by step playbooks for your business", iconName: "book-open-01" },
+          { label: "Guides", href: "/blog?category=Guides", description: "Step by step playbooks for your business", iconName: "book-open-01" },
           { label: "Webinars", href: "/contractor-webinars", description: "Live sessions with industry pros.", iconName: "play-circle" },
           { label: "Comparisons", href: "/comparison", description: "Compare Handoff to the competition", iconName: "compare" },
           { label: "Construction Costs", href: "/construction-costs", description: "Accurate construction cost estimates", iconName: "tag-01" },
@@ -150,9 +150,9 @@ export const navItems: NavItem[] = [
       },
     ],
     items: [
-      { label: "Case studies", href: "/" },
+      { label: "Case studies", href: "/blog?category=Case Studies" },
       { label: "Blog", href: "/blog" },
-      { label: "Guides", href: "/" },
+      { label: "Guides", href: "/blog?category=Guides" },
       { label: "Webinars", href: "/contractor-webinars" },
       { label: "Testimonials", href: "/" },
       { label: "Platform updates", href: "/" },
@@ -220,10 +220,10 @@ export const footerColumns: FooterColumn[] = [
   {
     title: "Blog Categories",
     links: [
-      { label: "Case Studies", href: "/blog#case-studies" },
-      { label: "Updates", href: "/blog#updates" },
-      { label: "Resources", href: "/resources" },
-      { label: "Guides", href: "/blog#guides" },
+      { label: "Case Studies", href: "/blog?category=Case Studies" },
+      { label: "Updates", href: "/blog?category=Updates" },
+      { label: "Resources", href: "/blog?category=Resources" },
+      { label: "Guides", href: "/blog?category=Guides" },
     ],
   },
   {
