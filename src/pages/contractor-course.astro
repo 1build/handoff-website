@@ -101,9 +101,39 @@ const seo = getPageSeo(Astro.url.pathname);
         </div>
 
         <!-- Video -->
-        <div class="w-full rounded-xl overflow-hidden flex justify-center">
-       <iframe width="1080" height="607" src="https://www.youtube.com/embed/RpBA-wUCraI" title="The Modern Contractor Webinar | Handoff" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <div class="relative">
+          <div id="course-video-wrapper" class="w-full rounded-xl overflow-hidden" style="max-height: 400px;">
+            <iframe width="1080" height="607" src="https://www.youtube.com/embed/RpBA-wUCraI" title="The Modern Contractor Webinar | Handoff" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width: 100%; display: block;"></iframe>
+          </div>
+          <!-- Expand overlay (intercepting clicks before iframe gets them) -->
+          <div id="course-expand-overlay" class="absolute inset-0 flex items-end justify-center pb-4 cursor-pointer" style="background: linear-gradient(to top, rgba(0,0,0,0.18) 0%, transparent 60%);">
+            <span class="flex items-center gap-1.5 text-sm font-medium text-white bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+              Expand
+            </span>
+          </div>
+          <button id="course-minimize" style="display: none;" class="mt-3 mx-auto flex items-center gap-1.5 text-sm text-text-secondary hover:text-text-primary transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"></polyline><polyline points="20 10 14 10 14 4"></polyline><line x1="10" y1="14" x2="21" y2="3"></line><line x1="3" y1="21" x2="14" y2="10"></line></svg>
+            Minimize
+          </button>
         </div>
+        <script>
+          {
+            const wrapper = document.getElementById('course-video-wrapper');
+            const overlay = document.getElementById('course-expand-overlay');
+            const btn = document.getElementById('course-minimize') as HTMLButtonElement;
+            overlay?.addEventListener('click', () => {
+              wrapper!.style.maxHeight = '';
+              overlay.style.display = 'none';
+              btn!.style.display = 'flex';
+            });
+            btn?.addEventListener('click', () => {
+              wrapper!.style.maxHeight = '400px';
+              overlay!.style.display = 'flex';
+              btn.style.display = 'none';
+            });
+          }
+        </script>
 
         <!-- Feature cards grid -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">

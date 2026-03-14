@@ -1,5 +1,8 @@
 ---
 import captureEverythingImg from "@/assets/images/Mockup wrap.png";
+import crmMockupImg from "@/assets/images/CRM & Pipeline Management (HP Card).webp";
+import projectManagementMockupImg from "@/assets/images/Project Management & Operations (HP Card).webp";
+import financialMockupImg from "@/assets/images/Financial & Business Management (HP Card).webp";
 import PlatformFeaturesSection from "@/components/sections/PlatformFeaturesSection.astro";
 
 const tabs = [
@@ -162,26 +165,26 @@ const tabs = [
           </div>
 
           <!-- Right column: tab-specific images -->
-          <div class="relative flex items-center justify-center p-5 md:p-8 lg:p-10 order-1 md:order-2" data-features-right-col>
-            <div class="relative w-full h-full flex items-center justify-center" data-features-crm-img>
+          <div class="relative flex flex-col items-stretch h-full p-5 md:p-8 lg:p-10 order-1 md:order-2" data-features-right-col>
+            <div class="relative w-full h-full overflow-hidden rounded-xl" data-features-crm-img>
               <img
-                src={captureEverythingImg.src}
+                src={crmMockupImg.src}
                 alt="CRM and Pipeline Management"
-                class="w-full h-auto rounded-xl"
+                class="absolute inset-0 w-full h-full object-cover block"
               />
             </div>
-            <div class="relative w-full h-full flex items-center justify-center hidden" data-features-project-img aria-hidden="true">
+            <div class="relative w-full h-full overflow-hidden rounded-xl hidden" data-features-project-img aria-hidden="true">
               <img
-                src={captureEverythingImg.src}
+                src={projectManagementMockupImg.src}
                 alt="Project Management and Operations"
-                class="w-full h-auto rounded-xl"
+                class="absolute inset-0 w-full h-full object-cover block"
               />
             </div>
-            <div class="relative w-full h-full flex items-center justify-center hidden" data-features-financial-img aria-hidden="true">
+            <div class="relative w-full h-full overflow-hidden rounded-xl hidden" data-features-financial-img aria-hidden="true">
               <img
-                src={captureEverythingImg.src}
+                src={financialMockupImg.src}
                 alt="Financial and Business Management"
-                class="w-full h-auto rounded-xl"
+                class="absolute inset-0 w-full h-full object-cover block"
               />
             </div>
 
