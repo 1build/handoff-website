@@ -2,42 +2,50 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Header from "@/components/sections/Header.astro";
 import Footer from "@/components/sections/Footer.astro";
-import CtaSection from "@/components/sections/CtaSection.astro";
+import CtaSystemsSection from "@/components/sections/CtaSystemsSection.astro";
 import { navItems, footerColumns } from "@/lib/navigation";
-import { getCollection } from "astro:content";
+import {
+  getCategories,
+  getAllPosts,
+  urlFor,
+  formatPostDate,
+  formatPostDateShort,
+  type SanityPostListItem,
+} from "@/lib/sanity";
+import { getPageSeo } from "@/lib/seo-pages";
 
-const posts = (await getCollection("blog")).sort(
-  (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime(),
-);
+const [sanityCategories, allPostsRaw] = await Promise.all([getCategories(), getAllPosts()]);
+
+const posts: SanityPostListItem[] = allPostsRaw.filter((p) => p.slug);
 
 const [featuredPost, ...remainingPosts] = posts;
 
-// Build category tabs from actual post data — only show categories that have posts
-const categorySet = new Set<string>();
-posts.forEach((p) => {
-  if (p.data.category) categorySet.add(p.data.category);
-});
-const categories = ["All", ...Array.from(categorySet).sort()];
+const PER_PAGE = 9;
+const totalPages = Math.max(1, Math.ceil(remainingPosts.length / PER_PAGE));
+
+const categories = ["All", ...sanityCategories.map((c) => c.name)];
+const seo = getPageSeo(Astro.url.pathname);
 ---
 
-<BaseLayout title="Blog — Handoff">
+<BaseLayout {...seo}>
   <Header navItems={navItems} />
 
   <section class="relative z-[2] pt-32 pb-2 px-4 bg-brand-800">
     <div class="max-w-[1920px] mx-auto bg-white rounded-3xl py-16 lg:py-24 overflow-hidden">
       <div class="max-w-[1440px] mx-auto px-6 lg:px-8">
+        <h1 class="sr-only">Handoff Blog</h1>
         {posts.length === 0 && (
           <p class="text-lg text-text-tertiary">No posts yet. Check back soon.</p>
         )}
 
         {/* Featured Post */}
         {featuredPost && (
-          <a href={`/blog/${featuredPost.id.replace(/\.md$/, "")}`} class="group flex flex-col lg:flex-row lg:items-stretch gap-12 lg:gap-16 mb-16" data-animate="fade-up">
+          <a href={`/blog/${featuredPost.slug}`} class="group flex flex-col lg:flex-row lg:items-stretch gap-12 lg:gap-16 mb-16" data-animate="fade-up">
             <div class="w-full lg:flex-[1.5] aspect-[16/10] lg:aspect-auto lg:min-h-[400px] rounded-xl overflow-hidden">
-              {featuredPost.data.featuredImage ? (
+              {(featuredPost.featuredImage || featuredPost.thumbnailImage) ? (
                 <img
-                  src={featuredPost.data.featuredImage}
-                  alt={featuredPost.data.title}
+                  src={urlFor(featuredPost.featuredImage ?? featuredPost.thumbnailImage).width(800).url()}
+                  alt={featuredPost.title ?? "Blog post"}
                   class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   loading="lazy"
                   decoding="async"
@@ -48,35 +56,31 @@ const categories = ["All", ...Array.from(categorySet).sort()];
             </div>
             <div class="flex-1 flex flex-col justify-center gap-5 max-w-[384px]">
               <h2 class="font-display text-[28px] lg:text-4xl font-medium leading-9 lg:leading-[44px] tracking-[-0.72px] text-text-primary group-hover:text-brand-500 transition-colors">
-                {featuredPost.data.title}
+                {featuredPost.title}
               </h2>
-              {featuredPost.data.excerpt && (
-                <p class="text-base leading-6 text-text-tertiary">{featuredPost.data.excerpt}</p>
+              {featuredPost.excerpt && (
+                <p class="text-base leading-6 text-text-tertiary">{featuredPost.excerpt}</p>
               )}
               <div class="flex items-center gap-3 mt-2">
-                {featuredPost.data.authorAvatar ? (
+                {featuredPost.author?.avatar ? (
                   <img
-                    src={featuredPost.data.authorAvatar}
-                    alt={featuredPost.data.author}
+                    src={urlFor(featuredPost.author.avatar).width(80).height(80).url()}
+                    alt={featuredPost.author.name ?? "Author"}
                     class="w-10 h-10 rounded-full object-cover"
                     loading="lazy"
                     decoding="async"
                   />
                 ) : (
                   <div class="w-10 h-10 rounded-full bg-brand-100 flex items-center justify-center">
-                    <span class="text-brand-700 font-medium">{featuredPost.data.author?.charAt(0) || "H"}</span>
+                    <span class="text-brand-700 font-medium">{featuredPost.author?.name?.charAt(0) ?? "H"}</span>
                   </div>
                 )}
                 <div class="flex flex-col">
-                  {featuredPost.data.author && (
-                    <span class="text-sm font-medium text-text-primary">{featuredPost.data.author}</span>
+                  {featuredPost.author?.name && (
+                    <span class="text-sm font-medium text-text-primary">{featuredPost.author.name}</span>
                   )}
                   <time class="text-sm text-text-quaternary">
-                    {featuredPost.data.publishedAt.toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })}
+                    {formatPostDate(featuredPost.publishedAt ?? featuredPost.date)}
                   </time>
                 </div>
               </div>
@@ -86,7 +90,7 @@ const categories = ["All", ...Array.from(categorySet).sort()];
 
         {/* Category Tabs */}
         {categories.length > 1 && (
-          <div class="flex items-center gap-2 border-b border-neutral-200 overflow-x-auto mb-12">
+          <div id="blog-list" class="flex items-center gap-2 border-b border-neutral-200 overflow-x-auto mb-12">
             {categories.map((cat, i) => (
               <button
                 class:list={[
@@ -106,13 +110,18 @@ const categories = ["All", ...Array.from(categorySet).sort()];
         {/* Posts Grid */}
         {remainingPosts.length > 0 && (
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-[opacity,max-height] duration-200 ease-in-out overflow-hidden" data-animate="stagger" id="posts-grid">
-            {remainingPosts.map((post) => (
-              <a href={`/blog/${post.id.replace(/\.md$/, "")}`} class="group flex flex-col gap-6" data-post-category={post.data.category || ""}>
+            {remainingPosts.map((post, index) => (
+              <a
+                href={`/blog/${post.slug}`}
+                class="group flex flex-col gap-6"
+                data-post-category={post.category?.name ?? ""}
+                data-post-index={index}
+              >
                 <div class="w-full h-[256px] rounded-md overflow-hidden">
-                  {post.data.featuredImage ? (
+                  {(post.featuredImage || post.thumbnailImage) ? (
                     <img
-                      src={post.data.featuredImage}
-                      alt={post.data.title}
+                      src={urlFor(post.featuredImage ?? post.thumbnailImage).width(600).height(256).url()}
+                      alt={post.title ?? "Blog post"}
                       class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                       loading="lazy"
                       decoding="async"
@@ -124,37 +133,72 @@ const categories = ["All", ...Array.from(categorySet).sort()];
                 <div class="flex flex-col gap-3">
                   <div class="flex items-start justify-between gap-4">
                     <h2 class="text-xl font-medium leading-[30px] text-text-primary group-hover:text-brand-500 transition-colors">
-                      {post.data.title}
+                      {post.title}
                     </h2>
                     <svg class="w-5 h-5 flex-shrink-0 mt-1 text-text-primary group-hover:text-brand-500 transition-colors" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M5.83333 14.1667L14.1667 5.83333M14.1667 5.83333H5.83333M14.1667 5.83333V14.1667" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                   </div>
                   <span class="text-sm leading-5 text-text-tertiary">
-                    {post.data.publishedAt.toLocaleDateString("en-US", {
-                      day: "numeric",
-                      month: "short",
-                      year: "numeric",
-                    })}{post.data.category && ` · ${post.data.category}`}
+                    {formatPostDateShort(post.publishedAt ?? post.date)}{post.category?.name ? ` · ${post.category.name}` : ""}
                   </span>
                 </div>
               </a>
             ))}
           </div>
         )}
+
+        {/* Pagination */}
+        {remainingPosts.length > PER_PAGE && (
+          <nav class="mt-10 flex items-center justify-between border-t border-t-[#E9EAEB] pt-5 overflow-auto" aria-label="Blog pagination">
+            <button
+              type="button"
+              data-page-prev
+              class="inline-flex items-center gap-2 rounded-xl shadow-xs px-3 py-2 text-sm font-medium text-text-secondary border border-[#D5D7DA] bg-white hover:bg-neutral-50 disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              <span aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M15.8332 10.0001H4.1665M4.1665 10.0001L9.99984 15.8334M4.1665 10.0001L9.99984 4.16675" stroke="#A4A7AE" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+              <span>Previous</span>
+            </button>
+            <div class="flex items-center gap-1 sm:gap-2">
+              {Array.from({ length: totalPages }).map((_, i) => (
+                <button
+                  type="button"
+                  data-page-btn={i + 1}
+                  class="min-w-10 h-10 rounded-md px-2 text-sm font-medium text-text-quaternary hover:text-text-secondary hover:border-neutral-300"
+                >
+                  {i + 1}
+                </button>
+              ))}
+            </div>
+            <button
+              type="button"
+              data-page-next
+              class="inline-flex items-center gap-2 rounded-xl shadow-xs px-3 py-2 text-sm font-medium text-text-secondary border border-[#D5D7DA] bg-white hover:bg-neutral-50 disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              <span>Next</span>
+              <span aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0.833496 6.66659H12.5002M12.5002 6.66659L6.66683 0.833252M12.5002 6.66659L6.66683 12.4999" stroke="#A4A7AE" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+            </button>
+          </nav>
+        )}
       </div>
     </div>
   </section>
 
-  <CtaSection />
+  <CtaSystemsSection />
   <Footer columns={footerColumns} />
 </BaseLayout>
 
 <script>
   import { initScrollAnimations } from "@/lib/animations";
 
+  // Scroll handler runs once at module level — window events persist across navigations
   const header = document.getElementById("site-header");
-
   window.addEventListener("scroll", () => {
     if (header) {
       if (window.scrollY > 40) {
@@ -165,38 +209,145 @@ const categories = ["All", ...Array.from(categorySet).sort()];
     }
   });
 
-  initScrollAnimations();
+  // Re-initialise filter + pagination on every page load, including View Transitions navigations
+  document.addEventListener("astro:page-load", () => {
+    initScrollAnimations();
 
-  // Category filter tabs
-  const tabs = document.querySelectorAll<HTMLButtonElement>("[data-category]");
-  const posts = document.querySelectorAll<HTMLElement>("[data-post-category]");
+    // Category filter tabs + pagination
+    const tabs = document.querySelectorAll<HTMLButtonElement>("[data-category]");
+    const postCards = Array.from(document.querySelectorAll<HTMLElement>("[data-post-category]"));
+    const grid = document.getElementById("posts-grid");
+    const pageButtons = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-page-btn]"));
+    const prevPageBtn = document.querySelector<HTMLButtonElement>("[data-page-prev]");
+    const nextPageBtn = document.querySelector<HTMLButtonElement>("[data-page-next]");
 
-  tabs.forEach((tab) => {
-    tab.addEventListener("click", () => {
-      const cat = tab.dataset.category;
+    if (!tabs.length) return; // not on the blog page
 
-      // Update active tab
-      tabs.forEach((t) => {
-        t.classList.remove("border-brand-700", "text-brand-700");
-        t.classList.add("border-transparent", "text-text-quaternary");
+    const PER_PAGE = 9;
+    let currentCategory = "All";
+    let currentPage = 1;
+
+    function applyFiltersAndPagination() {
+      if (!grid) return;
+
+      // Compute total filtered posts
+      let filteredCount = 0;
+      postCards.forEach((post) => {
+        const matches = currentCategory === "All" || post.dataset.postCategory === currentCategory;
+        if (matches) filteredCount++;
       });
-      tab.classList.remove("border-transparent", "text-text-quaternary");
-      tab.classList.add("border-brand-700", "text-brand-700");
 
-      // Filter posts with fade + smooth resize
-      const grid = document.getElementById("posts-grid");
-      if (grid) {
+      const totalPagesForCategory = Math.max(1, Math.ceil(filteredCount / PER_PAGE));
+      if (currentPage > totalPagesForCategory) currentPage = totalPagesForCategory;
+
+      const start = (currentPage - 1) * PER_PAGE;
+      const end = start + PER_PAGE;
+
+      grid.style.maxHeight = grid.scrollHeight + "px";
+      grid.style.opacity = "0";
+
+      setTimeout(() => {
+        let index = 0;
+        postCards.forEach((post) => {
+          const matches = currentCategory === "All" || post.dataset.postCategory === currentCategory;
+          if (matches) {
+            if (index >= start && index < end) {
+              post.style.display = "";
+            } else {
+              post.style.display = "none";
+            }
+            index++;
+          } else {
+            post.style.display = "none";
+          }
+        });
+
+        // Update pagination UI
+        pageButtons.forEach((btn) => {
+          const pageNum = Number(btn.dataset.pageBtn || "1");
+          if (pageNum > totalPagesForCategory) {
+            btn.style.display = "none";
+          } else {
+            btn.style.display = "";
+          }
+          if (pageNum === currentPage) {
+            btn.classList.add("bg-[#FAFAFA]", "text-[#414651]");
+            btn.classList.remove("text-text-quaternary", "border-transparent");
+          } else {
+            btn.classList.remove("bg-[#FAFAFA]", "text-[#414651]");
+            btn.classList.add("text-text-quaternary");
+          }
+        });
+
+        if (prevPageBtn) prevPageBtn.disabled = currentPage === 1;
+        if (nextPageBtn) nextPageBtn.disabled = currentPage === totalPagesForCategory;
+
         grid.style.maxHeight = grid.scrollHeight + "px";
-        grid.style.opacity = "0";
+        grid.style.opacity = "1";
         setTimeout(() => {
-          posts.forEach((post) => {
-            post.style.display = (cat === "All" || post.dataset.postCategory === cat) ? "" : "none";
-          });
-          grid.style.maxHeight = grid.scrollHeight + "px";
-          grid.style.opacity = "1";
-          setTimeout(() => { grid.style.maxHeight = ""; }, 250);
-        }, 200);
-      }
+          grid.style.maxHeight = "";
+        }, 250);
+      }, 200);
+    }
+
+    // Category tab clicks
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const cat = tab.dataset.category || "All";
+        currentCategory = cat;
+        currentPage = 1;
+
+        tabs.forEach((t) => {
+          t.classList.remove("border-brand-700", "text-brand-700");
+          t.classList.add("border-transparent", "text-text-quaternary");
+        });
+        tab.classList.remove("border-transparent", "text-text-quaternary");
+        tab.classList.add("border-brand-700", "text-brand-700");
+
+        applyFiltersAndPagination();
+      });
     });
+
+    // Page button clicks
+    pageButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const pageNum = Number(btn.dataset.pageBtn || "1");
+        currentPage = pageNum;
+        applyFiltersAndPagination();
+      });
+    });
+
+    if (prevPageBtn) {
+      prevPageBtn.addEventListener("click", () => {
+        if (currentPage > 1) {
+          currentPage -= 1;
+          applyFiltersAndPagination();
+        }
+      });
+    }
+
+    if (nextPageBtn) {
+      nextPageBtn.addEventListener("click", () => {
+        currentPage += 1;
+        applyFiltersAndPagination();
+      });
+    }
+
+    // Check for ?category URL param and activate matching tab
+    const urlCategory = new URLSearchParams(window.location.search).get("category");
+    if (urlCategory) {
+      const matchingTab = Array.from(tabs).find((t) => t.dataset.category === urlCategory);
+      if (matchingTab) {
+        currentCategory = urlCategory;
+        tabs.forEach((t) => {
+          t.classList.remove("border-brand-700", "text-brand-700");
+          t.classList.add("border-transparent", "text-text-quaternary");
+        });
+        matchingTab.classList.remove("border-transparent", "text-text-quaternary");
+        matchingTab.classList.add("border-brand-700", "text-brand-700");
+      }
+    }
+
+    applyFiltersAndPagination();
   });
 </script>

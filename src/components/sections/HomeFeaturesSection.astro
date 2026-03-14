@@ -1,0 +1,261 @@
+---
+import captureEverythingImg from "@/assets/images/Mockup wrap.png";
+import crmMockupImg from "@/assets/images/CRM & Pipeline Management (HP Card).webp";
+import projectManagementMockupImg from "@/assets/images/Project Management & Operations (HP Card).webp";
+import financialMockupImg from "@/assets/images/Financial & Business Management (HP Card).webp";
+import PlatformFeaturesSection from "@/components/sections/PlatformFeaturesSection.astro";
+
+const tabs = [
+  { id: "crm", label: "CRM & Pipeline Management" },
+  { id: "project", label: "Project Management & Operations" },
+  { id: "financial", label: "Financial & Business Management" },
+];
+---
+
+<section class="px-4">
+ <div class="max-w-[1920px] mx-auto relative z-[2] pb-4 bg-white transition-colors duration-300 rounded-3xl" data-animate="fade-up" data-features-tab-order={tabs.map((t) => t.id).join(",")}>
+  <div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 py-16 lg:py-24 overflow-hidden">
+    <!-- Heading -->
+    <div class="text-center max-w-[720px] mx-auto mb-8 md:mb-[100px]">
+      <h2 class="font-display text-3xl sm:text-4xl md:text-[2.75rem] lg:text-5xl font-medium leading-[1.15] tracking-[-0.02em] text-text-primary mb-5 md:mb-6">
+        One AI Teammate. Every Job. <span class="text-brand-accent">Start to Finish.</span>
+      </h2>
+      <p class="text-base md:text-lg font-semibold text-text-tertiary leading-relaxed mb-3 md:mb-4">
+        AI That Actually Learns Your Business.
+      </p>
+      <p class="text-base md:text-lg text-text-tertiary leading-relaxed">
+        When your AI Teammate knows your pricing, your markup rules, and how you like to scope a project, it stops being a tool and starts pulling its weight.
+      </p>
+    </div>
+
+    <!-- Tab navigation: mobile = label + arrows + progress; desktop = tab strip -->
+    <div class="mb-6 md:mb-10">
+      <!-- Mobile: category label + arrow buttons + progress bar -->
+      <div class="md:hidden" role="tablist" aria-label="Feature tabs">
+        <div class="flex items-center justify-between gap-3 mb-3">
+          <h3 class="text-base font-semibold text-text-primary" data-features-mobile-label>
+            {tabs[0].label}
+          </h3>
+          <div class="flex items-center gap-1.5 shrink-0">
+            <button type="button" aria-label="Previous feature" data-features-prev class="flex items-center justify-center w-10 h-10 rounded-full bg-transparent border border-[#E9EAEB] text-neutral-700 hover:bg-neutral-300 active:bg-neutral-400 transition-colors">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.4997 6.66659H0.833008M0.833008 6.66659L6.66634 12.4999M0.833008 6.66659L6.66634 0.833252" stroke="#535862" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+            </button>
+            <button type="button" aria-label="Next feature" data-features-next class="flex items-center justify-center w-10 h-10 rounded-full bg-transparent border border-[#E9EAEB] text-neutral-700 hover:bg-neutral-300 active:bg-neutral-400 transition-colors">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0.833008 6.66659H12.4997M12.4997 6.66659L6.66634 0.833252M12.4997 6.66659L6.66634 12.4999" stroke="#535862" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+            </button>
+          </div>
+        </div>
+        <div class="flex gap-1.5 items-center justify-between" data-features-progress aria-hidden="true">
+          {tabs.map((tab, i) => (
+            <span
+              data-features-progress-segment
+              data-tab-id={tab.id}
+              data-index={i}
+              data-active={i === 0 ? "" : undefined}
+              class="h-2 rounded-full bg-neutral-300 data-[active]:bg-brand-700 transition-all duration-200 data-[active]:w-1/2 w-full"
+            />
+          ))}
+        </div>
+      </div>
+   
+      <div class="hidden md:block border-b border-neutral-200 overflow-x-auto">
+        <div class="flex gap-6 lg:gap-8 min-w-max pb-px justify-between" role="tablist" aria-label="Feature tabs">
+          {tabs.map((tab, i) => (
+            <button
+              type="button"
+              role="tab"
+              aria-selected={i === 0}
+              aria-controls={`features-panel-${tab.id}`}
+              id={`features-tab-${tab.id}`}
+              data-features-tab={tab.id}
+              data-tab-index={i}
+              data-active={i === 0 ? "" : undefined}
+              class="features-tab px-5 pb-4 text-base font-medium whitespace-nowrap border-b-4 border-transparent -mb-px transition-colors duration-150 text-text-quaternary hover:text-text-primary data-[active]:text-text-brand-secondary data-[active]:border-brand-700 data-[active]:font-semibold"
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div class="rounded-2xl md:rounded-3xl bg-neutral-100 p-5">
+      <div class="rounded-xl md:rounded-2xl bg-white overflow-hidden shadow-sm">
+        <div class="grid grid-cols-1 md:grid-cols-2 min-h-0 shadow-2xl">
+          <!-- Text content (below image on mobile) -->
+          <div class="p-5 md:p-8 lg:p-10 flex flex-col justify-center order-2 md:order-1">
+            <!-- Panels: same structure — main heading, subtext, two feature blocks with Learn more -->
+            <!-- CRM and Pipeline Management panel (default visible) -->
+            <div data-features-panel="crm" class="features-panel features-panel-content" role="tabpanel" id="features-panel-crm" aria-labelledby="features-tab-crm">
+              <div class="space-y-6 md:space-y-8">
+                <div class="border-l-0 md:border-l-2 md:border-border-primary pl-4 md:pl-5">
+                  <h4 class="text-base font-semibold text-text-primary mb-2">Contact & Lead Tracking</h4>
+                  <p class="text-sm md:text-base text-text-secondary leading-relaxed">Every lead, client, and conversation in one place. Know exactly where each job stands without digging through texts, emails, or sticky notes.</p>
+                </div>
+                <div class="border-l-0 md:border-l-2 md:border-border-primary pl-4 md:pl-5">
+                  <h4 class="text-base font-semibold text-text-primary mb-2">Client Portal That's Easy to Use</h4>
+                  <p class="text-sm md:text-base text-text-secondary leading-relaxed">Documents, approvals, and invoices in one place. Your AI Teammate notifies you the moment clients open, view, or sign anything, so you always follow up at the right time.</p>
+                </div>
+                <div class="border-l-0 md:border-l-2 md:border-border-primary pl-4 md:pl-5">
+                  <h4 class="text-base font-semibold text-text-primary mb-2">Scope to Professional Proposal in Minutes</h4>
+                  <p class="text-sm md:text-base text-text-secondary leading-relaxed">Generate your scope, blueprints, or job photos and your AI Teammate returns a complete estimate from AI Takeoff or site-walkthrough with your numbers already built in. Send it in minutes, not days.</p>
+                </div>
+                <div class="border-l-0 md:border-l-2 md:border-border-primary pl-4 md:pl-5">
+                  <h4 class="text-base font-semibold text-text-primary mb-2">Team Access</h4>
+                  <p class="text-sm md:text-base text-text-secondary leading-relaxed">Add your team and control exactly what each person can see and do. Margins, billing, and client details stay protected.</p>
+                </div>
+              </div>
+            </div>
+            <!-- Project Management & Operations panel -->
+            <div data-features-panel="project" class="features-panel features-panel-content hidden" role="tabpanel" id="features-panel-project" aria-labelledby="features-tab-project">
+              <div class="space-y-6 md:space-y-8">
+                <div class="border-l-0 md:border-l-2 md:border-border-primary pl-4 md:pl-5">
+                  <h4 class="text-base font-semibold text-text-primary mb-2">AI-Powered Documentation</h4>
+                  <p class="text-sm md:text-base text-text-secondary leading-relaxed">Your AI Teammate generates contracts, scopes, and change orders as work progresses. You build. It documents. No chasing signatures.</p>
+                </div>
+                <div class="border-l-0 md:border-l-2 md:border-border-primary pl-4 md:pl-5">
+                  <h4 class="text-base font-semibold text-text-primary mb-2">Project Scheduling</h4>
+                  <p class="text-sm md:text-base text-text-secondary leading-relaxed">Crew availability, project phases, and site visits in one AI-powered calendar. Let your AI Teammate update the schedule for you when things change.</p>
+                </div>
+                <div class="border-l-0 md:border-l-2 md:border-border-primary pl-4 md:pl-5">
+                  <h4 class="text-base font-semibold text-text-primary mb-2">Daily Logs</h4>
+                  <p class="text-sm md:text-base text-text-secondary leading-relaxed">Document job progress, site conditions, and crew notes as you go. When something comes up, you have the record to back it up.</p>
+                </div>
+                <div class="border-l-0 md:border-l-2 md:border-border-primary pl-4 md:pl-5">
+                  <h4 class="text-base font-semibold text-text-primary mb-2">Real-Time Project Alerts</h4>
+                  <p class="text-sm md:text-base text-text-secondary leading-relaxed">Know before it becomes a problem. Get notified on approvals, change orders, payments, and milestones — without carrying it all in your head.</p>
+                </div>
+                <div class="border-l-0 md:border-l-2 md:border-border-primary pl-4 md:pl-5">
+                  <h4 class="text-base font-semibold text-text-primary mb-2">Photo & File Management</h4>
+                  <p class="text-sm md:text-base text-text-secondary leading-relaxed">Job photos, permits, and documents stored by project. Everything where you need it, nothing lost in a text thread.</p>
+                </div>
+              </div>
+            </div>
+            <!-- Financial & Business Management panel -->
+            <div data-features-panel="financial" class="features-panel features-panel-content hidden" role="tabpanel" id="features-panel-financial" aria-labelledby="features-tab-financial">
+              <div class="space-y-6 md:space-y-8">
+                <div class="border-l-0 md:border-l-2 md:border-border-primary pl-4 md:pl-5">
+                  <h4 class="text-base font-semibold text-text-primary mb-2">Estimate-to-Payment</h4>
+                  <p class="text-sm md:text-base text-text-secondary leading-relaxed">From signed estimate to final payment, every step runs on schedule. Invoices go out. Payments come in. Your AI Teammate handles the follow-through, no chasing required.</p>
+                </div>
+                <div class="border-l-0 md:border-l-2 md:border-border-primary pl-4 md:pl-5">
+                  <h4 class="text-base font-semibold text-text-primary mb-2">Milestone-Based Billing</h4>
+                  <p class="text-sm md:text-base text-text-secondary leading-relaxed">Set your payment schedule once. Handoff invoices at each phase so you get paid as the work gets done.</p>
+                </div>
+                <div class="border-l-0 md:border-l-2 md:border-border-primary pl-4 md:pl-5">
+                  <h4 class="text-base font-semibold text-text-primary mb-2">Custom Pricing & Markup</h4>
+                  <p class="text-sm md:text-base text-text-secondary leading-relaxed">Lock in your markup rules so no estimate ever goes out unprotected. Your margins are safe on every single job.</p>
+                </div>
+                <div class="border-l-0 md:border-l-2 md:border-border-primary pl-4 md:pl-5">
+                  <h4 class="text-base font-semibold text-text-primary mb-2">Consumer Financing</h4>
+                  <p class="text-sm md:text-base text-text-secondary leading-relaxed">Give clients a way to say yes to bigger projects. Built-in financing options so the budget doesn't kill the deal.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right column: tab-specific images -->
+          <div class="relative flex flex-col items-stretch h-full p-5 md:p-8 lg:p-10 order-1 md:order-2" data-features-right-col>
+            <div class="relative w-full h-full overflow-hidden rounded-xl" data-features-crm-img>
+              <img
+                src={crmMockupImg.src}
+                alt="CRM and Pipeline Management"
+                class="absolute inset-0 w-full h-full object-cover block"
+              />
+            </div>
+            <div class="relative w-full h-full overflow-hidden rounded-xl hidden" data-features-project-img aria-hidden="true">
+              <img
+                src={projectManagementMockupImg.src}
+                alt="Project Management and Operations"
+                class="absolute inset-0 w-full h-full object-cover block"
+              />
+            </div>
+            <div class="relative w-full h-full overflow-hidden rounded-xl hidden" data-features-financial-img aria-hidden="true">
+              <img
+                src={financialMockupImg.src}
+                alt="Financial and Business Management"
+                class="absolute inset-0 w-full h-full object-cover block"
+              />
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <PlatformFeaturesSection />
+
+  </div>
+</section>
+
+<script>
+  function initFeaturesTabs() {
+    const container = document.querySelector("[data-features-tab]")?.closest("section");
+    if (!container) return;
+
+    // Use server-rendered tab order so mobile progress/label match desktop exactly
+    const tabOrder = (container.getAttribute("data-features-tab-order") ?? "").split(",").filter(Boolean);
+    const tabButtons = container.querySelectorAll("[data-features-tab]");
+    const panels = container.querySelectorAll("[data-features-panel]");
+    const crmImgEl = container.querySelector("[data-features-crm-img]");
+    const projectImgEl = container.querySelector("[data-features-project-img]");
+    const financialImgEl = container.querySelector("[data-features-financial-img]");
+    const mobileLabel = container.querySelector("[data-features-mobile-label]");
+    const progressSegments = container.querySelectorAll("[data-features-progress-segment]");
+    const prevBtn = container.querySelector("[data-features-prev]");
+    const nextBtn = container.querySelector("[data-features-next]");
+
+    // Build tabIds and tabLabels in desktop order (from data-features-tab-order)
+    const tabIds = tabOrder.length ? tabOrder : Array.from(tabButtons).map((t) => t.getAttribute("data-features-tab"));
+    const tabLabels = tabIds.map((id) => {
+      const btn = container.querySelector(`[data-features-tab="${id}"]`);
+      return btn?.textContent?.trim() ?? "";
+    });
+
+    function setActiveIndex(index) {
+      const i = Math.max(0, Math.min(index, tabIds.length - 1));
+      const id = tabIds[i];
+      tabButtons.forEach((t) => {
+        const active = t.getAttribute("data-features-tab") === id;
+        t.toggleAttribute("data-active", active);
+        t.setAttribute("aria-selected", String(active));
+      });
+      panels.forEach((panel) => {
+        panel.classList.toggle("hidden", panel.getAttribute("data-features-panel") !== id);
+      });
+      if (crmImgEl) crmImgEl.classList.toggle("hidden", id !== "crm");
+      if (projectImgEl) projectImgEl.classList.toggle("hidden", id !== "project");
+      if (financialImgEl) financialImgEl.classList.toggle("hidden", id !== "financial");
+      if (mobileLabel && tabLabels[i]) mobileLabel.textContent = tabLabels[i];
+      progressSegments.forEach((seg) => {
+        seg.toggleAttribute("data-active", seg.getAttribute("data-tab-id") === id);
+      });
+    }
+
+    tabButtons.forEach((tab) => {
+      const id = tab.getAttribute("data-features-tab");
+      const idx = tabIds.indexOf(id);
+      if (idx !== -1) tab.addEventListener("click", () => setActiveIndex(idx));
+    });
+    prevBtn?.addEventListener("click", () => {
+      const currentId = Array.from(tabButtons).find((t) => t.hasAttribute("data-active"))?.getAttribute("data-features-tab");
+      const current = currentId ? tabIds.indexOf(currentId) : 0;
+      const next = current <= 0 ? tabIds.length - 1 : current - 1;
+      setActiveIndex(next);
+    });
+    nextBtn?.addEventListener("click", () => {
+      const currentId = Array.from(tabButtons).find((t) => t.hasAttribute("data-active"))?.getAttribute("data-features-tab");
+      const current = currentId ? tabIds.indexOf(currentId) : 0;
+      const next = current >= tabIds.length - 1 ? 0 : current + 1;
+      setActiveIndex(next);
+    });
+  }
+  initFeaturesTabs();
+  document.addEventListener("astro:page-load", initFeaturesTabs);
+</script>

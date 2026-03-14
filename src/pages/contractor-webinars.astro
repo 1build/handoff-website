@@ -1,0 +1,578 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/sections/Header.astro";
+import Footer from "@/components/sections/Footer.astro";
+import WebinarsCta from "@/components/sections/WebinarsCta.astro";
+import { navItems, footerColumns } from "@/lib/navigation";
+import { getPageSeo } from "@/lib/seo-pages";
+import webinarHero from "@/assets/images/Heros/Webinars.webp";
+import bgPattern from "@/assets/images/background-pattern-dots.png";
+import heroGlow from "@/assets/images/hero-glow-line.svg";
+import iconLayout from "@/assets/icons/icon-layout.svg";
+import whoPhoto from "@/assets/images/hero-remodeler.png";
+import avatar1 from "@/assets/images/avatar5.png";
+import avatar2 from "@/assets/images/avatar1.png";
+import avatar3 from "@/assets/images/avatar11.png";
+import avatar4 from "@/assets/images/avatar2.png";
+import avatar5 from "@/assets/images/avatar12.png";
+import checkIcon from "@/assets/icons/check-icon.svg";
+
+
+
+
+const sessions = [
+  { date: "March 17th", day: "Tuesday", time: "9:00 AM", title: "How Disorganized Jobsites Kill Margins", ended: false },
+  { date: "March 19th", day: "Thursday", time: "11:00 AM", title: "How Disorganized Jobsites Kill Margins", ended: false },
+  { date: "March 25th", day: "Wednesday", time: "9:00 AM", title: "Modern Contractor Guide To Sales", ended: false },
+  { date: "March 27th", day: "Friday", time: "10:00 AM", title: "Modern Contractor Guide To Sales", ended: false },
+];
+
+const expectItems = [
+  {
+    title: "Margin errors from inconsistent pricing",
+    body: "See where profit leaks happen as jobs get more complex, and how consistent pricing logic and documented scope prevent underpricing and rework.",
+  },
+  {
+    title: "Details lost to memory",
+    body: "Learn why relying on memory leads to missed items and confusion at higher volume, and how modern contractors capture information once and reuse it across jobs.",
+  },
+  {
+    title: "Workflow gaps from informal processes",
+    body: "See how inconsistent processes across pricing, scope, handoffs, and cost tracking create hidden gaps that lead to rework, delays, and margin loss as jobs grow more complex.",
+  },
+  {
+    title: "Burnout from volume without systems",
+    body: "See why growth without systems adds hours and stress, and how modern contractors prepare their operation so volume doesn't mean burnout.",
+  },
+];
+
+const registrationSessions = [
+  { date: "March 17th • 9:00 AM CT", title: "How Disorganized Jobsites Kill Margins", checked: true },
+  { date: "March 19th • 11:00 AM CT", title: "How Disorganized Jobsites Kill Margins", checked: true },
+  { date: "March 25th • 9:00 AM CT", title: "Modern Contractor Guide To Sales", checked: false },
+  { date: "March 27th • 10:00 AM CT", title: "Modern Contractor Guide To Sales", checked: false },
+];
+const seo = getPageSeo(Astro.url.pathname);
+---
+
+<BaseLayout {...seo}>
+  <Header navItems={navItems} />
+
+  <!-- ── Hero Section ── -->
+  <section class="relative pt-20 max-w-[1920px] mx-auto">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1920px] max-w-full h-[1440px] pointer-events-none z-0">
+    <img src={bgPattern.src} alt="" class="w-full h-full block object-contain object-top" />
+  </div>
+
+  <div class="absolute -top-[24%] -left-[14%] -right-[14%] -bottom-[24%] pointer-events-none z-[1]">
+    <img src={heroGlow.src} alt="" class="w-full h-full block" />
+  </div>
+    <div class="relative z-[2] mx-auto max-w-[1440px] px-8 pt-16 pb-0">
+      <!-- Hero content row -->
+      <div class="flex flex-col lg:flex-row items-start gap-16 pb-16">
+        <!-- Left: copy -->
+        <div class="flex flex-col gap-12 flex-1 min-w-0">
+          <div class="flex flex-col gap-6">
+            <div class="flex flex-col gap-3">
+              <p class="font-mono text-sm font-semibold tracking-[0.56px] uppercase text-text-on-brand-tertiary">
+                LIVE WEBINARS
+              </p>
+              <h1 class="font-display  text-4xl sm:text-[44px] lg:text-[60px]  font-medium leading-[1.05] tracking-[-1.44px] text-white max-w-[712px]">
+                The operating model behind cleaner jobs
+              </h1>
+            </div>
+            <p class="text-xl font-medium leading-[30px] text-white max-w-[640px]">
+              How modern remodelers audit workflows and use structured systems to maintain margins as job complexity increases.
+            </p>
+          </div>
+          <a href="#register" class="inline-flex items-center justify-center gap-1.5 px-4 py-3 text-base font-medium leading-6 rounded-xl bg-brand-accent text-white shadow-xs hover:bg-brand-500 transition-colors self-start">
+            Reserve your spot
+          </a>
+        </div>
+
+        <!-- Right: photo -->
+        <div class="hidden lg:flex items-center justify-center w-[600px] h-[570px] shrink-0 overflow-hidden">
+          <img src={webinarHero.src} alt="Contractors reviewing plans" class="w-[536px] h-auto object-contain" />
+        </div>
+      </div>
+
+      <!-- Upcoming sessions -->
+      <div class="flex flex-col gap-8 pb-16">
+        <div class="flex items-center justify-between">
+          <p class="font-mono text-sm font-semibold tracking-[0.56px] uppercase text-white">UPCOMING SESSIONS</p>
+          <p class="text-base font-medium text-neutral-300">Sessions rotate every 2 weeks</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {sessions.map((session) => (
+            session.ended ? (
+              <div class="flex flex-col justify-between p-6 rounded-3xl bg-white border border-border-primary shadow-xs">
+                <div class="flex flex-col gap-6">
+                  <div class="flex flex-col gap-1 text-text-on-brand-tertiary">
+                    <p class="font-display text-[30px] font-medium leading-[38px] line-through">{session.date}</p>
+                    <div class="flex items-center gap-2 text-base font-medium">
+                      <span>{session.day}</span>
+                      <span>•</span>
+                      <span>{session.time}</span>
+                    </div>
+                  </div>
+                  <hr class="border-0 border-t border-white/20 w-20" />
+                  <p class="text-xl font-medium leading-[30px] text-text-on-brand-tertiary">{session.title}</p>
+                </div>
+                <p class="text-sm font-medium text-text-on-brand-tertiary mt-4">This session has ended</p>
+              </div>
+            ) : (
+              <div class="flex flex-col justify-between p-6 rounded-3xl bg-white border border-border-primary shadow-xs">
+                <div class="flex flex-col gap-6">
+                  <div class="flex flex-col gap-1">
+                    <p class="font-display text-[30px] font-medium leading-[38px] text-text-primary">{session.date}</p>
+                    <div class="flex items-center gap-2 text-base font-medium text-text-quaternary">
+                      <span>{session.day}</span>
+                      <span>•</span>
+                      <span>{session.time}</span>
+                    </div>
+                  </div>
+                  <hr class="border-0 border-t border-border-primary w-20" />
+                  <p class="text-xl font-medium leading-[30px] text-text-quaternary">{session.title}</p>
+                </div>
+                <div class="mt-6">
+                  <a href="#register" class="inline-flex items-center justify-center px-[18px] py-3 text-base font-medium leading-6 rounded-xl bg-white border border-border-primary shadow-xs text-text-secondary hover:bg-bg-secondary transition-colors">
+                    Register
+                  </a>
+                </div>
+              </div>
+            )
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── What to Expect Section ── -->
+  <section class="relative z-[2] px-4 pt-4 max-w-[1920px] mx-auto">
+    <div class="bg-white border border-black/4 rounded-3xl overflow-hidden py-24">
+      <div class="max-w-[1440px] mx-auto px-4 md:px-8 flex flex-col gap-20">
+        <!-- Heading -->
+        <div class="flex flex-col gap-5 items-center text-center max-w-[1024px] mx-auto">
+          <h2 class="font-display text-2xl md:text-[48px] font-medium leading-[35px] md:leading-[60px] tracking-[-0.96px] text-text-primary">
+            What to expect from each session
+          </h2>
+          <div class="text-xl font-medium leading-[30px] text-text-tertiary max-w-[1024px]">
+            <p class="mb-5">Each session walks through one operational problem using the Modern Contractor framework.</p>
+            <p>You'll spend <strong class="font-semibold text-neutral-800">25 minutes on the core walkthrough, followed by 5 minutes of live Q&A</strong> where questions are answered in real time. Designed to deliver real clarity without taking over your day.</p>
+          </div>
+        </div>
+
+        <!-- Video -->
+        <div class="relative">
+          <div id="webinar-video-wrapper" class="w-full rounded-xl overflow-hidden" style="max-height: 400px;">
+            <iframe width="1080" height="607" src="https://www.youtube.com/embed/Df9PsBlugWQ" title="The Modern Contractor Webinar | Handoff" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width: 100%; display: block;"></iframe>
+          </div>
+          <!-- Expand overlay (intercepting clicks before iframe gets them) -->
+          <div id="webinar-expand-overlay" class="absolute inset-0 flex items-end justify-center pb-4 cursor-pointer" style="background: linear-gradient(to top, rgba(0,0,0,0.18) 0%, transparent 60%);">
+            <span class="flex items-center gap-1.5 text-sm font-medium text-white bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+              Expand
+            </span>
+          </div>
+          <button id="webinar-minimize" style="display: none;" class="mt-3 mx-auto flex items-center gap-1.5 text-sm text-text-secondary hover:text-text-primary transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"></polyline><polyline points="20 10 14 10 14 4"></polyline><line x1="10" y1="14" x2="21" y2="3"></line><line x1="3" y1="21" x2="14" y2="10"></line></svg>
+            Minimize
+          </button>
+        </div>
+        <script>
+          {
+            const wrapper = document.getElementById('webinar-video-wrapper');
+            const overlay = document.getElementById('webinar-expand-overlay');
+            const btn = document.getElementById('webinar-minimize') as HTMLButtonElement;
+            overlay?.addEventListener('click', () => {
+              wrapper!.style.maxHeight = '';
+              overlay.style.display = 'none';
+              btn!.style.display = 'flex';
+            });
+            btn?.addEventListener('click', () => {
+              wrapper!.style.maxHeight = '400px';
+              overlay!.style.display = 'flex';
+              btn.style.display = 'none';
+            });
+          }
+        </script>
+
+        <!-- Feature cards grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {expectItems.map((item) => (
+            <div class="flex flex-col gap-16 p-6 rounded-xl bg-bg-secondary min-h-[324px]">
+              <div class="flex items-center justify-center p-3 rounded-md bg-white shadow-3xl w-12 h-12 shrink-0">
+                <img src={iconLayout.src} alt="" class="w-6 h-6" />
+              </div>
+              <div class="flex flex-col gap-4">
+                <h3 class="font-display text-2xl font-medium leading-8 text-text-primary">{item.title}</h3>
+                <p class="text-lg leading-7 text-text-tertiary">{item.body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Why the Old Way Stopped Working Section ── -->
+  <section class="relative z-[2] px-4 pt-4 max-w-[1920px] mx-auto">
+    <div class="bg-white border border-black/4 rounded-3xl overflow-hidden py-24">
+      <div class="max-w-[1440px] mx-auto px-4 md:px-8">
+        <div class="flex flex-wrap gap-16 items-start">
+
+          <!-- Left: heading + copy -->
+          <div class="flex flex-col gap-5 flex-1 min-w-full md:min-w-[300px] max-w-full md:max-w-[560px]">
+            <div class="flex flex-col gap-3">
+              <p class="font-mono text-sm font-semibold tracking-[0.56px] uppercase text-text-quaternary">
+                THE SHIFT
+              </p>
+              <h2 class="font-display text-[60px] font-medium leading-[72px] tracking-[-1.2px] text-text-primary">
+                Why the old way stopped working
+              </h2>
+            </div>
+            <p class="text-xl font-medium leading-[30px] text-text-tertiary max-w-[560px]">
+              Contracting didn't get harder because builders got worse. It got harder because expectations changed.
+            </p>
+            <hr class="border-0 border-t border-border-primary w-20" />
+            <div class="text-xl font-medium leading-[30px] text-text-tertiary max-w-[560px]">
+              <p class="mb-7">As jobs involve more coordination and higher expectations, there's less room for improvisation. Informal systems that once worked can't keep up.</p>
+              <p>Running a serious business on informal systems no longer scales. The modern contractor standard exists to replace guesswork with structure before growth breaks the business.</p>
+            </div>
+          </div>
+
+          <!-- Right: numbered list -->
+          <div class="flex flex-col flex-1 min-w-full md:min-w-[300px]">
+
+            <div class="flex gap-16 items-start py-0 pb-16 flex-col md:flex-row">
+              <span class="font-display text-[60px] font-normal leading-[72px] tracking-[-1.2px] text-neutral-300 w-[90px] shrink-0">01.</span>
+              <div class="flex flex-col gap-3">
+                <h3 class="font-display text-2xl font-medium leading-8 text-text-primary">Client expectations outpaced your tools</h3>
+                <p class="text-lg font-medium leading-7 text-text-secondary">Clients expect faster answers and clearer communication. Texting and memory don't cut it.</p>
+              </div>
+            </div>
+            <hr class="border-0 border-t border-border-primary w-full mb-16" />
+
+            <div class="flex gap-16 items-start pb-16 flex-col md:flex-row">
+              <span class="font-display text-[60px] font-normal leading-[72px] tracking-[-1.2px] text-neutral-300 w-[90px] shrink-0">02.</span>
+              <div class="flex flex-col gap-3">
+                <h3 class="font-display text-2xl font-medium leading-8 text-text-primary">Jobs got more complex, faster</h3>
+                <p class="text-lg font-medium leading-7 text-text-secondary">More trades, more materials, more coordination. Every project is a web of moving parts.</p>
+              </div>
+            </div>
+            <hr class="border-0 border-t border-border-primary w-full mb-16" />
+
+            <div class="flex gap-16 items-start pb-16 flex-col md:flex-row">
+              <span class="font-display text-[60px] font-normal leading-[72px] tracking-[-1.2px] text-neutral-300 w-[90px] shrink-0">03.</span>
+              <div class="flex flex-col gap-3">
+                <h3 class="font-display text-2xl font-medium leading-8 text-text-primary">Mistakes became expensive</h3>
+                <p class="text-lg font-medium leading-7 text-text-secondary">Errors are more costly and harder to recover from. One missed detail eats an entire margin.</p>
+              </div>
+            </div>
+            <hr class="border-0 border-t border-border-primary w-full mb-16" />
+
+            <div class="flex gap-16 items-start pb-16 flex-col md:flex-row">
+              <span class="font-display text-[60px] font-normal leading-[72px] tracking-[-1.2px] text-neutral-300 w-[90px] shrink-0">04.</span>
+              <div class="flex flex-col gap-3">
+                <h3 class="font-display text-2xl font-medium leading-8 text-text-primary">Margins vanished</h3>
+                <p class="text-lg font-medium leading-7 text-text-secondary">Less room for improvisation or rework. Inconsistent pricing leaks profit on every complex job.</p>
+              </div>
+            </div>
+            <hr class="border-0 border-t border-border-primary w-full mb-16" />
+
+            <div class="flex gap-16 items-start flex-col md:flex-row">
+              <span class="font-display text-[60px] font-normal leading-[72px] tracking-[-1.2px] text-neutral-300 w-[90px] shrink-0">05.</span>
+              <div class="flex flex-col gap-3">
+                <h3 class="font-display text-2xl font-medium leading-8 text-text-primary">Growth exposed everything</h3>
+                <p class="text-lg font-medium leading-7 text-text-secondary">Scaling didn't hide the cracks, it widened them. More volume, more chaos, more burnout.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Who These Webinars Are For Section ── -->
+  <section class="relative z-[2] px-4 py-4 max-w-[1920px] mx-auto">
+    <div class="bg-bg-secondary border border-black/4 rounded-3xl overflow-hidden py-24">
+      <div class="max-w-[1280px] mx-auto px-8 flex flex-col lg:flex-row gap-16 items-center justify-center">
+
+        <!-- Left: heading, copy, CTA -->
+        <div class="flex flex-col gap-12 flex-1 min-w-0">
+          <div class="flex flex-col gap-6">
+            <h2 class="font-display text-[36px] font-medium leading-[44px] tracking-[-0.72px] text-text-primary">
+              Who these webinars are for
+            </h2>
+            <div class="text-xl leading-[30px] text-text-tertiary">
+              <p class="mb-5">These sessions are for contractors who want a business that runs with clarity instead of constant intervention.</p>
+              <p class="mb-5">If you care about protected margins, consistent execution, and building something that still works as volume increases, you're in the right place.</p>
+              <p>This isn't for one-off cash jobs or lowest-bid-only work. It's for contractors who want to operate at a higher standard.</p>
+            </div>
+          </div>
+          <a
+            href="https://app.handoff.ai/sign-up/"
+            class="relative inline-flex items-center justify-center px-[18px] py-3 rounded-xl bg-brand-700 text-white text-base font-medium leading-6 shadow-xs hover:bg-brand-600 transition-colors self-start"
+          >
+            Start free trial
+            <span class="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_0px_0px_1px_rgba(10,13,18,0.18),inset_0px_-2px_0px_0px_rgba(10,13,18,0.05)]"></span>
+          </a>
+        </div>
+
+        <!-- Right: photo -->
+        <div class="hidden lg:flex items-center justify-center w-[600px] h-[570px] shrink-0 overflow-hidden">
+          <img src={whoPhoto.src} alt="Contractor reviewing their phone on a job site" class="w-[536px] h-auto object-contain" />
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Save Your Spot / Registration Section ── -->
+  <section id="register" class="relative overflow-hidden px-4 py-4 max-w-[1920px] mx-auto">
+    <!-- Background grid -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1920px] h-[1440px] pointer-events-none z-0 opacity-32">
+      <div class="absolute inset-0" style="background-image: repeating-linear-gradient(0deg, transparent, transparent 47px, rgba(255,255,255,0.04) 47px, rgba(255,255,255,0.04) 48px), repeating-linear-gradient(90deg, transparent, transparent 47px, rgba(255,255,255,0.04) 47px, rgba(255,255,255,0.04) 48px);"></div>
+    </div>
+    <!-- Glow line -->
+    <div class="absolute inset-0 pointer-events-none z-[1] overflow-hidden">
+      <div class="absolute w-[140%] h-px bg-gradient-to-r from-transparent via-brand-400/30 to-transparent top-[60%] left-[-20%] rotate-[-30deg] blur-[2px]"></div>
+      <div class="absolute w-[140%] h-[2px] bg-gradient-to-r from-transparent via-brand-300/20 to-transparent top-[63%] left-[-20%] rotate-[-30deg] blur-[6px]"></div>
+    </div>
+
+    <div class="relative z-[2] rounded-3xl max-w-[1920px] mx-auto py-40">
+      <div class="max-w-[1440px] mx-auto px-4 md:px-8">
+        <div class="flex flex-col lg:flex-row items-center gap-16 justify-between">
+          <!-- Left: copy -->
+          <div class="flex flex-col gap-16 flex-1 min-w-0 max-w-full md:max-w-[768px]">
+            <div class="flex flex-col gap-5">
+              <div class="flex flex-col gap-3">
+                <p class="font-mono text-sm font-semibold tracking-[0.56px] uppercase text-text-on-brand-tertiary">
+                  SAVE YOUR SPOT
+                </p>
+                <h2 class="font-display text-3xl md:text-[64px] lg:text-[72px] font-medium leading-[1.05] tracking-[-1.44px] text-white">
+                  Join the Modern Contractor Webinar
+                </h2>
+              </div>
+
+              <!-- Avatar row -->
+              <div class="flex items-center flex-col md:flex-row gap-4">
+                <div class="flex items-center">
+                  
+                    <div class="w-10 h-10 rounded-full border-[1px] border-border-brand-alt overflow-hidden -ml-3 first:ml-0">
+                      <img src={avatar1.src} alt="Webinar participant" class="w-full h-full object-cover" />
+                    </div>
+                    <div class="w-10 h-10 rounded-full border-[1px] border-border-brand-alt overflow-hidden -ml-3 first:ml-0">
+                      <img src={avatar2.src} alt="Webinar participant" class="w-full h-full object-cover" />
+                    </div>
+                  <div class="w-10 h-10 rounded-full border-[1px] border-border-brand-alt overflow-hidden -ml-3 first:ml-0">
+                      <img src={avatar3.src} alt="Webinar participant" class="w-full h-full object-cover" />
+                    </div>
+                    <div class="w-10 h-10 rounded-full border-[1px] border-border-brand-alt overflow-hidden -ml-3 first:ml-0">
+                      <img src={avatar4.src} alt="Webinar participant" class="w-full h-full object-cover" />
+                    </div>
+                    <div class="w-10 h-10 rounded-full border-[1px] border-border-brand-alt overflow-hidden -ml-3 first:ml-0">
+                      <img src={avatar5.src} alt="Webinar participant" class="w-full h-full object-cover" />
+                    </div>
+                </div>
+                <p class="text-base font-medium text-text-on-brand-secondary whitespace-nowrap">
+                  200+ contractors joined in past sessions
+                </p>
+              </div>
+
+              <hr class="border-0 border-t border-white/20 w-20" />
+
+              <p class="text-xl font-medium leading-[30px] text-white max-w-full md:max-w-[560px]">
+                In these live sessions, you'll see how modern contractors step back, audit how work actually gets done, and replace informal processes with structure.
+              </p>
+            </div>
+          </div>
+
+          <!-- Right: registration card -->
+          <div class="flex-1 min-w-0 max-w-full md:max-w-[560px] w-full">
+            <div class="bg-brand-100 rounded-2xl p-3 md:p-10 flex flex-col gap-10">
+              <p class="font-display text-2xl font-medium leading-8 text-text-primary max-w-full md:max-w-[384px]">
+                Register for the times and dates that work best for you
+              </p>
+
+              <!-- Form -->
+              <form id="webinar-registration-form" class="flex flex-col gap-5">
+
+              <!-- Session checkboxes -->
+              <div class="flex flex-col gap-5">
+                {registrationSessions.map((s) => (
+                  <label class="flex items-start gap-3 cursor-pointer select-none">
+                    <input
+                      type="checkbox"
+                      name="sessions"
+                      value={`${s.date} | ${s.title}`}
+                      class="sr-only peer"
+                      checked={s.checked}
+                    />
+                    <div class="mt-0.5 w-5 h-5 rounded-md flex items-center justify-center shrink-0 transition-colors bg-white border border-border-primary peer-checked:bg-brand-700 peer-checked:border-brand-700">
+                      <img src={checkIcon.src} alt="" class="webinar-check-icon w-3 h-3" style="opacity:0" />
+                    </div>
+                    <div class="flex flex-col gap-0.5">
+                      <span class="text-base font-medium leading-6 text-text-secondary">{s.date}</span>
+                      <span class="text-base leading-6 text-text-tertiary">{s.title}</span>
+                    </div>
+                  </label>
+                ))}
+              </div>
+                <div class="grid grid-cols-2 gap-5">
+                  <div class="flex flex-col gap-1.5">
+                    <label class="text-sm font-medium leading-5 text-text-secondary">First name <span class="text-red-500">*</span></label>
+                    <input
+                      type="text"
+                      name="first_name"
+                      required
+                      class="w-full px-3.5 py-2.5 rounded-md bg-white border border-border-primary text-base text-text-primary placeholder:text-text-quaternary focus:outline-none focus:ring-2 focus:ring-brand-accent focus:border-brand-accent transition"
+                      placeholder="John"
+                    />
+                  </div>
+                  <div class="flex flex-col gap-1.5">
+                    <label class="text-sm font-medium leading-5 text-text-secondary">Last name <span class="text-red-500">*</span></label>
+                    <input
+                      type="text"
+                      name="last_name"
+                      required
+                      class="w-full px-3.5 py-2.5 rounded-md bg-white border border-border-primary text-base text-text-primary placeholder:text-text-quaternary focus:outline-none focus:ring-2 focus:ring-brand-accent focus:border-brand-accent transition"
+                      placeholder="Smith"
+                    />
+                  </div>
+                </div>
+
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-sm font-medium leading-5 text-text-secondary">Email <span class="text-red-500">*</span></label>
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    class="w-full px-3.5 py-2.5 rounded-md bg-white border border-border-primary text-base text-text-primary placeholder:text-text-quaternary focus:outline-none focus:ring-2 focus:ring-brand-accent focus:border-brand-accent transition"
+                    placeholder="john@example.com"
+                  />
+                </div>
+
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-sm font-medium leading-5 text-text-secondary">Phone number <span class="text-red-500">*</span></label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    required
+                    class="w-full px-3.5 py-2.5 rounded-md bg-white border border-border-primary text-base text-text-primary placeholder:text-text-quaternary focus:outline-none focus:ring-2 focus:ring-brand-accent focus:border-brand-accent transition"
+                    placeholder="+1 (555) 123-4567"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  class="relative w-full flex items-center justify-center px-[18px] py-3 rounded-xl bg-brand-700 text-white text-base font-medium leading-6 shadow-xs hover:bg-brand-600 transition-colors"
+                >
+                  Register
+                  <span class="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_0px_0px_1px_rgba(10,13,18,0.18),inset_0px_-2px_0px_0px_rgba(10,13,18,0.05)]"></span>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <WebinarsCta />
+
+  <Footer columns={footerColumns} />
+
+  <script>
+    const checkboxes = Array.from(document.querySelectorAll<HTMLInputElement>('input[name="sessions"]'));
+
+    const updateIcon = (cb: HTMLInputElement) => {
+      const icon = cb.nextElementSibling?.querySelector('.webinar-check-icon') as HTMLElement | null;
+      if (icon) icon.style.opacity = cb.checked ? '1' : '0';
+    };
+
+    checkboxes.forEach((cb) => {
+      updateIcon(cb);
+      cb.addEventListener('change', () => {
+        const checkedCount = checkboxes.filter(c => c.checked).length;
+        if (checkedCount === 0) {
+          cb.checked = true;
+        }
+        updateIcon(cb);
+      });
+    });
+
+    const form = document.getElementById('webinar-registration-form') as HTMLFormElement | null;
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const portalId = '44330500';
+      const formGuid = '2e44baa1-c09e-4948-9c32-b0cd44c6564f';
+
+      const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      const originalText = btn.textContent ?? 'Register';
+      btn.disabled = true;
+      btn.textContent = 'Submitting…';
+
+      const selectedSessions = checkboxes
+        .filter(cb => cb.checked)
+        .map(cb => cb.value)
+        .join('; ');
+
+      const payload = {
+        fields: [
+          { name: 'firstname', value: (form.elements.namedItem('first_name') as HTMLInputElement)?.value },
+          { name: 'lastname',  value: (form.elements.namedItem('last_name')  as HTMLInputElement)?.value },
+          { name: 'email',     value: (form.elements.namedItem('email')      as HTMLInputElement)?.value },
+          { name: 'phone',     value: (form.elements.namedItem('phone')      as HTMLInputElement)?.value },
+          { name: 'message',   value: selectedSessions },
+        ].filter(f => f.value),
+        context: {
+          pageUri: window.location.href,
+          pageName: document.title,
+        },
+      };
+
+      let errorEl = form.querySelector<HTMLElement>('.hs-error');
+      if (!errorEl) {
+        errorEl = document.createElement('p');
+        errorEl.className = 'hs-error text-sm text-red-600 mt-1';
+        form.appendChild(errorEl);
+      }
+      errorEl.textContent = '';
+
+      try {
+        const res = await fetch(
+          `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formGuid}`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          }
+        );
+
+        if (!res.ok) {
+          const err = await res.json().catch(() => ({}));
+          throw new Error((err as any).message || 'Submission failed');
+        }
+
+        const card = form.closest('.bg-brand-100');
+        if (card) {
+          card.innerHTML = `
+            <div class="flex flex-col gap-4 py-8 text-center">
+              <p class="font-display text-2xl font-medium text-text-primary">You're registered! See you at the webinar.</p>
+              <p class="text-lg text-text-tertiary">A confirmation will arrive shortly. We'll see you at the session you selected.</p>
+            </div>
+          `;
+        }
+      } catch (err: any) {
+        errorEl.textContent = err.message || 'Something went wrong. Please try again.';
+        btn.disabled = false;
+        btn.textContent = originalText;
+      }
+    });
+  </script>
+</BaseLayout>

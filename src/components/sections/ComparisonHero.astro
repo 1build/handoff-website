@@ -1,0 +1,45 @@
+---
+import bgPattern from "@/assets/images/background-pattern.png";
+import heroGlow from "@/assets/images/hero-glow-line.svg";
+interface Props { headingLevel?: 1 | 2 }
+const { headingLevel = 1 } = Astro.props;
+const HeadingTag = headingLevel === 2 ? "h2" : "h1";
+---
+
+<section class="relative pt-20">
+  <!-- Background grid pattern -->
+  <div class="absolute inset-0 pointer-events-none z-0 opacity-30">
+    <img src={bgPattern.src} alt="" class="w-full h-full object-cover object-top" />
+  </div>
+
+  <!-- Glow line -->
+  <div class="absolute -top-[24%] -left-[14%] -right-[14%] max-w-full -bottom-[24%] pointer-events-none z-[1]">
+    <img src={heroGlow.src} alt="" class="w-full h-full block" />
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-[2] max-w-[1440px] mx-auto px-8 pt-20 pb-24 flex flex-col items-center gap-12">
+    <!-- Heading group -->
+    <div class="flex flex-col gap-6 items-center text-center max-w-[1024px] w-full">
+      <!-- Eyebrow + Heading stacked left-aligned -->
+      <div class="flex flex-col gap-3 items-center w-full" data-animate="fade-up">
+        <p class="font-mono text-sm font-semibold leading-6 tracking-[0.56px] uppercase text-text-on-brand-tertiary">
+          Compare Handoff
+        </p>
+        <HeadingTag class="font-display text-5xl sm:text-6xl lg:text-[72px] font-medium leading-[1.1] lg:leading-[90px] tracking-[-1.44px] text-white w-full">
+          Explore Handoff and alternatives
+        </HeadingTag>
+      </div>
+
+      <!-- Description -->
+      <p
+        class="text-xl font-medium leading-[30px] text-white max-w-[768px]"
+        data-animate="fade-up"
+      >
+        Explore how Handoff stacks up against competitors and find the best solution for your business. See key differences in features, efficiency, and ease of use.
+      </p>
+    </div>
+
+    
+  </div>
+</section>

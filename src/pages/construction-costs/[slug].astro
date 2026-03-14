@@ -1,0 +1,1399 @@
+---
+
+import Logo from "@/components/ui/Logo.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/sections/Header.astro";
+import Footer from "@/components/sections/Footer.astro";
+import { navItems, footerColumns } from "@/lib/navigation";
+import { getPageSeo } from "@/lib/seo-pages";
+import { calculators } from "@/lib/construction-costs-data";
+import heroGlow from "@/assets/images/hero-glow-line.svg";
+import contractorPhoto from "@/assets/images/cont-img.png";
+
+export function getStaticPaths() {
+  return calculators.map((calc) => ({
+    params: { slug: calc.slug },
+    props: { slug: calc.slug },
+  }));
+}
+
+const { slug } = Astro.props;
+const calculator = calculators.find((c) => c.slug === slug);
+
+if (!calculator) {
+  return Astro.redirect("/construction-costs");
+}
+
+const baseSeo = getPageSeo("/construction-costs");
+const seo = {
+  ...baseSeo,
+  title: `${calculator.title} | Construction Cost Guide`,
+  description:
+    baseSeo.description ??
+    `Get an estimated cost for ${calculator.title.toLowerCase()} using Handoff's construction cost tools.`,
+};
+---
+
+<BaseLayout {...seo}>
+  <Header navItems={navItems} />
+
+  
+
+ <section class="relative md:pt-0 pt-20">
+    <!-- Glow line -->
+    <div class="absolute -top-[24%] -left-[5%] -right-[54%] max-w-full -bottom-[24%] pointer-events-none z-[1]">
+      <img src={heroGlow.src} alt="" class="w-full h-full block" />
+    </div>
+    <div class="relative mx-auto flex max-w-[1440px] flex-col items-center gap-10 md: pt-10 px-8 py-20 z-[12]">
+      <!-- Badge -->
+      <div
+        class="rounded-full border border-brand-700 bg-white/8 px-3 py-1 backdrop-blur-lg"
+      >
+        <span class="font-mono text-sm font-semibold text-[#ABEFC6]"
+          >Updated 2026</span
+        >
+      </div>
+
+      <!-- Breadcrumb + Title -->
+      <div class="flex max-w-3xl flex-col items-center gap-4 text-center">
+        <div
+          class="flex flex-col md:flex-row items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-text-on-brand-tertiary"
+        >
+          <a
+            href="/construction-costs"
+            class="transition-colors hover:text-white">Construction Costs</a
+          >
+          <span>/</span>
+          <span>Average Cost to install electric cooktop in the US</span>
+        </div>
+        <h1
+          class="font-display text-4xl md:text-5xl font-medium leading-tight tracking-tight text-white"
+          style="font-variation-settings: 'opsz' 14, 'wdth' 100"
+        >
+          Average cost to install electric cooktop in the US
+        </h1>
+      </div>
+
+      <!-- Search bar -->
+      <div class="flex w-full max-w-[896px] flex-col sm:flex-row items-stretch gap-3 sm:gap-4">
+        <div
+          class="flex flex-col md:flex-row flex-1 overflow-visible rounded-xl border border-border-primary bg-white"
+        >
+          <!-- Project Type -->
+          <div
+            class="relative flex flex-1 flex-col border-r border-border-primary px-6 py-4"
+            id="detail-project-wrap"
+          >
+            <label
+              class="mb-1 flex items-center gap-1 text-xs font-medium text-text-quaternary"
+            >
+              Project Type
+              <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none">
+                <circle cx="8" cy="8" r="6.5" stroke="currentColor"></circle>
+                <path
+                  d="M8 7v4"
+                  stroke="currentColor"
+                  stroke-linecap="round"></path>
+                <circle cx="8" cy="5.5" r=".5" fill="currentColor"></circle>
+              </svg>
+            </label>
+            <button
+              type="button"
+              id="detail-project-trigger"
+              class="flex items-center justify-between bg-white py-2 text-left w-full"
+              aria-label="Change project type"
+              aria-expanded="false"
+              aria-haspopup="listbox"
+            >
+              <span id="detail-project-display" class="text-base sm:text-lg font-medium text-text-primary">
+                Install Vinyl Siding
+              </span>
+              <svg
+                class="h-5 w-5 text-text-quaternary"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M6 9l6 6 6-6"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+            </button>
+            <div
+              id="detail-project-panel"
+              class="absolute left-6 top-full mt-1 w-[260px] max-h-[260px] overflow-y-auto bg-white border border-border-primary rounded-xl shadow-lg py-2 z-20 hidden"
+              role="listbox"
+              aria-label="Select project type"
+            >
+              {[
+                "Install Vinyl Siding",
+                "Install Fiber Cement Siding",
+                "Replace Wood Siding",
+                "Install Asphalt Shingles",
+                "Replace Roof",
+                "Install Metal Roofing",
+              ].map((label) => (
+                <button
+                  type="button"
+                  class="detail-project-option w-full text-left px-4 py-2 text-sm text-text-secondary hover:bg-neutral-50"
+                  data-label={label}
+                  role="option"
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
+          <!-- Location -->
+          <div class="relative flex flex-1 flex-col px-6 py-4" id="detail-location-wrap">
+            <label
+              class="mb-1 flex items-center gap-1 text-xs font-medium text-text-quaternary"
+            >
+              Location
+              <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none">
+                <circle cx="8" cy="8" r="6.5" stroke="currentColor"></circle>
+                <path
+                  d="M8 7v4"
+                  stroke="currentColor"
+                  stroke-linecap="round"></path>
+                <circle cx="8" cy="5.5" r=".5" fill="currentColor"></circle>
+              </svg>
+            </label>
+            <button
+              type="button"
+              id="detail-location-trigger"
+              class="flex items-center justify-between bg-white py-2 text-left"
+              aria-label="Change location"
+              aria-expanded="false"
+              aria-haspopup="listbox"
+            >
+              <span id="detail-location-display" class="text-base sm:text-lg font-medium text-text-primary">
+                Orlando, FL
+              </span>
+              <svg
+                class="h-5 w-5 text-text-quaternary"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M6 9l6 6 6-6"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+            </button>
+            <div
+              id="detail-location-panel"
+              class="absolute right-6 top-full mt-1 w-[220px] max-h-[260px] overflow-y-auto bg-white border border-border-primary rounded-xl shadow-lg py-2 z-20 hidden"
+              role="listbox"
+              aria-label="Select location"
+            >
+              {["Orlando, FL", "Oregon City, OR", "Orange, CA", "Orlinda, CA", "Oroville, CA"].map((loc) => (
+                <button
+                  type="button"
+                  class="detail-location-option w-full text-left px-4 py-2 text-sm text-text-secondary hover:bg-neutral-50"
+                  data-location={loc}
+                  role="option"
+                >
+                  {loc}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+        <!-- Arrow button -->
+        <button
+          class="flex h-12 sm:h-20 w-full sm:w-20 shrink-0 items-center justify-center rounded-xl bg-brand-accent transition-colors hover:bg-brand-500"
+          aria-label="Search"
+        >
+          <svg class="h-8 w-8 text-white" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M5 12h14M12 5l7 7-7 7"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <div class="max-w-[1920px] mx-auto bg-white">
+    <div class="mx-auto max-w-[1440px] px-4 sm:px-8 py-12 sm:py-16">
+      <div class="mx-auto flex max-w-[768px] flex-col gap-8 sm:gap-10">
+
+        <!-- ─── CALCULATOR CARD ─── -->
+        <div class="overflow-hidden rounded-xl border border-border-primary">
+
+          <!-- Estimate breakdown table -->
+          <div class="flex flex-col gap-6 sm:gap-8 px-4 sm:px-10 pb-6 sm:pb-8 pt-6 sm:pt-10">
+
+            <!-- Title + info alert -->
+            <div class="flex flex-col gap-2">
+              <h2 class="font-display text-3xl font-semibold text-text-primary">
+                Estimate breakdown
+              </h2>
+              <div class="flex items-center gap-2 py-1">
+                <svg
+                  class="h-5 w-5 shrink-0 text-text-tertiary"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z"
+                    clip-rule="evenodd"></path>
+                </svg>
+                <p class="text-sm font-medium text-text-primary">
+                  Add all required items to calculate the estimated cost for the
+                  completed work.
+                </p>
+              </div>
+            </div>
+
+            <!-- MATERIALS GROUP -->
+            <div class="flex flex-col">
+              <!-- Group header row -->
+              <div
+                class="flex items-center flex-col md:flex-row gap-2 border-b border-border-primary py-4"
+                id="materials-header"
+              >
+                <span
+                  class="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-brand-accent cursor-pointer"
+                  id="materials-checkbox"
+                >
+                  <svg
+                    class="h-3 w-3 text-white"
+                    viewBox="0 0 12 12"
+                    fill="none"
+                  >
+                    <path
+                      d="M2 6l3 3 5-5"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"></path>
+                  </svg>
+                </span>
+                <span class="flex-1 text-xl font-semibold text-text-primary"
+                  >Materials</span
+                >
+                <span
+                  class="text-lg font-semibold text-text-primary"
+                  id="materials-total">$250.00</span
+                >
+              </div>
+              <!-- Sheet Vinyl Material row -->
+              <div
+                class="flex items-center flex-col md:flex-row gap-2 border-b border-border-primary py-4"
+                id="mat1-row"
+              >
+                <div class="flex flex-1 items-center gap-2">
+                  <span
+                    class="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-brand-accent cursor-pointer"
+                    id="mat1-checkbox"
+                  >
+                    <svg
+                      class="h-3 w-3 text-white"
+                      viewBox="0 0 12 12"
+                      fill="none"
+                    >
+                      <path
+                        d="M2 6l3 3 5-5"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"></path>
+                    </svg>
+                  </span>
+                  <span class="whitespace-nowrap text-base font-medium text-text-primary"
+                    >Sheet Vinyl Material</span
+                  >
+                  <svg
+                    class="h-4 w-4 shrink-0 text-text-quaternary"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                  >
+                    <circle cx="8" cy="8" r="6.5" stroke="currentColor"
+                    ></circle>
+                    <path
+                      d="M8 7v4"
+                      stroke="currentColor"
+                      stroke-linecap="round"></path>
+                    <circle cx="8" cy="5.5" r=".5" fill="currentColor"
+                    ></circle>
+                  </svg>
+                </div>
+                <div
+                  class="flex w-[150px] shrink-0 items-baseline gap-1 whitespace-nowrap text-base font-medium"
+                >
+                  <span class="text-text-primary">$12.00</span>
+                  <span class="text-text-quaternary">×</span>
+                  <span class="text-text-primary" id="size-display-1">20 SF</span>
+                </div>
+                <span
+                  class="w-[150px] shrink-0 text-center md:text-right text-base font-medium text-text-primary"
+                  id="mat1-total">$240.00</span
+                >
+              </div>
+              <!-- Installation Supplies row -->
+              <div
+                class="flex items-center flex-col md:flex-row gap-2 border-b border-border-primary py-4"
+                id="mat2-row"
+              >
+                <div class="flex flex-1 items-center gap-2">
+                  <span
+                    class="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-brand-accent cursor-pointer"
+                    id="mat2-checkbox"
+                  >
+                    <svg
+                      class="h-3 w-3 text-white"
+                      viewBox="0 0 12 12"
+                      fill="none"
+                    >
+                      <path
+                        d="M2 6l3 3 5-5"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"></path>
+                    </svg>
+                  </span>
+                  <span class="whitespace-nowrap text-base font-medium text-text-primary"
+                    >Installation Supplies</span
+                  >
+                  <svg
+                    class="h-4 w-4 shrink-0 text-text-quaternary"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                  >
+                    <circle cx="8" cy="8" r="6.5" stroke="currentColor"
+                    ></circle>
+                    <path
+                      d="M8 7v4"
+                      stroke="currentColor"
+                      stroke-linecap="round"></path>
+                    <circle cx="8" cy="5.5" r=".5" fill="currentColor"
+                    ></circle>
+                  </svg>
+                </div>
+                <div
+                  class="flex w-[150px] shrink-0 items-baseline gap-1 whitespace-nowrap text-base font-medium"
+                >
+                  <span class="text-text-primary">$0.50</span>
+                  <span class="text-text-quaternary">×</span>
+                  <span class="text-text-primary" id="size-display-2">20 SF</span>
+                </div>
+                <span
+                  class="w-[150px] shrink-0 text-center md:text-right text-base font-medium text-text-primary"
+                  id="mat2-total">$10.00</span
+                >
+              </div>
+            </div>
+
+            <!-- LABOR GROUP -->
+            <div class="flex flex-col">
+              <!-- Group header -->
+              <div
+                class="flex items-center flex-col md:flex-row gap-2 border-b border-border-primary py-4"
+                id="labor-header"
+              >
+                <!-- Indeterminate checkbox (minus) -->
+                <span
+                  class="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-brand-accent cursor-pointer"
+                  id="labor-checkbox"
+                >
+                  <svg
+                    class="h-3 w-3 text-white"
+                    viewBox="0 0 12 12"
+                    fill="none"
+                  >
+                    <path
+                      d="M3 6h6"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"></path>
+                  </svg>
+                </span>
+                <span class="flex-1 text-xl font-semibold text-text-primary"
+                  >Labor</span
+                >
+                <span
+                  class="text-lg font-semibold text-text-primary"
+                  id="labor-total">$2,000.00</span
+                >
+              </div>
+              <!-- Installation Labor row -->
+              <div
+                class="flex items-center flex-col md:flex-row gap-2 border-b border-border-primary py-4"
+                id="labor-main-row"
+              >
+                <div class="flex flex-1 items-center gap-2">
+                  <span
+                    class="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-brand-accent cursor-pointer"
+                    id="labor-main-checkbox"
+                  >
+                    <svg
+                      class="h-3 w-3 text-white"
+                      viewBox="0 0 12 12"
+                      fill="none"
+                    >
+                      <path
+                        d="M2 6l3 3 5-5"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"></path>
+                    </svg>
+                  </span>
+                  <span class="whitespace-nowrap text-lg font-medium text-text-primary"
+                    >Installation Labor</span
+                  >
+                  <svg
+                    class="h-4 w-4 shrink-0 text-text-quaternary"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                  >
+                    <circle cx="8" cy="8" r="6.5" stroke="currentColor"
+                    ></circle>
+                    <path
+                      d="M8 7v4"
+                      stroke="currentColor"
+                      stroke-linecap="round"></path>
+                    <circle cx="8" cy="5.5" r=".5" fill="currentColor"
+                    ></circle>
+                  </svg>
+                </div>
+                <div
+                  class="flex w-[150px] shrink-0 items-baseline gap-1 whitespace-nowrap text-base font-medium"
+                >
+                  <span class="text-text-primary">$50.00</span>
+                  <span class="text-text-quaternary">×</span>
+                  <span class="text-text-primary">40 HR</span>
+                </div>
+                <span
+                  class="w-[150px] shrink-0 text-center md:text-right text-base font-medium text-text-primary"
+                  id="labor-main-total"
+                  >$2,000.00</span
+                >
+              </div>
+              <!-- Floor Removal row (optional) -->
+              <div
+                class="flex items-center flex-col md:flex-row gap-2 border-b border-border-primary py-4"
+                id="floor-row"
+              >
+                <div class="flex flex-1 items-center gap-2">
+                  <span
+                    class="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-brand-accent cursor-pointer"
+                    id="floor-checkbox"
+                  >
+                    <svg
+                      class="h-3 w-3 text-white opacity-0"
+                      viewBox="0 0 12 12"
+                      fill="none"
+                    >
+                      <path
+                        d="M2 6l3 3 5-5"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"></path>
+                    </svg>
+                  </span>
+                  <span class="whitespace-nowrap text-base font-medium text-text-primary" id="floor-label">
+                    Floor Removal
+                  </span>
+                  <svg
+                    class="h-4 w-4 shrink-0 text-text-quaternary"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                  >
+                    <circle cx="8" cy="8" r="6.5" stroke="currentColor"
+                    ></circle>
+                    <path
+                      d="M8 7v4"
+                      stroke="currentColor"
+                      stroke-linecap="round"></path>
+                    <circle cx="8" cy="5.5" r=".5" fill="currentColor"
+                    ></circle>
+                  </svg>
+                </div>
+                <div
+                  class="flex w-[150px] shrink-0 items-baseline gap-1 whitespace-nowrap text-base font-medium text-text-primary"
+                  id="floor-qty"
+                >
+                  <span>$50.00</span>
+                  <span class="no-underline">×</span>
+                  <span>10 HR</span>
+                </div>
+                <span
+                  class="w-[150px] shrink-0 text-center md:text-right text-base font-medium text-text-primary"
+                  id="labor2-total"
+                  >$0.00</span
+                >
+              </div>
+            </div>
+
+            <!-- Summary totals -->
+            <div class="flex w-full md:w-[364px] flex-col gap-4 self-end">
+              <div class="flex items-center gap-3">
+                <span class="flex-1 text-base font-medium text-text-quaternary"
+                  >Costs:</span
+                >
+                <span
+                  class="text-base font-medium text-text-primary"
+                  id="costs-total">$2,815.00</span
+                >
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="flex-1 text-base font-medium text-text-quaternary"
+                  >Markup (<span id="markup-pct-display">20</span>%):</span
+                >
+                <span
+                  class="text-base font-medium text-text-primary"
+                  id="markup-amount">$563.00</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Inputs panel (gray bg) -->
+          <div class="flex flex-col gap-2 md:gap-6 bg-bg-secondary p-5 md:p-10">
+
+            <!-- Big result numbers -->
+            <div class="flex gap-6 flex-col md:flex-row">
+              <div class="flex-1 flex flex-col items-end gap-2">
+                <p class="text-base font-medium text-text-tertiary">
+                  Contractor markup:
+                </p>
+                <p
+                  class="font-display text-4xl font-medium tracking-tight text-brand-accent"
+                  id="markup-big"
+                  style="font-variation-settings: 'opsz' 14, 'wdth' 100"
+                >
+                  $563.00
+                </p>
+              </div>
+              <div class="flex-1 flex flex-col items-end gap-2">
+                <p class="text-base font-medium text-text-tertiary">
+                  Avg. cost in Orlando, FL
+                </p>
+                <p
+                  class="font-display text-4xl font-semibold tracking-tight text-text-primary"
+                  id="avg-cost-big"
+                >
+                  $3,378.00
+                </p>
+                <div class=" flex items-center gap-3">
+                  <span class="text-sm font-medium text-text-quaternary"
+                    >Avg. cost per SF:</span
+                  >
+                  <span
+                    class="text-base font-medium text-text-primary"
+                    id="cost-per-sf">$168.90</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <hr class="border-border-primary" />
+
+            <!-- Input controls row -->
+            <div class="flex gap-6 flex-col md:flex-row">
+              <!-- Finish level -->
+              <div class="flex flex-1 flex-col gap-2">
+                <label
+                  class="flex items-center gap-1 text-sm font-medium text-text-primary"
+                >
+                  Finish level
+                  <svg
+                    class="h-4 w-4 text-text-quaternary"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                  >
+                    <circle cx="8" cy="8" r="6.5" stroke="currentColor"
+                    ></circle>
+                    <path
+                      d="M8 7v4"
+                      stroke="currentColor"
+                      stroke-linecap="round"></path>
+                    <circle cx="8" cy="5.5" r=".5" fill="currentColor"
+                    ></circle>
+                  </svg>
+                </label>
+                <div class="relative">
+                  <select
+                    id="finish-level"
+                    class="h-10 w-full appearance-none rounded-lg border border-border-primary bg-white pl-4 pr-9 text-base font-medium text-text-primary focus:outline-none focus:ring-2 focus:ring-brand-accent"
+                  >
+                    <option>Economy</option>
+                    <option selected>Mid-grade</option>
+                    <option>Premium</option>
+                    <option>Luxury</option>
+                  </select>
+                  <svg
+                    class="pointer-events-none absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-text-quaternary"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M6 9l6 6 6-6"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"></path>
+                  </svg>
+                </div>
+              </div>
+              <!-- Project size -->
+              <div class="flex flex-1 flex-col gap-2">
+                <label
+                  class="flex items-center gap-1 text-sm font-medium text-text-primary"
+                >
+                  Project size
+                  <svg
+                    class="h-4 w-4 text-text-quaternary"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                  >
+                    <circle cx="8" cy="8" r="6.5" stroke="currentColor"
+                    ></circle>
+                    <path
+                      d="M8 7v4"
+                      stroke="currentColor"
+                      stroke-linecap="round"></path>
+                    <circle cx="8" cy="5.5" r=".5" fill="currentColor"
+                    ></circle>
+                  </svg>
+                </label>
+                <div class="relative flex items-center">
+                  <input
+                    id="project-size"
+                    type="number"
+                    value="20"
+                    min="1"
+                    class="h-10 w-full rounded-lg border border-border-primary bg-white pl-4 pr-14 text-base font-medium text-text-primary focus:outline-none focus:ring-2 focus:ring-brand-accent"
+                  />
+                  <span
+                    class="pointer-events-none absolute right-4 border-l border-border-primary pl-3 text-sm font-medium text-text-primary"
+                    >SF</span
+                  >
+                </div>
+              </div>
+              <!-- Contractor markup % -->
+              <div class="flex flex-1 flex-col gap-2">
+                <label
+                  class="flex items-center gap-1 text-sm font-medium text-text-primary"
+                >
+                  Contractor markup:
+                  <svg
+                    class="h-4 w-4 text-text-quaternary"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                  >
+                    <circle cx="8" cy="8" r="6.5" stroke="currentColor"
+                    ></circle>
+                    <path
+                      d="M8 7v4"
+                      stroke="currentColor"
+                      stroke-linecap="round"></path>
+                    <circle cx="8" cy="5.5" r=".5" fill="currentColor"
+                    ></circle>
+                  </svg>
+                </label>
+                <div class="relative flex items-center">
+                  <input
+                    id="markup-pct"
+                    type="number"
+                    value="20"
+                    min="0"
+                    max="100"
+                    class="h-10 w-full rounded-lg border border-border-primary bg-white pl-4 pr-11 text-base font-medium text-text-primary focus:outline-none focus:ring-2 focus:ring-brand-accent"
+                  />
+                  <span
+                    class="pointer-events-none absolute right-4 border-l border-border-primary pl-3 text-sm font-medium text-text-primary"
+                    >%</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+<div class="p-0" id="calc-banner">
+                <div class="relative rounded-2xl overflow-hidden bg-brand-700 min-h-[100px]">
+                  <div class="absolute inset-0">
+                    <img
+                      src={contractorPhoto.src}
+                      alt=""
+                      class="w-full h-full object-cover object-right opacity-40"
+                    />
+                  </div>
+                  <div class="relative z-10 flex items-center justify-between gap-4 flex-wrap p-6">
+                    <div class="flex flex-col gap-2">
+                      <Logo />
+                      <p class="text-[20px] font-semibold text-white leading-tight max-w-xs mt-1">
+                        Create instant estimates
+                        <br />
+                        with AI and win more jobs
+                      </p>
+                    </div>
+                    <a
+                      href="/signup"
+                      class="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold rounded-xl bg-brand-accent text-white hover:bg-brand-500 transition-colors shrink-0"
+                    >
+                      Free trial
+                    </a>
+                  </div>
+                </div>
+              </div>
+        <!-- ─── INFO ALERT ─── -->
+        <div
+          class="flex gap-4 rounded-xl border border-border-primary bg-bg-secondary p-5"
+        >
+          <svg width="35" height="35" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10 13.9906C10.2421 13.9906 10.445 13.9087 10.6087 13.745C10.7725 13.5812 10.8544 13.3783 10.8544 13.1362V10.0703C10.8544 9.82824 10.7725 9.62533 10.6087 9.46157C10.445 9.29781 10.2421 9.21594 10 9.21594C9.75793 9.21594 9.55502 9.29781 9.39125 9.46157C9.2275 9.62533 9.14563 9.82824 9.14563 10.0703V13.1362C9.14563 13.3783 9.2275 13.5812 9.39125 13.745C9.55502 13.9087 9.75793 13.9906 10 13.9906ZM10 7.74157C10.2487 7.74157 10.4572 7.65745 10.6254 7.4892C10.7937 7.32095 10.8778 7.11247 10.8778 6.86375C10.8778 6.61503 10.7937 6.40655 10.6254 6.23831C10.4572 6.07006 10.2487 5.98594 10 5.98594C9.75128 5.98594 9.5428 6.07006 9.37455 6.23831C9.20631 6.40655 9.12219 6.61503 9.12219 6.86375C9.12219 7.11247 9.20631 7.32095 9.37455 7.4892C9.5428 7.65745 9.75128 7.74157 10 7.74157ZM10 18C8.89038 18 7.84925 17.7901 6.87659 17.3704C5.90394 16.9507 5.05786 16.3811 4.33837 15.6616C3.61887 14.9421 3.04927 14.0961 2.62956 13.1234C2.20985 12.1508 2 11.1096 2 10C2 8.89038 2.20985 7.84925 2.62956 6.87659C3.04927 5.90394 3.61887 5.05786 4.33837 4.33837C5.05786 3.61887 5.90394 3.04927 6.87659 2.62956C7.84925 2.20985 8.89038 2 10 2C11.1096 2 12.1508 2.20985 13.1234 2.62956C14.0961 3.04927 14.9421 3.61887 15.6616 4.33837C16.3811 5.05786 16.9507 5.90394 17.3704 6.87659C17.7901 7.84925 18 8.89038 18 10C18 11.1096 17.7901 12.1508 17.3704 13.1234C16.9507 14.0961 16.3811 14.9421 15.6616 15.6616C14.9421 16.3811 14.0961 16.9507 13.1234 17.3704C12.1508 17.7901 11.1096 18 10 18Z" fill="#9FB1A5"/>
+</svg>
+
+          <p class="text-sm font-medium leading-relaxed text-[#757573]">
+            Sheet vinyl flooring installation costs is $3.01 to $7.82/SF,
+            depending on vinyl quality, subfloor condition, room layout, and
+            flooring removal needs. Professional installation is essential for
+            proper handling and seam sealing.
+          </p>
+        </div>
+
+        <!-- ─── ARTICLE CONTENT ─── -->
+        <div class="flex flex-col gap-8 leading-relaxed text-text-secondary">
+          <div>
+            <h2
+              class="mb-4 font-display text-2xl font-semibold text-text-primary"
+            >
+              Estimate Assumptions
+            </h2>
+            <p class="text-xl">
+              This cost estimate for replacing wood siding is based on several key assumptions and average market prices. The siding quantity is calculated for an average home area of about 2000 square feet, with wood siding priced at $8.00 per square foot. <br /><br />
+The quantities of siding nails and caulk are estimated for this area, with costs of $10.00 per box and $5.00 per tube, respectively. Labor cost is based on an estimated 100 hours of work at $45.00 per hour, a rate that varies by region and contractor expertise. Delivery charges are included as standard costs. It's important to note that these figures are illustrative; actual costs can vary based on local market rates, material quality, and other factors. Additional costs such as old siding removal and surface repair are not included in this estimate.
+            </p>
+          </div>
+          <div>
+            <h2
+              class="mb-4 font-display text-2xl font-semibold text-text-primary"
+            >
+              Project Timeline
+            </h2>
+            <p class="text-xl">
+             The estimated timeline for completing the wood siding replacement project is approximately two weeks. This includes the removal of old siding, preparation of the surface, siding installation, and caulking. <br /><br />
+The actual timeline may vary depending on the client's schedule, the complexity of the work, and any unforeseen challenges that may arise during the renovation process. It is advisable to discuss the timeline in detail with your client to ensure that it aligns with their schedule.
+            </p>
+            
+          </div>
+          <div>
+            <h2
+              class="mb-4 font-display text-2xl font-semibold text-text-primary"
+            >
+              Replacing wood siding: Comprehensive Guide for Residential Contractors
+            </h2>
+            <p class="text-xl">
+              Welcome to our comprehensive guide on replacing wood siding, a resource tailor-made for residential contractors. In this blog post, we will delve into why replacing wood siding is an essential project, explore substitute materials, provide detailed construction guides, and share professional tips for successful siding replacements.
+              </p>
+          </div>
+          <div>
+            <h2
+              class="mb-4 font-display text-2xl font-semibold text-text-primary"
+            >
+Conclusion
+            </h2>
+            <p class="text-xl">
+              In conclusion, replacing wood siding is an excellent service residential contractors can provide. It increases a home's aesthetic appeal and value, presents long-term cost benefits, and with the right approach and materials, can be a highly satisfactory project. Remember the importance of awareness regarding various siding options, attention to the project's unique variables, use of high-quality materials and tools, and clear communication with clients. Your expertise and dedication to details will not only result in a superior siding job but also in satisfied clients who trust your craftsmanship.
+              </p>
+          </div>
+        </div>
+      <!-- Share this article -->
+      <div class="w-full max-w-[1440px]">
+        <div class="max-w-[768px] flex flex-wrap gap-6 items-center justify-between border-t border-neutral-200 pt-6">
+          <p class="text-lg font-medium leading-7 text-text-secondary">Share this article</p>
+          <div class="flex gap-3 items-center flex-col md:flex-row">
+            <button
+              class="flex gap-2 items-center justify-center px-3.5 w-full md:w-auto py-2.5 bg-bg-primary border border-border-primary rounded-xl text-sm font-medium leading-5 text-text-secondary hover:bg-bg-secondary transition-colors duration-150"
+              style="box-shadow: 0px 1px 2px rgba(10,13,18,0.05);"
+              onclick="navigator.clipboard.writeText(document.querySelector('[data-share-url]')?.getAttribute('data-share-url') || window.location.href)"
+            >
+              <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="8" y="8" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
+              Copy link
+            </button>
+            <span class="flex gap-3 items-center ">
+            <a data-share-twitter href="https://twitter.com/intent/tweet" target="_blank" rel="noopener" class="w-10 h-10 flex items-center justify-center bg-bg-primary border border-border-primary rounded-xl hover:bg-bg-secondary transition-colors duration-150" style="box-shadow: 0px 1px 2px rgba(10,13,18,0.05);">
+              <svg class="w-[18px] h-[18px] text-text-primary" viewBox="0 0 24 24" fill="currentColor" aria-label="Share on X">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.261 5.635 5.903-5.635zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+            <a data-share-facebook href="https://www.facebook.com/sharer/sharer.php" target="_blank" rel="noopener" class="w-10 h-10 flex items-center justify-center bg-bg-primary border border-border-primary rounded-xl hover:bg-bg-secondary transition-colors duration-150" style="box-shadow: 0px 1px 2px rgba(10,13,18,0.05);">
+              <svg class="w-[18px] h-[18px] text-text-primary" viewBox="0 0 24 24" fill="currentColor" aria-label="Share on Facebook">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+            </a>
+            <a data-share-linkedin href="https://www.linkedin.com/shareArticle" target="_blank" rel="noopener" class="w-10 h-10 flex items-center justify-center bg-bg-primary border border-border-primary rounded-xl hover:bg-bg-secondary transition-colors duration-150" style="box-shadow: 0px 1px 2px rgba(10,13,18,0.05);">
+              <svg class="w-[18px] h-[18px] text-text-primary" viewBox="0 0 24 24" fill="currentColor" aria-label="Share on LinkedIn">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </a>
+            </span>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- ─── RELATED COSTS ─── -->
+    <div class="border-t border-border-primary">
+      <div class="mx-auto flex max-w-[1440px] flex-col gap-10 px-4 md:px-8 py-16">
+        <h2
+          class="text-center font-display text-4xl font-semibold tracking-tight text-text-primary"
+        >
+          See more service costs in United States
+        </h2>
+
+        <!-- Row 1 -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <a
+            href="#"
+            class="flex flex-col gap-4 rounded-xl bg-bg-secondary p-8 transition-colors hover:bg-bg-quaternary"
+          >
+            <h3
+              class="font-display text-2xl font-medium leading-tight text-text-primary"
+            >
+              Cost to Install Vinyl Siding in Orlando, FL
+            </h3>
+            <div class="flex items-center gap-4">
+              <span
+                class="rounded-lg border border-border-primary bg-white px-3 py-2 text-sm font-medium text-text-primary"
+                >Concrete &amp; Masonry</span
+              >
+              <div class="flex items-center gap-2">
+                <svg
+                  class="h-4 w-4 text-text-quaternary opacity-50"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M8 1.5C5.5 1.5 3.5 3.5 3.5 6c0 3.5 4.5 8.5 4.5 8.5S12.5 9.5 12.5 6c0-2.5-2-4.5-4.5-4.5zm0 6a1.5 1.5 0 110-3 1.5 1.5 0 010 3z"
+                  ></path>
+                </svg>
+                <span class="text-sm font-medium text-text-secondary"
+                  >Orlando, FL</span
+                >
+              </div>
+            </div>
+          </a>
+          <a
+            href="#"
+            class="flex flex-col gap-4 rounded-xl bg-bg-secondary p-8 transition-colors hover:bg-bg-quaternary"
+          >
+            <h3
+              class="font-display text-2xl font-medium leading-tight text-text-primary"
+            >
+              Cost to Install Hardwood Flooring in Miami, FL
+            </h3>
+            <div class="flex items-center gap-4">
+              <span
+                class="rounded-lg border border-border-primary bg-white px-3 py-2 text-sm font-medium text-text-primary"
+                >Flooring</span
+              >
+              <div class="flex items-center gap-2">
+                <svg
+                  class="h-4 w-4 text-text-quaternary opacity-50"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M8 1.5C5.5 1.5 3.5 3.5 3.5 6c0 3.5 4.5 8.5 4.5 8.5S12.5 9.5 12.5 6c0-2.5-2-4.5-4.5-4.5zm0 6a1.5 1.5 0 110-3 1.5 1.5 0 010 3z"
+                  ></path>
+                </svg>
+                <span class="text-sm font-medium text-text-secondary"
+                  >Miami, FL</span
+                >
+              </div>
+            </div>
+          </a>
+          <a
+            href="#"
+            class="flex flex-col gap-4 rounded-xl bg-bg-secondary p-8 transition-colors hover:bg-bg-quaternary"
+          >
+            <h3
+              class="font-display text-2xl font-medium leading-tight text-text-primary"
+            >
+              Cost to Replace Roof Shingles in Tampa, FL
+            </h3>
+            <div class="flex items-center gap-4">
+              <span
+                class="rounded-lg border border-border-primary bg-white px-3 py-2 text-sm font-medium text-text-primary"
+                >Roofing</span
+              >
+              <div class="flex items-center gap-2">
+                <svg
+                  class="h-4 w-4 text-text-quaternary opacity-50"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M8 1.5C5.5 1.5 3.5 3.5 3.5 6c0 3.5 4.5 8.5 4.5 8.5S12.5 9.5 12.5 6c0-2.5-2-4.5-4.5-4.5zm0 6a1.5 1.5 0 110-3 1.5 1.5 0 010 3z"
+                  ></path>
+                </svg>
+                <span class="text-sm font-medium text-text-secondary"
+                  >Tampa, FL</span
+                >
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Row 2 -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <a
+            href="#"
+            class="flex flex-col gap-4 rounded-xl bg-bg-secondary p-8 transition-colors hover:bg-bg-quaternary"
+          >
+            <h3
+              class="font-display text-2xl font-medium leading-tight text-text-primary"
+            >
+              Cost to Install Kitchen Cabinets in Orlando, FL
+            </h3>
+            <div class="flex items-center gap-4">
+              <span
+                class="rounded-lg border border-border-primary bg-white px-3 py-2 text-sm font-medium text-text-primary"
+                >Cabinetry</span
+              >
+              <div class="flex items-center gap-2">
+                <svg
+                  class="h-4 w-4 text-text-quaternary opacity-50"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M8 1.5C5.5 1.5 3.5 3.5 3.5 6c0 3.5 4.5 8.5 4.5 8.5S12.5 9.5 12.5 6c0-2.5-2-4.5-4.5-4.5zm0 6a1.5 1.5 0 110-3 1.5 1.5 0 010 3z"
+                  ></path>
+                </svg>
+                <span class="text-sm font-medium text-text-secondary"
+                  >Orlando, FL</span
+                >
+              </div>
+            </div>
+          </a>
+          <a
+            href="#"
+            class="flex flex-col gap-4 rounded-xl bg-bg-secondary p-8 transition-colors hover:bg-bg-quaternary"
+          >
+            <h3
+              class="font-display text-2xl font-medium leading-tight text-text-primary"
+            >
+              Cost to Paint Interior Rooms in Orlando, FL
+            </h3>
+            <div class="flex items-center gap-4">
+              <span
+                class="rounded-lg border border-border-primary bg-white px-3 py-2 text-sm font-medium text-text-primary"
+                >Painting</span
+              >
+              <div class="flex items-center gap-2">
+                <svg
+                  class="h-4 w-4 text-text-quaternary opacity-50"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M8 1.5C5.5 1.5 3.5 3.5 3.5 6c0 3.5 4.5 8.5 4.5 8.5S12.5 9.5 12.5 6c0-2.5-2-4.5-4.5-4.5zm0 6a1.5 1.5 0 110-3 1.5 1.5 0 010 3z"
+                  ></path>
+                </svg>
+                <span class="text-sm font-medium text-text-secondary"
+                  >Orlando, FL</span
+                >
+              </div>
+            </div>
+          </a>
+          <a
+            href="#"
+            class="flex flex-col gap-4 rounded-xl bg-bg-secondary p-8 transition-colors hover:bg-bg-quaternary"
+          >
+            <h3
+              class="font-display text-2xl font-medium leading-tight text-text-primary"
+            >
+              Cost to Install Concrete Driveway in Jacksonville, FL
+            </h3>
+            <div class="flex items-center gap-4">
+              <span
+                class="rounded-lg border border-border-primary bg-white px-3 py-2 text-sm font-medium text-text-primary"
+                >Concrete</span
+              >
+              <div class="flex items-center gap-2">
+                <svg
+                  class="h-4 w-4 text-text-quaternary opacity-50"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M8 1.5C5.5 1.5 3.5 3.5 3.5 6c0 3.5 4.5 8.5 4.5 8.5S12.5 9.5 12.5 6c0-2.5-2-4.5-4.5-4.5zm0 6a1.5 1.5 0 110-3 1.5 1.5 0 010 3z"
+                  ></path>
+                </svg>
+                <span class="text-sm font-medium text-text-secondary"
+                  >Jacksonville, FL</span
+                >
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <Footer columns={footerColumns} />
+</BaseLayout>
+
+<script>
+  function initDetailDropdowns() {
+    // Guard against duplicate listener attachment (e.g. DOMContentLoaded + astro:page-load)
+    if (document.body.dataset.costCalcDetailInit === "1") return;
+    document.body.dataset.costCalcDetailInit = "1";
+
+    // Location dropdown
+    const locTrigger = document.getElementById("detail-location-trigger");
+    const locPanel = document.getElementById("detail-location-panel");
+    const locDisplay = document.getElementById("detail-location-display");
+    const locOptions = document.querySelectorAll(".detail-location-option");
+
+    if (locTrigger && locPanel && locDisplay) {
+      locTrigger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        locPanel.classList.toggle("hidden");
+        const open = !locPanel.classList.contains("hidden");
+        locTrigger.setAttribute("aria-expanded", String(open));
+      });
+
+      locOptions.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const loc = (btn as HTMLElement).dataset.location ?? "";
+          if (loc) {
+            locDisplay.textContent = loc;
+          }
+          locPanel.classList.add("hidden");
+          locTrigger.setAttribute("aria-expanded", "false");
+        });
+      });
+    }
+
+    // Project type dropdown
+    const projTrigger = document.getElementById("detail-project-trigger");
+    const projPanel = document.getElementById("detail-project-panel");
+    const projDisplay = document.getElementById("detail-project-display");
+    const projOptions = document.querySelectorAll(".detail-project-option");
+
+    if (projTrigger && projPanel && projDisplay) {
+      projTrigger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        projPanel.classList.toggle("hidden");
+        const open = !projPanel.classList.contains("hidden");
+        projTrigger.setAttribute("aria-expanded", String(open));
+      });
+
+      projOptions.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const label = (btn as HTMLElement).dataset.label ?? "";
+          if (label) {
+            projDisplay.textContent = label;
+          }
+          projPanel.classList.add("hidden");
+          projTrigger.setAttribute("aria-expanded", "false");
+        });
+      });
+    }
+
+    document.addEventListener("click", () => {
+      if (locPanel && locTrigger && !locPanel.classList.contains("hidden")) {
+        locPanel.classList.add("hidden");
+        locTrigger.setAttribute("aria-expanded", "false");
+      }
+      if (projPanel && projTrigger && !projPanel.classList.contains("hidden")) {
+        projPanel.classList.add("hidden");
+        projTrigger.setAttribute("aria-expanded", "false");
+      }
+    });
+    locPanel?.addEventListener("click", (e) => e.stopPropagation());
+    projPanel?.addEventListener("click", (e) => e.stopPropagation());
+  }
+
+  function initEstimateCalculator() {
+    if (document.body.dataset.costCalcEstimateInit === "1") return;
+    document.body.dataset.costCalcEstimateInit = "1";
+
+    const sizeInput = document.getElementById("project-size");
+    const markupInput = document.getElementById("markup-pct");
+    const finishSelect = document.getElementById("finish-level");
+
+    const sizeDisplay1 = document.getElementById("size-display-1");
+    const sizeDisplay2 = document.getElementById("size-display-2");
+
+    const mat1TotalEl = document.getElementById("mat1-total");
+    const mat2TotalEl = document.getElementById("mat2-total");
+    const materialsTotalEl = document.getElementById("materials-total");
+    const laborTotalEl = document.getElementById("labor-total");
+    const laborMainTotalEl = document.getElementById("labor-main-total");
+    const laborFloorTotalEl = document.getElementById("labor2-total");
+    const costsTotalEl = document.getElementById("costs-total");
+
+    const markupPctDisplay = document.getElementById("markup-pct-display");
+    const markupAmountEl = document.getElementById("markup-amount");
+    const markupBigEl = document.getElementById("markup-big");
+    const avgCostBigEl = document.getElementById("avg-cost-big");
+    const costPerSfEl = document.getElementById("cost-per-sf");
+
+    if (
+      !(sizeInput instanceof HTMLInputElement) ||
+      !(markupInput instanceof HTMLInputElement) ||
+      !(finishSelect instanceof HTMLSelectElement) ||
+      !sizeDisplay1 ||
+      !sizeDisplay2 ||
+      !mat1TotalEl ||
+      !mat2TotalEl ||
+      !materialsTotalEl ||
+      !laborTotalEl ||
+      !laborMainTotalEl ||
+      !laborFloorTotalEl ||
+      !costsTotalEl ||
+      !markupPctDisplay ||
+      !markupAmountEl ||
+      !markupBigEl ||
+      !avgCostBigEl ||
+      !costPerSfEl
+    ) {
+      return;
+    }
+
+    const MAT1_PRICE_PER_SF = 12; // Sheet vinyl material
+    const MAT2_PRICE_PER_SF = 0.5; // Installation supplies
+    const LABOR_TOTAL_BASE = 2000; // From 50 × 40 HR
+    const FLOOR_REMOVAL_BASE = 500; // From 50 × 10 HR
+    const EXTRA_FIXED_COST = 565; // Matches initial Costs total at size=20
+    const BASE_SIZE = 20;
+
+    const currency = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+
+    function formatCurrency(value) {
+      return currency.format(value);
+    }
+
+    const floorCheckbox = document.getElementById("floor-checkbox");
+    const floorRow = document.getElementById("floor-row");
+
+    const mat1Row = document.getElementById("mat1-row");
+    const mat2Row = document.getElementById("mat2-row");
+    const laborMainRow = document.getElementById("labor-main-row");
+
+    const mat1Checkbox = document.getElementById("mat1-checkbox");
+    const mat2Checkbox = document.getElementById("mat2-checkbox");
+    const laborMainCheckbox = document.getElementById("labor-main-checkbox");
+
+    const materialsHeader = document.getElementById("materials-header");
+    const materialsCheckbox = document.getElementById("materials-checkbox");
+    const laborHeader = document.getElementById("labor-header");
+    const laborCheckbox = document.getElementById("labor-checkbox");
+
+    let mat1Included = true;
+    let mat2Included = true;
+    let laborMainIncluded = true;
+    let floorIncluded = false;
+
+    function getFinishMultiplier() {
+      const value = finishSelect.value;
+      switch (value) {
+        case "Economy":
+          return 0.9;
+        case "Premium":
+          return 1.15;
+        case "Luxury":
+          return 1.3;
+        default:
+          return 1; // Mid-grade
+      }
+    }
+
+    function recalc() {
+      let size = parseFloat(sizeInput.value);
+      if (!Number.isFinite(size) || size <= 0) size = BASE_SIZE;
+
+      // Update size displays (e.g., "20 SF")
+      const sizeLabel = `${size} SF`;
+      sizeDisplay1.textContent = sizeLabel;
+      sizeDisplay2.textContent = sizeLabel;
+
+      // Base material totals, scaled by project size
+      const mat1Base = MAT1_PRICE_PER_SF * size;
+      const mat2Base = MAT2_PRICE_PER_SF * size;
+
+      const finishMultiplier = getFinishMultiplier();
+
+      // Apply finish multiplier to materials
+      const mat1AdjBase = mat1Base * finishMultiplier;
+      const mat2AdjBase = mat2Base * finishMultiplier;
+
+      const mat1Adj = mat1Included ? mat1AdjBase : 0;
+      const mat2Adj = mat2Included ? mat2AdjBase : 0;
+      const materialsTotal = mat1Adj + mat2Adj;
+
+      // Labor + optional floor removal + fixed extra costs
+      const laborMainAdjBase = LABOR_TOTAL_BASE * finishMultiplier;
+      const laborMainAdj = laborMainIncluded ? laborMainAdjBase : 0;
+      const floorAdj = floorIncluded ? FLOOR_REMOVAL_BASE * finishMultiplier : 0;
+      const laborTotal = laborMainAdj + floorAdj;
+      const extraCost = EXTRA_FIXED_COST * finishMultiplier;
+
+      const costsTotal = materialsTotal + laborTotal + extraCost;
+
+      // Markup
+      let markupPct = parseFloat(markupInput.value);
+      if (!Number.isFinite(markupPct) || markupPct < 0) markupPct = 0;
+      if (markupPct > 100) markupPct = 100;
+      markupInput.value = String(markupPct);
+      markupPctDisplay.textContent = String(markupPct);
+
+      const markupAmount = (costsTotal * markupPct) / 100;
+      const totalWithMarkup = costsTotal + markupAmount;
+      const costPerSf = size > 0 ? totalWithMarkup / size : 0;
+
+      // Write numbers back to the DOM
+      mat1TotalEl.textContent = formatCurrency(mat1Adj);
+      mat2TotalEl.textContent = formatCurrency(mat2Adj);
+      materialsTotalEl.textContent = formatCurrency(materialsTotal);
+      laborMainTotalEl.textContent = formatCurrency(laborMainAdj);
+      laborFloorTotalEl.textContent = formatCurrency(floorAdj);
+      laborTotalEl.textContent = formatCurrency(laborTotal);
+      costsTotalEl.textContent = formatCurrency(costsTotal);
+
+      markupAmountEl.textContent = formatCurrency(markupAmount);
+      markupBigEl.textContent = formatCurrency(markupAmount);
+      avgCostBigEl.textContent = formatCurrency(totalWithMarkup);
+      costPerSfEl.textContent = formatCurrency(costPerSf);
+
+      updateCheckboxVisuals();
+    }
+
+    function updateCheckboxVisuals() {
+      function applyState(checkboxEl, included) {
+        if (!checkboxEl) return;
+        checkboxEl.classList.toggle("bg-brand-accent", included);
+        checkboxEl.classList.toggle("border", !included);
+        checkboxEl.classList.toggle("border-border-primary", !included);
+        const icon = checkboxEl.querySelector("svg");
+        if (icon) {
+          icon.classList.toggle("opacity-0", !included);
+        }
+      }
+
+      function applyRow(rowEl, included) {
+        if (!rowEl) return;
+        rowEl.classList.toggle("opacity-60", !included);
+      }
+
+      applyState(mat1Checkbox, mat1Included);
+      applyRow(mat1Row, mat1Included);
+
+      applyState(mat2Checkbox, mat2Included);
+      applyRow(mat2Row, mat2Included);
+
+      applyState(laborMainCheckbox, laborMainIncluded);
+      applyRow(laborMainRow, laborMainIncluded);
+
+      if (floorCheckbox) {
+        applyState(floorCheckbox, floorIncluded);
+      }
+      applyRow(floorRow, floorIncluded);
+
+      // Group checkbox states
+      const materialsAll = mat1Included && mat2Included;
+      const materialsAny = mat1Included || mat2Included;
+      if (materialsCheckbox) {
+        materialsCheckbox.classList.toggle("bg-brand-accent", materialsAll);
+        materialsCheckbox.classList.toggle("border", !materialsAll);
+        materialsCheckbox.classList.toggle("border-border-primary", !materialsAll);
+        const icon = materialsCheckbox.querySelector("svg");
+        if (icon) {
+          icon.classList.toggle("opacity-0", !materialsAll);
+        }
+      }
+      const laborAll = laborMainIncluded && floorIncluded;
+      const laborAny = laborMainIncluded || floorIncluded;
+      if (laborCheckbox) {
+        laborCheckbox.classList.toggle("bg-brand-accent", laborAll);
+        laborCheckbox.classList.toggle("border", !laborAll);
+        laborCheckbox.classList.toggle("border-border-primary", !laborAll);
+        const icon = laborCheckbox.querySelector("svg");
+        if (icon) {
+          // Show minus when some but not all, hide when none, show full when all
+          icon.classList.toggle("opacity-0", !laborAny);
+        }
+      }
+    }
+
+    sizeInput.addEventListener("input", recalc);
+    markupInput.addEventListener("input", recalc);
+    finishSelect.addEventListener("change", recalc);
+
+    function attachToggle(rowEl, getIncluded, setIncluded) {
+      if (!rowEl) return;
+      rowEl.addEventListener("click", () => {
+        const next = !getIncluded();
+        setIncluded(next);
+        recalc();
+      });
+    }
+
+    attachToggle(mat1Row, () => mat1Included, (v) => (mat1Included = v));
+    attachToggle(mat2Row, () => mat2Included, (v) => (mat2Included = v));
+    attachToggle(laborMainRow, () => laborMainIncluded, (v) => (laborMainIncluded = v));
+    attachToggle(floorRow, () => floorIncluded, (v) => (floorIncluded = v));
+
+    // Group header toggles: Materials (all/none), Labor (all/none)
+    if (materialsHeader) {
+      materialsHeader.addEventListener("click", (event) => {
+        const next = !(mat1Included && mat2Included);
+        mat1Included = next;
+        mat2Included = next;
+        recalc();
+      });
+    }
+
+    if (laborHeader) {
+      laborHeader.addEventListener("click", () => {
+        const next = !(laborMainIncluded && floorIncluded);
+        laborMainIncluded = next;
+        floorIncluded = next;
+        recalc();
+      });
+    }
+
+    recalc();
+  }
+
+  function initCostCalcDetailPage() {
+    initDetailDropdowns();
+    initEstimateCalculator();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initCostCalcDetailPage);
+  } else {
+    initCostCalcDetailPage();
+  }
+  document.addEventListener("astro:page-load", initCostCalcDetailPage);
+</script>
+

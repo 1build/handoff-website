@@ -1,0 +1,61 @@
+---
+import DetailRowClientManagement from "./DetailRowClientManagement.astro";
+import transcribingImg from "@/assets/images/AI Transcription/Transcribe on desktop@2x.webp";
+import shareDocImg from "@/assets/images/AI Transcription/Share document@2x.webp";
+import transcribingImg2 from "@/assets/images/AI Transcription/Transcribing@2x.webp";
+
+const rows = [
+  {
+    eyebrow: "Audio-powered documents",
+    title: "Say It Once. Let AI Write It Up.",
+    description: "Contractors already explain what needs to happen, on-site, out loud, every day.\n\nInstead of writing it all down after the fact, Handoff uses AI to turn that voice note into a finished document you can send to crews, subs, or clients.\n\nYou speak. AI handles the formatting, structure, and delivery.",
+    reverse: false,
+    visualType: "desktop" as const,
+    visualImages: [transcribingImg],
+    placeholder: "Screenshot of AI transcription in action",
+  },
+  {
+    eyebrow: "Built for real workflows",
+    title: "Four ways your voice becomes a document",
+    description: "Walkthrough → Scope of Work\nRecord your notes while on a client walkthrough. Handoff builds a scope that's clear, shareable, and aligned with your customers' expectations.\n\nEnd of Day → Daily Log\nNarrate what happened before you leave the jobsite. AI creates a daily log your client or supervisor can read that evening.\n\nSite Visit → Crew Checklist\nWhile on a site visit, record what your crew needs to tackle next. Handoff builds a checklist you can text, so nothing gets missed.\n\nClient Meeting → Punchlist\nHit record while you meet your client. Call out asks while walking the job. Handoff turns your voice into a punchlist that keeps things moving.",
+    reverse: true,
+    visualType: "phones" as const,
+    visualImages: [shareDocImg],
+    placeholder: "Screenshot of workflow use cases",
+  },
+  {
+    eyebrow: "Organized, shareable, and ready to go",
+    title: "Voice docs that live in your project",
+    description: "Voice docs are automatically saved under your project and ready to:\n\nEdit or adjust on the fly\n\nTranslate into Spanish\n\nShare by text or email\n\nExport as a PDF\n\nIt's one workflow, built for how you actually work.",
+    reverse: false,
+    visualType: "desktop" as const,
+    visualImages: [transcribingImg2],
+    placeholder: "Screenshot of document sharing options",
+  },
+  {
+    eyebrow: "Built for speed and accuracy",
+    title: "Your voice becomes the system, not the bottleneck",
+    description: "With Audio-to-Docs, you skip the late-night typing and capture every detail while it's still fresh.\n\nCreate cleaner handoffs to crews and clients. Get professional results without starting from scratch.",
+    reverse: true,
+    visualType: "desktop" as const,
+    visualImages: [transcribingImg],
+    placeholder: "Screenshot of completed AI-generated document",
+  },
+];
+---
+
+<section class="relative z-[2] px-4 pb-4">
+  <div class="max-w-[1920px] mx-auto bg-white rounded-3xl py-16 lg:py-24 overflow-hidden flex flex-col gap-20 lg:gap-40">
+    {rows.map((r) => (
+      <DetailRowClientManagement
+        eyebrow={r.eyebrow}
+        title={r.title}
+        description={r.description}
+        reverse={r.reverse}
+        visualType={r.visualType}
+        visualImages={r.visualImages}
+        placeholder={r.placeholder}
+      />
+    ))}
+  </div>
+</section>

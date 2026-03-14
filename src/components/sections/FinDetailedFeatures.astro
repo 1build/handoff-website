@@ -1,63 +1,74 @@
 ---
 import DetailRow from "./DetailRow.astro";
+import proposalSignatureImg from "@/assets/images/Proposals/Proposal + Signature@2x.webp";
+import attachmentsImg from "@/assets/images/Invoice/Attachments@2x.webp";
+import financialVisibilityImg from "@/assets/images/Client Financing/Estimate Financing approved@2x.webp";
+import paidAsYouGoImg from "@/assets/images/Invoice/Paid as you go@2x.webp";
 
 const rows = [
   {
     eyebrow: "Estimate to payment automation",
     title: "Get paid while others are still bidding",
-    description: "Connect your entire financial workflow from first quote to final payment.",
+    description: "Connect your entire financial workflow from first quote to final payment. No retyping numbers from old spreadsheets.",
     bullets: [
-      "No retyping numbers from old spreadsheets",
       "Payment tracking happens behind the scenes",
       "You focus on building, not billing",
     ],
     reverse: false,
     visualType: "desktop" as const,
-    placeholder: "Screenshot of payment automation workflow",
+    visualImages: [proposalSignatureImg],
+    imageFill: true,
+    ctaHref: "/invoicing",
   },
   {
-    eyebrow: "Payment schedules & milestone billing",
+    eyebrow: "schedules & milestone billing",
     title: "Money flows throughout the project",
     description: "Set payment schedules once and get paid throughout the project lifecycle. Handoff automates invoices at each phase.",
     bullets: [
-      "Define your milestones: deposit, framing, completion — whatever fits your projects",
+      "Cash comes in at every phase you set",
       "Invoices go out automatically when milestones hit",
-      "Get paid as work progresses instead of financing the project yourself",
+      "Get paid as work progresses instead of financing the project",
     ],
     reverse: true,
-    visualType: "phones" as const,
-    placeholder: "Screenshot of milestone billing setup",
+    visualType: "desktop" as const,
+    visualImages: [paidAsYouGoImg],
+    imageFill: true,
+    ctaHref: "/invoicing",
   },
   {
-    eyebrow: "Pricing standardization & markup logic",
+    eyebrow: "Pricing & markup logic",
     title: "Keep pricing consistent and profitable",
-    description: "Set your markup rules once and every job automatically protects your margins — whether you're pricing your first estimate of the day or your fifteenth.",
+    description: "Set your markup rules once and every job automatically protects your margins, whether you're pricing your first estimate of the day or your fifteenth.",
     bullets: [
-      "Every estimate includes your markup automatically — no more forgetting profit margins",
+      "Every estimate includes your markup automatically",
       "Consistent pricing across all projects and estimators",
       "Protect against accidentally underpricing work",
     ],
     reverse: false,
-    visualType: "isometric" as const,
-    placeholder: "Screenshot of pricing standardization rules",
+    visualType: "desktop" as const,
+    visualImages: [attachmentsImg],
+    imageFill: true,
+    ctaHref: "/invoicing",
   },
   {
     eyebrow: "Financial visibility",
     title: "See the complete financial picture",
-    description: "Track estimates, costs, invoices, and payments in real-time across every project — synced with QuickBooks.",
+    description: "Track estimates, costs, invoices, and payments in real-time across every project, all in one dashboard.",
     bullets: [
       "See exactly which projects are making money",
       "Know if projects are going over budget while there's time to fix them",
       "Track which clients owe money and when payments are due",
     ],
     reverse: true,
-    visualType: "phones" as const,
-    placeholder: "Screenshot of financial reporting dashboard",
+    visualType: "desktop" as const,
+    visualImages: [financialVisibilityImg],
+    imageFill: true,
+    ctaHref: "/homeowner-financing",
   },
 ];
 ---
 
-<section class="relative z-[2] px-4 pb-4 bg-brand-800">
+<section class="relative z-[2] px-4">
   <div class="max-w-[1920px] mx-auto bg-white rounded-3xl py-16 lg:py-24 overflow-hidden flex flex-col gap-20 lg:gap-40">
     {rows.map((r) => (
       <DetailRow
@@ -67,7 +78,10 @@ const rows = [
         bullets={r.bullets}
         reverse={r.reverse}
         visualType={r.visualType}
+        visualImages={r.visualImages}
+        imageFill={r.imageFill}
         placeholder={r.placeholder}
+        ctaHref={r.ctaHref}
       />
     ))}
   </div>

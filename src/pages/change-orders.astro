@@ -1,0 +1,35 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/sections/Header.astro";
+import HeroSection from "@/components/sections/HeroSectionChangeOrders.astro";
+import FeaturesSection from "@/components/sections/FeaturesSection.astro";
+import DetailedFeatures from "@/components/sections/DetailedFeaturesChangeOrders.astro";
+import OverviewSection from "@/components/sections/OverviewSection.astro";
+import FaqSection from "@/components/sections/FaqSection.astro";
+import SolutionsCta from "@/components/sections/SolutionsCta.astro";
+import Footer from "@/components/sections/Footer.astro";
+import { navItems, footerColumns, faqItems } from "@/lib/navigation";
+import { getPageSeo } from "@/lib/seo-pages";
+import { getCanonicalUrl, getFaqPageSchema } from "@/lib/seo";
+
+const seo = getPageSeo(Astro.url.pathname);
+seo.jsonLd = [getFaqPageSchema(faqItems, getCanonicalUrl(Astro.url.pathname))];
+---
+
+<BaseLayout {...seo}>
+  <Header navItems={navItems} />
+  <HeroSection />
+  <FeaturesSection />
+  <DetailedFeatures />
+  <!-- <OverviewSection /> -->
+  <FaqSection items={faqItems} />
+  <SolutionsCta />
+  <Footer columns={footerColumns} />
+</BaseLayout>
+
+<script>
+  import { initScrollAnimations } from "@/lib/animations";
+  import { initHeroScroll } from "@/lib/heroScroll";
+  initScrollAnimations();
+  initHeroScroll();
+</script>

@@ -1,0 +1,219 @@
+---
+import avatar10 from "@/assets/images/avatar10.png";
+import storyimg from "@/assets/images/storyimg.png";
+import storyimg2 from "@/assets/images/michael.webp";
+import michaelAvatar from "@/assets/images/michaelavatar.webp";
+
+const stories = [
+  {
+    headline: "How EJ Elliot Landed a $118,000 Remodel in His First Month",
+    highlight: "$118,000",
+    description:
+      "EJ didn't have a back-office team. He had Handoff. His AI Teammate handled the estimate and proposal so he could go from first contact to signed contract in under 24 hours.",
+    name: "EJ Elliot",
+    company: "Bellamore Contracting & Renovations, San Antonio, TX",
+    avatar: avatar10.src,
+    initials: "EJ",
+    color: "#183f2e",
+    videoPoster: storyimg.src,
+    videoUrl: "https://s3.us-west-2.amazonaws.com/handoffai.production.1build.com/public/public-videos/EJElliot+Compressed.mp4",
+  },
+  {
+    headline: "See why Michael Galante finds Handoff to be “revolutionary”for his business.",
+    highlight: "Handoff",
+    description:
+      "After signing up for Handoff, Michael discovered that our product is so powerful that it's impossible to go back to running a contracting business without our AI.",
+    name: "Michael Galante",
+    company: "Highland Services",
+    avatar: michaelAvatar.src,
+    initials: "SC",
+    color: "#235f40",
+    videoPoster: storyimg2.src,
+    videoUrl: "/Michael-Galante.mp4",
+  },
+];
+---
+
+<section
+  class="relative z-[2] py-12 md:pt-16 lg:pt-20"
+  data-animate="fade-up"
+  data-customer-story-section
+>
+  <div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8">
+    {stories.length > 0 && (
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <!-- Left: headline, description, author, nav (first on mobile) -->
+        <div class="order-1 lg:order-1">
+          {stories.map((story, index) => (
+            <div
+              class={`customer-story-slide ${index === 0 ? "" : "hidden"}`}
+              data-slide
+              data-slide-index={index}
+            >
+              <h2 class="font-display text-2xl  md:text-5xl font-semibold leading-tight text-text-primary mb-4">
+                {story.headline.split(story.highlight)[0]}
+                <span class="font-bold">{story.highlight}</span>
+                {story.headline.split(story.highlight)[1]}
+              </h2>
+              <p class="text-base text-text-secondary leading-relaxed mb-6">
+                {story.description}
+              </p>
+              <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div class="flex items-center gap-3" data-story-author data-story-index={index}>
+                  {story.avatar ? (
+                    <img
+                      src={story.avatar}
+                      alt={story.name}
+                      class="w-12 h-12 rounded-full object-cover shrink-0 story-avatar"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div
+                      class="w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold text-sm shrink-0 story-avatar"
+                      style={`background-color: ${story.color}`}
+                    >
+                      {story.initials}
+                    </div>
+                  )}
+                  <div class="min-w-0">
+                    <p class="text-base font-semibold text-text-primary leading-5">
+                      {story.name}
+                    </p>
+                    <p class="text-sm text-text-tertiary">{story.company}</p>
+                  </div>
+                </div>
+                <!-- Slide controls: below author on mobile, to the right on desktop -->
+                <div class="flex items-center gap-2">
+                  <button
+                    type="button"
+                    aria-label="Previous story"
+                    data-customer-story-prev
+                    class="w-12 h-12 rounded-full border border-neutral-300 bg-white flex items-center justify-center text-neutral-600 hover:bg-neutral-50 transition-colors"
+                  >
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M15 8H1M1 8L8 15M1 8L8 1" stroke="#A4A7AE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+                  </button>
+                  <button
+                    type="button"
+                    aria-label="Next story"
+                    data-customer-story-next
+                    class="w-12 h-12 rounded-full border border-neutral-300 bg-white flex items-center justify-center text-neutral-600 hover:bg-neutral-50 transition-colors"
+                  >
+                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 8H15M15 8L8 1M15 8L8 15" stroke="#A4A7AE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="order-2 lg:order-2">
+          {stories.map((story, index) => (
+            <div
+              class={`customer-story-slide ${index === 0 ? "" : "hidden"}`}
+              data-slide
+              data-slide-index={index}
+            >
+              <div
+                class="block relative md:min-h-[600px] rounded-2xl overflow-hidden border border-neutral-200 shadow-sm aspect-video w-full bg-[#b8d4c8] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50"
+                aria-label="Play video: {story.name}"
+                data-story-media
+                data-story-index={index}
+                data-video-url={story.videoUrl}
+              >
+                {story.videoPoster ? (
+                  <img
+                    src={story.videoPoster}
+                    alt=""
+                    class="w-full h-full object-cover story-poster"
+                    loading="lazy"
+                    data-poster
+                  />
+                ) : null}
+                <div class="absolute inset-0 flex items-center justify-center story-play-overlay" data-play-overlay>
+                  <span
+                    class="flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white/30"
+                    aria-hidden="true"
+                  >
+                    <span
+                      class="w-0 h-0 ml-1 border-y-[10px] border-y-transparent border-l-[16px] border-l-white sm:border-y-[12px] sm:border-l-[20px] story-play-icon"
+                      aria-hidden="true"
+                    />
+                  </span>
+                </div>
+                {story.videoUrl && story.videoUrl !== "#" ? (
+                  story.videoUrl.endsWith(".webp") ? (
+                    <img
+                      src={story.videoUrl}
+                      alt=""
+                      class="absolute inset-0 w-full h-full object-cover hidden story-media"
+                      data-media
+                    />
+                  ) : (
+                    <video
+                      src={story.videoUrl}
+                      class="absolute inset-0 w-full h-full object-cover hidden story-media"
+                      controls
+                      data-media
+                    />
+                  )
+                ) : null}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+  </div>
+</section>
+
+<script>
+  function initCustomerStoryCarousel() {
+    const section = document.querySelector("[data-customer-story-section]");
+    if (!section) return;
+    const prevBtns = section.querySelectorAll("[data-customer-story-prev]");
+    const nextBtns = section.querySelectorAll("[data-customer-story-next]");
+    const slides = section.querySelectorAll("[data-slide]");
+    const total = Math.max(1, slides.length / 2);
+    let current = 0;
+
+    function goTo(index: number) {
+      current = (index + total) % total;
+      section.querySelectorAll(".customer-story-slide").forEach((el) => el.classList.add("hidden"));
+      section.querySelectorAll(`[data-slide-index="${current}"]`).forEach((el) => el.classList.remove("hidden"));
+    }
+
+    prevBtns.forEach((btn) => btn.addEventListener("click", () => goTo(current - 1)));
+    nextBtns.forEach((btn) => btn.addEventListener("click", () => goTo(current + 1)));
+    goTo(0);
+
+    // Play media on click: hide poster + play icon + avatar, show and play video/img
+    section.querySelectorAll("[data-story-media]").forEach((block) => {
+      block.addEventListener("click", () => {
+        const url = block.getAttribute("data-video-url");
+        if (!url || url === "#") return;
+        const index = block.getAttribute("data-story-index");
+        const poster = block.querySelector("[data-poster]");
+        const overlay = block.querySelector("[data-play-overlay]");
+        const media = block.querySelector("[data-media]");
+        if (poster) (poster as HTMLElement).classList.add("hidden");
+        if (overlay) (overlay as HTMLElement).classList.add("hidden");
+        if (media) {
+          (media as HTMLElement).classList.remove("hidden");
+          if (media.tagName === "VIDEO") (media as HTMLVideoElement).play();
+        }
+        const authorBlock = section.querySelector(`[data-story-author][data-story-index="${index}"]`);
+        if (authorBlock) {
+          authorBlock.querySelectorAll(".story-avatar").forEach((el) => (el as HTMLElement).classList.add("hidden"));
+        }
+      });
+    });
+  }
+  initCustomerStoryCarousel();
+  document.addEventListener("astro:page-load", initCustomerStoryCarousel);
+</script>

@@ -3,17 +3,25 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import Header from "@/components/sections/Header.astro";
 import PricingSection from "@/components/sections/PricingSection.astro";
 import PricingCompareTable from "@/components/sections/PricingCompareTable.astro";
-import SupplierLogosSection from "@/components/sections/SupplierLogosSection.astro";
 import PricingMetricsSection from "@/components/sections/PricingMetricsSection.astro";
 import Footer from "@/components/sections/Footer.astro";
-import { navItems, footerColumns } from "@/lib/navigation";
+import TestimonialsGridSectionPricing from "@/components/sections/TestimonialsGridSectionPricing.astro";
+import FaqSection from "@/components/sections/FaqSection.astro";
+import CtaSystemsSection from "@/components/sections/CtaSystemsSection.astro";
+import { navItems, footerColumns, pricingFaqItems } from "@/lib/navigation";
+import { getPageSeo } from "@/lib/seo-pages";
+import { getCanonicalUrl, getFaqPageSchema } from "@/lib/seo";
+
+const seo = getPageSeo(Astro.url.pathname);
+seo.jsonLd = [getFaqPageSchema(pricingFaqItems, getCanonicalUrl(Astro.url.pathname))];
 ---
 
-<BaseLayout title="Pricing — Handoff">
+<BaseLayout {...seo}>
   <Header navItems={navItems} />
   <PricingSection />
   <PricingCompareTable />
-  <SupplierLogosSection />
-  <PricingMetricsSection />
+  <TestimonialsGridSectionPricing />
+  <FaqSection items={pricingFaqItems} />
+  <CtaSystemsSection />
   <Footer columns={footerColumns} />
 </BaseLayout>

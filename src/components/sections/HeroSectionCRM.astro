@@ -1,0 +1,60 @@
+---
+import bgPattern from "@/assets/images/background-pattern.png";
+import heroGlow from "@/assets/images/hero-glow-line.svg";
+import heroImage from "@/assets/images/Heros/CRM Hub.webp";
+
+interface Props { headingLevel?: 1 | 2 }
+const { headingLevel = 1 } = Astro.props;
+const HeadingTag = headingLevel === 2 ? "h2" : "h1";
+
+const eyebrow = "Construction-Trained AI for Sales and Lead Intake";
+const titleStart = "Never lose money to ";
+const titleHighlight = "slow estimates";
+const description = "Turn site visits into signed contracts faster than any competitor. Handoff captures every lead and generates complete estimates using trained AI built for construction.";
+const ctaText = "See how it works";
+---
+
+<section id="hero" class="relative pt-20">
+  <!-- Background grid pattern -->
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 max-w-full w-[1920px] h-[1440px] pointer-events-none z-0">
+    <img src={bgPattern.src} alt="" class="w-full h-full block object-contain object-top" />
+  </div>
+
+  <!-- Glow line -->
+  <div class="absolute max-w-full -top-[24%] -left-[14%] -right-[14%] -bottom-[24%] pointer-events-none z-[1]">
+    <img src={heroGlow.src} alt="" class="w-full h-full block" />
+  </div>
+
+  <!-- Content -->
+  <div id="hero-container" class="relative z-[1] max-w-[1440px] mx-auto px-4 md:px-8 py-24 flex flex-col lg:flex-row items-center gap-12 lg:gap-16 will-change-[opacity,transform]">
+    <div class="flex-1 flex flex-col">
+      <p class="font-mono text-sm font-semibold leading-6 tracking-[0.56px] uppercase text-text-on-brand-tertiary mb-3">
+        {eyebrow}
+      </p>
+      <HeadingTag class="font-display text-4xl sm:text-[44px] lg:text-[60px] font-medium leading-[1.2] lg:leading-[72px] tracking-[-1.2px] text-white mb-6">
+        {titleStart}<span class="text-text-highlight">{titleHighlight}</span>
+      </HeadingTag>
+      <p class="text-lg lg:text-xl font-medium leading-[30px] text-white max-w-full md:max-w-[560px]">
+        {description}
+      </p>
+      <div class="mt-12">
+
+        <a href="https://app.handoff.ai/sign-up/" class="inline-flex w-full md:w-auto items-center justify-center gap-1.5 px-5 py-3 text-base font-medium leading-6 rounded-xl transition-all duration-150 whitespace-nowrap bg-black/40 backdrop-blur-md text-white hover:bg-black/30">
+
+          {ctaText}
+<span class="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_0px_0px_1px_rgba(10,13,18,0.18),inset_0px_-2px_0px_0px_rgba(10,13,18,0.05)]"></span> </a>
+      </div>
+    </div>
+
+    <!-- Hero visual -->
+    <div class="flex-1 relative z-[2]">
+      <img
+        src={heroImage.src}
+        alt="CRM Pipeline Management"
+        class="w-full h-auto rounded-3xl"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+  </div>
+</section>

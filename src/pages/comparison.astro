@@ -1,0 +1,36 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getPageSeo } from "@/lib/seo-pages";
+import Header from "@/components/sections/Header.astro";
+import ComparisonHero from "@/components/sections/ComparisonHero.astro";
+import ComparisonGrid from "@/components/sections/ComparisonGrid.astro";
+import ComparisonReviewsSimple from "@/components/sections/ComparisonReviewsSimple.astro";
+import AutomateSection from "@/components/sections/AutomateSection.astro";
+import FaqSection from "@/components/sections/FaqSection.astro";
+import Footer from "@/components/sections/Footer.astro";
+import { navItems, footerColumns } from "@/lib/navigation";
+
+const seo = getPageSeo(Astro.url.pathname);
+---
+
+<BaseLayout {...seo}>
+  <Header navItems={navItems} />
+  <ComparisonHero />
+  <ComparisonGrid />
+  <ComparisonReviewsSimple />
+  <AutomateSection />
+  <FaqSection items={[
+    { question: "How is Handoff different from other estimating software?", answer: "Handoff is purpose-built for residential remodelers. It combines AI-powered estimating, branded proposals, client management, and project tracking in one place — without the complexity or price tag of enterprise tools." },
+    { question: "Can I import data from my current software?", answer: "Yes. Handoff supports CSV imports and direct connections to common tools. Your pricing, templates, and client history come with you." },
+    { question: "Does Handoff work for specialty trades?", answer: "Yes — whether you're a general contractor, kitchen and bath remodeler, painter, or handyman, Handoff adapts to your trade's pricing model and scope of work." },
+    { question: "Is there a free trial?", answer: "Yes. You can try Handoff free for 14 days, no credit card required. You'll have full access to every feature so you can see exactly how it fits your workflow." },
+    { question: "What kind of support is included?", answer: "Every plan includes live chat support and onboarding help. Higher tiers include dedicated account management and priority response times." },
+    { question: "How long does it take to get up and running?", answer: "Most contractors complete setup in under an hour. Our onboarding team walks you through importing your pricing and sending your first estimate." },
+  ]} />
+  <Footer columns={footerColumns} />
+</BaseLayout>
+
+<script>
+  import { initScrollAnimations } from "@/lib/animations";
+  initScrollAnimations();
+</script>

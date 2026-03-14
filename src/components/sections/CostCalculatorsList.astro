@@ -1,0 +1,165 @@
+---
+import { Image } from "astro:assets";
+import Logo from "@/components/ui/Logo.astro";
+import contractorPhoto from "@/assets/images/cont-img.png";
+import { calculators } from "@/lib/construction-costs-data";
+
+const INITIAL_VISIBLE = 9;
+---
+
+<section class="min-h-screen">
+  <div class="bg-white">
+  <div class="max-w-[768px] mx-auto px-4 sm:px-6 pt-16 pb-16">
+    <!-- Results container -->
+    <div
+      id="calc-list"
+      class="bg-white  overflow-hidden flex flex-col gap-4"
+    >
+      {
+        calculators.map((calc, i) => (
+          <>
+            <a
+              href={`/construction-costs/${calc.slug}`}
+              class:list={[
+                "calc-card group flex flex-col gap-2 px-5 py-4 border-b border-border-primary rounded-2xl border border-border-primary",
+                "hover:bg-brand-25 hover:border-[#008042] transition-colors duration-150",
+                { hidden: i >= INITIAL_VISIBLE },
+              ]}
+              data-category={calc.category}
+              data-location={calc.location}
+            >
+              <span class="calc-title text-base font-medium text-text-primary group-hover:text-brand-accent transition-colors duration-150">
+                {calc.title}
+              </span>
+              <div class="flex gap-2 flex-wrap">
+                <span class="text-xs font-medium px-2 py-0.5 rounded-full bg-brand-50 text-brand-700 border border-brand-100">
+                  {calc.category}
+                </span>
+                <span class="text-xs font-medium px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-600 border border-neutral-200">
+                  {calc.location}
+                </span>
+              </div>
+            </a>
+
+            {i === INITIAL_VISIBLE - 1 && (
+              <div class="p-0" id="calc-banner">
+                <div class="relative rounded-2xl overflow-hidden bg-brand-700 min-h-[100px]">
+                  <div class="absolute inset-0">
+                    <Image
+                      src={contractorPhoto}
+                      alt=""
+                      class="w-full h-full object-cover object-right opacity-40"
+                    />
+                  </div>
+                  <div class="relative z-10 flex items-center justify-between gap-4 flex-wrap p-6">
+                    <div class="flex flex-col gap-2">
+                      <Logo />
+                      <p class="text-[20px] font-semibold text-white leading-tight max-w-xs mt-1">
+                        Create instant estimates
+                        <br />
+                        with AI and win more jobs
+                      </p>
+                    </div>
+                    <a
+                      href="/signup"
+                      class="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold rounded-xl bg-brand-accent text-white hover:bg-brand-500 transition-colors shrink-0"
+                    >
+                      Free trial
+                    </a>
+                  </div>
+                </div>
+              </div>
+            )}
+          </>
+        ))
+      }
+    </div>
+
+    <!-- Load more -->
+    <div class="mt-8 flex justify-center" id="calc-load-more-wrap">
+      <button
+        id="calc-load-more"
+        class="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold rounded-xl bg-brand-accent text-white hover:bg-brand-500 transition-colors shrink-0"
+      >
+        Load more
+      </button>
+    </div>
+  </div>
+  </div>
+</section>
+
+<script>
+  const BATCH = 9;
+
+  const state = { category: "All", query: "", location: "", visible: BATCH };
+
+  function update() {
+    const cards = Array.from(document.querySelectorAll<HTMLElement>(".calc-card"));
+
+    const matches = cards.filter((card) => {
+      const cat = card.dataset.category ?? "";
+      const loc = card.dataset.location ?? "";
+      const title =
+        card.querySelector(".calc-title")?.textContent?.toLowerCase() ?? "";
+      const catMatch = state.category === "All" || cat === state.category;
+      const searchMatch =
+        !state.query || title.includes(state.query.toLowerCase());
+      const locationMatch = !state.location || loc === state.location;
+      return catMatch && searchMatch && locationMatch;
+    });
+
+    cards.forEach((card) => card.classList.add("hidden"));
+    matches.slice(0, state.visible).forEach((card) =>
+      card.classList.remove("hidden")
+    );
+
+    const loadMoreWrap = document.getElementById("calc-load-more-wrap");
+    if (loadMoreWrap) {
+      loadMoreWrap.style.display =
+        matches.length > state.visible ? "" : "none";
+    }
+  }
+
+  function initList() {
+    // Guard against duplicate listener attachment (e.g. astro:page-load + DOMContentLoaded).
+    if (document.body.dataset.costCalcListInit === "1") return;
+    document.body.dataset.costCalcListInit = "1";
+
+    document.addEventListener("calc:filter", (e) => {
+      const ev = e as CustomEvent<{ category: string }>;
+      state.category = ev.detail.category;
+      state.visible = BATCH;
+      update();
+    });
+
+    document.addEventListener("calc:search", (e) => {
+      const ev = e as CustomEvent<{ query: string }>;
+      state.query = ev.detail.query;
+      state.visible = BATCH;
+      update();
+    });
+
+    document.addEventListener("calc:location", (e) => {
+      const ev = e as CustomEvent<{ location: string }>;
+      state.location = ev.detail.location ?? "";
+      state.visible = BATCH;
+      update();
+    });
+
+    document
+      .getElementById("calc-load-more")
+      ?.addEventListener("click", () => {
+        state.visible += BATCH;
+        update();
+      });
+
+    update();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initList);
+  } else {
+    initList();
+  }
+  document.addEventListener("astro:page-load", initList);
+</script>

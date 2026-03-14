@@ -1,0 +1,164 @@
+---
+import Button from "@/components/ui/Button.astro";
+import filesInChat from "@/assets/images/AI Documents/Files in chat@2x.webp";
+import aiBuildsTheDocs from "@/assets/images/AI Documents/Sign any document@2x-1.webp";
+import shareDocument from "@/assets/images/AI Documents/Share document@2x.webp";
+import scopeOfWork from "@/assets/images/AI Documents/Scope of Work@2x.webp";
+import materialList from "@/assets/images/AI Documents/Material List@2x.webp";
+import dailyLog from "@/assets/images/AI Documents/Daily Log@2x.webp";
+import workOrder from "@/assets/images/AI Documents/Work order@2x.webp";
+import punchlist from "@/assets/images/AI Documents/Sign any document@2x.webp";
+import documentTypesTogether from "@/assets/images/AI Documents/Document types together@2x.webp";
+
+const rows = [
+  {
+    eyebrow: "",
+    title: "Start With What You Already Have",
+    description: "Handoff takes the details you're already collecting and turns them into usable documents.",
+    bullets: [
+      "Drop in site photos, notes, or videos",
+      "Pull scopes directly from your estimate items",
+      "Keep every input tied to the right project automatically",
+    ],
+    reverse: false,
+    image: filesInChat,
+    placeholder: "AI documents input",
+  },
+  {
+    eyebrow: "",
+    title: "AI Builds the Docs for You",
+    description: "No more late-night typing or copy-paste. Handoff creates polished documents in seconds.",
+    bullets: [
+      "Drafts are created instantly, ready to review or edit",
+      "Pricing details stay private in work orders and bid requests",
+      "Files and photos can be added inline for full context",
+    ],
+    reverse: true,
+    image: aiBuildsTheDocs,
+    placeholder: "AI document generation",
+  },
+  {
+    eyebrow: "",
+    title: "Send, Share, and Stay Organized",
+    description: "Every document lives under one project, ready to send with a tap.",
+    bullets: [
+      "Share by text or email, no logins or portals needed",
+      "Get notified when clients or subs open the link",
+      "Reduce mistakes with one source of truth for your team",
+    ],
+    reverse: false,
+    image: shareDocument,
+    placeholder: "Document sharing",
+  },
+  {
+    eyebrow: "Scopes of Work",
+    title: "Detailed Scopes Without the Rewrites",
+    description: "Turn estimates or walkthroughs into professional scopes instantly. Crews get clear direction, and clients get consistent, polished docs.",
+    bullets: [],
+    reverse: true,
+    image: scopeOfWork,
+    placeholder: "Scope of work document",
+  },
+  {
+    eyebrow: "Material Lists",
+    title: "Shopping Lists Without the Spreadsheets",
+    description: "Your estimate automatically becomes a vendor-ready material list with accurate quantities. No retyping, no mistakes, faster purchasing.",
+    bullets: [],
+    reverse: false,
+    image: materialList,
+    placeholder: "Material list document",
+  },
+  {
+    eyebrow: "Daily Logs",
+    title: "Client Updates Before You Leave the Site",
+    description: "Site photos, videos, and notes become clean daily logs in seconds. Clients get professional updates without late-night typing.",
+    bullets: [],
+    reverse: true,
+    image: dailyLog,
+    placeholder: "Daily log document",
+  },
+  {
+    eyebrow: "Punchlists & Checklists",
+    title: "Clear Tasks for Your Crew",
+    description: "Snap a photo or jot notes in Handoff, and AI creates a checklist your crew can check off on their phone. Nothing gets missed, and the job moves faster.",
+    bullets: [],
+    reverse: false,
+    image: punchlist,
+    placeholder: "Punchlist document",
+  },
+  {
+    eyebrow: "Work Orders & Bid Requests",
+    title: "Docs Subs Can Actually Use",
+    description: "Generate clean work orders and scoped bid requests right from your estimate. Sensitive pricing stays hidden, clarity stays front and center.",
+    bullets: [],
+    reverse: true,
+    image: workOrder,
+    placeholder: "Work order document",
+  },
+  {
+    eyebrow: "Project Paperwork",
+    title: "Paperwork That Writes Itself",
+    description: "Contractors spend hours rewriting scopes, building punchlists, and typing material lists into Excel. With Handoff, AI handles it for you so you can stay focused on building.",
+    bullets: [],
+    reverse: false,
+    image: documentTypesTogether,
+    placeholder: "Project paperwork",
+  },
+];
+---
+
+<section class="relative z-[2] px-4 pb-4">
+  <div class="max-w-[1920px] mx-auto bg-white rounded-3xl py-16 lg:py-24 overflow-hidden flex flex-col gap-20 lg:gap-40">
+
+    {rows.map((r) => (
+      <div class:list={[
+        "max-w-[1440px] mx-auto px-6 lg:px-8 w-full flex flex-col lg:flex-row items-center gap-12 lg:gap-24",
+        r.reverse && "lg:flex-row-reverse"
+      ]} data-animate="fade-up">
+        <!-- Text -->
+        <div class="flex-1 flex flex-col py-6 min-w-0">
+          {r.eyebrow && (
+            <p class="font-mono text-sm font-semibold leading-6 tracking-[0.56px] uppercase text-text-quaternary mb-3">
+              {r.eyebrow}
+            </p>
+          )}
+          <h3 class="font-display text-[28px] lg:text-4xl font-medium leading-9 lg:leading-[44px] tracking-[-0.72px] text-text-primary mb-5">
+            {r.title}
+          </h3>
+          <p class="text-xl font-medium leading-[30px] text-text-tertiary mb-6">
+            {r.description}
+          </p>
+          {r.bullets.length > 0 && (
+            <ul class="flex flex-col gap-3">
+              {r.bullets.map((bullet) => (
+                <li class="flex items-start gap-3 text-lg font-medium leading-[28px] text-text-tertiary">
+                  <span class="mt-1.5 flex-shrink-0 w-4 h-4 rounded-full bg-brand-500 flex items-center justify-center">
+                    <svg width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M1 3L3 5L7 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                  {bullet}
+                </li>
+              ))}
+            </ul>
+          )}
+          <div class="mt-8">
+            <a href="https://app.handoff.ai/sign-up/" class="inline-flex items-center justify-center gap-1.5 font-medium text-base leading-6 rounded-xl transition-all duration-150 whitespace-nowrap cursor-pointer bg-white text-text-secondary border border-border-primary shadow-xs hover:bg-neutral-50 px-5 py-2.5 ">Get started</a>
+          </div>
+        </div>
+
+        <!-- Visual -->
+        <div class="flex-1 min-w-0 rounded-xl overflow-hidden h-[400px] lg:h-[512px] relative" class:list={[!r.image && "bg-detail-visual-bg"]}>
+          {r.image ? (
+            <img src={r.image.src} alt={r.placeholder} class="w-full h-full object-cover" />
+          ) : (
+            <div class="absolute inset-0 bg-detail-visual-bg flex items-center justify-center">
+              <p class="text-white/80 text-lg font-medium">{r.placeholder}</p>
+            </div>
+          )}
+        </div>
+      </div>
+    ))}
+
+  </div>
+</section>

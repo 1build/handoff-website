@@ -1,0 +1,83 @@
+---
+import EstimateDetailedFeatures from "@/components/sections/EstimateDetailedFeatures.astro";
+import videoThumbnail from "@/assets/images/See In Action Video Thumbnail.webp";
+interface Props {
+  videoSrc?: string;
+}
+const { videoSrc = "https://www.handoff.ai/assets/hndf-delivery-video.webm" } = Astro.props;
+---
+<section class="px-4">
+<div class="max-w-[1920px] mx-auto relative z-[2] py-10 md:py-16 lg:py-20 bg-white rounded-xl" data-animate="fade-up">
+  <div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8">
+    <div class="text-center max-w-[720px] mx-auto mb-8 md:mb-12">
+    <p class="font-mono text-sm font-semibold leading-6 tracking-[0.56px] uppercase text-text-quaternary mb-6 animate-in" data-animate="fade-up">
+SEE IN ACTION
+</p>
+      <h2 class="font-display text-3xl sm:text-4xl md:text-[2.5rem] font-semibold leading-tight tracking-[-0.02em] text-text-primary mb-4">
+        Modern contractors move faster
+      </h2>
+      <p class="text-base md:text-lg leading-relaxed text-text-secondary">
+        See how top contractors use Handoff to run their day-to-day on connected systems and AI, not sticky notes and memory.
+      </p>
+    </div>
+
+    {videoSrc ? (
+    <div class="relative">
+      <div id="estimate-video-wrapper" class="relative w-full rounded-xl overflow-hidden bg-black/5" style="max-height: 400px; cursor: pointer;">
+        <video
+          id="estimate-video"
+          class="w-full h-full object-cover rounded-xl"
+          controls
+          playsinline
+          preload="auto"
+          poster={videoThumbnail.src}
+          style="max-height: 400px; width: 100%;"
+        >
+          <source src={videoSrc} type="video/webm" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <button id="estimate-minimize" style="display: none;" class="mt-3 mx-auto flex items-center gap-1.5 text-sm text-text-secondary hover:text-text-primary transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"></polyline><polyline points="20 10 14 10 14 4"></polyline><line x1="10" y1="14" x2="21" y2="3"></line><line x1="3" y1="21" x2="14" y2="10"></line></svg>
+        Minimize
+      </button>
+    </div>
+    <script>
+      {
+        const wrapper = document.getElementById('estimate-video-wrapper');
+        const video = document.getElementById('estimate-video') as HTMLVideoElement;
+        const btn = document.getElementById('estimate-minimize') as HTMLButtonElement;
+        let expanded = false;
+        video?.addEventListener('click', (e) => {
+          if (!expanded) {
+            e.preventDefault();
+            expanded = true;
+            wrapper!.style.maxHeight = '';
+            wrapper!.style.cursor = 'default';
+            wrapper!.classList.add('aspect-video');
+            video.style.maxHeight = '';
+            btn!.style.display = 'flex';
+            video.play();
+          }
+        });
+        btn?.addEventListener('click', () => {
+          expanded = false;
+          wrapper!.style.maxHeight = '400px';
+          wrapper!.style.cursor = 'pointer';
+          wrapper!.classList.remove('aspect-video');
+          video.style.maxHeight = '400px';
+          btn.style.display = 'none';
+          video.pause();
+        });
+      }
+    </script>
+    ) : (
+    <div class="relative w-full rounded-xl overflow-hidden bg-black/5 aspect-video flex items-center justify-center text-text-tertiary">
+      <p>Add a video via the videoSrc prop or place a file at <code class="text-sm">public/video/demo.webm</code></p>
+    </div>
+    )}
+  </div>
+  <EstimateDetailedFeatures />
+</div>
+  
+</section>

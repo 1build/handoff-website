@@ -1,0 +1,121 @@
+---
+import StarIcon from "@/components/ui/StarIcon.astro";
+import SupplierLogosCarousel from "@/components/sections/SupplierLogosCarousel.astro";
+
+const features = [
+  {
+    title: "Consistent margins",
+    description:
+      "Every contract, change order, and document in one place. No more hunting through excel sheets for approvals.",
+    icon: "layout",
+  },
+  {
+    title: "Cut admin time in half",
+    description:
+      "Proposals turn into payments seamlessly. Change orders stay organized without the extra work.",
+    icon: "clock",
+  },
+  {
+    title: "Scale without the bottleneck",
+    description:
+      "Your AI Teammate learns your way of doing things and handles it on every project. Scale up without being in three places at once.",
+    icon: "scale",
+  },
+];
+---
+
+<section class="px-4">
+  <div class="max-w-[1920px] mx-auto bg-white border border-black/[0.04] rounded-3xl overflow-hidden py-16 md:py-24 flex flex-col gap-20 items-center">
+
+    <!-- Heading + Feature Cards -->
+    <div class="w-full max-w-[1440px] px-8 flex flex-col gap-8">
+
+      <!-- Section heading -->
+      <div class="flex flex-col gap-5 max-w-[1024px]" data-animate="fade-up">
+        <h2 class="font-display text-2xl md:text-[48px] font-medium leading-[35px] md:leading-[60px] tracking-[-0.96px] text-text-primary">
+          Every output reflects your business<br />Without you checking It
+        </h2>
+        <p class="text-xl font-normal leading-[30px] text-text-tertiary">
+          Set your rules once. Handoff applies them automatically across every estimate, proposal, and change order.
+        </p>
+      </div>
+
+      <!-- Feature cards row -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8" data-animate="stagger">
+        {features.map((feature) => (
+          <div class="bg-bg-secondary rounded-xl p-6 flex flex-col gap-16">
+            <!-- Icon -->
+            <div class="bg-white rounded-lg p-3 w-fit shadow-[0px_32px_64px_-12px_rgba(10,13,18,0.14),0px_5px_5px_-2.5px_rgba(10,13,18,0.04)]">
+              {feature.icon === "layout" && (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <rect x="3" y="3" width="8" height="18" rx="1.5" fill="#344054" />
+                  <rect x="13" y="3" width="8" height="8" rx="1.5" fill="#344054" />
+                  <rect x="13" y="13" width="8" height="8" rx="1.5" fill="#344054" />
+                </svg>
+              )}
+              {feature.icon === "clock" && (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 7V12L15 14M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10" stroke="#344054" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M18 16v6M21 19h-6" stroke="#344054" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              )}
+              {feature.icon === "scale" && (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 3v18M3 9l9-6 9 6M5 21h14M3 9c0 3.314 2.686 6 6 6s6-2.686 6-6H3zm12 0c0 3.314 2.686 6 6 6s6-2.686 6-6h-12z" stroke="#344054" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              )}
+            </div>
+
+            <!-- Text -->
+            <div class="flex flex-col gap-4">
+              <h3 class="font-display text-2xl font-medium leading-8 text-text-primary">
+                {feature.title}
+              </h3>
+              <p class="text-lg font-normal leading-7 text-text-tertiary">
+                {feature.description}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Testimonial card -->
+      <div class="bg-bg-secondary rounded-xl p-3 md:p-12 flex flex-col gap-8" data-animate="fade-up">
+        <!-- Stars -->
+        <div class="flex items-center gap-4">
+          <div class="flex items-center gap-1">
+            {[...Array(5)].map(() => <StarIcon />)}
+          </div>
+          <span class="text-base font-medium leading-6 text-text-quaternary">5/5</span>
+        </div>
+
+        <!-- Quote -->
+        <p class="font-display text-[20px] md:text-[36px] font-medium leading-[30px] md:leading-[44px] tracking-[-0.72px] text-text-primary max-w-[1280px]">
+          Handoff has{" "}
+          <span class="text-brand-accent">streamlined a lot of my workflow</span>
+          . I really appreciate how everything is in one place, making communication and tracking progress much easier.
+        </p>
+
+        <!-- Author + CTA -->
+        <div class="flex flex-wrap items-center gap-16">
+          <div class="flex flex-col gap-1">
+            <p class="text-lg font-semibold leading-7 text-text-primary">— Amanda M.</p>
+            <p class="text-base font-normal leading-6 text-text-tertiary">Owner/Project Manager</p>
+          </div>
+          <a
+            href="/reviews"
+            class="inline-flex items-center justify-center gap-1.5 px-2 md:px-[18px] py-3 text-base font-medium leading-6 rounded-xl bg-white border border-border-primary text-text-secondary shadow-xs hover:bg-bg-secondary transition-colors duration-150 whitespace-nowrap"
+          >
+            View more testimonials
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Logo strip -->
+    <div class="w-full" data-animate="fade-up">
+      <SupplierLogosCarousel title="Used by thousands of construction businesses like yours:" />
+    </div>
+
+  </div>
+</section>

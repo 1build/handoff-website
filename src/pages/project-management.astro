@@ -3,7 +3,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import Header from "@/components/sections/Header.astro";
 import Footer from "@/components/sections/Footer.astro";
 import FaqSection from "@/components/sections/FaqSection.astro";
-import CtaSection from "@/components/sections/CtaSection.astro";
+import ProjectManagementCta from "@/components/sections/ProjectManagementCta.astro";
 import DetailRow from "@/components/sections/DetailRow.astro";
 import TestimonialCard from "@/components/sections/TestimonialCard.astro";
 import StarIcon from "@/components/ui/StarIcon.astro";
@@ -11,10 +11,16 @@ import Button from "@/components/ui/Button.astro";
 import bgPattern from "@/assets/images/background-pattern.png";
 import heroGlow from "@/assets/images/hero-glow-line.svg";
 import SupplierLogosCarousel from "@/components/sections/SupplierLogosCarousel.astro";
-import featureEstimate from "@/assets/icons/feature-estimate.svg";
-import featureWin from "@/assets/icons/feature-win.svg";
-import featureMoney from "@/assets/icons/feature-money.svg";
+import projectIcon1 from "@/assets/icons/projectIcon1.svg";
+import projectIcon2 from "@/assets/icons/clock-plus.svg";
+import projectIcon3 from "@/assets/icons/projectIcon3.svg";
 import { navItems, footerColumns } from "@/lib/navigation";
+import { getPageSeo } from "@/lib/seo-pages";
+import heroImage from "@/assets/images/Heros/Project Management.webp";
+import scheduleImage from "@/assets/images/Project Management/Schedule Project Phases and Track@2x.webp";
+import projectDashImg from "@/assets/images/Project Management/Project dash@2x.webp";
+import aiContractImg from "@/assets/images/Project Management/Ask about your project@2x.webp";
+import projectBlocksImg from "@/assets/images/Project Management/Project Blocks@2x.webp";
 
 const faqItems = [
   {
@@ -27,7 +33,7 @@ const faqItems = [
   },
   {
     question: "Will this work when I'm running multiple projects?",
-    answer: "Yes. Handoff is built to help you scale. The more projects you run, the more valuable the automated coordination becomes. You can manage 3x more projects when you delegate admin work to your AI teammate.",
+    answer: "Yes. Handoff is built to help you scale. The more projects you run, the more valuable the automated coordination becomes. You can manage 3x more projects when you delegate admin work to your AI Teammate.",
   },
   {
     question: 'How does "Crew Scheduling" work?',
@@ -49,7 +55,9 @@ const features = [
       "Change orders tracked from request to payment",
       "Every project document in one place",
     ],
-    placeholder: "Screenshot of contract generation",
+    image: aiContractImg,
+    imageFill: true,
+    ctaHref: "/ai-documents",
   },
   {
     eyebrow: "Intelligent crew scheduling",
@@ -61,7 +69,9 @@ const features = [
       "Everyone gets notified when schedules change",
       "Your phone stops buzzing with scheduling questions",
     ],
-    placeholder: "Screenshot of crew scheduling calendar",
+    image: scheduleImage,
+    imageFill: true,
+    ctaHref: "https://app.handoff.ai/sign-up/",
   },
   {
     eyebrow: "Real-time project alerts",
@@ -73,7 +83,9 @@ const features = [
       "Handle change orders before they cause delays",
       "Spot crew conflicts and timeline risks while you can still fix them",
     ],
-    placeholder: "Screenshot of real-time project alerts",
+    image: projectBlocksImg,
+    imageFill: true,
+    ctaHref: "/client-management-system",
   },
   {
     eyebrow: "Role-based permissions",
@@ -85,46 +97,49 @@ const features = [
       "Only authorized team members see markup and margin data",
       "Set it once, never worry about information leaks",
     ],
-    placeholder: "Screenshot of role-based permissions settings",
+    image: projectDashImg,
+    imageFill: true,
+    ctaHref: "https://app.handoff.ai/sign-up/",
   },
 ];
 
 const outcomes = [
   {
-    icon: featureEstimate.src,
+    icon: projectIcon1.src,
     title: "Keep project organized",
     description: "Every contract, change order, and document in one place. No more hunting through excel sheets for approvals.",
   },
   {
-    icon: featureWin.src,
+    icon: projectIcon2.src,
     title: "Cut admin time in half",
     description: "Proposals turn into payments seamlessly. Change orders stay organized without the extra work.",
   },
   {
-    icon: featureMoney.src,
+    icon: projectIcon3.src,
     title: "Scale without the bottleneck",
-    description: "Your AI teammate learns your way of doing things and handles it on every project. Scale up without being in three places at once.",
+    description: "Your AI Teammate learns your way of doing things and handles it on every project. Scale up without being in three places at once.",
   },
 ];
+const seo = getPageSeo(Astro.url.pathname);
 ---
 
-<BaseLayout title="Project management — Handoff">
+<BaseLayout {...seo}>
   <Header navItems={navItems} />
 
   <!-- Hero (matches solutions HeroSection pattern) -->
-  <section id="hero" class="hero-fixed">
+  <section id="hero" class="relative pt-20">
     <!-- Background grid pattern -->
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1920px] h-[1440px] pointer-events-none z-0">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 max-w-full w-[1920px] h-[1440px] pointer-events-none z-0">
       <img src={bgPattern.src} alt="" class="w-full h-full block object-contain object-top" />
     </div>
 
     <!-- Glow line -->
-    <div class="absolute -top-[24%] -left-[14%] -right-[14%] -bottom-[24%] pointer-events-none z-[1]">
+    <div class="absolute max-w-full -top-[24%] -left-[14%] -right-[14%] -bottom-[24%] pointer-events-none z-[1]">
       <img src={heroGlow.src} alt="" class="w-full h-full block" />
     </div>
 
     <!-- Content -->
-    <div id="hero-container" class="relative z-[1] max-w-[1440px] mx-auto px-8 py-24 flex flex-col lg:flex-row items-center gap-12 lg:gap-16 will-change-[opacity,transform]">
+    <div id="hero-container" class="relative z-[1] max-w-[1440px] mx-auto px-4 md:px-8 py-24 flex flex-col lg:flex-row items-center gap-12 lg:gap-16 will-change-[opacity,transform]">
       <div class="flex-1 flex flex-col">
         <p class="font-mono text-sm font-semibold leading-6 tracking-[0.56px] uppercase text-text-on-brand-tertiary mb-3">
           End-to-End Project Management
@@ -133,22 +148,26 @@ const outcomes = [
           Run more projects <span class="text-text-highlight">without more admin</span>
         </h1>
         <p class="text-lg lg:text-xl font-medium leading-[30px] text-white max-w-[640px]">
-          Spend your time building and growing your business instead of chasing project details. Built for contractors, Handoff's trained AI manages all the documentation, scheduling, and crew coordination in one system, acting like your AI teammate.
+          Spend your time building and growing your business instead of chasing project details. Built for contractors, Handoff's trained AI manages all the documentation, scheduling, and crew coordination in one system, acting like your AI Teammate.
         </p>
         <div class="mt-12">
-          <Button variant="secondary-outline" size="lg" class="!bg-white !text-text-secondary !border-border-primary">
-            See how it works
-          </Button>
+         
+          <a href="https://app.handoff.ai/sign-up/" class="inline-flex w-full md:w-auto items-center justify-center gap-1.5 px-5 py-3 text-base font-medium leading-6 rounded-xl transition-all duration-150 whitespace-nowrap bg-black/40 backdrop-blur-md text-white hover:bg-black/30">
+
+        See how it works
+<span class="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_0px_0px_1px_rgba(10,13,18,0.18),inset_0px_-2px_0px_0px_rgba(10,13,18,0.05)]"></span> </a>
         </div>
       </div>
 
-      <!-- Hero visual placeholder -->
-      <div class="flex-1 relative z-[2]">
-        <div class="w-full h-[500px] rounded-3xl bg-white/10 backdrop-blur-sm p-8 flex items-center justify-center">
-          <div class="w-full h-full rounded-xl bg-detail-visual-bg flex items-center justify-center">
-            <p class="text-white/80 text-lg font-medium">Screenshot of project dashboard</p>
-          </div>
-        </div>
+      <!-- Hero visual -->
+      <div class="flex-1 relative z-[2] self-end">
+        <img
+          src={heroImage.src}
+          alt="Project management dashboard"
+          class="w-full h-auto translate-y-[16%]"
+          loading="eager"
+          decoding="async"
+        />
       </div>
     </div>
   </section>
@@ -161,7 +180,7 @@ const outcomes = [
         <h2 class="font-display text-4xl lg:text-5xl font-medium leading-[44px] lg:leading-[60px] tracking-[-0.96px] text-text-primary max-w-4xl">
           Run projects in one connected system
         </h2>
-        <p class="text-xl font-normal leading-[30px] text-text-tertiary max-w-4xl">
+        <p class="text-xl font-normal leading-[30px] text-text-tertiary">
           Handoff gives you the tools to respond faster, look more professional, and protect your margins on every job.
         </p>
       </div>
@@ -182,7 +201,7 @@ const outcomes = [
       </div>
 
       <!-- Testimonial -->
-      <div class="bg-bg-secondary rounded-xl p-8 lg:p-12 flex flex-col gap-8 mx-6 lg:mx-8 -mt-12 max-w-[calc(1440px-64px)] w-[calc(100%-48px)] lg:w-[calc(100%-64px)] self-center" data-animate="fade-up">
+      <div class="bg-bg-secondary rounded-xl p-4 md:p-8 lg:p-12 flex flex-col gap-8 mx-6 lg:mx-8 lg:-mt-12 max-w-[calc(1440px-64px)] w-[calc(100%-48px)] lg:w-[calc(100%-64px)] self-center" data-animate="fade-up">
         <!-- Stars -->
         <div class="flex items-center gap-4">
           <div class="flex gap-1">
@@ -202,7 +221,12 @@ const outcomes = [
             <p class="text-lg font-semibold leading-7 text-text-primary">— Amanda M.</p>
             <p class="text-base font-normal leading-6 text-text-tertiary">Owner/Project Manager</p>
           </div>
-          <Button variant="secondary-outline">View more testimonials</Button>
+          <a
+            href="/reviews"
+            class="inline-flex items-center justify-center gap-1.5 px-2 md:px-[18px] py-3 text-base font-medium leading-6 rounded-xl bg-white border border-border-primary text-text-secondary shadow-xs hover:bg-bg-secondary transition-colors duration-150 whitespace-nowrap"
+          >
+            View more testimonials
+          </a>
         </div>
       </div>
 
@@ -212,7 +236,7 @@ const outcomes = [
   </section>
 
   <!-- Detailed feature rows -->
-  <section class="relative z-[2] px-4 pb-4 bg-brand-800">
+  <section class="relative z-[2] px-4 bg-brand-800">
     <div class="max-w-[1920px] mx-auto bg-white rounded-3xl py-16 lg:py-24 overflow-hidden flex flex-col gap-20 lg:gap-40">
       {features.map((f, i) => (
         <DetailRow
@@ -222,7 +246,10 @@ const outcomes = [
           bullets={f.bullets}
           reverse={i % 2 !== 0}
           visualType="desktop"
+          visualImages={f.image ? [f.image] : undefined}
+          imageFill={f.imageFill}
           placeholder={f.placeholder}
+          ctaHref={f.ctaHref}
         />
       ))}
     </div>
@@ -232,7 +259,7 @@ const outcomes = [
   <FaqSection items={faqItems} />
 
   <!-- CTA -->
-  <CtaSection />
+  <ProjectManagementCta />
 
   <!-- Footer -->
   <Footer columns={footerColumns} />

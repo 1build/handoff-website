@@ -1,0 +1,291 @@
+---
+import contractorPhoto from "@/assets/images/contractor-photo.png";
+import bgPattern from "@/assets/images/testi-bg-pattern.png";
+import avatar1 from "@/assets/images/avatar1.png";
+import avatar2 from "@/assets/images/avatar2.png";
+import avatar3 from "@/assets/images/avatar3.png";
+import avatar4 from "@/assets/images/avatar4.png";
+import avatar5 from "@/assets/images/avatar5.png";
+import avatar6 from "@/assets/images/avatar6.png";
+import avatar7 from "@/assets/images/avatar7.png";
+import avatar8 from "@/assets/images/avatar8.png";
+import avatar9 from "@/assets/images/avatar9.png";
+
+const testimonials = [
+  {
+    name: "Scott",
+    title: "MCM Homes | Omaha, NE",
+    quote: "I can genuinely trust the numbers I'm getting. Since I've been introduced to Handoff, there hasn't been a single job where I haven't checked my numbers against it. I've got a number in my head, and Handoff gives me the same scope — that's incredibly comfortable.",
+    avatar: avatar1.src,
+    initials: "S",
+    color: "#0f766e",
+  },
+  {
+    name: "Glenn",
+    title: "Glenn and Sons Remodel | Dallas, TX",
+    quote: "We won a $10,000 job with Handoff in our first month!",
+    avatar: avatar2.src,
+    initials: "G",
+    color: "#2d7a52",
+  },
+  {
+    name: "Todd",
+    title: "GoHome LLC | Chester, VA",
+    quote: "I've been so frustrated with estimating that I was ready to give it up. Handoff is like taking a 1,000-pound weight off my chest.",
+    avatar: avatar3.src,
+    initials: "T",
+    color: "#0d9488",
+  },
+  {
+    name: "Heath",
+    title: "Mayfield Construction | Bowie, TX",
+    quote: "I am very surprised at how close to my numbers the AI is. I really like the app.",
+    avatar: avatar4.src,
+    initials: "H",
+    color: "#3b7dd8",
+  },
+  {
+    name: "Francisco Z.",
+    title: "Estimator | Small Business",
+    quote: "Handoff completely changed the game for our handyman business. The AI estimates are fast, accurate, and detailed — it saves us hours of manual work every week.",
+    avatar: avatar5.src,
+    initials: "F",
+    color: "#7c3aed",
+  },
+  {
+    name: "Harold Bailey",
+    title: "Owner at Mr. Fix-It",
+    quote: "Best Estimating System Out There. Very good, definitely a time saver. Cut my estimating time down by 75%. Its been a game changer for me and our profit is up due to Handoff. We switched from Jobber because Handoff is easier to use and navigate, and it's cheaper.",
+    avatar: avatar6.src,
+    initials: "H",
+    color: "#c2410c",
+  },
+  {
+    name: "Zaid Schwartz",
+    title: "Founder, Wildcrafted",
+    quote: "I've been so frustrated with estimating that I was ready to give it up. Handoff is like taking a 1,000-pound weight off my chest. I feel so much better now. I'm so glad I found you guys.",
+    avatar: avatar7.src,
+    initials: "Z",
+    color: "#7c3aed",
+  },
+  {
+    name: "Owen Garcia",
+    title: "CTO, Solaris Energy",
+    quote: "With Handoff, we can focus more on design and less on the tedious setup work. Best money ever spent.",
+    avatar: avatar8.src,
+    initials: "O",
+    color: "#ea580c",
+  },
+  {
+    name: "Harriet Rojas",
+    title: "Product Designer, Ikigai Labs",
+    quote: "Handoff has been a real time-saver for us. It's organized, efficient, and keeps us moving forward with every project.",
+    avatar: avatar9.src,
+    initials: "H",
+    color: "#2563eb",
+  },
+];
+
+const visibleOnMobile = 4;
+
+
+---
+
+<section class="relative z-[2] px-4" data-animate="fade-up">
+  <div class="bg-[#D5DED8] rounded-3xl max-w-[1920px] mx-auto overflow-hidden py-16 lg:py-24 relative">
+    <!-- Background pattern -->
+    <div class="absolute top-[10%] right-0  pointer-events-none z-[2]">
+    <img src={bgPattern.src} alt="" class="w-full h-full block object-contain object-top" />
+  </div>
+
+    <!-- Top: Metrics + Contractor Image -->
+    <div class="relative z-[1] max-w-[1280px] mx-auto pl-4 lg:pl-8">
+      <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-16 lg:h-[546px]">
+        <!-- Left content (flex-1 fills remaining space) -->
+        <div class="flex-1 min-w-0 flex flex-col gap-10 lg:gap-16 px-4 lg:px-0">
+          <!-- Heading + subtitle -->
+          <div class="flex flex-col gap-5">
+            <h2 class="font-display text-3xl sm:text-4xl lg:text-[48px] font-medium leading-tight lg:leading-[60px] tracking-[-0.96px] text-text-primary">
+              Built for contractors who want their time back
+            </h2>
+            <p class="text-lg lg:text-xl text-text-tertiary leading-[30px] font-normal">
+              Forward-thinking teams use Handoff to move faster, protect margins, and scale without over-hiring.
+            </p>
+          </div>
+
+          <!-- Metrics -->
+          <div class="flex flex-wrap gap-y-12 gap-x-6">
+            <div class="flex-1 min-w-[240px] flex flex-col gap-1">
+              <span class="font-display text-5xl sm:text-6xl lg:text-[72px] font-medium leading-tight lg:leading-[90px] tracking-[-1.44px] text-brand-300">
+                10x
+              </span>
+              <span class="text-base lg:text-[16px] font-semibold text-text-primary leading-6">
+                Faster than manual estimating
+              </span>
+            </div>
+            <div class="flex-1 min-w-[240px] flex flex-col gap-1">
+              <span class="font-display text-5xl sm:text-6xl lg:text-[72px] font-medium leading-tight lg:leading-[90px] tracking-[-1.44px] text-brand-300">
+                21 min
+              </span>
+              <span class="text-base lg:text-[16px] font-semibold text-text-primary leading-6">
+                Average time spent per estimate
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Contractor image + notification cards -->
+        <div class="relative w-full max-w-[360px] h-[340px] sm:max-w-[420px] sm:h-[400px] lg:w-[582px] lg:max-w-none lg:h-[546px] shrink-0 overflow-hidden mx-auto lg:mx-0">
+          <img
+            src={contractorPhoto.src}
+            alt="Contractor using Handoff"
+            class="w-full h-auto max-h-[300px] sm:max-h-[360px] lg:max-h-none lg:w-[520px] lg:h-[498px] object-cover"
+            loading="lazy"
+            decoding="async"
+          />
+
+          <!-- Notification queue (absolute positioned per Figma) -->
+          <div class="absolute bottom-[3px] left-2 sm:left-4 w-[260px] sm:w-[290px] lg:w-[320px] h-[240px] sm:h-[270px] lg:h-[300px]">
+            <!-- Top card: file-check "approved" -->
+            <div class="absolute top-0 left-0 w-[260px] sm:w-[290px] lg:w-[320px] bg-white rounded-xl p-3 lg:p-4 flex gap-3 lg:gap-4 items-start overflow-hidden shadow-[0px_20px_24px_-4px_rgba(10,13,18,0.08),0px_8px_8px_-4px_rgba(10,13,18,0.03),0px_3px_3px_-1.5px_rgba(10,13,18,0.04)]">
+              <div class="shrink-0 w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-[rgba(213,222,216,0.3)] flex items-center justify-center">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10 18H14C14.55 18 15.0208 17.8042 15.4125 17.4125C15.8042 17.0208 16 16.55 16 16V9.825C16 9.55833 15.9 9.30417 15.7 9.0625L12.875 6.3C12.675 6.1 12.4333 6 12.15 6H10C9.45 6 8.97917 6.19583 8.5875 6.5875C8.19583 6.97917 8 7.45 8 8V16C8 16.55 8.19583 17.0208 8.5875 17.4125C8.97917 17.8042 9.45 18 10 18ZM11 13.175L10.4 12.575C10.2167 12.3917 10.2167 12.2083 10.4 12.025C10.5833 11.8417 10.7667 11.8417 10.95 12.025L11.275 12.35L12.55 11.075C12.7333 10.8917 12.9167 10.8917 13.1 11.075C13.2833 11.2583 13.2833 11.4417 13.1 11.625L11.55 13.175C11.3667 13.3583 11.1833 13.3583 11 13.175Z" fill="var(--color-brand-700)"/>
+                </svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-xs sm:text-sm font-medium text-brand-700 leading-5">Master Bath Remodel proposal <strong class="font-bold">approved</strong> by Sarah Miller</p>
+                <p class="text-xs text-neutral-500 mt-0.5">Just now</p>
+              </div>
+            </div>
+
+            <!-- Middle card: bank-note "$8,500 received" (offset 32px left) -->
+            <div class="absolute top-[80px] sm:top-[92px] lg:top-[104px] left-4 sm:left-6 lg:left-8 w-[260px] sm:w-[290px] lg:w-[320px] bg-white rounded-xl p-3 lg:p-4 flex gap-3 lg:gap-4 items-start overflow-hidden shadow-[0px_20px_24px_-4px_rgba(10,13,18,0.08),0px_8px_8px_-4px_rgba(10,13,18,0.03),0px_3px_3px_-1.5px_rgba(10,13,18,0.04)]">
+              <div class="shrink-0 w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-[rgba(213,222,216,0.3)] flex items-center justify-center">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2 17V7C2 6.45 2.19583 5.97917 2.5875 5.5875C2.97917 5.19583 3.45 5 4 5H20C20.55 5 21.0208 5.19583 21.4125 5.5875C21.8042 5.97917 22 6.45 22 7V17C22 17.55 21.8042 18.0208 21.4125 18.4125C21.0208 18.8042 20.55 19 20 19H4C3.45 19 2.97917 18.8042 2.5875 18.4125C2.19583 18.0208 2 17.55 2 17ZM12 14C12.55 14 13.0208 13.8042 13.4125 13.4125C13.8042 13.0208 14 12.55 14 12C14 11.45 13.8042 10.9792 13.4125 10.5875C13.0208 10.1958 12.55 10 12 10C11.45 10 10.9792 10.1958 10.5875 10.5875C10.1958 10.9792 10 11.45 10 12C10 12.55 10.1958 13.0208 10.5875 13.4125C10.9792 13.8042 11.45 14 12 14Z" fill="var(--color-brand-700)"/>
+                </svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-xs sm:text-sm font-medium text-brand-700 leading-5">Deposit of <strong class="font-bold">$8,500 received</strong> for Kitchen Remodel project</p>
+                <p class="text-xs text-neutral-500 mt-0.5">2m ago</p>
+              </div>
+            </div>
+
+            <!-- Bottom card: send "proposal sent" (faded) -->
+            <div class="absolute top-[160px] sm:top-[184px] lg:top-[208px] left-0 w-[260px] sm:w-[290px] lg:w-[320px] rounded-xl p-3 lg:p-4 flex gap-3 lg:gap-4 items-start overflow-hidden opacity-80 bg-gradient-to-b from-white from-[48%] to-transparent">
+              <div class="shrink-0 w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-[rgba(213,222,216,0.3)] flex items-center justify-center">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 20V14L11 12L3 10V4L22 12L3 20Z" fill="var(--color-brand-700)"/>
+                </svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-xs sm:text-sm font-medium text-brand-700 leading-5">Kitchen Remodel <strong class="font-bold">proposal sent</strong> successfully to Olivia Rhye</p>
+                <p class="text-xs text-neutral-500 mt-0.5">15m ago</p>
+              </div>
+            </div>
+
+            <!-- Blurred background behind bottom card -->
+            <div class="absolute top-[160px] sm:top-[184px] lg:top-[208px] left-0 w-[260px] sm:w-[290px] lg:w-[320px] h-[92px] rounded-xl backdrop-blur-[6px] bg-white/10 -z-10"></div>
+          </div>
+        </div>
+      </div>
+<div class="max-w-[1280px] mx-auto px-4 lg:px-8 pt-16 lg:pt-24">
+      <div class="text-center max-w-[700px] mx-auto mb-10 md:mb-12">
+        <h2 class="font-display text-3xl sm:text-4xl md:text-[2.5rem] font-semibold leading-tight tracking-[-0.02em] text-text-primary mb-4">
+          Real Contractors. Real Results.
+        </h2>
+        <p class="text-base md:text-lg text-text-secondary leading-relaxed">
+          Forward-thinking teams use Handoff to move faster, protect margins, and scale.
+        </p>
+      </div>
+
+      <!-- Desktop: 3-column staggered masonry layout -->
+      <div class="hidden md:flex gap-8 relative z-[12] items-start">
+        {[0, 1, 2].map((col) => (
+          <div class={`flex-1 flex flex-col gap-8 ${col === 0 ? "pt-8" : col === 2 ? "pt-10" : ""}`}>
+            {testimonials.filter((_, i) => i % 3 === col && i < 6).map((t) => (
+              <article class="rounded-xl border border-[#E9EAEB] bg-white p-8 flex flex-col gap-12">
+                <p class="text-base text-[#535862] leading-relaxed">{t.quote}</p>
+                <div class="flex items-center gap-3">
+                  {t.avatar ? (
+                    <img src={t.avatar} alt={t.name} class="w-12 h-12 rounded-full object-cover shrink-0" loading="lazy" />
+                  ) : (
+                    <div
+                      class="w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold text-sm shrink-0"
+                      style={`background-color: ${t.color}`}
+                    >
+                      {t.initials}
+                    </div>
+                  )}
+                  <div class="min-w-0">
+                    <p class="text-base font-semibold text-text-primary leading-6 flex items-center gap-1">
+                      {t.name}
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip-verified-est-desk)"><path d="M12.3553 2.83357C12.5073 3.20109 12.7989 3.49321 13.1662 3.64573L14.4541 4.17919C14.8217 4.33143 15.1137 4.62344 15.2659 4.99098C15.4182 5.35852 15.4182 5.77149 15.2659 6.13903L14.7328 7.42599C14.5805 7.7937 14.5803 8.20708 14.7333 8.57461L15.2655 9.86119C15.3409 10.0432 15.3798 10.2384 15.3798 10.4354C15.3799 10.6325 15.3411 10.8276 15.2657 11.0097C15.1902 11.1918 15.0797 11.3572 14.9403 11.4965C14.801 11.6358 14.6355 11.7463 14.4534 11.8217L13.1665 12.3547C12.7989 12.5067 12.5068 12.7984 12.3543 13.1657L11.8208 14.4536C11.6686 14.8211 11.3766 15.1131 11.009 15.2654C10.6415 15.4176 10.2285 15.4176 9.86099 15.2654L8.57403 14.7323C8.20648 14.5804 7.79366 14.5807 7.42634 14.7331L6.13845 15.2658C5.77111 15.4177 5.3585 15.4176 4.99126 15.2655C4.62402 15.1134 4.33217 14.8217 4.17982 14.4545L3.6462 13.1663C3.49424 12.7988 3.20256 12.5066 2.83527 12.3541L1.54739 11.8207C1.18 11.6685 0.88808 11.3767 0.735782 11.0093C0.583485 10.642 0.583278 10.2292 0.735208 9.86175L1.26829 8.57478C1.42015 8.20723 1.41984 7.79441 1.26742 7.42709L0.735111 6.13828C0.659639 5.95624 0.620778 5.76111 0.620746 5.56405C0.620714 5.36698 0.659514 5.17184 0.734926 4.98978C0.81034 4.80772 0.920888 4.6423 1.06026 4.50298C1.19962 4.36365 1.36508 4.25316 1.54716 4.1778L2.83413 3.64472C3.20132 3.4929 3.49327 3.20158 3.6459 2.83472L4.17936 1.54683C4.3316 1.17929 4.62361 0.887276 4.99115 0.735035C5.3587 0.582794 5.77166 0.582794 6.1392 0.735035L7.42617 1.26811C7.79372 1.41998 8.20654 1.41967 8.57386 1.26725L9.86229 0.735862C10.2298 0.583706 10.6427 0.583738 11.0101 0.735948C11.3776 0.888159 11.6696 1.18009 11.8218 1.54753L12.3555 2.8358L12.3553 2.83357Z" fill="#2E90FA"/><path fill-rule="evenodd" clip-rule="evenodd" d="M11.1333 5.90291C11.2401 5.73503 11.276 5.53157 11.2328 5.33728C11.1897 5.14299 11.0711 4.9738 10.9033 4.86691C10.7354 4.76003 10.5319 4.72422 10.3376 4.76735C10.1433 4.81048 9.97414 4.92903 9.86726 5.09691L6.93026 9.71191L5.58626 8.03191C5.46201 7.8765 5.2811 7.7768 5.08335 7.75477C4.88559 7.73273 4.68718 7.79016 4.53176 7.91441C4.37634 8.03867 4.27665 8.21957 4.25462 8.41733C4.23258 8.61508 4.29001 8.8135 4.41426 8.96891L6.41426 11.4689C6.4888 11.5622 6.58453 11.6363 6.6935 11.6852C6.80246 11.734 6.92152 11.7561 7.04075 11.7497C7.15998 11.7432 7.27595 11.7084 7.37901 11.6481C7.48207 11.5877 7.56923 11.5037 7.63326 11.4029L11.1333 5.90291Z" fill="white"/></g><defs><clipPath id="clip-verified-est-desk"><rect width="16" height="16" fill="white"/></clipPath></defs></svg>
+                    </p>
+                    <p class="text-sm text-[#535862]">{t.title}</p>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        ))}
+      </div>
+
+      <!-- Mobile: single column -->
+      <div class="flex flex-col gap-8 md:hidden relative z-[12]">
+        {testimonials.slice(0, 6).map((t) => (
+          <article class="rounded-xl border border-[#E9EAEB] bg-white p-6 flex flex-col gap-12">
+            <p class="text-base text-[#535862] leading-relaxed">{t.quote}</p>
+            <div class="flex items-center gap-3">
+              {t.avatar ? (
+                <img src={t.avatar} alt={t.name} class="w-12 h-12 rounded-full object-cover shrink-0" loading="lazy" />
+              ) : (
+                <div
+                  class="w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold text-sm shrink-0"
+                  style={`background-color: ${t.color}`}
+                >
+                  {t.initials}
+                </div>
+              )}
+              <div class="min-w-0">
+                <p class="text-base font-semibold text-text-primary leading-6 flex items-center gap-1">
+                  {t.name}
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip-verified-est-mob)"><path d="M12.3553 2.83357C12.5073 3.20109 12.7989 3.49321 13.1662 3.64573L14.4541 4.17919C14.8217 4.33143 15.1137 4.62344 15.2659 4.99098C15.4182 5.35852 15.4182 5.77149 15.2659 6.13903L14.7328 7.42599C14.5805 7.7937 14.5803 8.20708 14.7333 8.57461L15.2655 9.86119C15.3409 10.0432 15.3798 10.2384 15.3798 10.4354C15.3799 10.6325 15.3411 10.8276 15.2657 11.0097C15.1902 11.1918 15.0797 11.3572 14.9403 11.4965C14.801 11.6358 14.6355 11.7463 14.4534 11.8217L13.1665 12.3547C12.7989 12.5067 12.5068 12.7984 12.3543 13.1657L11.8208 14.4536C11.6686 14.8211 11.3766 15.1131 11.009 15.2654C10.6415 15.4176 10.2285 15.4176 9.86099 15.2654L8.57403 14.7323C8.20648 14.5804 7.79366 14.5807 7.42634 14.7331L6.13845 15.2658C5.77111 15.4177 5.3585 15.4176 4.99126 15.2655C4.62402 15.1134 4.33217 14.8217 4.17982 14.4545L3.6462 13.1663C3.49424 12.7988 3.20256 12.5066 2.83527 12.3541L1.54739 11.8207C1.18 11.6685 0.88808 11.3767 0.735782 11.0093C0.583485 10.642 0.583278 10.2292 0.735208 9.86175L1.26829 8.57478C1.42015 8.20723 1.41984 7.79441 1.26742 7.42709L0.735111 6.13828C0.659639 5.95624 0.620778 5.76111 0.620746 5.56405C0.620714 5.36698 0.659514 5.17184 0.734926 4.98978C0.81034 4.80772 0.920888 4.6423 1.06026 4.50298C1.19962 4.36365 1.36508 4.25316 1.54716 4.1778L2.83413 3.64472C3.20132 3.4929 3.49327 3.20158 3.6459 2.83472L4.17936 1.54683C4.3316 1.17929 4.62361 0.887276 4.99115 0.735035C5.3587 0.582794 5.77166 0.582794 6.1392 0.735035L7.42617 1.26811C7.79372 1.41998 8.20654 1.41967 8.57386 1.26725L9.86229 0.735862C10.2298 0.583706 10.6427 0.583738 11.0101 0.735948C11.3776 0.888159 11.6696 1.18009 11.8218 1.54753L12.3555 2.8358L12.3553 2.83357Z" fill="#2E90FA"/><path fill-rule="evenodd" clip-rule="evenodd" d="M11.1333 5.90291C11.2401 5.73503 11.276 5.53157 11.2328 5.33728C11.1897 5.14299 11.0711 4.9738 10.9033 4.86691C10.7354 4.76003 10.5319 4.72422 10.3376 4.76735C10.1433 4.81048 9.97414 4.92903 9.86726 5.09691L6.93026 9.71191L5.58626 8.03191C5.46201 7.8765 5.2811 7.7768 5.08335 7.75477C4.88559 7.73273 4.68718 7.79016 4.53176 7.91441C4.37634 8.03867 4.27665 8.21957 4.25462 8.41733C4.23258 8.61508 4.29001 8.8135 4.41426 8.96891L6.41426 11.4689C6.4888 11.5622 6.58453 11.6363 6.6935 11.6852C6.80246 11.734 6.92152 11.7561 7.04075 11.7497C7.15998 11.7432 7.27595 11.7084 7.37901 11.6481C7.48207 11.5877 7.56923 11.5037 7.63326 11.4029L11.1333 5.90291Z" fill="white"/></g><defs><clipPath id="clip-verified-est-mob"><rect width="16" height="16" fill="white"/></clipPath></defs></svg>
+                </p>
+                <p class="text-sm text-[#535862]">{t.title}</p>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="flex justify-center mt-8">
+        <a
+          href="/reviews"
+          class="inline-flex items-center justify-center px-[18px] py-3 text-base font-medium text-[#414651] border border-[#d5d7da] rounded-xl bg-white hover:bg-neutral-50 transition-colors shadow-[0px_1px_2px_0px_rgba(10,13,18,0.05)]"
+        >
+          See More Customer Testimonials
+        </a>
+      </div>
+    </div>
+    </div>
+
+    
+</section>
+
+
+<script>
+  function initTestimonialsMore() {
+    const btn = document.querySelector("[data-testimonials-expand]");
+    const moreCards = document.querySelectorAll("[data-testimonial-more]");
+    const toggleWrap = document.getElementById("testimonials-more-toggle");
+    if (!btn || !toggleWrap) return;
+    btn.addEventListener("click", () => {
+      moreCards.forEach((el) => el.classList.remove("hidden"));
+      toggleWrap.classList.add("hidden");
+    });
+  }
+  initTestimonialsMore();
+  document.addEventListener("astro:page-load", initTestimonialsMore);
+</script>

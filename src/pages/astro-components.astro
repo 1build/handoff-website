@@ -3,6 +3,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import Header from "@/components/sections/Header.astro";
 import Footer from "@/components/sections/Footer.astro";
 import { navItems, footerColumns } from "@/lib/navigation";
+import { getPageSeo } from "@/lib/seo-pages";
 
 const atoms = [
   {
@@ -258,14 +259,52 @@ const organisms = [
   },
 ];
 
+// Map component names to their anchor IDs on /components
+const previewIds: Record<string, string> = {
+  Button: "button",
+  Logo: "logo",
+  StarIcon: "star-icon",
+  ChevronDown: "chevron-down",
+  BulletIcon: "bullet-icon",
+  AppBadge: "app-badge",
+  CalloutBanner: "callout-banner",
+  TestimonialCard: "testimonial-card",
+  DetailRow: "detail-row",
+  SupplierLogosCarousel: "supplier-logos-carousel",
+  Header: "header",
+  Footer: "footer",
+  NewHeroSection: "new-hero-section",
+  HeroSection: "hero-section",
+  StatsStrip: "stats-strip",
+  SocialProofSection: "social-proof-section",
+  FeaturesSection: "features-section",
+  DetailedFeatures: "detailed-features",
+  FaqSection: "faq-section",
+  CtaSection: "cta-section",
+  OverviewSection: "overview-section",
+  NewsletterSection: "newsletter-section",
+  SupplierLogosSection: "supplier-logos-section",
+  FinHeroSection: "fin-hero-section",
+  FinFeaturesSection: "fin-features-section",
+  FinDetailedFeatures: "fin-detailed-features",
+  FinCtaSection: "fin-cta-section",
+  PricingSection: "pricing-section",
+  PricingCompareTable: "pricing-compare-table",
+  PricingFaqSection: "pricing-faq-section",
+  PricingFeatureStrip: "pricing-feature-strip",
+  PricingTestimonials: "pricing-testimonials",
+  PricingMetricsSection: "pricing-metrics-section",
+};
+
 const levels = [
   { title: "Atoms", subtitle: "Small, indivisible UI primitives — icons, buttons, badges", items: atoms, color: "brand-accent" },
   { title: "Molecules", subtitle: "Composite components built from atoms — cards, rows, carousels", items: molecules, color: "text-highlight" },
   { title: "Organisms", subtitle: "Full-width page sections — heroes, features, footers", items: organisms, color: "brand-300" },
 ];
+const seo = getPageSeo(Astro.url.pathname);
 ---
 
-<BaseLayout title="Astro Components — Handoff Design System">
+<BaseLayout {...seo}>
   <Header navItems={navItems} />
 
   <main class="bg-bg-primary">
@@ -352,11 +391,25 @@ const levels = [
                   <p class="text-xs text-text-tertiary italic mb-4">No props — self-contained component</p>
                 )}
 
-                <!-- Used on -->
-                <div class="flex flex-wrap gap-1.5">
-                  {comp.usedOn.map((page) => (
-                    <span class="text-xs bg-brand-50 text-brand-700 px-2 py-0.5 rounded-full">{page}</span>
-                  ))}
+                <!-- Used on + Preview button -->
+                <div class="flex items-center justify-between gap-4">
+                  <div class="flex flex-wrap gap-1.5">
+                    {comp.usedOn.map((page) => (
+                      <span class="text-xs bg-brand-50 text-brand-700 px-2 py-0.5 rounded-full">{page}</span>
+                    ))}
+                  </div>
+                  {previewIds[comp.name] && (
+                    <button
+                      data-preview={previewIds[comp.name]}
+                      class="preview-btn shrink-0 inline-flex items-center gap-1.5 text-xs font-semibold text-brand-accent hover:text-brand-700 transition-colors cursor-pointer"
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                      </svg>
+                      Preview
+                    </button>
+                  )}
                 </div>
               </div>
             ))}
@@ -404,4 +457,55 @@ const levels = [
 
   <Footer columns={footerColumns} />
 
+  <!-- Preview Modal -->
+  <div id="preview-modal" class="fixed inset-0 z-[9999] hidden">
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="preview-backdrop"></div>
+    <div class="absolute inset-4 md:inset-8 bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden">
+      <div class="flex items-center justify-between px-6 py-3 border-b border-border-primary bg-bg-secondary">
+        <span id="preview-title" class="font-mono text-sm font-semibold text-text-primary"></span>
+        <button id="preview-close" class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-200 transition-colors text-text-secondary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <iframe id="preview-iframe" class="flex-1 w-full border-0"></iframe>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('preview-modal');
+    const iframe = document.getElementById('preview-iframe') as HTMLIFrameElement;
+    const title = document.getElementById('preview-title');
+
+    function openPreview(anchorId: string, name: string) {
+      if (!modal || !iframe || !title) return;
+      title.textContent = name;
+      iframe.src = `/components?embed#${anchorId}`;
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePreview() {
+      if (!modal || !iframe) return;
+      modal.classList.add('hidden');
+      iframe.src = '';
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.preview-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const anchorId = (btn as HTMLElement).dataset.preview;
+        const name = btn.closest('[class*="rounded-xl"]')?.querySelector('h3')?.textContent?.trim() || '';
+        if (anchorId) openPreview(anchorId, name);
+      });
+    });
+
+    document.getElementById('preview-backdrop')?.addEventListener('click', closePreview);
+    document.getElementById('preview-close')?.addEventListener('click', closePreview);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closePreview();
+    });
+  </script>
 </BaseLayout>

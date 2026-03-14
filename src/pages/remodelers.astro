@@ -1,0 +1,149 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/sections/Header.astro";
+import Footer from "@/components/sections/Footer.astro";
+import FaqSection from "@/components/sections/FaqSection.astro";
+import RemodelersCta from "@/components/sections/RemodelersCta.astro";
+import RemodelersBenefitsSection from "@/components/sections/RemodelersBenefitsSection.astro";
+import RemodelerCommunitySection from "@/components/sections/RemodelerCommunitySection.astro";
+import Button from "@/components/ui/Button.astro";
+import bgPattern from "@/assets/images/background-pattern.png";
+import heroGlow from "@/assets/images/hero-glow-line.svg";
+import heroRemodeler from "@/assets/images/hero-remodeler.png";
+import iconFileCheck from "@/assets/icons/icon-file-check.svg";
+import iconBanknote from "@/assets/icons/icon-banknote.svg";
+import iconSend from "@/assets/icons/icon-send.svg";
+import { navItems, footerColumns } from "@/lib/navigation";
+import { getPageSeo } from "@/lib/seo-pages";
+
+const faqItems = [
+  {
+    question: "How does Handoff's trained AI handle change orders?",
+    answer: "Change orders are created directly in the platform, tracked automatically, and connected to the original estimate. You can see how changes affect the budget and timeline in real-time.",
+  },
+  {
+    question: "Can my whole team use it?",
+    answer: "Yes. You control who sees what through role-based permissions. Crew members see their schedules, project managers see project details, and you see everything.",
+  },
+  {
+    question: "Will this work when I'm running multiple projects?",
+    answer: "Yes. Handoff is built to help you scale. The more projects you run, the more valuable the automated coordination becomes. You can manage 3x more projects when you delegate admin work to your AI Teammate.",
+  },
+  {
+    question: 'How does "Crew Scheduling" work?',
+    answer: "You set crew availability and project phases. Handoff's trained AI coordinates schedules, sends notifications, and alerts you to conflicts automatically.",
+  },
+  {
+    question: "Can I customize it for how my business works?",
+    answer: "You can set up approval rules, authorization levels, and workflows that match how you actually run projects.",
+  },
+];
+const seo = getPageSeo(Astro.url.pathname);
+---
+
+<BaseLayout {...seo}>
+  <Header navItems={navItems} />
+<!-- Hero -->
+  <section id="hero" class="relative pt-20">
+    <!-- Background grid pattern -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 max-w-full w-[1920px] h-[1440px] pointer-events-none z-0">
+      <img src={bgPattern.src} alt="" class="w-full h-full block object-contain object-top" />
+    </div>
+
+    <!-- Glow line -->
+    <div class="absolute -top-[24%] -left-[14%] -right-[14%] max-w-full -bottom-[24%] pointer-events-none z-[1]">
+      <img src={heroGlow.src} alt="" class="w-full h-full block" />
+    </div>
+
+    <!-- Content -->
+    <div id="hero-container" class="relative z-[1] max-w-[1440px] mx-auto px-4 md:px-8 py-24 flex flex-col lg:flex-row items-center gap-12 lg:gap-16 will-change-[opacity,transform]">
+      <!-- Left: Text -->
+      <div class="flex-1 flex flex-col">
+        <p class="font-mono text-sm font-semibold leading-6 tracking-[0.56px] uppercase text-text-highlight mb-3">
+          Remodelers
+        </p>
+        <h1 class="font-display text-4xl sm:text-[44px] lg:text-[60px] xl:text-[72px] font-medium leading-[1.2] lg:leading-[1.25] tracking-[-1.44px] text-white mb-6">
+          Scale your remodeling business <span class="text-text-highlight">profitably</span>
+        </h1>
+        <p class="text-lg lg:text-xl font-medium leading-[30px] text-white max-w-[640px]">
+          Spend your time building and growing your business instead of chasing project details. Built for contractors, Handoff's trained AI manages all the documentation, scheduling, and crew coordination in one system, acting like your AI Teammate.
+        </p>
+        <div class="mt-12 w-full">
+          <a href="https://app.handoff.ai/sign-up/" class="inline-flex w-full md:w-auto items-center justify-center gap-1.5 font-medium text-base leading-6 rounded-xl px-5 py-2.5 h-12 whitespace-nowrap cursor-pointer bg-white/10 backdrop-blur-[4px] text-white transition-all duration-150 hover:bg-white/20">
+            See how it works
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: Hero visual -->
+      <div class="flex-1 relative z-[2] flex items-center justify-center">
+        <div class="relative w-full max-w-[600px] h-[570px]">
+          <!-- Diamond contractor photo -->
+          <img
+            src={heroRemodeler.src}
+            alt="Remodeling contractor using Handoff on site"
+            class="w-[536px] h-[513px] object-contain mx-auto"
+            loading="eager"
+            decoding="async"
+          />
+
+          <!-- Notification cards -->
+          <div class="absolute bottom-[3px] left-[16px] w-[330px] flex flex-col gap-0">
+            <!-- Card 1: Proposal approved (top, solid white) -->
+            <div class="bg-white rounded-xl p-4 shadow-[0px_21px_25px_-4px_rgba(10,13,18,0.08),0px_8px_8px_-4px_rgba(10,13,18,0.03)] flex items-start gap-4 relative z-30">
+              <div class="bg-[rgba(213,222,216,0.3)] rounded-lg p-2 shrink-0">
+                <img src={iconFileCheck.src} alt="" class="w-6 h-6" />
+              </div>
+              <div class="flex flex-col gap-0.5 min-w-0">
+                <p class="text-sm font-medium leading-5 text-text-brand-secondary">
+                  Master Bath Remodel proposal <span class="font-bold">approved</span> by Sarah Miller
+                </p>
+                <p class="text-xs font-medium leading-[18px] text-text-quaternary">Just now</p>
+              </div>
+            </div>
+
+            <!-- Card 2: Deposit received (middle, solid white, offset right) -->
+            <div class="bg-white rounded-xl p-4 shadow-[0px_21px_25px_-4px_rgba(10,13,18,0.08),0px_8px_8px_-4px_rgba(10,13,18,0.03)] flex items-start gap-4 ml-8 -mt-1 relative z-20">
+              <div class="bg-[rgba(213,222,216,0.3)] rounded-lg p-2 shrink-0">
+                <img src={iconBanknote.src} alt="" class="w-6 h-6" />
+              </div>
+              <div class="flex flex-col gap-0.5 min-w-0">
+                <p class="text-sm font-medium leading-5 text-text-brand-secondary">
+                  Deposit of <span class="font-bold">$8,500 received</span> for Kitchen Remodel project
+                </p>
+                <p class="text-xs font-medium leading-[18px] text-text-quaternary">2m ago</p>
+              </div>
+            </div>
+
+            <!-- Card 3: Proposal sent (bottom, faded) -->
+            <div class="bg-gradient-to-b from-white from-[49%] to-transparent rounded-xl p-4 opacity-80 flex items-start gap-4 -mt-1 relative z-10">
+              <div class="bg-[rgba(213,222,216,0.3)] rounded-lg p-2 shrink-0">
+                <img src={iconSend.src} alt="" class="w-6 h-6" />
+              </div>
+              <div class="flex flex-col gap-0.5 min-w-0">
+                <p class="text-sm font-medium leading-5 text-text-brand-secondary">
+                  Kitchen Remodel <span class="font-bold">proposal sent</span> successfully to Olivia Rhye
+                </p>
+                <p class="text-xs font-medium leading-[18px] text-text-quaternary">15m ago</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <RemodelersBenefitsSection />
+  <RemodelerCommunitySection />
+  <FaqSection items={faqItems} />
+
+  <RemodelersCta />
+
+  <Footer columns={footerColumns} />
+</BaseLayout>
+
+<script>
+  import { initScrollAnimations } from "@/lib/animations";
+  import { initHeroScroll } from "@/lib/heroScroll";
+  initScrollAnimations();
+  initHeroScroll();
+</script>

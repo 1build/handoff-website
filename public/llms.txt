@@ -1,0 +1,29 @@
+# Handoff
+
+> Handoff is an AI-powered construction software for residential remodelers, home builders, and trade contractors. Set your rules once — Handoff applies them across every estimate, proposal, change order, and project so more of what you bill turns into profit.
+
+Handoff helps contractors generate accurate estimates instantly, win more jobs with branded proposals, manage clients and projects in one place, and handle admin with AI. Built for the US residential construction market.
+
+## Key pages
+
+- [Home](https://handoff.ai/): Product overview and AI Teammate value proposition
+- [Pricing](https://handoff.ai/pricing): Plans, free trial, and feature comparison
+- [Who we serve](https://handoff.ai/): Home builders, remodelers, handymen, fix-and-flip
+- [Instant AI estimates](https://handoff.ai/instant-ai-estimates): AI-driven estimating for construction
+- [Project management](https://handoff.ai/project-management): Run projects without more admin
+- [CRM & pipeline](https://handoff.ai/crm-pipeline-management): Turn leads into signed contracts
+- [Change orders](https://handoff.ai/change-orders): Streamlined change order workflow
+- [Invoicing](https://handoff.ai/invoicing): Get paid faster
+- [Blog](https://handoff.ai/blog): Tips, case studies, guides, and product updates
+- [Reviews](https://handoff.ai/reviews): Contractor testimonials and reviews
+- [Careers](https://handoff.ai/careers): Open roles at Handoff
+- [Construction costs](https://handoff.ai/construction-costs): Free construction cost estimator and guides
+- [Comparisons](https://handoff.ai/comparison): Handoff vs Jobber, CoConstruct, Buildertrend, and others
+
+## Optional
+
+- [Contractor webinars](https://handoff.ai/contractor-webinars): Live sessions for contractors
+- [Contractor course](https://handoff.ai/contractor-course): Run a more profitable business with less admin
+- [Help center](https://help.handoff.ai/): Support and documentation
+- [Terms of use](https://handoff.ai/terms-of-use)
+- [Privacy policy](https://handoff.ai/privacy-policy)

@@ -1,0 +1,49 @@
+---
+import DetailRowClientManagement from "./DetailRowClientManagement.astro";
+import filesInChat from "@/assets/images/Creating Estimates From Files/Files in chat@2x.webp";
+import attachFromProjectFiles from "@/assets/images/Creating Estimates From Files/Attach from project files@2x.webp";
+import projectFilesOrganized from "@/assets/images/Creating Estimates From Files/Project files organized@2x.webp";
+
+const rows = [
+  {
+    eyebrow: "Creating Estimates",
+    title: "Our AI reads drawings, photos, videos, audio & docs",
+    description: "Upload blueprints, progress photos, walkthrough videos, voice notes, or spreadsheets. Handoff uses AI to extract dimensions, count windows, transcribe audio, and auto‑tag files—then generates a detailed estimate using a simple prompt.",
+    reverse: false,
+    visualType: "desktop" as const,
+    visualImages: [filesInChat],
+  },
+  {
+    eyebrow: "Handoff Capabilities",
+    title: "Supported File Types",
+    description: "Handoff organizes all project file types, with AI processing for specific formats to enhance estimates. Handoff can analyze the following file types to create and edit estimates: PDF drawings, documents, spreadsheets, images, videos, and audio.",
+    reverse: true,
+    visualType: "phones" as const,
+    visualImages: [projectFilesOrganized],
+  },
+  {
+    eyebrow: "File Upload Options",
+    title: "Two Methods to Upload Files and Create Estimates",
+    description: "Handoff offers two ways to create estimates from files:\nMethod 1: upload your files directly to the AI Chat. Best for small file sets.\nMethod 2: upload your files into your project, then talk to AI Chat. Best for analyzing a high volume of files at once.",
+    reverse: false,
+    visualType: "desktop" as const,
+    visualImages: [attachFromProjectFiles],
+  },
+];
+---
+
+<section class="relative z-[2] px-4 pb-4">
+  <div class="max-w-[1920px] mx-auto bg-white rounded-3xl py-16 lg:py-24 overflow-hidden flex flex-col gap-20 lg:gap-40">
+    {rows.map((r) => (
+      <DetailRowClientManagement
+        eyebrow={r.eyebrow}
+        title={r.title}
+        description={r.description}
+        reverse={r.reverse}
+        visualType={r.visualType}
+        visualImages={r.visualImages}
+        placeholder={r.placeholder}
+      />
+    ))}
+  </div>
+</section>

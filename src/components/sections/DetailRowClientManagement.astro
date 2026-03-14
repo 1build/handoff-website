@@ -1,0 +1,63 @@
+---
+import Button from "@/components/ui/Button.astro";
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  description: string;
+  reverse?: boolean;
+  visualType: "desktop" | "phones" | "isometric";
+  visualImages?: ImageMetadata[];
+  placeholder?: string;
+}
+
+const { eyebrow, title, description, reverse = false, visualType, visualImages, placeholder } = Astro.props;
+
+const images: string[] = (visualImages || []).map((img) => img.src);
+---
+
+<div class:list={[
+  "max-w-[1440px] mx-auto px-6 lg:px-8 w-full flex flex-col lg:flex-row items-center gap-12 lg:gap-24",
+  reverse && "lg:flex-row-reverse"
+]} data-animate="fade-up">
+  <!-- Text -->
+  <div class="flex-1 flex flex-col py-6 min-w-0">
+    <p class="font-mono text-sm font-semibold leading-6 tracking-[0.56px] uppercase text-text-quaternary mb-3">
+      {eyebrow}
+    </p>
+    <h3 class="font-display text-[28px] lg:text-4xl font-medium leading-9 lg:leading-[44px] tracking-[-0.72px] text-text-primary mb-5">
+      {title}
+    </h3>
+    <p class="text-xl font-medium leading-[30px] text-text-tertiary">
+      {description}
+    </p>
+    <div class="mt-8">
+      <a href="https://app.handoff.ai/sign-up/" class="inline-flex items-center justify-center gap-1.5 font-medium text-base leading-6 rounded-xl transition-all duration-150 whitespace-nowrap cursor-pointer bg-white text-text-secondary border border-border-primary shadow-xs hover:bg-neutral-50 px-5 py-2.5 ">Get started</a>
+    </div>
+  </div>
+
+  <!-- Visual -->
+  <div class="flex-1 min-w-0 rounded-xl overflow-hidden h-[400px] lg:h-[512px] bg-detail-visual-bg relative">
+    {visualType === "desktop" && images[0] && (
+      <img src={images[0]} alt="Dashboard screenshot" class="w-full h-full object-cover" loading="lazy" decoding="async" />
+    )}
+
+    {visualType === "phones" && images[0] && (
+      <img src={images[0]} alt={placeholder || "Feature screenshot"} class="w-full h-full object-cover" loading="lazy" decoding="async" />
+    )}
+
+    {visualType === "isometric" && images.length >= 3 && (
+      <div class="relative w-full h-full flex items-center justify-center iso-stack">
+        <img src={images[0]} alt="Handoff app screenshot" class="absolute w-[280px] h-auto top-10 left-1/2 iso-card-1 z-[3] rounded-xl object-cover shadow-[0_32px_64px_-12px_rgba(10,13,18,0.18)]" loading="lazy" decoding="async" />
+        <img src={images[1]} alt="Handoff app screenshot" class="absolute w-[240px] h-auto top-[120px] right-0 iso-card z-[2] rounded-xl object-cover shadow-[0_32px_64px_-12px_rgba(10,13,18,0.18)]" loading="lazy" decoding="async" />
+        <img src={images[2]} alt="Handoff app screenshot" class="absolute w-[220px] h-auto bottom-10 left-5 iso-card z-[1] rounded-xl object-cover shadow-[0_32px_64px_-12px_rgba(10,13,18,0.18)]" loading="lazy" decoding="async" />
+      </div>
+    )}
+
+    {placeholder && !images.length && (
+      <div class="absolute inset-0 flex items-center justify-center">
+        <p class="text-white/80 text-lg font-medium">{placeholder}</p>
+      </div>
+    )}
+  </div>
+</div>

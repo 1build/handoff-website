@@ -1,0 +1,68 @@
+---
+import bgPattern from "@/assets/images/background-pattern.png";
+import heroGlow from "@/assets/images/hero-glow-line.svg";
+import estimatesImg from "@/assets/images/Heros/AI Teammate.webp";
+interface Props { headingLevel?: 1 | 2 }
+const { headingLevel = 1 } = Astro.props;
+const HeadingTag = headingLevel === 2 ? "h2" : "h1";
+---
+
+<section class="relative pt-20">
+  <!-- Background grid pattern -->
+  <div class="absolute inset-0 pointer-events-none z-0 opacity-30">
+    <img src={bgPattern.src} alt="" class="w-full h-full object-cover object-top" />
+  </div>
+
+  <!-- Glow line -->
+  <div class="absolute -top-[24%] -left-[14%] -right-[14%] max-w-full -bottom-[24%] pointer-events-none z-[1]">
+    <img src={heroGlow.src} alt="" class="w-full h-full block" />
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-[2] max-w-[1440px] mx-auto px-4 md:px-8 pt-20 pb-0 flex flex-col items-center text-center">
+    <!-- Eyebrow -->
+    <p
+      class="font-mono text-sm font-semibold leading-6 tracking-[0.56px] uppercase text-text-on-brand-tertiary mb-6"
+      data-animate="fade-up"
+    >
+      Instructions &amp; Templates
+    </p>
+
+    <!-- Heading -->
+    <HeadingTag
+      class="font-display text-5xl sm:text-6xl lg:text-[72px] font-medium leading-[1.1] lg:leading-[90px] tracking-[-1.44px] text-white mb-6 max-w-[900px]"
+      data-animate="fade-up"
+    >
+      Train an <span class="text-text-highlight">AI Teammate</span> to run your construction business
+    </HeadingTag>
+
+    <!-- Description -->
+    <p
+      class="text-xl font-medium leading-[30px] text-white max-w-[680px] mb-10"
+      data-animate="fade-up"
+    >
+      Stop double-checking every estimate your team sends. Built for contractors, Handoff's trained AI applies your markup rules, templates, and real pricing, so every output looks like your business, every time.
+    </p>
+
+    <!-- CTA -->
+    <div class="mb-16" data-animate="fade-up">
+      <a
+        href="/ai-agent"
+        class="inline-flex items-center justify-center gap-1.5 px-5 py-3 text-base font-medium leading-6 rounded-xl transition-all duration-150 whitespace-nowrap bg-white/10 backdrop-blur-md text-white hover:bg-white/20"
+      >
+        See how it works
+      </a>
+    </div>
+
+  </div>
+
+  <!-- Product mockup -->
+  <div class="relative z-[2] w-full" data-animate="fade-up">
+    <img
+      src={estimatesImg.src}
+      alt="Train your AI assistant — Handoff"
+      class="w-full h-auto block"
+      loading="eager"
+    />
+  </div>
+</section>

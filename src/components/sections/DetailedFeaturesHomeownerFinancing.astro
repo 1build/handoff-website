@@ -1,0 +1,40 @@
+---
+import DetailRowClientManagement from "./DetailRowClientManagement.astro";
+import inAppModal from "@/assets/images/Client Financing/In app modal@2x.webp";
+import estimateFinancingApproved from "@/assets/images/Client Financing/Estimate Financing approved@2x.webp";
+
+const rows = [
+  {
+    eyebrow: "enable homeowner financing",
+    title: "Enable homeowner financing for all proposals at no cost to you",
+    description: "Available on Pro and custom plans.\nWith the Handoff–Acorn Finance integration, contractors can offer financing directly from estimates and invoices. Once enabled in settings, a financing banner appears automatically on proposals and invoices. Homeowners can explore loan options without impacting their credit score. This feature is free for contractors, with no hidden fees.",
+    reverse: false,
+    visualType: "desktop" as const,
+    visualImages: [inAppModal],
+  },
+  {
+    eyebrow: "Close More deals",
+    title: "Close more deals and upsell projects by offering free financing",
+    description: "Available on Pro and custom plans.\nOnce a customer is pre-qualified, they can compare offers from over 12 lenders and choose the option that works best for them. If they move forward, they are redirected to the lender's site to complete the process. Contractors can track application status directly in Handoff for full visibility.",
+    reverse: true,
+    visualType: "phones" as const,
+    visualImages: [estimateFinancingApproved],
+  },
+];
+---
+
+<section class="relative z-[2] px-4 pb-4">
+  <div class="max-w-[1920px] mx-auto bg-white rounded-3xl py-16 lg:py-24 overflow-hidden flex flex-col gap-20 lg:gap-40">
+    {rows.map((r) => (
+      <DetailRowClientManagement
+        eyebrow={r.eyebrow}
+        title={r.title}
+        description={r.description}
+        reverse={r.reverse}
+        visualType={r.visualType}
+        visualImages={r.visualImages}
+        placeholder={r.placeholder}
+      />
+    ))}
+  </div>
+</section>

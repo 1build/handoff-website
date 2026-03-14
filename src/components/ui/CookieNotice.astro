@@ -1,0 +1,155 @@
+---
+---
+
+<div
+  id="cookie-notice"
+  role="dialog"
+  aria-label="Cookie notice"
+  aria-live="polite"
+  class="cookie-notice"
+>
+  <div class="cookie-notice__header">
+    <span class="cookie-notice__title">Notice</span>
+    <button
+      id="cookie-dismiss"
+      aria-label="Dismiss cookie notice"
+      class="cookie-notice__close"
+    >
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M13 1L1 13M1 1L13 13" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+  <p class="cookie-notice__body">
+    We use cookies and third-party tracking tools to collect data about how our site is used. This helps us improve your experience and assist in marketing efforts. Learn more in our{" "}
+    <a href="/privacy-policy" class="cookie-notice__link">privacy policy.</a>
+  </p>
+</div>
+
+<style>
+  .cookie-notice {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    z-index: 9999;
+    width: 100%;
+    max-width: 340px;
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border-primary);
+    border-radius: var(--radius-xl);
+    padding: 16px 18px 18px;
+    box-shadow: var(--shadow-3xl);
+    font-family: var(--font-body);
+
+    /* Entry animation */
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .cookie-notice.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .cookie-notice.is-dismissed {
+    opacity: 0;
+    transform: translateY(12px);
+    pointer-events: none;
+  }
+
+  .cookie-notice__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .cookie-notice__title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    letter-spacing: -0.01em;
+  }
+
+  .cookie-notice__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: transparent;
+    color: var(--color-text-tertiary);
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    transition: color 0.15s ease, background 0.15s ease;
+    flex-shrink: 0;
+  }
+
+  .cookie-notice__close:hover {
+    color: var(--color-text-primary);
+    background: var(--color-bg-secondary);
+  }
+
+  .cookie-notice__body {
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  .cookie-notice__link {
+    color: var(--color-brand-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.15s ease;
+  }
+
+  .cookie-notice__link:hover {
+    color: var(--color-brand-500);
+  }
+
+  @media (max-width: 400px) {
+    .cookie-notice {
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      max-width: calc(100% - 24px);
+    }
+  }
+</style>
+
+<script>
+  const STORAGE_KEY = "handoff_cookie_notice_dismissed";
+
+  function init() {
+    const notice = document.getElementById("cookie-notice");
+    const dismissBtn = document.getElementById("cookie-dismiss");
+
+    if (!notice || !dismissBtn) return;
+
+    // Check if already dismissed
+    if (localStorage.getItem(STORAGE_KEY) === "1") {
+      notice.remove();
+      return;
+    }
+
+    // Show with a slight delay so it doesn't flash on page load
+    requestAnimationFrame(() => {
+      setTimeout(() => notice.classList.add("is-visible"), 600);
+    });
+
+    dismissBtn.addEventListener("click", () => {
+      notice.classList.add("is-dismissed");
+      localStorage.setItem(STORAGE_KEY, "1");
+      setTimeout(() => notice.remove(), 400);
+    });
+  }
+
+  // Run on initial load and after Astro View Transitions
+  init();
+  document.addEventListener("astro:after-swap", init);
+</script>

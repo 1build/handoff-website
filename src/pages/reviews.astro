@@ -1,0 +1,122 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/sections/Header.astro";
+import Footer from "@/components/sections/Footer.astro";
+import ReviewsSection from "@/components/sections/ReviewsSection.astro";
+import AppDownloadCtaSection from "@/components/sections/AppDownloadCtaSection.astro";
+import bgPattern from "@/assets/images/background-pattern.png";
+import heroGlow from "@/assets/images/hero-glow-line.svg";
+import videoThumbnail from "@/assets/images/See In Action Video Thumbnail.webp";
+import { navItems, footerColumns } from "@/lib/navigation";
+import { getPageSeo } from "@/lib/seo-pages";
+
+const seo = getPageSeo(Astro.url.pathname);
+---
+
+<BaseLayout {...seo}>
+  <Header navItems={navItems} />
+
+  <!-- Hero Section -->
+  <section class="relative overflow-visible pt-20 bg-brand-800">
+    <!-- Background grid pattern -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1920px] h-[1440px] pointer-events-none z-0 opacity-30">
+      <img src={bgPattern.src} alt="" class="w-full h-full block object-contain object-top" />
+    </div>
+
+    <!-- Glow line -->
+    <div class="absolute -top-[24%] -left-[14%] -right-[14%] -bottom-[24%] pointer-events-none z-[1]">
+      <img src={heroGlow.src} alt="" class="w-full h-full block" />
+    </div>
+
+    <!-- Content -->
+    <div class="relative z-[2] max-w-[1280px] mx-auto px-8 pt-24 pb-0 flex flex-col items-center text-center">
+      <!-- Eyebrow -->
+      <p class="font-mono text-sm font-semibold leading-6 tracking-[0.56px] uppercase text-text-on-brand-tertiary mb-4" data-animate="fade-up">
+        Reviews
+      </p>
+
+      <!-- Heading -->
+      <h1 class="font-display text-5xl sm:text-6xl lg:text-[72px] font-medium leading-[1.1] lg:leading-[90px] tracking-[-1.44px] text-white mb-6 max-w-[960px]" data-animate="fade-up">
+        Contractors love Handoff
+      </h1>
+
+      <!-- Supporting text -->
+      <p class="text-xl font-medium leading-[30px] text-white max-w-[768px] mb-10" data-animate="fade-up">
+        But don&rsquo;t take our word for it, see for yourself. Check out real testimonials from actual contractors using Handoff to scale their construction businesses.
+      </p>
+
+      <!-- CTA -->
+      <div class="flex items-center justify-center mb-16" data-animate="fade-up">
+        <a
+          href="https://app.handoff.ai/sign-up/"
+          class="inline-flex items-center justify-center gap-1.5 px-5 py-3 text-base font-medium leading-6 rounded-xl transition-all duration-150 whitespace-nowrap bg-white/10 backdrop-blur-md text-white hover:bg-white/20 shadow-xs"
+        >
+          See how it works
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Video (overlaps into next section) -->
+  <div class="relative z-[3] max-w-[1280px] mx-auto px-8 mb-[-200px] lg:mb-[-280px]" data-animate="fade-up">
+    <div id="reviews-video-wrapper" class="relative rounded-2xl overflow-hidden aspect-video shadow-2xl cursor-pointer">
+      <video
+        id="reviews-video"
+        class="w-full h-full block object-cover"
+        playsinline
+        preload="auto"
+        poster={videoThumbnail.src}
+      >
+        <source src="https://www.handoff.ai/assets/hndf-delivery-video.webm" type="video/webm" />
+      </video>
+      <!-- Play button overlay -->
+      <div id="reviews-play-overlay" class="absolute inset-0 flex items-center justify-center bg-black/20 transition-opacity duration-200">
+        <button
+          type="button"
+          class="flex items-center justify-center w-20 h-20 rounded-full bg-white/20 backdrop-blur-md hover:bg-white/30 transition-colors duration-200"
+          aria-label="Play video"
+        >
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" class="translate-x-0.5">
+            <path d="M6 4.5L19.5 12L6 19.5V4.5Z" fill="white" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const video = document.getElementById('reviews-video') as HTMLVideoElement;
+    const overlay = document.getElementById('reviews-play-overlay') as HTMLDivElement;
+    const wrapper = document.getElementById('reviews-video-wrapper') as HTMLDivElement;
+
+    overlay?.addEventListener('click', () => {
+      video.controls = true;
+      overlay.style.opacity = '0';
+      overlay.style.pointerEvents = 'none';
+      wrapper.style.cursor = 'default';
+      video.play();
+    });
+
+    video?.addEventListener('pause', () => {
+      if (video.ended || video.currentTime === 0) {
+        overlay.style.opacity = '1';
+        overlay.style.pointerEvents = 'auto';
+        wrapper.style.cursor = 'pointer';
+      }
+    });
+
+    video?.addEventListener('ended', () => {
+      overlay.style.opacity = '1';
+      overlay.style.pointerEvents = 'auto';
+      wrapper.style.cursor = 'pointer';
+      video.controls = false;
+    });
+  </script>
+
+  <div class="pt-[200px] lg:pt-[280px]">
+    <ReviewsSection />
+  </div>
+  <AppDownloadCtaSection />
+  <Footer columns={footerColumns} />
+</BaseLayout>
