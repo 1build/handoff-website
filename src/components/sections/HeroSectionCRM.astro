@@ -3,6 +3,9 @@ import bgPattern from "@/assets/images/background-pattern.png";
 import heroGlow from "@/assets/images/hero-glow-line.svg";
 import heroImage from "@/assets/images/Heros/CRM Hub.webp";
 
+interface Props { headingLevel?: 1 | 2 }
+const { headingLevel = 1 } = Astro.props;
+const HeadingTag = headingLevel === 2 ? "h2" : "h1";
 
 const eyebrow = "Construction-Trained AI for Sales and Lead Intake";
 const titleStart = "Never lose money to ";
