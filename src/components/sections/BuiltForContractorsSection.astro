@@ -120,9 +120,9 @@ const featureRows = chunk(featureTiles, 2);
               <p class="text-base lg:text-lg text-text-tertiary">
                 {tile.description}
               </p>
-              <a href={tile.learnMoreHref ?? "#"} class="inline-flex items-center gap-3 text-brand-600 font-semibold hover:text-brand-700 transition-colors">
+              <a href={tile.learnMoreHref ?? "#"} class="inline-flex items-center gap-3 text-brand-600 font-semibold hover:text-brand-700 transition-colors" aria-label={`Learn more about ${tile.title}`}>
                 Learn more
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path d="M0.833496 6.66683H12.5002M12.5002 6.66683L6.66683 0.833496M12.5002 6.66683L6.66683 12.5002" stroke="#4E6D5D" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </a>

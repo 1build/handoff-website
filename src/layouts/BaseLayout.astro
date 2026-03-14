@@ -82,6 +82,7 @@ const imageAltForMeta = imageAlt?.trim() || titleForMeta || "Handoff";
     <meta name="twitter:image:alt" content={imageAltForMeta} />
     <meta name="twitter:image:width" content="1200" />
     <meta name="twitter:image:height" content="630" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -200,7 +201,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <CookieNotice />
     <SpeedInsights />
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",

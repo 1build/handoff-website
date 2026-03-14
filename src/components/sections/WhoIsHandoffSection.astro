@@ -69,6 +69,7 @@ const cards = [
                 <a
                   href={card.href}
                   class="inline-flex items-center gap-2 font-body font-medium text-brand-600 hover:text-brand-700 transition-colors mt-2 group"
+                  aria-label={`Learn more about ${card.label}`}
                 >
                   Learn more
                   <svg
@@ -78,6 +79,7 @@ const cards = [
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                     class="transition-transform group-hover:translate-x-1"
+                    aria-hidden="true"
                   >
                     <path
                       d="M3.333 8h9.334M8.667 4l4 4-4 4"

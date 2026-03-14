@@ -131,9 +131,9 @@ const bottomCards = [
             <p class="text-base font-normal leading-6 text-text-tertiary">
               {card.desc}
             </p>
-            <a href={card.link} class="inline-flex items-center gap-2 text-sm font-semibold leading-5 text-brand-600 hover:text-brand-700 transition-colors">
+            <a href={card.link} class="inline-flex items-center gap-2 text-sm font-semibold leading-5 text-brand-600 hover:text-brand-700 transition-colors" aria-label={`Learn more about ${card.title}`}>
               Learn more
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                 <path d="M3.333 8h9.334M8.667 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </a>
