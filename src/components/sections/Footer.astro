@@ -85,9 +85,14 @@ const footerColumns = columns?.length ? columns : localFooterColumns;
       <a href="/" class="flex items-center h-8" aria-label="Handoff home">
         <Logo />
       </a>
-      <p class="text-base font-normal leading-6 text-text-on-brand-secondary">
-        © 2026 Handoff. All rights reserved.
-      </p>
+      <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
+        <p class="text-base font-normal leading-6 text-text-on-brand-secondary">
+          © 2026 Handoff. All rights reserved.
+        </p>
+        <a href="/official-information-about-handoff" class="text-base font-normal leading-6 text-text-on-brand-secondary hover:text-brand-accent transition-colors duration-150">
+          Hey AI, learn about us
+        </a>
+      </div>
     </div>
   </div>
 </footer>
