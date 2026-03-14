@@ -40,30 +40,23 @@ const solutionsBaseFeatures: NavLink[] = [
   { label: "AI agent", href: "/ai-agent" },
   { label: "AI documents", href: "/ai-documents" },
   { label: "AI transcription", href: "/ai-transcription" },
+  { label: "Client portal", href: "/client-management-system" },
 ];
 
-// Per-solution feature groups (currently overlapping / similar,
-// but structured so they can diverge later without code changes).
-const salesAndMarketingFeatures: NavLink[] = [
-  solutionsBaseFeatures[0], // Instant AI estimates
-  solutionsBaseFeatures[1], // Winning AI proposals
-  solutionsBaseFeatures[2], // Client management CRM
-  solutionsBaseFeatures[3], // Project management
-  solutionsBaseFeatures[4], // Change orders
-  solutionsBaseFeatures[5], // File management
-  solutionsBaseFeatures[6], // Estimates from files
-  solutionsBaseFeatures[7], // Customer financing
-  solutionsBaseFeatures[8], // Customer financing
-  solutionsBaseFeatures[9],  // AI agent
+// Per-solution feature groups
+const crmPipelineFeatures: NavLink[] = [
+  solutionsBaseFeatures[0],  // Instant AI estimates
+  solutionsBaseFeatures[12], // Client portal
+  solutionsBaseFeatures[1],  // Winning AI proposals
+  solutionsBaseFeatures[6],  // Estimates from files
   solutionsBaseFeatures[10], // AI documents
-  solutionsBaseFeatures[11], // AI transcription
 ];
 
 const projectManagementFeatures: NavLink[] = [
-  solutionsBaseFeatures[3], // Project management
-  solutionsBaseFeatures[4], // Change orders
-  solutionsBaseFeatures[5], // File management
-  solutionsBaseFeatures[6], // Estimates from files
+  solutionsBaseFeatures[12], // Client portal
+  solutionsBaseFeatures[5],  // File management
+  solutionsBaseFeatures[1],  // Winning AI proposals
+  solutionsBaseFeatures[4],  // Change orders
 ];
 
 const financialBusinessFeatures: NavLink[] = [
@@ -73,18 +66,16 @@ const financialBusinessFeatures: NavLink[] = [
 
 const aiTeammateFeatures: NavLink[] = [
   solutionsBaseFeatures[9],  // AI agent
-  solutionsBaseFeatures[10], // AI documents
   solutionsBaseFeatures[11], // AI transcription
-  solutionsBaseFeatures[0],  // Instant AI estimates
 ];
 
 export const navItems: NavItem[] = [
   {
     label: "Who We Serve",
     items: [
-      { label: "Established remodelers", href: "/remodelers", description: "See how contractors win with Handoff", iconName: "book-closed" },
-      { label: "New and small remodeling businesses", href: "/fix-and-flip", description: "Tips, trends, and product updates", iconName: "pencil-line" },
-      { label: "Trade contractors and handymen", href: "/handyman", description: "Step by step playbooks for your business", iconName: "book-open-01" },
+      { label: "Home Builders", href: "/builders", iconName: "book-closed" },
+      { label: "Remodelers", href: "/remodelers", iconName: "pencil-line" },
+      { label: "Trade Contractors & Handymen", href: "/handyman", iconName: "book-open-01" },
     ],
   },
   {
@@ -92,28 +83,28 @@ export const navItems: NavItem[] = [
     wide: true,
     items: [
       {
-        label: "Sales and marketing growth",
-        href: "/sales-marketing-growth",
+        label: "CRM & Pipeline Management",
+        href: "/crm-pipeline-management",
         description: "Turn leads into signed contracts",
         iconName: "book-closed",
-        features: salesAndMarketingFeatures,
+        features: crmPipelineFeatures,
       },
       {
-        label: "Project management and operations",
+        label: "Project Management",
         href: "/project-management",
         description: "One system from estimate to completion",
         iconName: "stars-02",
         features: projectManagementFeatures,
       },
       {
-        label: "Financial and business management",
-        href: "/financial-business-solution",
+        label: "Financial Management",
+        href: "/financial-management",
         description: "Get paid faster. Know your numbers",
         iconName: "play-circle",
         features: financialBusinessFeatures,
       },
       {
-        label: "AI teammate",
+        label: "AI Teammate",
         href: "/ai-teammate",
         description: "Your always-on estimating partner",
         iconName: "file-code",
@@ -131,42 +122,44 @@ export const navItems: NavItem[] = [
       {
         label: "Learn",
         items: [
-          { label: "Case studies", href: "/blog#blog-list", description: "See how contractors win with Handoff", iconName: "book-closed" },
+          { label: "Case studies", href: "/blog?category=Case Studies", description: "See how contractors win with Handoff", iconName: "book-closed" },
           { label: "Blog", href: "/blog", description: "Tips, trends, and product updates", iconName: "pencil-line" },
-          { label: "Guides", href: "/blog#blog-list", description: "Step by step playbooks for your business", iconName: "book-open-01" },
+          { label: "Guides", href: "/blog?category=Guides", description: "Step by step playbooks for your business", iconName: "book-open-01" },
           { label: "Webinars", href: "/contractor-webinars", description: "Live sessions with industry pros.", iconName: "play-circle" },
+          { label: "Comparisons", href: "/comparison", description: "Compare Handoff to the competition", iconName: "compare" },
+          { label: "Construction Costs", href: "/construction-costs", description: "Accurate construction cost estimates", iconName: "tag-01" },
         ],
       },
       {
         label: "Community",
         items: [
           { label: "Testimonials", href: "/reviews", description: "Real stories from real contractors", iconName: "message-text-circle-02" },
-          { label: "Platform updates", href: "/blog#blog-list", description: "What's new in Handoff", iconName: "announcement-01" },
+          { label: "Platform updates", href: "/blog?category=Updates", description: "What's new in Handoff", iconName: "announcement-01" },
           { label: "Contractor course", href: "/contractor-course", description: "Level up your remodeling business", iconName: "graduation-hat-01" },
-          { label: "Careers", href: "/careers", description: "Build something that matters", iconName: "briefcase-02" },
-          { label: "Handoff Nation community", href: "/", description: "Connect with contractors like you", iconName: "users-plus" },
+          { label: "Handoff Nation community", href: "https://www.facebook.com/groups/820048150161667/", description: "Connect with contractors like you", iconName: "users-plus" },
         ],
       },
     ],
     items: [
-      { label: "Case studies", href: "/" },
+      { label: "Case studies", href: "/blog?category=Case Studies" },
       { label: "Blog", href: "/blog" },
-      { label: "Guides", href: "/" },
+      { label: "Guides", href: "/blog?category=Guides" },
       { label: "Webinars", href: "/contractor-webinars" },
-      { label: "Testimonials", href: "/" },
-      { label: "Platform updates", href: "/" },
-      { label: "Contractor course", href: "/" },
-      { label: "Careers", href: "/careers" },
-      { label: "Handoff Nation community", href: "/" },
+      { label: "Comparisons", href: "/comparison" },
+      { label: "Construction Costs", href: "/construction-costs" },
+      { label: "Testimonials", href: "/reviews" },
+      { label: "Platform updates", href: "/blog?category=Updates" },
+      { label: "Contractor course", href: "/contractor-course" },
+      { label: "Handoff Nation community", href: "https://www.facebook.com/groups/820048150161667/" },
     ],
   },
   {
     label: "Support",
     items: [
-      { label: "Contact us", href: "/", description: "We're here to help", iconName: "book-closed" },
       { label: "Help center", href: "https://help.handoff.ai/en/", description: "Find answers fast", iconName: "pencil-line" },
     ],
   },
+  { label: "We're Hiring", href: "/careers" },
 ];
 
 export interface FooterColumn {
@@ -177,36 +170,52 @@ export interface FooterColumn {
 
 export const footerColumns: FooterColumn[] = [
   {
-    title: "Product",
+    title: "Useful Links",
     links: [
-      { label: "Overview", href: "/" },
-      { label: "Features", href: "/" },
-      { label: "Solutions", href: "/", badge: "New" },
-      { label: "Tutorials", href: "/" },
+      { label: "Home", href: "/" },
       { label: "Pricing", href: "/pricing" },
-      { label: "Releases", href: "/" },
-    ],
-  },
-  {
-    title: "Company",
-    links: [
-      { label: "About us", href: "/" },
-      { label: "Careers", href: "/careers" },
-      { label: "Press", href: "/" },
-      { label: "News", href: "/" },
-      { label: "Media kit", href: "/" },
-      { label: "Contact", href: "/" },
-    ],
-  },
-  {
-    title: "Resources",
-    links: [
+      { label: "Compare", href: "/comparison", badge: "New" },
       { label: "Blog", href: "/blog" },
-      { label: "Newsletter", href: "/" },
-      { label: "Events", href: "/" },
-      { label: "Help centre", href: "https://help.handoff.ai/en/" },
-      { label: "Tutorials", href: "/" },
-      { label: "Support", href: "/" },
+      { label: "Careers", href: "/careers" },
+      { label: "1build", href: "/1build" },
+      { label: "Construction Costs", href: "/construction-costs" },
+      { label: "Become an Affiliate", href: "https://handoff.trackdesk.com/sign-up" },
+      { label: "Contractor Webinars", href: "/contractor-webinars" },
+    ],
+  },
+  {
+    title: "Features",
+    links: [
+      { label: "Instant AI Estimates", href: "/instant-ai-estimates" },
+      { label: "CRM", href: "/client-management-system" },
+      { label: "Winning AI Proposals", href: "/winning-ai-proposals" },
+      { label: "Invoicing", href: "/invoicing" },
+      { label: "Project Management", href: "/project-management" },
+      { label: "Change Orders", href: "/change-orders" },
+      { label: "AI Agent", href: "/ai-agent" },
+      { label: "File Management", href: "/file-management" },
+      { label: "Customer Financing", href: "/homeowner-financing" },
+      { label: "Creating Estimates from Files", href: "/creating-estimates-from-files" },
+      { label: "AI Documents", href: "/ai-documents" },
+      { label: "AI Transcription", href: "/ai-transcription" },
+    ],
+  },
+  {
+    title: "Who We Serve",
+    links: [
+      { label: "Home Builders", href: "/builders" },
+      { label: "Remodelers", href: "/remodelers" },
+      { label: "Handyman", href: "/handyman" },
+      { label: "Fix and Flip", href: "/fix-and-flip" },
+    ],
+  },
+  {
+    title: "Blog Categories",
+    links: [
+      { label: "Case Studies", href: "/blog?category=Case Studies" },
+      { label: "Updates", href: "/blog?category=Updates" },
+      { label: "Resources", href: "/blog?category=Resources" },
+      { label: "Guides", href: "/blog?category=Guides" },
     ],
   },
   {
@@ -215,20 +224,9 @@ export const footerColumns: FooterColumn[] = [
       { label: "Twitter", href: "https://twitter.com/HandoffAI" },
       { label: "LinkedIn", href: "https://www.linkedin.com/company/handoff-ai/" },
       { label: "Facebook", href: "https://facebook.com/handoffai" },
-      { label: "GitHub", href: "/" },
-      { label: "AngelList", href: "/" },
-      { label: "Dribbble", href: "/" },
-    ],
-  },
-  {
-    title: "Legal",
-    links: [
-      { label: "Terms", href: "/terms-of-use" },
-      { label: "Privacy", href: "/privacy-policy" },
-      { label: "Cookies", href: "/" },
-      { label: "Licenses", href: "/" },
-      { label: "Settings", href: "/" },
-      { label: "Contact", href: "/" },
+      { label: "Instagram", href: "https://www.instagram.com/handoffai/" },
+      { label: "Youtube", href: "https://www.youtube.com/@HandoffAI" },
+      { label: "TikTok", href: "https://www.tiktok.com/@handoffai" },
     ],
   },
 ];
@@ -258,5 +256,44 @@ export const faqItems: FaqItem[] = [
   {
     question: "Does this replace my estimators?",
     answer: "No — it makes them faster. Handoff handles the repetitive work so your team can focus on accuracy, client relationships, and winning more projects.",
+  },
+];
+
+export const pricingFaqItems: FaqItem[] = [
+  {
+    question: "Is there a free trial available?",
+    answer: "Yes. 7 days free, no credit card required. We'll set up a 30-minute call to train the AI to your business so you get the most use out of your trial.",
+  },
+  {
+    question: "Where does your cost data come from?",
+    answer: "Directly from suppliers and based on over 100,000 residential construction estimates. Handoff integrates with Home Depot, Lowe's, and other major suppliers for real-time materials pricing and tracks labor rates across every city in the US. Pricing updates daily so your estimates reflect what things actually cost right now.",
+  },
+  {
+    question: "Does this work for my type of business?",
+    answer: "Yes. Handoff is built for anyone in residential construction who needs fast, accurate estimates and a more connected project management solution. Handoff is commonly used by:<ul class=\"list-disc pl-5 mt-2 space-y-1\"><li>Home builders and design-build firms</li><li>Remodelers and general contractors</li><li>Kitchen, bath, and specialty contractors</li><li>Electricians, plumbers, HVAC, and other trades</li><li>Handymen and small crews</li><li>Property managers and real estate investors</li></ul><p class=\"mt-2\">And many more trade-based businesses.</p>",
+  },
+  {
+    question: "When will you have a feature I need?",
+    answer: "Track what we're building on our public roadmap and submit requests anytime. Pro plan users get early access when new features ship.",
+  },
+  {
+    question: "Do you have an online community for Handoff clients?",
+    answer: "Yes. We have a Facebook community group called Handoff Nation. Jump in, ask questions, and see how other contractors are using Handoff to win more work.",
+  },
+  {
+    question: "What kind of affiliate or ambassador program do you have?",
+    answer: "We offer both. Affiliates earn commission for referrals, and ambassadors earn cash or gift cards for creating content for Handoff. Pick the one that fits and start earning.",
+  },
+  {
+    question: "Do you offer homeowner financing options?",
+    answer: "Yes. Pro plan users can offer financing on every proposal through our partner Acorn Finance. It's optional and costs you nothing, but it helps clients say yes to bigger jobs.",
+  },
+  {
+    question: "Can your AI read my drawings, photos, and other files I upload?",
+    answer: "Yes. Upload drawings, photos, or documents and Handoff pulls out the details (square footage, quantities, material lists, and more) to build a more accurate estimate automatically.",
+  },
+  {
+    question: "What's the difference between Standard onboarding and Success Coach onboarding?",
+    answer: "Standard onboarding gets you set up with guided resources at your own pace. Success Coach onboarding is hands-on and one-on-one. We train the AI to your workflow, your pricing, and your process so you hit the ground running.",
   },
 ];
