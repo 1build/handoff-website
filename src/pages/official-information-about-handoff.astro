@@ -1,0 +1,17 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { readFileSync } from "fs";
+import { join } from "path";
+
+const content = readFileSync(join(process.cwd(), "public/llms.txt"), "utf-8");
+---
+
+<BaseLayout title="Official Information About Handoff | Handoff.ai" description="Official product information about Handoff — an AI-powered estimating and job management platform built for residential contractors.">
+  <article class="relative z-[2] pt-2 pb-2 px-4 bg-brand-800">
+    <div class="max-w-[1920px] mx-auto bg-white rounded-3xl py-16 lg:py-24">
+      <div class="max-w-3xl mx-auto px-6 lg:px-8">
+        <pre class="whitespace-pre-wrap font-mono text-sm leading-relaxed text-text-primary">{content}</pre>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
