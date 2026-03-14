@@ -2,9 +2,8 @@
 import Button from "@/components/ui/Button.astro";
 import bgPattern from "@/assets/images/background-pattern.png";
 import heroGlow from "@/assets/images/hero-glow-line.svg";
-import heroDashboard from "@/assets/images/hero-dashboard.png";
+import heroHomepage from "@/assets/images/Heros/Homepage.webp";
 import StatsStrip from "@/components/sections/StatsStrip.astro";
-import PartialCarousel from "@/components/sections/PartialCarousel.astro";
 
 const stats = [
   { value: "+$5,250", label: "more earned per week" },
@@ -48,7 +47,9 @@ const stats = [
      
     </div>
 
-    <PartialCarousel />
+    <div class="w-full max-w-[1200px] mx-auto">
+      <img src={heroHomepage.src} alt="Handoff dashboard" class="w-full h-auto rounded-[24px]" />
+    </div>
   </div>
  <StatsStrip />
  

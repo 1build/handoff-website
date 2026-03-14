@@ -11,7 +11,7 @@ const description = "Using Handoff AI is like having your personal AI assistant.
 const ctaText = "See how it works";
 ---
 
-<section id="hero" class="hero-fixed oveflow-hidden relative">
+<section id="hero" class="hero-fixed overflow-visible relative">
   <!-- Background grid pattern -->
   <div class="absolute top-0 left-1/2 -translate-x-1/2 max-w-full w-[1920px] h-[1440px] pointer-events-none z-0">
     <img src={bgPattern.src} alt="" class="w-full h-full block object-contain object-top" />
@@ -44,16 +44,14 @@ const ctaText = "See how it works";
     </div>
 
     <!-- Hero visual -->
-    <div class="flex-1 h-[550px] relative z-[2]">
-      <div class="absolute left-1/2 -translate-x-1/2 top-0 w-[440px] h-[672px] overflow-clip rounded-tl-[32px] rounded-tr-[32px]">
-        <img
-          src={heroImage.src}
-          alt="AI Agent"
-          class="w-full h-full object-cover object-top"
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
+    <div class="flex-1 relative z-[2] flex items-end justify-end">
+      <img
+        src={heroImage.src}
+        alt="AI Agent"
+        class="w-full h-auto -mb-24"
+        loading="lazy"
+        decoding="async"
+      />
     </div>
   </div>
 </section>

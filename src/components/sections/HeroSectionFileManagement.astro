@@ -2,7 +2,7 @@
 import Button from "@/components/ui/Button.astro";
 import bgPattern from "@/assets/images/background-pattern.png";
 import heroGlow from "@/assets/images/hero-glow-line.svg";
-import placeholder from "@/assets/images/placeholder-img.png";
+import heroImage from "@/assets/images/Heros/File management.webp";
 
 
 const eyebrow = "file management";
@@ -43,12 +43,12 @@ const ctaText = "See how it works";
       </div>
     </div>
 
-    <!-- Hero visual placeholder -->
-    <div class="flex-1 relative z-[2] bg-[rgba(255,255,255,0.1)] backdrop-blur-[4px] rounded-3xl p-6">
+    <!-- Hero visual -->
+    <div class="flex-1 relative z-[2] rounded-3xl overflow-hidden">
       <img
-                src={placeholder.src}
+                src={heroImage.src}
                 alt=""
-                class="w-full h-auto rounded-xl"
+                class="w-full h-auto rounded-3xl"
                 loading="lazy"
                 decoding="async"
               />
