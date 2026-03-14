@@ -11,6 +11,12 @@ import avatar8 from "@/assets/images/avatar8.png";
 import avatar9 from "@/assets/images/avatar9.png";
 import CustomerStorySection from "@/components/sections/CustomerStorySection.astro";
 
+interface Props {
+  hideCustomerStory?: boolean;
+}
+
+const { hideCustomerStory = false } = Astro.props;
+
 const testimonials = [
   {
     name: "Scott",
@@ -89,7 +95,7 @@ const testimonials = [
 const visibleOnMobile = 6;
 ---
 <section class="px-4 pt-4">
-<div class="relative z-[2] overflow-hidden py-10 md:py-16 lg:py-20 bg-[linear-gradient(180deg,_#D5DED8_0%,_#F4F6F4_80%,_#FFFFFF_100%)] rounded-3xl" data-animate="fade-up">
+<div class="max-w-[1920px] mx-auto relative z-[2] overflow-hidden py-10 md:py-16 lg:py-20 bg-[linear-gradient(180deg,_#D5DED8_0%,_#F4F6F4_80%,_#FFFFFF_100%)] rounded-3xl" data-animate="fade-up">
   <div class="absolute top-[10%] right-0  pointer-events-none z-[2]">
     <img src={bgPattern.src} alt="" class="w-full h-full block object-contain object-top" />
   </div>
@@ -174,7 +180,7 @@ const visibleOnMobile = 6;
     </div>
   </div>
   
-  <CustomerStorySection />
+  {!hideCustomerStory && <CustomerStorySection />}
   </div>
 </section>
 

@@ -13,24 +13,24 @@ import card3Image from "@/assets/images/Card 3.png";
   <Header navItems={navItems} />
 
   <article class="relative z-[2] pt-32 pb-2 px-4 bg-brand-800">
-    <div class="max-w-[1920px] mx-auto bg-white rounded-3xl py-16 lg:py-24">
+    <div class="max-w-[1920px] mx-auto bg-white rounded-3xl py-10 lg:py-24">
 
       <!-- Page Header — 1build brand -->
-      <header class="max-w-[1280px] mx-auto px-6 lg:px-8" data-animate="fade-up">
-        <div class="flex items-end justify-between">
+      <header class="max-w-[1280px] mx-auto px-5 lg:px-8" data-animate="fade-up">
+        <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 lg:gap-0">
 
           <!-- Left: Brand name + login button + description -->
           <div class="flex flex-col gap-4 items-start">
             <!-- Row 1: Brand name + login button -->
-            <div class="flex flex-wrap gap-5 items-center">
-              <h1 class="font-display text-[40px] font-bold leading-[48px] tracking-[-2.56px] text-[#0f0f0f]">
+            <div class="flex flex-wrap gap-4 lg:gap-5 items-center">
+              <h1 class="font-display text-[32px] lg:text-[40px] font-bold leading-[40px] lg:leading-[48px] tracking-[-2.56px] text-[#0f0f0f]">
                 1build
               </h1>
               <a
                 href="https://app2.1build.com/public/login"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex items-center gap-2 border border-[rgba(15,15,15,0.1)] rounded-full px-[21px] py-[14px] text-[13px] font-medium uppercase tracking-[1.12px] text-[#0f0f0f] leading-[1.4] whitespace-nowrap hover:bg-[rgba(15,15,15,0.05)] transition-colors duration-200"
+                class="inline-flex items-center gap-2 border border-[rgba(15,15,15,0.1)] rounded-full px-4 py-3 lg:px-[21px] lg:py-[14px] text-[12px] lg:text-[13px] font-medium uppercase tracking-[1.12px] text-[#0f0f0f] leading-[1.4] whitespace-nowrap hover:bg-[rgba(15,15,15,0.05)] transition-colors duration-200"
               >
                 Login to 1build
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -40,11 +40,11 @@ import card3Image from "@/assets/images/Card 3.png";
             </div>
 
             <!-- Row 2: Description paragraphs -->
-            <div class="flex flex-col gap-4 items-start max-w-[640px]">
-              <p class="text-[20px] font-normal leading-[28px] text-[#6f6f6f]">
+            <div class="flex flex-col gap-3 lg:gap-4 items-start max-w-[640px]">
+              <p class="text-[16px] lg:text-[20px] font-normal leading-[24px] lg:leading-[28px] text-[#6f6f6f]">
                 1build is a team of engineers, data scientists, and company builders.
               </p>
-              <p class="text-[20px] font-normal leading-[28px] text-[#6f6f6f]">
+              <p class="text-[16px] lg:text-[20px] font-normal leading-[24px] lg:leading-[28px] text-[#6f6f6f]">
                 We&rsquo;re working on AI that can run a construction company, so contractors can
                 focus on what they do best: building beautiful spaces for their clients.
               </p>
@@ -52,11 +52,11 @@ import card3Image from "@/assets/images/Card 3.png";
           </div>
 
           <!-- Right: Carousel navigation -->
-          <div class="flex items-center gap-8 shrink-0 pb-1">
+          <div class="flex items-center gap-6 lg:gap-8 shrink-0 pb-1">
             <button
               id="carousel-prev"
               aria-label="Previous slide"
-              class="flex items-center justify-center w-11 h-11 rounded-full border border-[rgba(15,15,15,0.1)] transition-opacity duration-200"
+              class="flex items-center justify-center w-10 h-10 lg:w-11 lg:h-11 rounded-full border border-[rgba(15,15,15,0.1)] transition-opacity duration-200"
               style="opacity:0.3"
             >
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -73,7 +73,7 @@ import card3Image from "@/assets/images/Card 3.png";
             <button
               id="carousel-next"
               aria-label="Next slide"
-              class="flex items-center justify-center w-11 h-11 rounded-full border border-[rgba(15,15,15,0.1)] hover:bg-[rgba(15,15,15,0.04)] transition-colors duration-200"
+              class="flex items-center justify-center w-10 h-10 lg:w-11 lg:h-11 rounded-full border border-[rgba(15,15,15,0.1)] hover:bg-[rgba(15,15,15,0.04)] transition-colors duration-200"
             >
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path d="M6 12L10 8L6 4" stroke="#0f0f0f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -85,36 +85,36 @@ import card3Image from "@/assets/images/Card 3.png";
       </header>
 
       <!-- Divider -->
-      <div class="max-w-[1280px] mx-auto px-6 lg:px-8 mt-12">
+      <div class="max-w-[1280px] mx-auto px-5 lg:px-8 mt-8 lg:mt-12">
         <div class="border-t border-border-primary"></div>
       </div>
 
       <!-- Carousel of product cards -->
-      <div class="relative mt-10" data-animate="fade-up">
+      <div class="relative mt-8 lg:mt-10" data-animate="fade-up">
 
         <!-- Carousel viewport: overflow hidden, left-padded to match header -->
         <div class="overflow-hidden">
-          <div class="pl-6 lg:pl-[max(1.5rem,calc((100%-1280px)/2+2rem))]">
+          <div class="pl-5 lg:pl-[max(1.5rem,calc((100%-1280px)/2+2rem))]">
             <div
               id="carousel-track"
-              class="flex gap-6"
+              class="flex gap-4 lg:gap-6"
               style="transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); will-change: transform;"
             >
 
               <!-- Card 1: Handoff (green) -->
-              <div class="shrink-0 w-[800px] h-[420px] rounded-[20px] relative overflow-hidden isolate flex" style="background:#183f2e">
+              <div class="carousel-card shrink-0 w-[calc(100vw-56px)] lg:w-[800px] h-[360px] lg:h-[420px] rounded-[16px] lg:rounded-[20px] relative overflow-hidden isolate flex flex-col lg:flex-row" style="background:#183f2e">
                 <!-- Text content -->
-                <div class="relative z-10 flex flex-col justify-between p-8 shrink-0 w-[368px]">
-                  <span class="text-[20px] font-bold leading-[28px] tracking-[-0.48px] text-white">Handoff</span>
-                  <div class="flex flex-col gap-6">
-                    <h2 class="text-[28px] font-bold leading-[39.2px] tracking-[-0.56px] text-white m-0">
+                <div class="relative z-10 flex flex-col justify-between p-6 lg:p-8 shrink-0 lg:w-[368px]">
+                  <span class="text-[16px] lg:text-[20px] font-bold leading-[24px] lg:leading-[28px] tracking-[-0.48px] text-white">Handoff</span>
+                  <div class="flex flex-col gap-4 lg:gap-6 mt-4 lg:mt-0">
+                    <h2 class="text-[22px] lg:text-[28px] font-bold leading-[30px] lg:leading-[39.2px] tracking-[-0.56px] text-white m-0">
                       Instantly create<br><span class="whitespace-nowrap">construction estimates</span><br>with AI.
                     </h2>
                     <a
                       href="https://app.handoff.ai/sign-up"
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="inline-flex items-center gap-2 bg-white rounded-full pl-6 pr-4 py-2 text-[16px] font-bold text-[#0f0f0f] leading-[24px] w-fit no-underline hover:bg-[rgba(255,255,255,0.9)] transition-colors duration-200"
+                      class="inline-flex items-center gap-2 bg-white rounded-full pl-5 pr-3 lg:pl-6 lg:pr-4 py-2 text-[14px] lg:text-[16px] font-bold text-[#0f0f0f] leading-[24px] w-fit no-underline hover:bg-[rgba(255,255,255,0.9)] transition-colors duration-200"
                     >
                       Start an estimate
                       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -124,7 +124,7 @@ import card3Image from "@/assets/images/Card 3.png";
                   </div>
                 </div>
                 <!-- Decorative SVG behind mockup -->
-                <div class="absolute z-[1] pointer-events-none" aria-hidden="true" style="left:333px;top:-15px;width:500px;height:540px;">
+                <div class="absolute z-[1] pointer-events-none hidden lg:block" aria-hidden="true" style="left:333px;top:-15px;width:500px;height:540px;">
                   <svg width="500" height="540" viewBox="0 0 500 540" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <mask id="mask0_10186_63807" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="4" y="0" width="492" height="532">
                       <path d="M68.9727 199.684C147.931 137.191 173.197 119.662 197.06 104.617C301.034 39.0671 278.246 74.5113 335.06 78.7255C357.753 80.4087 381.209 88.4711 393.119 110.264C403.43 129.132 376.146 151.862 365.31 162.081C315.018 209.513 254.721 247.031 198.953 286.821C172.383 305.778 144.84 325.134 126.991 353.886C109.148 382.63 97.1998 425.442 140.95 427.951C173.164 429.799 206.014 406.794 231.993 389.252C263.008 368.307 291.343 342.97 322.418 322.131C345.585 306.596 371.441 301.517 397.958 305.831C437.336 312.238 436.857 378.985 421.341 405.807C410.878 423.893 386.492 444.859 384.183 466.94" fill="#7ED6AC"/>
@@ -137,30 +137,30 @@ import card3Image from "@/assets/images/Card 3.png";
                 </div>
 
                 <!-- Product screenshot -->
-                <div class="absolute right-0 bottom-0 z-[2] pointer-events-none" aria-hidden="true" style="width:420px;height:420px;overflow:hidden;">
+                <div class="absolute right-0 bottom-0 z-[2] pointer-events-none" aria-hidden="true" style="overflow:hidden;">
                   <img
                     src="https://www.figma.com/api/mcp/asset/e44c119f-9c6d-4b12-ad22-28801bf64b96"
                     alt="Handoff app showing a construction estimate"
-                    class="absolute bottom-0 right-0 h-[372px] w-auto max-w-none object-contain object-bottom-right"
+                    class="absolute bottom-0 right-0 h-[200px] lg:h-[372px] w-auto max-w-none object-contain object-bottom-right"
                     style="object-position:bottom right;"
                   />
                 </div>
               </div>
 
               <!-- Card 2: 1build Estimating Service (navy) -->
-              <div class="shrink-0 w-[800px] h-[420px] rounded-[20px] relative overflow-hidden isolate flex" style="background:#1e2644">
+              <div class="carousel-card shrink-0 w-[calc(100vw-56px)] lg:w-[800px] h-[360px] lg:h-[420px] rounded-[16px] lg:rounded-[20px] relative overflow-hidden isolate flex flex-col lg:flex-row" style="background:#1e2644">
                 <!-- Text content -->
-                <div class="relative z-10 flex flex-col justify-between p-8 shrink-0 w-[368px]">
-                  <span class="text-[20px] font-bold leading-[28px] tracking-[-0.48px] text-white">1build Estimating Service</span>
-                  <div class="flex flex-col gap-6">
-                    <h2 class="text-[28px] font-bold leading-[39.2px] tracking-[-0.56px] text-white m-0">
+                <div class="relative z-10 flex flex-col justify-between p-6 lg:p-8 shrink-0 lg:w-[368px]">
+                  <span class="text-[16px] lg:text-[20px] font-bold leading-[24px] lg:leading-[28px] tracking-[-0.48px] text-white">1build Estimating Service</span>
+                  <div class="flex flex-col gap-4 lg:gap-6 mt-4 lg:mt-0">
+                    <h2 class="text-[22px] lg:text-[28px] font-bold leading-[30px] lg:leading-[39.2px] tracking-[-0.56px] text-white m-0">
                       <span class="whitespace-nowrap">Let our estimators help</span><br>with your bids.
                     </h2>
                     <a
                       href="https://estimating.1build.com/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="inline-flex items-center gap-2 bg-white rounded-full pl-6 pr-4 py-2 text-[16px] font-bold text-[#0f0f0f] leading-[24px] w-fit no-underline hover:bg-[rgba(255,255,255,0.9)] transition-colors duration-200"
+                      class="inline-flex items-center gap-2 bg-white rounded-full pl-5 pr-3 lg:pl-6 lg:pr-4 py-2 text-[14px] lg:text-[16px] font-bold text-[#0f0f0f] leading-[24px] w-fit no-underline hover:bg-[rgba(255,255,255,0.9)] transition-colors duration-200"
                     >
                       Hire an estimator
                       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -170,7 +170,7 @@ import card3Image from "@/assets/images/Card 3.png";
                   </div>
                 </div>
                 <!-- Decorative SVG behind mockup -->
-                <div class="absolute z-[1] pointer-events-none" aria-hidden="true" style="left:361px;top:-105px;width:750px;height:503.878px;">
+                <div class="absolute z-[1] pointer-events-none hidden lg:block" aria-hidden="true" style="left:361px;top:-105px;width:750px;height:503.878px;">
                   <svg width="750" height="503.878" viewBox="-7 -104.939 750 503.878" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#card2-clip0)">
                       <g clip-path="url(#card2-clip1)">
@@ -208,33 +208,38 @@ import card3Image from "@/assets/images/Card 3.png";
                 </div>
 
                 <!-- Product screenshot -->
-                <div class="absolute right-0 bottom-0 z-[2] pointer-events-none overflow-hidden" aria-hidden="true" style="width:400px;height:420px;">
+                <div class="absolute right-0 bottom-0 z-[2] pointer-events-none overflow-hidden" aria-hidden="true">
                   <img
                     src="https://www.figma.com/api/mcp/asset/635aa556-7973-4fbb-a5ce-1e463593c554"
                     alt="1build estimating service interface"
-                    class="absolute max-w-none object-cover"
+                    class="absolute max-w-none object-cover hidden lg:block"
                     style="width:499.98px;height:631.31px;left:10px;top:-126.26px;"
+                  />
+                  <img
+                    src="https://www.figma.com/api/mcp/asset/635aa556-7973-4fbb-a5ce-1e463593c554"
+                    alt="1build estimating service interface"
+                    class="absolute max-w-none object-cover lg:hidden right-0 bottom-0 w-[200px] h-auto"
                   />
                 </div>
               </div>
 
               <!-- Card 3: 1build API (light) -->
-              <div class="shrink-0 w-[800px] h-[420px] rounded-[20px] relative overflow-hidden isolate flex" style="background:#EDEDED">
+              <div class="carousel-card shrink-0 w-[calc(100vw-56px)] lg:w-[800px] h-[360px] lg:h-[420px] rounded-[16px] lg:rounded-[20px] relative overflow-hidden isolate flex flex-col lg:flex-row" style="background:#EDEDED">
                 <!-- Red decorative circles -->
-                <div class="absolute z-[1] pointer-events-none" aria-hidden="true" style="left:390px;top:-72px;width:220px;height:220px;border-radius:50%;border:2px solid rgba(210,45,25,0.65);"></div>
-                <div class="absolute z-[1] pointer-events-none" aria-hidden="true" style="left:488px;bottom:-52px;width:160px;height:160px;border-radius:50%;border:2px solid rgba(210,45,25,0.65);"></div>
+                <div class="absolute z-[1] pointer-events-none hidden lg:block" aria-hidden="true" style="left:390px;top:-72px;width:220px;height:220px;border-radius:50%;border:2px solid rgba(210,45,25,0.65);"></div>
+                <div class="absolute z-[1] pointer-events-none hidden lg:block" aria-hidden="true" style="left:488px;bottom:-52px;width:160px;height:160px;border-radius:50%;border:2px solid rgba(210,45,25,0.65);"></div>
                 <!-- Text content -->
-                <div class="relative z-10 flex flex-col justify-between p-8 shrink-0 w-[368px] h-full">
-                  <span class="text-[20px] font-bold leading-[28px] tracking-[-0.48px] text-[#0f0f0f]">1build API</span>
-                  <div class="flex flex-col gap-6">
-                    <h2 class="text-[28px] font-bold leading-[39.2px] tracking-[-0.56px] text-[#0f0f0f] m-0">
+                <div class="relative z-10 flex flex-col justify-between p-6 lg:p-8 shrink-0 lg:w-[368px] h-full">
+                  <span class="text-[16px] lg:text-[20px] font-bold leading-[24px] lg:leading-[28px] tracking-[-0.48px] text-[#0f0f0f]">1build API</span>
+                  <div class="flex flex-col gap-4 lg:gap-6 mt-4 lg:mt-0">
+                    <h2 class="text-[22px] lg:text-[28px] font-bold leading-[30px] lg:leading-[39.2px] tracking-[-0.56px] text-[#0f0f0f] m-0">
                       Embed real time<br>construction costs in<br>your application.
                     </h2>
                     <a
                       href="https://uy83jp615hl.typeform.com/to/j7bL1QHr?typeform-source=app2.1build.com"
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="inline-flex items-center gap-2 bg-[#0f0f0f] rounded-full pl-6 pr-4 py-2 text-[16px] font-bold text-white leading-[24px] w-fit no-underline hover:bg-[#333] transition-colors duration-200"
+                      class="inline-flex items-center gap-2 bg-[#0f0f0f] rounded-full pl-5 pr-3 lg:pl-6 lg:pr-4 py-2 text-[14px] lg:text-[16px] font-bold text-white leading-[24px] w-fit no-underline hover:bg-[#333] transition-colors duration-200"
                     >
                       Join waitlist
                       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -244,11 +249,11 @@ import card3Image from "@/assets/images/Card 3.png";
                   </div>
                 </div>
                 <!-- Product mockup image -->
-                <div class="absolute right-0 top-0 z-[2] pointer-events-none" aria-hidden="true" style="width:400px;height:420px;overflow:hidden;">
+                <div class="absolute right-0 top-0 z-[2] pointer-events-none" aria-hidden="true" style="overflow:hidden;">
                   <img
                     src={card3Image.src}
                     alt="1build API pricing interface showing construction cost rates"
-                    class="absolute top-0 right-0 w-[400px] max-w-none h-auto"
+                    class="absolute top-0 right-0 w-[200px] lg:w-[400px] max-w-none h-auto"
                   />
                 </div>
               </div>
@@ -286,13 +291,19 @@ import card3Image from "@/assets/images/Card 3.png";
   const dots = document.querySelectorAll<HTMLButtonElement>("#carousel-dots button");
 
   const TOTAL_SLIDES = 3;
-  const CARD_WIDTH = 800;
-  const GAP = 24;
   let current = 0;
+
+  function getCardDimensions() {
+    const isLg = window.matchMedia("(min-width: 1024px)").matches;
+    const cardWidth = isLg ? 800 : window.innerWidth - 56;
+    const gap = isLg ? 24 : 16;
+    return { cardWidth, gap };
+  }
 
   function updateCarousel() {
     if (!track) return;
-    track.style.transform = `translateX(-${current * (CARD_WIDTH + GAP)}px)`;
+    const { cardWidth, gap } = getCardDimensions();
+    track.style.transform = `translateX(-${current * (cardWidth + gap)}px)`;
 
     dots.forEach((dot, i) => {
       if (i === current) {
@@ -319,6 +330,24 @@ import card3Image from "@/assets/images/Card 3.png";
   dots.forEach((dot, i) => {
     dot.addEventListener("click", () => { current = i; updateCarousel(); });
   });
+
+  // Touch/swipe support for mobile
+  let touchStartX = 0;
+  let touchEndX = 0;
+  track?.addEventListener("touchstart", (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+  track?.addEventListener("touchend", (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0 && current < TOTAL_SLIDES - 1) { current++; updateCarousel(); }
+      else if (diff < 0 && current > 0) { current--; updateCarousel(); }
+    }
+  }, { passive: true });
+
+  // Recalculate on resize
+  window.addEventListener("resize", updateCarousel, { passive: true });
 
   updateCarousel();
 </script>

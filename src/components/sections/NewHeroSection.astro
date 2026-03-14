@@ -14,14 +14,14 @@ const stats = [
 
 ---
 
-<section class="relative overflow-hidden pt-20">
+<section class="relative pt-20 [overflow-x:clip]">
   <!-- Background grid pattern -->
   <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1920px] h-[1440px] pointer-events-none z-0">
     <img src={bgPattern.src} alt="" class="w-full h-full block object-contain object-top" />
   </div>
 
   <!-- Glow line -->
-  <div class="absolute -top-[24%] -left-[14%] -right-[14%] -bottom-[24%] pointer-events-none z-[1]">
+  <div class="absolute top-0 -left-[14%] -right-[14%] -bottom-[24%] pointer-events-none z-[1]">
     <img src={heroGlow.src} alt="" class="w-full h-full block" />
   </div>
 

@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 html {
   scrollbar-gutter: stable;
 }
@@ -131,7 +136,7 @@ html {
 .hero-fixed {
   position: sticky;
   top: 0;
-  overflow: hidden;
+  overflow: visible;
   padding: 8px 16px 0;
   padding-top: 80px;
   z-index: 0;
