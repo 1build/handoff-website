@@ -4,6 +4,7 @@ import SpeedInsights from "@vercel/speed-insights/astro";
 import "../styles/global.css";
 import CookieNotice from "@/components/ui/CookieNotice.astro";
 import {
+  DEFAULT_OG_IMAGE,
   getCanonicalUrl,
   getDefaultDescription,
   getDefaultJsonLd,
@@ -26,8 +27,13 @@ const {
 } = Astro.props;
 
 const canonicalUrl = getCanonicalUrl(canonicalPath ?? Astro.url.pathname);
-const ogImage = resolveImageUrl(image);
+const ogImage = resolveImageUrl(image ?? DEFAULT_OG_IMAGE);
 const defaultSchema = getDefaultJsonLd(canonicalUrl);
+
+// Ensure Twitter/OG meta never get empty values (validators require non-empty)
+const titleForMeta = title?.trim() || "Handoff";
+const descriptionForMeta = description?.trim() || getDefaultDescription();
+const imageAltForMeta = imageAlt?.trim() || titleForMeta || "Handoff";
 ---
 
 <!doctype html>
@@ -35,7 +41,7 @@ const defaultSchema = getDefaultJsonLd(canonicalUrl);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={description} />
+    <meta name="description" content={descriptionForMeta} />
     
     <!-- Google Tag Manager -->
     <script is:inline>
@@ -60,25 +66,29 @@ const defaultSchema = getDefaultJsonLd(canonicalUrl);
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:title" content={titleForMeta} />
+    <meta property="og:description" content={descriptionForMeta} />
     <meta property="og:site_name" content="Handoff" />
     <meta property="og:locale" content="en_US" />
-    {ogImage && <meta property="og:image" content={ogImage} />}
-    {ogImage && imageAlt && <meta property="og:image:alt" content={imageAlt} />}
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content={ogImage ? "summary_large_image" : "summary"} />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    {ogImage && <meta name="twitter:image" content={ogImage} />}
-    {ogImage && imageAlt && <meta name="twitter:image:alt" content={imageAlt} />}
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content={imageAltForMeta} />
+    <!-- Twitter Card (summary_large_image: card, title, description, image, site; image:alt and creator for completeness) -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@HandoffAI" />
+    <meta name="twitter:creator" content="@HandoffAI" />
+    <meta name="twitter:title" content={titleForMeta} />
+    <meta name="twitter:description" content={descriptionForMeta} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={imageAltForMeta} />
+    <meta name="twitter:image:width" content="1200" />
+    <meta name="twitter:image:height" content="630" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <title>{title}</title>
+    <title>{titleForMeta}</title>
     <script type="application/ld+json" set:html={JSON.stringify(defaultSchema)} />
     {jsonLd && (
       <script type="application/ld+json" set:html={JSON.stringify(Array.isArray(jsonLd) ? { "@context": "https://schema.org", "@graph": jsonLd } : jsonLd)} />

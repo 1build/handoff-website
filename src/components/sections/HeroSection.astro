@@ -4,6 +4,9 @@ import bgPattern from "@/assets/images/background-pattern.png";
 import heroGlow from "@/assets/images/hero-glow-line.svg";
 import placeholder from "@/assets/images/placeholder-img.png";
 
+interface Props { headingLevel?: 1 | 2 }
+const { headingLevel = 1 } = Astro.props;
+const HeadingTag = headingLevel === 2 ? "h2" : "h1";
 
 const eyebrow = "Construction-Trained AI for Sales and Lead Intake";
 const titleStart = "Never lose money to ";
@@ -29,9 +32,9 @@ const ctaText = "See how it works";
       <p class="font-mono text-sm font-semibold leading-6 tracking-[0.56px] uppercase text-text-on-brand-tertiary mb-3">
         {eyebrow}
       </p>
-      <h1 class="font-display text-4xl sm:text-[44px] lg:text-[60px] font-medium leading-[1.2] lg:leading-[72px] tracking-[-1.2px] text-white mb-6">
+      <HeadingTag class="font-display text-4xl sm:text-[44px] lg:text-[60px] font-medium leading-[1.2] lg:leading-[72px] tracking-[-1.2px] text-white mb-6">
         {titleStart}<span class="text-text-highlight">{titleHighlight}</span>
-      </h1>
+      </HeadingTag>
       <p class="text-lg lg:text-xl font-medium leading-[30px] text-white max-w-full md:max-w-[560px]">
         {description}
       </p>

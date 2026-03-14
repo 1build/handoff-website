@@ -48,9 +48,9 @@ const images: string[] = (visualImages || []).map((img) => img.src);
 
     {visualType === "isometric" && images.length >= 3 && (
       <div class="relative w-full h-full flex items-center justify-center iso-stack">
-        <img src={images[0]} alt="" class="absolute w-[280px] h-auto top-10 left-1/2 iso-card-1 z-[3] rounded-xl object-cover shadow-[0_32px_64px_-12px_rgba(10,13,18,0.18)]" loading="lazy" decoding="async" />
-        <img src={images[1]} alt="" class="absolute w-[240px] h-auto top-[120px] right-0 iso-card z-[2] rounded-xl object-cover shadow-[0_32px_64px_-12px_rgba(10,13,18,0.18)]" loading="lazy" decoding="async" />
-        <img src={images[2]} alt="" class="absolute w-[220px] h-auto bottom-10 left-5 iso-card z-[1] rounded-xl object-cover shadow-[0_32px_64px_-12px_rgba(10,13,18,0.18)]" loading="lazy" decoding="async" />
+        <img src={images[0]} alt="Handoff app screenshot" class="absolute w-[280px] h-auto top-10 left-1/2 iso-card-1 z-[3] rounded-xl object-cover shadow-[0_32px_64px_-12px_rgba(10,13,18,0.18)]" loading="lazy" decoding="async" />
+        <img src={images[1]} alt="Handoff app screenshot" class="absolute w-[240px] h-auto top-[120px] right-0 iso-card z-[2] rounded-xl object-cover shadow-[0_32px_64px_-12px_rgba(10,13,18,0.18)]" loading="lazy" decoding="async" />
+        <img src={images[2]} alt="Handoff app screenshot" class="absolute w-[220px] h-auto bottom-10 left-5 iso-card z-[1] rounded-xl object-cover shadow-[0_32px_64px_-12px_rgba(10,13,18,0.18)]" loading="lazy" decoding="async" />
       </div>
     )}
 

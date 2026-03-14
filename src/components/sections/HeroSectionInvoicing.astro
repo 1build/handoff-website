@@ -5,6 +5,10 @@ import heroGlow from "@/assets/images/hero-glow-line.svg";
 import heroImage from "@/assets/images/Heros/Digital invoicing.webp";
 
 
+interface Props { headingLevel?: 1 | 2 }
+const { headingLevel = 1 } = Astro.props;
+const HeadingTag = headingLevel === 2 ? "h2" : "h1";
+
 const eyebrow = "digital invoices";
 const title = "Get paid faster with digital invoices";
 const description = "Milestone Invoicing lets you bill in stages as work gets done. Attach proof of work like photos, videos, or PDFs to each payment request so clients can see progress before they pay.\n\nNo confusion, no chasing payments, just clear invoicing that builds trust and keeps cash flowing.";
@@ -28,9 +32,9 @@ const ctaText = "See how it works";
       <p class="font-mono text-sm font-semibold leading-6 tracking-[0.56px] uppercase text-text-on-brand-tertiary mb-3">
         {eyebrow}
       </p>
-      <h1 class="font-display text-4xl sm:text-[44px] lg:text-[60px] font-medium leading-[1.2] lg:leading-[72px] tracking-[-1.2px] text-white mb-6">
+      <HeadingTag class="font-display text-4xl sm:text-[44px] lg:text-[60px] font-medium leading-[1.2] lg:leading-[72px] tracking-[-1.2px] text-white mb-6">
         {title}
-      </h1>
+      </HeadingTag>
       <div class="text-lg lg:text-xl font-medium leading-[30px] text-white max-w-[560px] flex flex-col gap-4">
         <p>Milestone Invoicing lets you bill in stages as work gets done. Attach proof of work like photos, videos, or PDFs to each payment request so clients can see progress before they pay.</p>
         <p>No confusion, no chasing payments, just clear invoicing that builds trust and keeps cash flowing.</p>

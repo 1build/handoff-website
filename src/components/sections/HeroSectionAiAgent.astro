@@ -5,6 +5,10 @@ import heroGlow from "@/assets/images/hero-glow-line.svg";
 import heroImage from "@/assets/images/Heros/AI Agent.webp";
 
 
+interface Props { headingLevel?: 1 | 2 }
+const { headingLevel = 1 } = Astro.props;
+const HeadingTag = headingLevel === 2 ? "h2" : "h1";
+
 const eyebrow = "AI Agent";
 const title = "AI Assistant for your busywork";
 const description = "Using Handoff AI is like having your personal AI assistant. An extra pair of hands to help around the office and in the field. Ask Handoff AI to send your invoices, create project scopes, update your CRM, and do much much more.";
@@ -28,9 +32,9 @@ const ctaText = "See how it works";
       <p class="font-mono text-sm font-semibold leading-6 tracking-[0.56px] uppercase text-text-on-brand-tertiary mb-3">
         {eyebrow}
       </p>
-      <h1 class="font-display text-4xl sm:text-[44px] lg:text-[60px] font-medium leading-[1.2] lg:leading-[72px] tracking-[-1.2px] text-white mb-6">
+      <HeadingTag class="font-display text-4xl sm:text-[44px] lg:text-[60px] font-medium leading-[1.2] lg:leading-[72px] tracking-[-1.2px] text-white mb-6">
         {title}
-      </h1>
+      </HeadingTag>
       <div class="text-lg lg:text-xl font-medium leading-[30px] text-white max-w-[560px] flex flex-col gap-4">
         <p>{description}</p>
       </div>

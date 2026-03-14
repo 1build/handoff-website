@@ -1,4 +1,8 @@
 ---
+interface Props { headingLevel?: 1 | 2 }
+const { headingLevel = 1 } = Astro.props;
+const HeadingTag = headingLevel === 2 ? "h2" : "h1";
+
 const locations = [
   "Albuquerque, FL",
   "Orlando, FL",
@@ -31,12 +35,12 @@ const categories = [
 <section class="pt-24 pb-12">
   <div class="bg-brand-800">
   <div class="max-w-[768px] mx-auto px-4 sm:px-6 text-center">
-    <h1
+    <HeadingTag
       class="font-display text-4xl sm:text-[44px] font-bold leading-[1.2] tracking-tight text-white"
       data-animate="fade-up"
     >
       Construction costs for contractors
-    </h1>
+    </HeadingTag>
     <p class="mt-4 text-base text-white/70 leading-relaxed max-w-xl mx-auto" data-animate="fade-up">
       Get accurate, up-to-date construction cost estimates for any project.
     </p>

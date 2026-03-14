@@ -1,6 +1,9 @@
 ---
 import bgPattern from "@/assets/images/background-pattern.png";
 import heroGlow from "@/assets/images/hero-glow-line.svg";
+interface Props { headingLevel?: 1 | 2 }
+const { headingLevel = 1 } = Astro.props;
+const HeadingTag = headingLevel === 2 ? "h2" : "h1";
 ---
 
 <section class="relative pt-20">
@@ -22,9 +25,9 @@ import heroGlow from "@/assets/images/hero-glow-line.svg";
     </p>
 
     <!-- Heading -->
-    <h1 class="font-display text-5xl sm:text-6xl lg:text-[72px] font-medium leading-[1.1] lg:leading-[90px] tracking-[-1.44px] text-white mb-6 max-w-[1024px]">
+    <HeadingTag class="font-display text-5xl sm:text-6xl lg:text-[72px] font-medium leading-[1.1] lg:leading-[90px] tracking-[-1.44px] text-white mb-6 max-w-[1024px]">
       Train an <span class="text-text-highlight">AI Teammate</span> to run your construction business
-    </h1>
+    </HeadingTag>
 
     <!-- Description -->
     <p class="text-xl font-medium leading-[30px] text-white max-w-[768px] mb-12">

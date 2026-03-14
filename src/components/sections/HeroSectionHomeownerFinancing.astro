@@ -5,6 +5,10 @@ import heroGlow from "@/assets/images/hero-glow-line.svg";
 import heroImage from "@/assets/images/Homeowner Financing 1.webp";
 
 
+interface Props { headingLevel?: 1 | 2 }
+const { headingLevel = 1 } = Astro.props;
+const HeadingTag = headingLevel === 2 ? "h2" : "h1";
+
 const eyebrow = "Homeowner Financing";
 const title = "Close More Deals with Homeowner Financing";
 const description = "Handoff partners with Acorn Finance to offer homeowner financing directly on proposals sent through Handoff. Acorn Finance connects homeowners with competitive home improvement financing through partnerships with 12+ national lenders, offering personalized loan options up to $100,000 with competitive APRs. Contractors pay no fees to offer financing.";
@@ -28,9 +32,9 @@ const ctaText = "See how it works";
       <p class="font-mono text-sm font-semibold leading-6 tracking-[0.56px] uppercase text-text-on-brand-tertiary mb-3">
         {eyebrow}
       </p>
-      <h1 class="font-display text-4xl sm:text-[44px] lg:text-[60px] font-medium leading-[1.2] lg:leading-[72px] tracking-[-1.2px] text-white mb-6">
+      <HeadingTag class="font-display text-4xl sm:text-[44px] lg:text-[60px] font-medium leading-[1.2] lg:leading-[72px] tracking-[-1.2px] text-white mb-6">
         {title}
-      </h1>
+      </HeadingTag>
       <div class="text-lg lg:text-xl font-medium leading-[30px] text-white max-w-[560px] flex flex-col gap-4">
         <p>{description}</p>
       </div>

@@ -2,6 +2,10 @@
 import bgPattern from "@/assets/images/background-pattern-dots.png";
 import heroGlow from "@/assets/images/hero-glow-line.svg";
 
+interface Props { headingLevel?: 1 | 2 }
+const { headingLevel = 1 } = Astro.props;
+const HeadingTag = headingLevel === 2 ? "h2" : "h1";
+
 interface PricingTier {
   name: string;
   badge?: { label: string; color: "green" | "gray" };
@@ -93,9 +97,9 @@ const tiers: PricingTier[] = [
       <p class="font-mono text-sm font-semibold leading-6 tracking-[0.56px] uppercase text-text-on-brand-tertiary">
         PRICING
       </p>
-      <h1 class="font-display text-4xl lg:text-[48px] font-medium leading-[44px] lg:leading-[60px] tracking-[-0.96px] text-white max-w-[800px] mt-3">
+      <HeadingTag class="font-display text-4xl lg:text-[48px] font-medium leading-[44px] lg:leading-[60px] tracking-[-0.96px] text-white max-w-[800px] mt-3">
         Stop Paying for Five Tools. Handoff Does It All with an AI Teammate.
-      </h1>
+      </HeadingTag>
       <div class="text-lg lg:text-xl font-normal leading-[28px] lg:leading-[30px] text-text-on-brand-tertiary flex flex-col gap-1 mt-6">
         <p>Start Free for 7 Days. Your First Estimate Is On Us.</p>
       </div>

@@ -5,6 +5,9 @@
 
 export const SITE_URL = "https://handoff.ai";
 
+/** Default OG and Twitter card image when a page does not set one. File: public/og-image.png (served at /og-image.png → SITE_URL/og-image.png). Use 1200×630 for best results. */
+export const DEFAULT_OG_IMAGE = "/og-image.png";
+
 const DEFAULT_DESCRIPTION =
   "Train an AI Teammate to run your construction business. Set your rules once — Handoff applies them automatically across every estimate, proposal, and change order.";
 
@@ -55,8 +58,55 @@ export function getDefaultJsonLd(canonicalUrl: string): object {
         "@id": `${SITE_URL}/#website`,
         url: SITE_URL,
         name: "Handoff",
+        description: DEFAULT_DESCRIPTION,
         publisher: { "@id": `${SITE_URL}/#organization` },
       },
     ],
   };
+}
+
+/** FAQPage schema for AEO/GEO. Use on pages that have an FAQ section. Pass the same items used in FaqSection. */
+export function getFaqPageSchema(
+  faqItems: { question: string; answer: string }[],
+  pageUrl: string
+): object {
+  const mainEntity = faqItems.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer.replace(/<[^>]+>/g, "").trim(),
+    },
+  }));
+  return {
+    "@type": "FAQPage",
+    "@id": `${pageUrl}#faq`,
+    mainEntity,
+  };
+}
+
+/** Article schema for blog posts. Supports AEO/GEO with author and dates. */
+export function getArticleSchema(opt: {
+  url: string;
+  headline: string;
+  description?: string;
+  imageUrl?: string;
+  datePublished: string; // ISO 8601
+  dateModified?: string; // ISO 8601
+  authorName?: string;
+}): object {
+  const article: Record<string, unknown> = {
+    "@type": "Article",
+    "@id": `${opt.url}#article`,
+    mainEntityOfPage: { "@id": opt.url },
+    headline: opt.headline,
+    datePublished: opt.datePublished,
+  };
+  if (opt.description) article.description = opt.description;
+  if (opt.imageUrl) article.image = opt.imageUrl;
+  if (opt.dateModified) article.dateModified = opt.dateModified;
+  if (opt.authorName) {
+    article.author = { "@type": "Person", name: opt.authorName };
+  }
+  return article;
 }

@@ -5,6 +5,10 @@ import heroGlow from "@/assets/images/hero-glow-line.svg";
 import heroImage from "@/assets/images/Heros/CREATING ESTIMATES FROM FILES.webp";
 
 
+interface Props { headingLevel?: 1 | 2 }
+const { headingLevel = 1 } = Astro.props;
+const HeadingTag = headingLevel === 2 ? "h2" : "h1";
+
 const eyebrow = "File Management";
 const title = "Creating Estimates from Drawings, Photos and more!";
 const description = "Handoff now lets you upload project files to instantly generate accurate estimates using AI. No more typing – just upload and get results.";
@@ -28,9 +32,9 @@ const ctaText = "See how it works";
       <p class="font-mono text-sm font-semibold leading-6 tracking-[0.56px] uppercase text-text-on-brand-tertiary mb-3">
         {eyebrow}
       </p>
-      <h1 class="font-display text-4xl sm:text-[44px] lg:text-[60px] font-medium leading-[1.2] lg:leading-[72px] tracking-[-1.2px] text-white mb-6">
+      <HeadingTag class="font-display text-4xl sm:text-[44px] lg:text-[60px] font-medium leading-[1.2] lg:leading-[72px] tracking-[-1.2px] text-white mb-6">
         {title}
-      </h1>
+      </HeadingTag>
       <div class="text-lg lg:text-xl font-medium leading-[30px] text-white max-w-[560px] flex flex-col gap-4">
         <p>{description}</p>
       </div>

@@ -2,4 +2,18 @@
 User-agent: *
 Allow: /
 
+# AI/LLM crawlers allowed for AEO (Answer Engine Optimization)
+User-agent: GPTBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: Claude-Web
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+
 Sitemap: https://handoff.ai/sitemap-index.xml
+
+# LLM-friendly site summary for AI search: https://handoff.ai/llms.txt

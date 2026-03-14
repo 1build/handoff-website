@@ -2,7 +2,9 @@
 import bgPattern from "@/assets/images/background-pattern.png";
 import heroGlow from "@/assets/images/hero-glow-line.svg";
 import estimatesImg from "@/assets/images/Heros/Estimates.webp";
-
+interface Props { headingLevel?: 1 | 2 }
+const { headingLevel = 1 } = Astro.props;
+const HeadingTag = headingLevel === 2 ? "h2" : "h1";
 ---
 
 <section class="relative pt-20">
@@ -24,9 +26,9 @@ import estimatesImg from "@/assets/images/Heros/Estimates.webp";
     </p>
 
     <!-- Heading -->
-    <h1 class="font-display text-5xl sm:text-6xl lg:text-[72px] font-medium leading-[1.1] lg:leading-[90px] tracking-[-1.44px] text-white mb-6 max-w-[900px]" data-animate="fade-up">
+    <HeadingTag class="font-display text-5xl sm:text-6xl lg:text-[72px] font-medium leading-[1.1] lg:leading-[90px] tracking-[-1.44px] text-white mb-6 max-w-[900px]" data-animate="fade-up">
       Create accurate AI-powered estimates <span class="text-text-highlight">in seconds</span>
-    </h1>
+    </HeadingTag>
 
     <!-- Description -->
     <div class="max-w-[700px] flex flex-col gap-4 mb-10" data-animate="fade-up">

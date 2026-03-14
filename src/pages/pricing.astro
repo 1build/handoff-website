@@ -10,8 +10,10 @@ import FaqSection from "@/components/sections/FaqSection.astro";
 import CtaSystemsSection from "@/components/sections/CtaSystemsSection.astro";
 import { navItems, footerColumns, pricingFaqItems } from "@/lib/navigation";
 import { getPageSeo } from "@/lib/seo-pages";
+import { getCanonicalUrl, getFaqPageSchema } from "@/lib/seo";
 
 const seo = getPageSeo(Astro.url.pathname);
+seo.jsonLd = [getFaqPageSchema(pricingFaqItems, getCanonicalUrl(Astro.url.pathname))];
 ---
 
 <BaseLayout {...seo}>

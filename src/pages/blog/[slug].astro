@@ -15,6 +15,7 @@ import {
   renderPostBody,
   type SanityPostListItem,
 } from "@/lib/sanity";
+import { getArticleSchema, getCanonicalUrl } from "@/lib/seo";
 
 export async function getStaticPaths() {
   const { getAllPostSlugs } = await import("@/lib/sanity");
@@ -39,11 +40,28 @@ const allPosts = await getAllPosts();
 const relatedPosts: SanityPostListItem[] = allPosts
   .filter((p) => p.slug && p.slug !== slug)
   .slice(0, 3);
+
+const articleUrl = getCanonicalUrl(`/blog/${slug}`);
+const featuredAsset = post.featuredImage ?? post.thumbnailImage;
+const ogImageUrl = featuredAsset ? urlFor(featuredAsset).width(1200).url() : undefined;
+const datePublished = post.publishedAt ?? post.date ?? new Date().toISOString().split("T")[0];
+const articleSchema = getArticleSchema({
+  url: articleUrl,
+  headline: post.title ?? "Blog post",
+  description: post.seoDescription ?? post.excerpt ?? undefined,
+  imageUrl: ogImageUrl ?? undefined,
+  datePublished: typeof datePublished === "string" && datePublished.includes("T") ? datePublished : `${datePublished}T00:00:00Z`,
+  dateModified: datePublished,
+  authorName: post.author?.name ?? undefined,
+});
 ---
 
 <BaseLayout
   title={post.seoTitle ?? `${post.title ?? "Post"} — Handoff Blog`}
   description={post.seoDescription ?? post.excerpt ?? undefined}
+  image={ogImageUrl}
+  imageAlt={post.title ?? "Handoff Blog"}
+  jsonLd={[articleSchema]}
 >
   <Header navItems={navItems} />
 

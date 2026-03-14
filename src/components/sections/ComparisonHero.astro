@@ -1,6 +1,9 @@
 ---
 import bgPattern from "@/assets/images/background-pattern.png";
 import heroGlow from "@/assets/images/hero-glow-line.svg";
+interface Props { headingLevel?: 1 | 2 }
+const { headingLevel = 1 } = Astro.props;
+const HeadingTag = headingLevel === 2 ? "h2" : "h1";
 ---
 
 <section class="relative pt-20">
@@ -23,9 +26,9 @@ import heroGlow from "@/assets/images/hero-glow-line.svg";
         <p class="font-mono text-sm font-semibold leading-6 tracking-[0.56px] uppercase text-text-on-brand-tertiary">
           Compare Handoff
         </p>
-        <h1 class="font-display text-5xl sm:text-6xl lg:text-[72px] font-medium leading-[1.1] lg:leading-[90px] tracking-[-1.44px] text-white w-full">
+        <HeadingTag class="font-display text-5xl sm:text-6xl lg:text-[72px] font-medium leading-[1.1] lg:leading-[90px] tracking-[-1.44px] text-white w-full">
           Explore Handoff and alternatives
-        </h1>
+        </HeadingTag>
       </div>
 
       <!-- Description -->
