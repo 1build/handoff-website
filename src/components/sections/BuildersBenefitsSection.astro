@@ -326,11 +326,11 @@ const features = [
             </div>
           </div>
         ) : f.visualType === "screenshot" && f.image ? (
-          <div class="flex-1 w-full lg:w-auto h-[512px] bg-brand-50 rounded-xl overflow-hidden relative flex items-center justify-center">
+          <div class="flex-1 w-full lg:w-auto h-auto min-h-[280px] sm:min-h-[380px] lg:h-[512px] bg-brand-50 rounded-xl overflow-hidden relative flex items-center justify-center py-8 lg:py-0">
             <img
               src={f.image.src}
               alt={`${f.title} screenshot`}
-              class="w-[496px] max-w-[90%] rounded-[20px] object-cover"
+              class="w-full max-w-[496px] h-auto rounded-[20px] object-contain px-4 lg:px-6"
               loading="lazy"
             />
           </div>
