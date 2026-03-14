@@ -8,10 +8,9 @@ type CellValue =
 
 interface TableRow {
   label: string;
+  tooltip?: string;
   flex: CellValue;
   pro: CellValue;
-  custom: CellValue;
-  enterprise: CellValue;
 }
 
 interface TableGroup {
@@ -29,107 +28,85 @@ const plans = [
   {
     name: "Flex",
     badge: { label: "7-day free trial", color: "green" },
-    annualPrice: "$149",
-    monthlyPrice: "$185",
-    description: "Fast, professional estimates, proposals and invoicing for small crews.",
+    annualPrice: "$119",
+    monthlyPrice: "$149",
+    description: "Estimating takes too long. Get accurate bids out the door the same day you walk the job.",
     cta: { label: "Start free trial", href: "https://app.handoff.ai/sign-up/", primary: true },
   },
   {
     name: "Pro",
-    badge: { label: "Contract", color: "gray" },
-    annualPrice: "$299",
-    monthlyPrice: "$375",
-    description: "Unlimited AI and a smoother client experience for growing teams.",
-    cta: { label: "Book a demo", href: "https://app.tryhandoff.com/demo", primary: false },
-  },
-  {
-    name: "Custom",
-    badge: { label: "Contract", color: "gray" },
-    annualPrice: "$599",
-    monthlyPrice: "$749",
-    description: "Advanced features, more control, and support for high-volume contractors.",
-    cta: { label: "Contact sales", href: "https://app.tryhandoff.com/demo", primary: false },
-  },
-  {
-    name: "Enterprise",
-    badge: undefined,
-    annualPrice: null,
-    monthlyPrice: null,
-    priceLabel: "Contact us",
-    description: "API integrations and custom setup for large or multi-location operations.",
-    cta: { label: "Contact sales", href: "https://app.tryhandoff.com/demo", primary: false },
+    badge: { label: "12-month commitment", color: "gray" },
+    annualPrice: "$239",
+    monthlyPrice: "$299",
+    description: "You're running more projects than one person can track. Handoff is built around your workflow, your pricing, and your crew - with hands-on setup to match.",
+    cta: { label: "Start free trial", href: "https://app.handoff.ai/sign-up/", primary: true },
   },
 ];
 
 const tableGroups: TableGroup[] = [
   {
-    title: "AI Features",
+    title: "CRM & Pipeline Management",
     rows: [
-      { label: "AI Agent Credits", flex: text("50 credits"), pro: text("Unlimited"), custom: text("Unlimited"), enterprise: text("Unlimited") },
-      { label: "AI Estimating from PDFs", flex: text("3 PDFs"), pro: text("Unlimited"), custom: text("Unlimited"), enterprise: text("Unlimited") },
-      { label: "AI Scopes and Proposals", flex: check, pro: check, custom: check, enterprise: check },
-      { label: "Voice Transcription", flex: x, pro: check, custom: check, enterprise: check },
-      { label: "AI Site Walkthroughs", flex: x, pro: check, custom: check, enterprise: check },
-      { label: "AI presets", flex: text("Standard"), pro: text_badge("Advanced", "Coming soon"), custom: text_badge("Advanced", "Coming soon"), enterprise: text_badge("Advanced", "Coming soon") },
-      { label: "Advanced Takeoff", flex: x, pro: check, custom: check, enterprise: check },
-      { label: "AI Localize Costs", flex: text("Standard"), pro: text_badge("Advanced", "Coming soon"), custom: text_badge("Advanced", "Coming soon"), enterprise: text_badge("Advanced", "Coming soon") },
-      { label: "AI Estimate Updates", flex: x, pro: check, custom: check, enterprise: check },
+      { label: "AI Usage Credits", tooltip: "Each credit powers one AI Interaction. Your plan includes a set number. Pro and above get unlimited.", flex: text("50 credits p/mo"), pro: text("Unlimited") },
+      { label: "AI Estimating", tooltip: "Upload or transcribe project scope. Handoff builds the estimate for you.", flex: check, pro: check },
+      { label: "AI Proposals", tooltip: "Turn job details into clear scopes and professional proposals.", flex: check, pro: check },
+      { label: "AI Voice Transcription", tooltip: "Talk through the job on-site. Handoff turns your voice notes into job details ready for estimating.", flex: check, pro: check },
+      { label: "AI Site Walkthroughs", tooltip: "Snap photos and take notes on the site. Handoff builds the estimate from what you capture and documents the project in one place.", flex: x, pro: text("Unlimited") },
+      { label: "AI Presets", tooltip: "Lock in your rates and services once. Every estimate comes out your way, every time.", flex: check, pro: check },
+      { label: "AI-Powered Material Lists", tooltip: "Turn any estimate into a ready-to-use material list in one click. Know exactly what to order before you ever set foot in the supply house.", flex: x, pro: check },
+      { label: "AI Takeoffs", tooltip: "Measure directly from your drawings and pull quantities automatically. No manual counting.", flex: check, pro: check },
+      { label: "Client Portal", tooltip: "Your client sees their documents, approvals, and invoices in one place. No chasing required.", flex: x, pro: badge("Coming soon") },
+      { label: "Track Client Activity", tooltip: "Know exactly when a client opens, views, or approves your proposal. Follow up at the right moment, not in the dark.", flex: check, pro: check },
     ],
   },
   {
-    title: "Documents & Job Management",
+    title: "Project Management",
     rows: [
-      { label: "File to Job Documentation", flex: check, pro: check, custom: check, enterprise: check },
-      { label: "Photos & Files Storage", flex: check, pro: check, custom: check, enterprise: check },
-      { label: "Digital Signatures", flex: check, pro: check, custom: check, enterprise: check },
-      { label: "Service Catalog", flex: text("1 catalog"), pro: text("Unlimited"), custom: text("Unlimited"), enterprise: text("Unlimited") },
-      { label: "Cost Codes", flex: x, pro: x, custom: badge("Coming soon"), enterprise: badge("Coming soon") },
-      { label: "Daily Log", flex: x, pro: x, custom: badge("Coming soon"), enterprise: badge("Coming soon") },
-      { label: "Schedule", flex: x, pro: x, custom: badge("Coming soon"), enterprise: badge("Coming soon") },
-      { label: "Tasks", flex: x, pro: x, custom: badge("Coming soon"), enterprise: badge("Coming soon") },
+      { label: "Digital Signatures", tooltip: "Send estimates, proposals, and invoices for signature. No switching context required.", flex: check, pro: check },
+      { label: "Custom Pricing Catalogs", tooltip: "Save your services and pricing once. Pull them into any estimate without retyping a thing.", flex: text("1"), pro: text("Unlimited") },
+      { label: "AI Meeting Recording", tooltip: "Turn any client conversation into job-ready notes. Handoff listens, captures the details, and gets your estimate started before you leave the driveway.", flex: x, pro: badge("Coming soon") },
+      { label: "Daily Logs", tooltip: "Keep a running record of job progress and site notes. Everything is documented in one place.", flex: x, pro: badge("Coming soon") },
+      { label: "Scheduling", tooltip: "Map out your project timeline and key dates in one place. Everyone knows what's happening and when.", flex: x, pro: badge("Coming soon") },
     ],
   },
   {
-    title: "Customer Experience & Visibility",
+    title: "Financial Management",
     rows: [
-      { label: "Client Portal", flex: x, pro: check, custom: check, enterprise: check },
-      { label: "Track Customer Activity", flex: check, pro: check, custom: check, enterprise: check },
-      { label: "Client Financing", flex: check, pro: check, custom: check, enterprise: check },
-    ],
-  },
-  {
-    title: "Payments & Invoicing",
-    rows: [
-      { label: "Invoices & Payments", flex: check, pro: check, custom: check, enterprise: check },
-      { label: "Progress Payments", flex: check, pro: check, custom: check, enterprise: check },
-      { label: "Card Fees to Client", flex: text("3.3%"), pro: text("2.85%"), custom: text("2.85%"), enterprise: text("2.85%") },
-      { label: "ACH Fees to Client", flex: text("1% ($10 cap)"), pro: text("1% ($10 cap)"), custom: text("1% ($10 cap)"), enterprise: text("1% ($10 cap)") },
+      { label: "Invoices & Payments", tooltip: "Send a professional invoice and get paid online. No paper, no checks, no waiting by the mailbox.", flex: check, pro: check },
+      { label: "Milestone Invoicing", tooltip: "Set your payment schedule upfront and collect at each phase. Money comes in as the work gets done.", flex: check, pro: check },
+      { label: "Quickbooks Integration", tooltip: "Your estimates, invoices, and payments sync bi-directionally to QuickBooks Online. No double entry, no reconciling at midnight.", flex: check, pro: check },
+      { label: "Credit Card Fees", tooltip: "Credit card processing fees are covered by the client, not you. Your margin stays intact.", flex: text("3.35%"), pro: text("2.85%") },
+      { label: "ACH Fees", tooltip: "ACH processing fees are covered by the client. Bank transfers at no cost to your business.", flex: text("1% ($10 cap)"), pro: text("1% ($10 cap)") },
+      { label: "Budgeting & Expense Tracking", tooltip: "Track exactly where money is going on every job. Know your costs before they become a problem.", flex: x, pro: badge("Coming soon") },
+      { label: "Client Financing", tooltip: "Give clients a way to pay over time through Acorn Finance. More clients say yes when the number isn't due all at once.", flex: x, pro: check },
     ],
   },
   {
     title: "Team, Access & Support",
     rows: [
-      { label: "Custom Roles", flex: x, pro: badge("Coming soon"), custom: badge("Coming soon"), enterprise: badge("Coming soon") },
-      { label: "Seat Management", flex: text("2 seats"), pro: text("5 included + add more"), custom: text("5 included + add more"), enterprise: text("5 included + add more") },
-      { label: "Onboarding", flex: text("Standard"), pro: text("Success Coach (AI Trainer & Setup)"), custom: text("Success Coach (AI Trainer & Setup)"), enterprise: text("Success Coach (AI Trainer & Setup)") },
-      { label: "Support channels", flex: check, pro: check, custom: check, enterprise: check },
-      { label: "Book an expert call", flex: check, pro: check, custom: check, enterprise: check },
-      { label: "New Feature Request", flex: check, pro: check, custom: check, enterprise: check },
-      { label: "Desktop App", flex: check, pro: check, custom: check, enterprise: check },
-      { label: "iOS App", flex: check, pro: check, custom: check, enterprise: check },
-      { label: "Android App", flex: check, pro: check, custom: check, enterprise: check },
+      { label: "Custom Roles", tooltip: "Control exactly what each team member can see and do. Your margins and billing stay protected.", flex: x, pro: check },
+      { label: "Included Users", tooltip: "Add your team, control what they see, and keep sensitive details locked down.", flex: text("2"), pro: text("5+") },
+      { label: "Dedicated Onboarding", tooltip: "A real person who knows your account and helps you train your AI. Not a ticket queue.", flex: text("Standard"), pro: text("Success Coach (AI Trainer & Setup)") },
+      { label: "Realtime Support (email, live chat, phone)", tooltip: "Call, chat, or email when you need help. Someone picks up.", flex: check, pro: check },
+      { label: "Desktop App", tooltip: "Full Handoff experience in any browser. No downloads required. Chrome recommended.", flex: check, pro: check },
+      { label: "iOS App", tooltip: "Estimate, manage, and invoice from your iPhone or iPad - on the job or in the truck.", flex: check, pro: check },
+      { label: "Android App", tooltip: "Full Handoff access on any Android phone or tablet. Built for the job site.", flex: check, pro: check },
     ],
   },
 ];
 ---
 
 <section class="px-4 py-2" id="compare">
-  <div class="bg-white rounded-3xl border border-black/[0.04] py-16 lg:py-24">
+  <div class="max-w-[1920px] mx-auto bg-white rounded-3xl border border-black/[0.04] py-16 lg:py-24">
     <div class="max-w-[1440px] mx-auto px-6 lg:px-8">
 
-    <!-- Table header (separate from table body) -->
-    <div class="px-8 sticky top-[72px] z-10 bg-white overflow-x-auto" data-animate="fade-up">
-      <div class="flex border-b border-border-primary min-h-[278px]">
+    <!-- Single scroll container: header + body scroll together on mobile -->
+    <div class="overflow-x-auto md:overflow-visible">
+    <div class="min-w-[700px] md:min-w-0">
+
+    <!-- Table header -->
+    <div class="px-3 sm:px-6 md:px-8 md:sticky top-[72px] z-10 bg-white" data-animate="fade-up">
+      <div class="flex border-b border-border-primary min-h-[200px] md:min-h-[278px]">
         <!-- Label col -->
         <div class="flex-1 pt-6 pb-6 px-6 flex flex-col justify-between gap-4">
           <p class="text-base font-normal leading-6 text-brand-700">Compare plans:</p>
@@ -207,9 +184,9 @@ const tableGroups: TableGroup[] = [
     </div>
 
     <!-- Table body groups -->
-    <div class="px-8 mt-16 overflow-x-auto" data-animate="fade-up">
+    <div class="px-3 sm:px-6 md:px-8 mt-8 md:mt-16" data-animate="fade-up">
       {tableGroups.map((group, gi) => (
-        <div class:list={["", gi < tableGroups.length - 1 ? "mb-16" : ""]}>
+        <div class:list={["", gi < tableGroups.length - 1 ? "mb-10 md:mb-16" : ""]}>
           <!-- Group header -->
           <div class="px-6 pb-4">
             <p class="text-xl font-semibold leading-7 text-brand-700">{group.title}</p>
@@ -219,18 +196,33 @@ const tableGroups: TableGroup[] = [
             {/* Label column */}
             <div class="flex-1 flex flex-col">
               {group.rows.map((row, ri) => (
-                <div class:list={["px-6 h-16 flex items-center gap-1", ri % 2 === 0 ? "bg-bg-secondary" : ""]}>
+                <div class:list={["px-6 min-h-[64px] h-auto py-3 flex items-center gap-1", ri % 2 === 0 ? "bg-bg-secondary" : ""]}>
                   <span class="text-sm font-medium leading-5 text-text-primary">{row.label}</span>
+                  {row.tooltip && (
+                    <div class="relative shrink-0" data-tooltip>
+                      <button type="button" class="flex items-center justify-center text-text-quaternary cursor-help touch-manipulation" aria-label={`More info about ${row.label}`}>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                          <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/>
+                          <path d="M6.06 6a2 2 0 0 1 3.88.67c0 1.33-2 2-2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                          <path d="M8 11.5h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                      </button>
+                      <div class="tooltip-popup absolute bottom-full left-0 mb-2 w-[min(296px,calc(100vw-2rem))] bg-[#0a0d12] rounded-lg p-3 shadow-[0px_12px_16px_0px_rgba(10,13,18,0.08),0px_4px_6px_0px_rgba(10,13,18,0.03),0px_2px_2px_0px_rgba(10,13,18,0.04)] pointer-events-none opacity-0 transition-opacity duration-150 z-50">
+                        <p class="text-xs font-semibold text-white leading-[18px] mb-0.5">{row.label}</p>
+                        <p class="text-xs font-medium text-[#d5d7da] leading-[18px]">{row.tooltip}</p>
+                      </div>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
             {/* Value columns */}
-            {(["flex", "pro", "custom", "enterprise"] as const).map((key) => (
+            {(["flex", "pro"] as const).map((key) => (
               <div class="flex-1 flex flex-col">
                 {group.rows.map((row, ri) => {
                   const cell = row[key];
                   return (
-                    <div class:list={["px-6 h-16 flex items-center justify-center", ri % 2 === 0 ? "bg-bg-secondary" : ""]}>
+                    <div class:list={["px-6 min-h-[64px] h-auto py-3 flex items-center justify-center", ri % 2 === 0 ? "bg-bg-secondary" : ""]}>
                       {cell.type === "check" && (
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="text-brand-600 shrink-0">
                           <path fill-rule="evenodd" clip-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z" fill="currentColor"/>
@@ -264,6 +256,26 @@ const tableGroups: TableGroup[] = [
       ))}
     </div>
 
+    </div><!-- end min-width wrapper -->
+    </div><!-- end scroll wrapper -->
+
     </div>
   </div>
 </section>
+
+<style>
+  [data-tooltip]:hover .tooltip-popup,
+  [data-tooltip][data-open] .tooltip-popup {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  document.addEventListener('click', function (e) {
+    const trigger = (e.target as Element).closest('[data-tooltip]');
+    document.querySelectorAll('[data-tooltip][data-open]').forEach(function (el) {
+      if (el !== trigger) el.removeAttribute('data-open');
+    });
+    if (trigger) trigger.toggleAttribute('data-open');
+  });
+</script>

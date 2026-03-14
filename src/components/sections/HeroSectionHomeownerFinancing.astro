@@ -2,7 +2,7 @@
 import Button from "@/components/ui/Button.astro";
 import bgPattern from "@/assets/images/background-pattern.png";
 import heroGlow from "@/assets/images/hero-glow-line.svg";
-import placeholder from "@/assets/images/placeholder-img.png";
+import heroImage from "@/assets/images/Homeowner Financing 1.webp";
 
 
 const eyebrow = "Homeowner Financing";
@@ -11,7 +11,7 @@ const description = "Handoff partners with Acorn Finance to offer homeowner fina
 const ctaText = "See how it works";
 ---
 
-<section id="hero" class="hero-fixed oveflow-hidden relative">
+<section id="hero" class="relative overflow-visible pt-20">
   <!-- Background grid pattern -->
   <div class="absolute top-0 left-1/2 -translate-x-1/2 max-w-full w-[1920px] h-[1440px] pointer-events-none z-0">
     <img src={bgPattern.src} alt="" class="w-full h-full block object-contain object-top" />
@@ -43,16 +43,15 @@ const ctaText = "See how it works";
       </div>
     </div>
 
-    <!-- Hero visual placeholder -->
-    <div class="flex-1 relative z-[2] bg-[rgba(255,255,255,0.1)] backdrop-blur-[4px] rounded-3xl p-6">
+    <!-- Hero visual -->
+    <div class="flex-1 relative z-[2] flex items-end justify-end">
       <img
-                src={placeholder.src}
-                alt=""
-                class="w-full h-auto rounded-xl"
-                loading="lazy"
-                decoding="async"
-              />
-
+        src={heroImage.src}
+        alt="Homeowner Financing"
+        class="w-full h-auto -mb-24"
+        loading="lazy"
+        decoding="async"
+      />
     </div>
   </div>
 </section>

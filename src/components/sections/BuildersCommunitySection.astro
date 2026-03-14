@@ -1,0 +1,121 @@
+---
+import communityPhoto1 from "@/assets/images/community-photo-1.png";
+import communityPhoto2 from "@/assets/images/community-photo-2.png";
+import communityPhoto3 from "@/assets/images/community-photo-3.png";
+import communityPhoto4 from "@/assets/images/community-photo-4.png";
+import communityPhoto5 from "@/assets/images/community-photo-5.png";
+import communityBubble1 from "@/assets/images/community-bubble-1.png";
+import communityBubble2 from "@/assets/images/community-bubble-2.png";
+import communityEmoji from "@/assets/images/community-emoji.png";
+import communityThumbsup from "@/assets/images/community-thumbsup.png";
+import communityFbIcon from "@/assets/images/community-fb-icon.png";
+---
+
+<section class="relative z-[2] px-4 pt-4">
+  <div class="max-w-[1920px] mx-auto bg-bg-secondary rounded-[20px] overflow-hidden py-24">
+    <div class="max-w-[1280px] mx-auto px-8 flex flex-col lg:flex-row items-center gap-16">
+      <!-- Text Content -->
+      <div class="flex-1 flex flex-col gap-12">
+        <div class="flex flex-col gap-6">
+          <h2 class="font-display text-[48px] font-medium leading-[60px] tracking-[-0.96px] text-text-primary">
+            Builders community
+          </h2>
+          <p class="text-xl leading-[30px] text-text-tertiary">
+            Have questions about Handoff or need general business advice? You can speak with other contractors in Handoff Nation, our engaging Facebook community.
+          </p>
+        </div>
+        <div>
+          <a
+            href="https://www.facebook.com/groups/820048150161667/"
+            class="inline-flex items-center justify-center shrink-0 w-full md:w-auto px-5 py-3 text-base font-medium text-white rounded-xl bg-brand-700 border border-brand-600 hover:bg-brand-800 transition-colors duration-150"
+          >
+            Join community
+          </a>
+        </div>
+      </div>
+
+      <!-- Photo Collage -->
+      <div class="flex-1 relative h-[496px] hidden lg:block">
+        <!-- Chat bubble: "Just click on the Add Item button..." -->
+        <img
+          src={communityBubble1.src}
+          alt="Community message: Just click on the Add Item button on the right side and add the items"
+          class="absolute top-[29px] left-[21px] w-[267px] h-[91px] object-cover"
+          loading="lazy"
+        />
+
+        <!-- Emoji reaction -->
+        <img
+          src={communityEmoji.src}
+          alt=""
+          class="absolute top-[167px] left-[46px] w-[35px] h-[48px] object-cover"
+          loading="lazy"
+        />
+
+        <!-- Photo 1: tall vertical (top-right area) -->
+        <img
+          src={communityPhoto1.src}
+          alt="Community member"
+          class="absolute top-0 left-[calc(50%+8px)] w-[160px] h-[240px] rounded-[20px] object-cover"
+          loading="lazy"
+        />
+
+        <!-- Photo 5: square (left of photo 1) -->
+        <img
+          src={communityPhoto5.src}
+          alt="Community member"
+          class="absolute top-[80px] left-[calc(50%-168px)] w-[160px] h-[160px] rounded-full object-cover"
+          loading="lazy"
+        />
+
+        <!-- Facebook icon -->
+        <img
+          src={communityFbIcon.src}
+          alt="Facebook"
+          class="absolute top-[13px] right-[calc(50%-248px)] w-[32px] h-[32px] object-cover"
+          loading="lazy"
+        />
+
+        <!-- Photo 2: wide horizontal (bottom-right) -->
+        <img
+          src={communityPhoto2.src}
+          alt="Community member"
+          class="absolute top-[256px] left-[calc(50%+88px)] w-[192px] h-[128px] rounded-[20px] object-cover"
+          loading="lazy"
+        />
+
+        <!-- Photo 3: pill-shaped (bottom-left) -->
+        <img
+          src={communityPhoto3.src}
+          alt="Community member"
+          class="absolute top-[256px] left-[calc(50%-267px)] w-[163px] h-[128px] rounded-[72px] object-cover"
+          loading="lazy"
+        />
+
+        <!-- Photo 4: tall vertical (bottom-center) -->
+        <img
+          src={communityPhoto4.src}
+          alt="Community member"
+          class="absolute top-[256px] left-[calc(50%-88px)] w-[160px] h-[240px] rounded-[20px] object-cover"
+          loading="lazy"
+        />
+
+        <!-- Chat bubble: "It works! Thanks for your help!" -->
+        <img
+          src={communityBubble2.src}
+          alt="Community message: It works! Thanks for your help!"
+          class="absolute top-[215px] left-[169px] w-[236px] h-[75px] object-cover"
+          loading="lazy"
+        />
+
+        <!-- Thumbs up icon -->
+        <img
+          src={communityThumbsup.src}
+          alt=""
+          class="absolute top-[406px] left-[355px] w-[42px] h-[42px] object-cover"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+</section>

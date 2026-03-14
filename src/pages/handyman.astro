@@ -9,7 +9,7 @@ import HandymanCommunitySection from "@/components/sections/HandymanCommunitySec
 import Button from "@/components/ui/Button.astro";
 import bgPattern from "@/assets/images/background-pattern.png";
 import heroGlow from "@/assets/images/hero-glow-line.svg";
-import heroHandyman from "@/assets/images/hero-handyman.png";
+import heroHandyman from "@/assets/images/Handyman Hero.webp";
 import iconFileCheck from "@/assets/icons/icon-file-check.svg";
 import iconBanknote from "@/assets/icons/icon-banknote.svg";
 import iconSend from "@/assets/icons/icon-send.svg";
@@ -56,7 +56,7 @@ const seo = getPageSeo(Astro.url.pathname);
 <BaseLayout {...seo}>
   <Header navItems={navItems} />
 <!-- Hero -->
-  <section id="hero" class="hero-fixed">
+  <section id="hero" class="relative pt-20">
     <!-- Background grid pattern -->
     <div class="absolute top-0 left-1/2 -translate-x-1/2 max-w-full w-[1920px] h-[1440px] pointer-events-none z-0">
       <img src={bgPattern.src} alt="" class="w-full h-full block object-contain object-top" />

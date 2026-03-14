@@ -1,46 +1,49 @@
 ---
 import EstimateDetailRow from "./EstimateDetailRow.astro";
+import estimateBreakdown from "@/assets/images/Instant Estimates/Estimate Breakdown.webp";
+import estimates1 from "@/assets/images/Instant Estimates/Estimates-1.webp";
+import estimateFullView from "@/assets/images/Instant Estimates/Estimate Full View – Control.webp";
 
 const rows = [
   {
     eyebrow: "GENERATING",
     title: "Real-time local pricing",
-    
+
     bullets: [
-        'Handoff analyzes live construction costs across every U.S. city and pulls data from trusted suppliers like Home Depot, Lowe’s, and regional distributors.',
+        'Handoff analyzes live construction costs across every U.S. city and pulls data from trusted suppliers like Home Depot, Lowe\u2019s, and regional distributors.',
                 'Your estimates always reflect current local pricing.',
                 'Now, product details appear directly in-app, so you can compare specs and prices without switching tabs.',
     ],
     reverse: false,
-    visualType: "desktop" as const,
-    placeholder: "TBD",
+    visualType: "fill" as const,
+    visualImages: [estimates1],
   },
   {
     eyebrow: "Editing estimates",
     title: "Edit instantly. Without redoing work",
-    
+
     bullets: [
               'Need to change a scope, swap materials, or upload a new photo?',
                 'Handoff updates your estimate automatically.',
                 'Describe the change, adjust a line, or drop in a file, and totals, markups, and profit recalculate on the spot',
     ],
     reverse: true,
-    visualType: "phones" as const,
-    placeholder: "TBD",
+    visualType: "fill" as const,
+    visualImages: [estimateBreakdown],
   },
   {
     eyebrow: "Localized costs",
-    title: "One estimating experiencefor every Job",
-   
+    title: "One estimating experience for every Job",
+
     bullets: [
               'From small repairs to full custom builds, Handoff adapts to how you price work.',
                 'Combine rooms, separate labor and materials, and manage markups at every level, all within a single connected system that keeps profit clear from start to finish.',
     ],
     reverse: false,
-    visualType: "isometric" as const,
-    placeholder: "TBD",
+    visualType: "fill" as const,
+    visualImages: [estimateFullView],
   },
-  
+
 ];
 ---
 
@@ -54,6 +57,7 @@ const rows = [
         bullets={r.bullets}
         reverse={r.reverse}
         visualType={r.visualType}
+        visualImages={r.visualImages}
         placeholder={r.placeholder}
       />
     ))}

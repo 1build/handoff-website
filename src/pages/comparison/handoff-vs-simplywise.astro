@@ -4,7 +4,7 @@ import { getPageSeo } from "@/lib/seo-pages";
 import Header from "@/components/sections/Header.astro";
 import Footer from "@/components/sections/Footer.astro";
 import Logo from "@/components/ui/Logo.astro";
-import ComparisonReviews from "@/components/sections/ComparisonReviews.astro";
+import ReviewsSection from "@/components/sections/ReviewsSection.astro";
 import FaqSection from "@/components/sections/FaqSection.astro";
 import simpliwise from "@/assets/images/simpliwise.jpg";
 
@@ -191,16 +191,6 @@ const seo = getPageSeo(Astro.url.pathname);
               {features.map((row) => (
                 <div class="flex items-center gap-1.5 min-h-20 h-20 px-4 sm:px-6 border-b border-border-primary">
                   <span class="font-body font-medium text-base sm:text-lg leading-6 sm:leading-7 text-text-primary">{row.label}</span>
-                  <div class="relative group shrink-0">
-                    <svg class="w-4 h-4 text-neutral-400 hover:text-neutral-600 transition-colors cursor-pointer" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                      <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/>
-                      <path d="M6.06 6a2 2 0 0 1 3.88.67c0 1.33-2 2-2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                      <circle cx="8" cy="11" r="0.75" fill="currentColor"/>
-                    </svg>
-                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-neutral-900 text-white text-xs font-medium rounded-lg whitespace-normal opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity z-10 max-w-[260px] sm:max-w-[220px] text-center leading-5">
-                      {row.tooltip}
-                    </div>
-                  </div>
                 </div>
               ))}
             </div>
@@ -244,7 +234,7 @@ const seo = getPageSeo(Astro.url.pathname);
 
       </div>
     </div>
-    <ComparisonReviews />
+    <ReviewsSection />
     <FaqSection items={faqItems} />
   </main>
 

@@ -1,5 +1,14 @@
 ---
 import Button from "@/components/ui/Button.astro";
+import filesInChat from "@/assets/images/AI Documents/Files in chat@2x.webp";
+import aiBuildsTheDocs from "@/assets/images/AI Documents/Sign any document@2x-1.webp";
+import shareDocument from "@/assets/images/AI Documents/Share document@2x.webp";
+import scopeOfWork from "@/assets/images/AI Documents/Scope of Work@2x.webp";
+import materialList from "@/assets/images/AI Documents/Material List@2x.webp";
+import dailyLog from "@/assets/images/AI Documents/Daily Log@2x.webp";
+import workOrder from "@/assets/images/AI Documents/Work order@2x.webp";
+import punchlist from "@/assets/images/AI Documents/Sign any document@2x.webp";
+import documentTypesTogether from "@/assets/images/AI Documents/Document types together@2x.webp";
 
 const rows = [
   {
@@ -12,6 +21,7 @@ const rows = [
       "Keep every input tied to the right project automatically",
     ],
     reverse: false,
+    image: filesInChat,
     placeholder: "AI documents input",
   },
   {
@@ -24,6 +34,7 @@ const rows = [
       "Files and photos can be added inline for full context",
     ],
     reverse: true,
+    image: aiBuildsTheDocs,
     placeholder: "AI document generation",
   },
   {
@@ -36,6 +47,7 @@ const rows = [
       "Reduce mistakes with one source of truth for your team",
     ],
     reverse: false,
+    image: shareDocument,
     placeholder: "Document sharing",
   },
   {
@@ -44,6 +56,7 @@ const rows = [
     description: "Turn estimates or walkthroughs into professional scopes instantly. Crews get clear direction, and clients get consistent, polished docs.",
     bullets: [],
     reverse: true,
+    image: scopeOfWork,
     placeholder: "Scope of work document",
   },
   {
@@ -52,6 +65,7 @@ const rows = [
     description: "Your estimate automatically becomes a vendor-ready material list with accurate quantities. No retyping, no mistakes, faster purchasing.",
     bullets: [],
     reverse: false,
+    image: materialList,
     placeholder: "Material list document",
   },
   {
@@ -60,6 +74,7 @@ const rows = [
     description: "Site photos, videos, and notes become clean daily logs in seconds. Clients get professional updates without late-night typing.",
     bullets: [],
     reverse: true,
+    image: dailyLog,
     placeholder: "Daily log document",
   },
   {
@@ -68,6 +83,7 @@ const rows = [
     description: "Snap a photo or jot notes in Handoff, and AI creates a checklist your crew can check off on their phone. Nothing gets missed, and the job moves faster.",
     bullets: [],
     reverse: false,
+    image: punchlist,
     placeholder: "Punchlist document",
   },
   {
@@ -76,6 +92,7 @@ const rows = [
     description: "Generate clean work orders and scoped bid requests right from your estimate. Sensitive pricing stays hidden, clarity stays front and center.",
     bullets: [],
     reverse: true,
+    image: workOrder,
     placeholder: "Work order document",
   },
   {
@@ -84,12 +101,13 @@ const rows = [
     description: "Contractors spend hours rewriting scopes, building punchlists, and typing material lists into Excel. With Handoff, AI handles it for you so you can stay focused on building.",
     bullets: [],
     reverse: false,
+    image: documentTypesTogether,
     placeholder: "Project paperwork",
   },
 ];
 ---
 
-<section class="relative z-[2] px-4 pb-4 bg-brand-800">
+<section class="relative z-[2] px-4 pb-4">
   <div class="max-w-[1920px] mx-auto bg-white rounded-3xl py-16 lg:py-24 overflow-hidden flex flex-col gap-20 lg:gap-40">
 
     {rows.map((r) => (
@@ -130,10 +148,14 @@ const rows = [
         </div>
 
         <!-- Visual -->
-        <div class="flex-1 min-w-0 rounded-xl overflow-hidden h-[400px] lg:h-[512px] bg-detail-visual-bg relative">
-          <div class="absolute inset-0 flex items-center justify-center">
-            <p class="text-white/80 text-lg font-medium">{r.placeholder}</p>
-          </div>
+        <div class="flex-1 min-w-0 rounded-xl overflow-hidden h-[400px] lg:h-[512px] relative" class:list={[!r.image && "bg-detail-visual-bg"]}>
+          {r.image ? (
+            <img src={r.image.src} alt={r.placeholder} class="w-full h-full object-cover" />
+          ) : (
+            <div class="absolute inset-0 bg-detail-visual-bg flex items-center justify-center">
+              <p class="text-white/80 text-lg font-medium">{r.placeholder}</p>
+            </div>
+          )}
         </div>
       </div>
     ))}

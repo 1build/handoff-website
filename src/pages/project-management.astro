@@ -16,7 +16,11 @@ import projectIcon2 from "@/assets/icons/clock-plus.svg";
 import projectIcon3 from "@/assets/icons/projectIcon3.svg";
 import { navItems, footerColumns } from "@/lib/navigation";
 import { getPageSeo } from "@/lib/seo-pages";
-import placeholder from "@/assets/images/placeholder-img.png";
+import heroImage from "@/assets/images/Heros/Project Management.webp";
+import scheduleImage from "@/assets/images/Project Management/Schedule Project Phases and Track@2x.webp";
+import projectDashImg from "@/assets/images/Project Management/Project dash@2x.webp";
+import aiContractImg from "@/assets/images/Project Management/Ask about your project@2x.webp";
+import projectBlocksImg from "@/assets/images/Project Management/Project Blocks@2x.webp";
 
 const faqItems = [
   {
@@ -29,7 +33,7 @@ const faqItems = [
   },
   {
     question: "Will this work when I'm running multiple projects?",
-    answer: "Yes. Handoff is built to help you scale. The more projects you run, the more valuable the automated coordination becomes. You can manage 3x more projects when you delegate admin work to your AI teammate.",
+    answer: "Yes. Handoff is built to help you scale. The more projects you run, the more valuable the automated coordination becomes. You can manage 3x more projects when you delegate admin work to your AI Teammate.",
   },
   {
     question: 'How does "Crew Scheduling" work?',
@@ -51,7 +55,9 @@ const features = [
       "Change orders tracked from request to payment",
       "Every project document in one place",
     ],
-    placeholder: "Screenshot of contract generation",
+    image: aiContractImg,
+    imageFill: true,
+    ctaHref: "/ai-documents",
   },
   {
     eyebrow: "Intelligent crew scheduling",
@@ -63,7 +69,9 @@ const features = [
       "Everyone gets notified when schedules change",
       "Your phone stops buzzing with scheduling questions",
     ],
-    placeholder: "Screenshot of crew scheduling calendar",
+    image: scheduleImage,
+    imageFill: true,
+    ctaHref: "https://app.handoff.ai/sign-up/",
   },
   {
     eyebrow: "Real-time project alerts",
@@ -75,7 +83,9 @@ const features = [
       "Handle change orders before they cause delays",
       "Spot crew conflicts and timeline risks while you can still fix them",
     ],
-    placeholder: "Screenshot of real-time project alerts",
+    image: projectBlocksImg,
+    imageFill: true,
+    ctaHref: "/client-management-system",
   },
   {
     eyebrow: "Role-based permissions",
@@ -87,7 +97,9 @@ const features = [
       "Only authorized team members see markup and margin data",
       "Set it once, never worry about information leaks",
     ],
-    placeholder: "Screenshot of role-based permissions settings",
+    image: projectDashImg,
+    imageFill: true,
+    ctaHref: "https://app.handoff.ai/sign-up/",
   },
 ];
 
@@ -105,7 +117,7 @@ const outcomes = [
   {
     icon: projectIcon3.src,
     title: "Scale without the bottleneck",
-    description: "Your AI teammate learns your way of doing things and handles it on every project. Scale up without being in three places at once.",
+    description: "Your AI Teammate learns your way of doing things and handles it on every project. Scale up without being in three places at once.",
   },
 ];
 const seo = getPageSeo(Astro.url.pathname);
@@ -115,7 +127,7 @@ const seo = getPageSeo(Astro.url.pathname);
   <Header navItems={navItems} />
 
   <!-- Hero (matches solutions HeroSection pattern) -->
-  <section id="hero" class="hero-fixed oveflow-hidden relative">
+  <section id="hero" class="relative pt-20">
     <!-- Background grid pattern -->
     <div class="absolute top-0 left-1/2 -translate-x-1/2 max-w-full w-[1920px] h-[1440px] pointer-events-none z-0">
       <img src={bgPattern.src} alt="" class="w-full h-full block object-contain object-top" />
@@ -136,7 +148,7 @@ const seo = getPageSeo(Astro.url.pathname);
           Run more projects <span class="text-text-highlight">without more admin</span>
         </h1>
         <p class="text-lg lg:text-xl font-medium leading-[30px] text-white max-w-[640px]">
-          Spend your time building and growing your business instead of chasing project details. Built for contractors, Handoff's trained AI manages all the documentation, scheduling, and crew coordination in one system, acting like your AI teammate.
+          Spend your time building and growing your business instead of chasing project details. Built for contractors, Handoff's trained AI manages all the documentation, scheduling, and crew coordination in one system, acting like your AI Teammate.
         </p>
         <div class="mt-12">
          
@@ -147,17 +159,16 @@ const seo = getPageSeo(Astro.url.pathname);
         </div>
       </div>
 
-      <!-- Hero visual placeholder -->
-      <div class="flex-1 relative z-[2] bg-[rgba(255,255,255,0.1)] backdrop-blur-[4px] rounded-3xl p-6">
-      <img
-                src={placeholder.src}
-                alt=""
-                class="w-full h-auto rounded-xl"
-                loading="lazy"
-                decoding="async"
-              />
-              
-    </div>
+      <!-- Hero visual -->
+      <div class="flex-1 relative z-[2] self-end">
+        <img
+          src={heroImage.src}
+          alt="Project management dashboard"
+          class="w-full h-auto translate-y-[16%]"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
     </div>
   </section>
 
@@ -190,7 +201,7 @@ const seo = getPageSeo(Astro.url.pathname);
       </div>
 
       <!-- Testimonial -->
-      <div class="bg-bg-secondary rounded-xl p-4 md:p-8 lg:p-12 flex flex-col gap-8 mx-6 lg:mx-8 -mt-12 max-w-[calc(1440px-64px)] w-[calc(100%-48px)] lg:w-[calc(100%-64px)] self-center" data-animate="fade-up">
+      <div class="bg-bg-secondary rounded-xl p-4 md:p-8 lg:p-12 flex flex-col gap-8 mx-6 lg:mx-8 lg:-mt-12 max-w-[calc(1440px-64px)] w-[calc(100%-48px)] lg:w-[calc(100%-64px)] self-center" data-animate="fade-up">
         <!-- Stars -->
         <div class="flex items-center gap-4">
           <div class="flex gap-1">
@@ -235,7 +246,10 @@ const seo = getPageSeo(Astro.url.pathname);
           bullets={f.bullets}
           reverse={i % 2 !== 0}
           visualType="desktop"
+          visualImages={f.image ? [f.image] : undefined}
+          imageFill={f.imageFill}
           placeholder={f.placeholder}
+          ctaHref={f.ctaHref}
         />
       ))}
     </div>

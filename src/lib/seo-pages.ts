@@ -72,13 +72,13 @@ export const PAGE_SEO: Record<string, Partial<PageSeo> & { title: string }> = {
       "JobTread is best suited for commercial builders. Handoff is built for residential remodelers and handymen. Compare features, pricing, and more.",
   },
   "/ai-teammate": {
-    title: "Ai teammate",
-    description: "ai teammate - Handoff"
+    title: "AI Teammate",
+    description: "AI Teammate - Handoff"
       },
   "/presets": {
     title: "Presets",
     description:
-      "Train an AI teammate to run your construction business",
+      "Train an AI Teammate to run your construction business",
   },
   "/sales-marketing-growth": {
     title: "Sales & Marketing Growth",

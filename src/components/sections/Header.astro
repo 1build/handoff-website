@@ -61,6 +61,8 @@ const solutionIcons: Record<string, string> = {
   "graduation-hat-01": `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 7.5L10 4.167l7.5 3.333-7.5 3.333L2.5 7.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.833 9.167V13.333a8.333 8.333 0 0 0 8.334 0V9.167" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.5 7.5v4.167" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   "briefcase-02": `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.333 5.833V4.167a1.667 1.667 0 0 0-1.666-1.667H8.333a1.667 1.667 0 0 0-1.666 1.667v1.666" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M1.667 9.167A15 15 0 0 0 10 11.25a15 15 0 0 0 8.333-2.083M7.5 10h5M3.333 5.833h13.334a1.667 1.667 0 0 1 1.666 1.667v8.333a1.667 1.667 0 0 1-1.666 1.667H3.333a1.667 1.667 0 0 1-1.666-1.667V7.5a1.667 1.667 0 0 1 1.666-1.667Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   "users-plus": `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.333 17.5v-1.667A3.333 3.333 0 0 0 10 12.5H4.167a3.333 3.333 0 0 0-3.334 3.333V17.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M7.083 9.167a3.333 3.333 0 1 0 0-6.667 3.333 3.333 0 0 0 0 6.667Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.833 6.667v5M18.333 9.167h-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  "compare": `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 3.333v13.334M3.333 10H1.667M18.333 10H16.667M5.833 7.5 3.333 10l2.5 2.5M14.167 7.5 16.667 10l-2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  "tag-01": `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.167 1.667H3.333A1.667 1.667 0 0 0 1.667 3.333v5.834c0 .442.175.866.488 1.178l7.5 7.5a1.667 1.667 0 0 0 2.357 0l5.833-5.833a1.667 1.667 0 0 0 0-2.357l-7.5-7.5a1.667 1.667 0 0 0-1.178-.488Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 5h.008" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
 };
 ---
 
@@ -128,7 +130,7 @@ const solutionIcons: Record<string, string> = {
               </div>
             </div>
           ) : getFeatures(item).length > 0 ? (
-            <div class="dropdown-panel dropdown-panel-solutions absolute top-full left-1/2 -translate-x-1/2 bg-white border border-black/[0.08] rounded-2xl shadow-[0px_12px_16px_-4px_rgba(10,13,18,0.08),0px_4px_6px_-2px_rgba(10,13,18,0.03),0px_2px_2px_-1px_rgba(10,13,18,0.04)] overflow-hidden">
+            <div class="dropdown-panel dropdown-panel-solutions absolute top-full bg-white border border-black/[0.08] rounded-2xl shadow-[0px_12px_16px_-4px_rgba(10,13,18,0.08),0px_4px_6px_-2px_rgba(10,13,18,0.03),0px_2px_2px_-1px_rgba(10,13,18,0.04)] overflow-hidden">
               <div class="flex w-full">
                 <div class="flex flex-col gap-2 p-6 w-[400px] shrink-0">
                   <p class="text-sm font-semibold leading-5 text-[#335645]">{item.label}</p>
@@ -167,7 +169,7 @@ const solutionIcons: Record<string, string> = {
           ) : hasIconItems(item) ? (
             <div
               class="dropdown-panel absolute top-full left-1/2 -translate-x-1/2 min-w-[420px] bg-white border border-black/[0.08] rounded-xl p-6 flex flex-col gap-2 shadow-[0px_12px_16px_-4px_rgba(10,13,18,0.08),0px_4px_6px_-2px_rgba(10,13,18,0.03),0px_2px_2px_-1px_rgba(10,13,18,0.04)]"
-              style={item.label === "Support" ? "min-width:260px" : undefined}
+              style={item.label === "Support" ? "min-width:260px" : item.label === "Who We Serve" ? "min-width:340px" : undefined}
             >
               {getChildren(item).map((link: any) => (
                 <a href={link.href || "/"} class="flex gap-3 items-start p-3 rounded-lg transition-colors hover:bg-[#fafafa]">
@@ -260,9 +262,20 @@ const solutionIcons: Record<string, string> = {
                         link.label
                       )}
                     </a>
+                    {link.features && link.features.length > 0 && (
+                      <ul class="ml-3 pl-2 border-l border-white/15 flex flex-col gap-0.5 mb-1">
+                        {link.features.map((feat: any) => (
+                          <li>
+                            <a href={feat.href || "/"} class="mobile-menu-link block px-3 py-1.5 rounded-md text-white/60 text-sm hover:bg-white/10 hover:text-white transition-colors">
+                              {feat.label}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </li>
                 ))}
-                {getFeatures(item).length > 0 && (
+                {getFeatures(item).length > 0 && !getChildren(item).some((link: any) => link.features && link.features.length > 0) && (
                   <>
                     <li class="mt-2 mb-1 px-3 text-xs font-semibold uppercase tracking-[0.08em] text-white/60">
                       Features
@@ -288,8 +301,8 @@ const solutionIcons: Record<string, string> = {
     </ul>
   </nav>
   <div class="shrink-0 p-4 border-t border-white/10 flex flex-col gap-2">
-    <a href="/" class="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 text-base font-medium leading-6 rounded-xl bg-white/10 text-white hover:bg-white/20 transition-colors">Log in</a>
-    <a href="/" class="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 text-base font-medium leading-6 rounded-xl bg-brand-accent text-white hover:bg-brand-500 transition-colors">Sign up</a>
+    <a href="https://app.handoff.ai/login/" class="mobile-menu-link inline-flex items-center justify-center gap-1.5 px-5 py-2.5 text-base font-medium leading-6 rounded-xl bg-white/10 text-white hover:bg-white/20 transition-colors">Log in</a>
+    <a href="https://app.handoff.ai/sign-up/?af_xp=custom&source_caller=ui&pid=handoff_landing&af_js_web=true&shortlink=landing&deep_link_value=%2Festimates&af_ss_ui=true&c=landing_default&af_ss_ver=2_8_1" class="mobile-menu-link inline-flex items-center justify-center gap-1.5 px-5 py-2.5 text-base font-medium leading-6 rounded-xl bg-brand-accent text-white hover:bg-brand-500 transition-colors">Sign up</a>
   </div>
 </div>
 </div>
@@ -303,20 +316,25 @@ const solutionIcons: Record<string, string> = {
   .header-wrapper.mobile-menu-open .mobile-menu-panel {
     transform: translateX(0) !important;
   }
-  .header-wrapper .nav-dropdown .dropdown-panel {
+  .header-wrapper .nav-dropdown .dropdown-panel:not(.dropdown-panel-solutions) {
     left: auto !important;
     transform: none !important;
     right: auto !important;
   }
-  .dropdown-panel-solutions {
-    transition: width 260ms ease-in-out;
+  .header-wrapper .nav-dropdown .dropdown-panel-solutions {
+    left: 0;
+    transform: none;
   }
   .dropdown-panel-solutions .solutions-features {
-    transition: opacity 260ms ease-in-out;
+    display: none;
+    opacity: 0;
+    transition: opacity 180ms ease-in-out;
   }
 </style>
 
 <script>
+  let mobileMenuInitialized = false;
+
   function initHeader() {
     const header = document.getElementById("site-header");
     if (!header) return;
@@ -332,11 +350,10 @@ const solutionIcons: Record<string, string> = {
   }
 
   function initSolutionsFeatures() {
-    if (document.body.dataset.solutionsMenuInit === "1") return;
-    document.body.dataset.solutionsMenuInit = "1";
-
     const menus = document.querySelectorAll(".dropdown-panel-solutions");
     menus.forEach((menu) => {
+      if (menu.dataset.solutionsInit) return;
+      menu.dataset.solutionsInit = "1";
       if (!(menu instanceof HTMLElement)) return;
       const features = menu.querySelector(".solutions-features");
       if (!(features instanceof HTMLElement)) return;
@@ -350,10 +367,6 @@ const solutionIcons: Record<string, string> = {
           .replace(/>/g, "&gt;")
           .replace(/"/g, "&quot;");
 
-      // Initial state: only solutions column visible
-      menu.style.width = "400px";
-      features.style.display = "none";
-      features.style.opacity = "0";
       const links = menu.querySelectorAll(".solutions-link");
       links.forEach((link) => {
         link.addEventListener("mouseenter", () => {
@@ -379,7 +392,6 @@ const solutionIcons: Record<string, string> = {
               }
             }
           }
-          menu.style.width = "700px";
           features.style.display = "flex";
           requestAnimationFrame(() => {
             features.style.opacity = "1";
@@ -387,7 +399,6 @@ const solutionIcons: Record<string, string> = {
         });
       });
       menu.addEventListener("mouseleave", () => {
-        menu.style.width = "400px";
         features.style.opacity = "0";
         setTimeout(() => {
           features.style.display = "none";
@@ -399,8 +410,25 @@ const solutionIcons: Record<string, string> = {
   function initMobileMenu() {
     // Use event delegation so the toggle works regardless of init order and duplicate Headers.
     // Guard so we don't attach listeners twice (e.g. on astro:page-load).
-    if (document.body.dataset.mobileMenuInit === "1") return;
-    document.body.dataset.mobileMenuInit = "1";
+    if (mobileMenuInitialized) return;
+    mobileMenuInitialized = true;
+
+    // Reset all menu state before each View Transition swap to prevent
+    // residual body overflow or open class bleeding into the new page.
+    document.addEventListener("astro:before-swap", () => {
+      document.body.style.overflow = "";
+      const wrapper = document.querySelector(".header-wrapper.mobile-menu-open");
+      if (!wrapper) return;
+      const panel = wrapper.querySelector(".mobile-menu-panel");
+      const toggle = wrapper.querySelector("#mobile-menu-toggle");
+      const iconOpen = wrapper.querySelector("#mobile-menu-icon-open");
+      const iconClose = wrapper.querySelector("#mobile-menu-icon-close");
+      wrapper.classList.remove("mobile-menu-open");
+      panel?.classList.add("translate-x-full");
+      if (toggle) toggle.setAttribute("aria-expanded", "false");
+      if (iconOpen) iconOpen.classList.remove("hidden");
+      if (iconClose) iconClose.classList.add("hidden");
+    });
 
     document.addEventListener("click", (e) => {
       const toggle = e.target instanceof Element && e.target.closest("#mobile-menu-toggle");

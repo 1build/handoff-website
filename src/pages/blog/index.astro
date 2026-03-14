@@ -196,8 +196,8 @@ const seo = getPageSeo(Astro.url.pathname);
 <script>
   import { initScrollAnimations } from "@/lib/animations";
 
+  // Scroll handler runs once at module level — window events persist across navigations
   const header = document.getElementById("site-header");
-
   window.addEventListener("scroll", () => {
     if (header) {
       if (window.scrollY > 40) {
@@ -208,126 +208,145 @@ const seo = getPageSeo(Astro.url.pathname);
     }
   });
 
-  initScrollAnimations();
+  // Re-initialise filter + pagination on every page load, including View Transitions navigations
+  document.addEventListener("astro:page-load", () => {
+    initScrollAnimations();
 
-  // Category filter tabs + pagination
-  const tabs = document.querySelectorAll<HTMLButtonElement>("[data-category]");
-  const postCards = Array.from(document.querySelectorAll<HTMLElement>("[data-post-category]"));
-  const grid = document.getElementById("posts-grid");
-  const pageButtons = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-page-btn]"));
-  const prevPageBtn = document.querySelector<HTMLButtonElement>("[data-page-prev]");
-  const nextPageBtn = document.querySelector<HTMLButtonElement>("[data-page-next]");
+    // Category filter tabs + pagination
+    const tabs = document.querySelectorAll<HTMLButtonElement>("[data-category]");
+    const postCards = Array.from(document.querySelectorAll<HTMLElement>("[data-post-category]"));
+    const grid = document.getElementById("posts-grid");
+    const pageButtons = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-page-btn]"));
+    const prevPageBtn = document.querySelector<HTMLButtonElement>("[data-page-prev]");
+    const nextPageBtn = document.querySelector<HTMLButtonElement>("[data-page-next]");
 
-  const PER_PAGE = 9;
-  let currentCategory = "All";
-  let currentPage = 1;
+    if (!tabs.length) return; // not on the blog page
 
-  function applyFiltersAndPagination() {
-    if (!grid) return;
+    const PER_PAGE = 9;
+    let currentCategory = "All";
+    let currentPage = 1;
 
-    // Compute total filtered posts
-    let filteredCount = 0;
-    postCards.forEach((post) => {
-      const matches = currentCategory === "All" || post.dataset.postCategory === currentCategory;
-      if (matches) filteredCount++;
-    });
+    function applyFiltersAndPagination() {
+      if (!grid) return;
 
-    const totalPagesForCategory = Math.max(1, Math.ceil(filteredCount / PER_PAGE));
-    if (currentPage > totalPagesForCategory) currentPage = totalPagesForCategory;
-
-    const start = (currentPage - 1) * PER_PAGE;
-    const end = start + PER_PAGE;
-
-    grid.style.maxHeight = grid.scrollHeight + "px";
-    grid.style.opacity = "0";
-
-    setTimeout(() => {
-      let index = 0;
+      // Compute total filtered posts
+      let filteredCount = 0;
       postCards.forEach((post) => {
         const matches = currentCategory === "All" || post.dataset.postCategory === currentCategory;
-        if (matches) {
-          if (index >= start && index < end) {
-            post.style.display = "";
+        if (matches) filteredCount++;
+      });
+
+      const totalPagesForCategory = Math.max(1, Math.ceil(filteredCount / PER_PAGE));
+      if (currentPage > totalPagesForCategory) currentPage = totalPagesForCategory;
+
+      const start = (currentPage - 1) * PER_PAGE;
+      const end = start + PER_PAGE;
+
+      grid.style.maxHeight = grid.scrollHeight + "px";
+      grid.style.opacity = "0";
+
+      setTimeout(() => {
+        let index = 0;
+        postCards.forEach((post) => {
+          const matches = currentCategory === "All" || post.dataset.postCategory === currentCategory;
+          if (matches) {
+            if (index >= start && index < end) {
+              post.style.display = "";
+            } else {
+              post.style.display = "none";
+            }
+            index++;
           } else {
             post.style.display = "none";
           }
-          index++;
-        } else {
-          post.style.display = "none";
-        }
-      });
+        });
 
-      // Update pagination UI
-      pageButtons.forEach((btn) => {
-        const pageNum = Number(btn.dataset.pageBtn || "1");
-        if (pageNum > totalPagesForCategory) {
-          btn.style.display = "none";
-        } else {
-          btn.style.display = "";
-        }
-        if (pageNum === currentPage) {
-          btn.classList.add("bg-[#FAFAFA]", "text-[#414651]");
-          btn.classList.remove("text-text-quaternary", "border-transparent");
-        } else {
-          btn.classList.remove("bg-[#FAFAFA]", "text-[#414651]");
-          btn.classList.add("text-text-quaternary");
-        }
-      });
+        // Update pagination UI
+        pageButtons.forEach((btn) => {
+          const pageNum = Number(btn.dataset.pageBtn || "1");
+          if (pageNum > totalPagesForCategory) {
+            btn.style.display = "none";
+          } else {
+            btn.style.display = "";
+          }
+          if (pageNum === currentPage) {
+            btn.classList.add("bg-[#FAFAFA]", "text-[#414651]");
+            btn.classList.remove("text-text-quaternary", "border-transparent");
+          } else {
+            btn.classList.remove("bg-[#FAFAFA]", "text-[#414651]");
+            btn.classList.add("text-text-quaternary");
+          }
+        });
 
-      if (prevPageBtn) prevPageBtn.disabled = currentPage === 1;
-      if (nextPageBtn) nextPageBtn.disabled = currentPage === totalPagesForCategory;
+        if (prevPageBtn) prevPageBtn.disabled = currentPage === 1;
+        if (nextPageBtn) nextPageBtn.disabled = currentPage === totalPagesForCategory;
 
-      grid.style.maxHeight = grid.scrollHeight + "px";
-      grid.style.opacity = "1";
-      setTimeout(() => {
-        grid.style.maxHeight = "";
-      }, 250);
-    }, 200);
-  }
+        grid.style.maxHeight = grid.scrollHeight + "px";
+        grid.style.opacity = "1";
+        setTimeout(() => {
+          grid.style.maxHeight = "";
+        }, 250);
+      }, 200);
+    }
 
-  // Category tab clicks
-  tabs.forEach((tab) => {
-    tab.addEventListener("click", () => {
-      const cat = tab.dataset.category || "All";
-      currentCategory = cat;
-      currentPage = 1;
+    // Category tab clicks
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const cat = tab.dataset.category || "All";
+        currentCategory = cat;
+        currentPage = 1;
 
-      tabs.forEach((t) => {
-        t.classList.remove("border-brand-700", "text-brand-700");
-        t.classList.add("border-transparent", "text-text-quaternary");
-      });
-      tab.classList.remove("border-transparent", "text-text-quaternary");
-      tab.classList.add("border-brand-700", "text-brand-700");
+        tabs.forEach((t) => {
+          t.classList.remove("border-brand-700", "text-brand-700");
+          t.classList.add("border-transparent", "text-text-quaternary");
+        });
+        tab.classList.remove("border-transparent", "text-text-quaternary");
+        tab.classList.add("border-brand-700", "text-brand-700");
 
-      applyFiltersAndPagination();
-    });
-  });
-
-  // Page button clicks
-  pageButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const pageNum = Number(btn.dataset.pageBtn || "1");
-      currentPage = pageNum;
-      applyFiltersAndPagination();
-    });
-  });
-
-  if (prevPageBtn) {
-    prevPageBtn.addEventListener("click", () => {
-      if (currentPage > 1) {
-        currentPage -= 1;
         applyFiltersAndPagination();
+      });
+    });
+
+    // Page button clicks
+    pageButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const pageNum = Number(btn.dataset.pageBtn || "1");
+        currentPage = pageNum;
+        applyFiltersAndPagination();
+      });
+    });
+
+    if (prevPageBtn) {
+      prevPageBtn.addEventListener("click", () => {
+        if (currentPage > 1) {
+          currentPage -= 1;
+          applyFiltersAndPagination();
+        }
+      });
+    }
+
+    if (nextPageBtn) {
+      nextPageBtn.addEventListener("click", () => {
+        currentPage += 1;
+        applyFiltersAndPagination();
+      });
+    }
+
+    // Check for ?category URL param and activate matching tab
+    const urlCategory = new URLSearchParams(window.location.search).get("category");
+    if (urlCategory) {
+      const matchingTab = Array.from(tabs).find((t) => t.dataset.category === urlCategory);
+      if (matchingTab) {
+        currentCategory = urlCategory;
+        tabs.forEach((t) => {
+          t.classList.remove("border-brand-700", "text-brand-700");
+          t.classList.add("border-transparent", "text-text-quaternary");
+        });
+        matchingTab.classList.remove("border-transparent", "text-text-quaternary");
+        matchingTab.classList.add("border-brand-700", "text-brand-700");
       }
-    });
-  }
+    }
 
-  if (nextPageBtn) {
-    nextPageBtn.addEventListener("click", () => {
-      currentPage += 1;
-      applyFiltersAndPagination();
-    });
-  }
-
-  // Initial render
-  applyFiltersAndPagination();
+    applyFiltersAndPagination();
+  });
 </script>

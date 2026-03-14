@@ -1,92 +1,101 @@
 ---
-import platform1Img from "@/assets/images/platform1.png";
-
-const platformImages = [platform1Img, platform1Img, platform1Img, platform1Img, platform1Img, platform1Img];
+import platform1Img from "@/assets/images/Instant Estimates/Estimates-2.webp";
+import crmCardImg from "@/assets/images/Proposals/Proposal + Signature@2x.webp";
+import projectCardImg from "@/assets/images/Project Management/Ask about your project@2x.webp";
+import financialCardImg from "@/assets/images/Notifications/Notifications@2x.webp";
+import proposalsImg from "@/assets/images/Proposals/Create Proposals with AI@2x.webp";
+import trainAIImg from "@/assets/images/TrainyourAIassistant.png";
 
 const features = [
   {
-    title: "Estimate from anything",
-    description: "AI generates accurate estimates from photos, plans, or voice notes",
+    title: "Lock In Your Process",
+    description: "Your AI Teammate runs every estimate through your rates, markup rules, and approval steps. New hire? They estimate like a 10-year veteran on day one. No guesswork. No margin leaks.",
+    href: "/instant-ai-estimates",
+    image: platform1Img,
   },
   {
-    title: "Scope that writes itself",
-    description: "Turn estimates into professional scope documents automatically",
+    title: "Coordinate Without the Chaos",
+    description: "Walkthroughs, project phases, and crew schedules in one place. Less phone tag. Fewer delays. More jobs done and billed.",
+    href: "/crm-pipeline-management",
+    image: crmCardImg,
   },
   {
-    title: "learns how you work",
-    description: "Pricing, preferences, and labor rates improve with every project",
+    title: "Stay One Step Ahead",
+    description: "Real-time alerts when approvals stall, change orders come in, or a project needs attention. You never have to micromanage what your AI Teammate is already watching.",
+    href: "/project-management",
+    image: projectCardImg,
   },
   {
-    title: "Built-in supplier pricing",
-    description: "Real costs from Lowe's and Home Depot, updated automatically",
+    title: "Go from First Contact to Signed Proposal in Under 24 Hours",
+    description: "Your AI Teammate handles the estimate while you're still on the drive home. Your crew starts while your competition is still writing up the bid.",
+    href: "/winning-ai-proposals",
+    image: proposalsImg,
   },
   {
-    title: "Scope and materials",
-    description: "Material lists and labor requirements generated together",
-  },
-  {
-    title: "Proposals that close",
-    description: "Send professional proposals clients can sign and approve",
+    title: "Grow Without Losing Control",
+    description: "Role-based permissions keep your markup, approvals, and workflows locked as your team grows. Bigger business, same margins, less chaos.",
+    href: "/project-management",
+    image: financialCardImg,
   },
 ];
 ---
 
-<section class="relative z-[2] border-t border-[#E9EAEB]"  data-animate="fade-up">
+<section class="max-w-[1920px] mx-auto relative z-[2] border-t border-[#E9EAEB]" data-animate="fade-up">
   <div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 py-12 md:py-20">
-    <!-- Header: mobile = stacked; desktop = title+subtitle left, CTA right -->
-    <div class="flex flex-col gap-4 mb-8 md:mb-10 md:flex-row md:items-end md:justify-between md:gap-8">
+    <!-- Header -->
+    <div class="flex flex-col gap-4 mb-12 md:mb-[96px] md:flex-row md:items-end md:justify-between md:gap-8">
       <div class="flex flex-col gap-2">
         <h2 class="font-display text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight tracking-[-0.02em] text-text-primary">
-          Everything you need, in one platform
+          The Contractors Winning Right Now All Have One Thing in Common.
         </h2>
         <p class="text-base text-text-tertiary leading-relaxed max-w-[560px]">
-          One platform. No tool-stitching, no workarounds, no re-keying.
+          It's not that they work harder. They move faster. First to bid. First to win. First payment collected. Handoff is that edge.
         </p>
       </div>
       <a
-        href="#"
+        href="/instant-ai-estimates"
         class="inline-flex items-center justify-center shrink-0 w-full md:w-auto px-5 py-3 text-base font-medium text-white rounded-xl bg-brand-700 border border-brand-600 hover:bg-brand-800 transition-colors duration-150"
       >
-        See the full list
+        Learn more
       </a>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
-      {features.map((feature, i) => (
-        <article class="flex flex-col rounded-2xl bg-white border border-[#E9EAEB] overflow-hidden">
-          <div class="h-[260px] overflow-hidden">
-            <img
-              src={platformImages[i].src}
-              alt=""
-              class="w-full h-full object-cover max-h-[260px]"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-          <div class="p-4 sm:py-6 bg-[#F4F6F4]">
-            <div class="flex items-end justify-between gap-4">
-              <div>
-                <p class="text-sm font-semibold text-text-quaternary uppercase mb-1">
+    <div class="flex flex-col gap-y-12 md:gap-y-[96px]">
+      {Array.from({ length: Math.ceil(features.length / 2) }, (_, i) => features.slice(i * 2, i * 2 + 2)).map((pair) => (
+        <div class="grid md:grid-cols-2 md:gap-x-12 lg:gap-x-[96px] md:grid-rows-[auto_1fr]">
+          {pair.map((feature) => (
+            <Fragment>
+              <!-- Text — on mobile flows before image; on desktop placed into row 1 -->
+              <div class="md:row-start-1 pt-6 pb-4 md:py-8 flex flex-col gap-3">
+                <h3 class="font-display text-xl sm:text-2xl font-semibold leading-snug tracking-[-0.01em] text-text-primary">
                   {feature.title}
-                </p>
-                <p class="text-base md:text-lg text-text-primary leading-relaxed">
+                </h3>
+                <p class="text-sm sm:text-base text-text-tertiary leading-relaxed">
                   {feature.description}
                 </p>
+                <a
+                  href={feature.href}
+                  class="inline-flex items-center gap-1.5 text-sm font-medium text-text-primary hover:text-brand-700 transition-colors mt-1"
+                >
+                  Learn more
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>
               </div>
-              <button
-                type="button"
-                class="hidden sm:inline-flex items-center justify-center w-12 h-12 rounded-full border border-[#E9EAEB] bg-transparent text-neutral-700 hover:bg-white transition-colors"
-                aria-hidden="true"
-                tabIndex={-1}
-              >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M9 18L15 12L9 6" stroke="#414651" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-
-              </button>
-            </div>
-          </div>
-        </article>
+              <!-- Image — on mobile flows after text; on desktop placed into row 2 -->
+              <div class="md:row-start-2 aspect-[4/3] overflow-hidden rounded-xl bg-[#1a3327] flex items-start justify-center mb-8 md:mb-0">
+                <img
+                  src={feature.image.src}
+                  alt=""
+                  class="w-full h-full object-cover object-top"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </Fragment>
+          ))}
+        </div>
       ))}
     </div>
   </div>

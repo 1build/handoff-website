@@ -41,14 +41,41 @@ const footerColumns = columns?.length ? columns : localFooterColumns;
           </ul>
         </div>
       ))}
-      <!-- App column -->
-      <div class="flex flex-col gap-4 min-w-[45%] md:min-w-[160px] ">
-        <h4 class="text-sm font-semibold leading-5 text-white">
-          Get the app
-        </h4>
+      <!-- App + Roadmap column -->
+      <div class="flex flex-col gap-16 min-w-[45%] md:min-w-[136px] shrink-0">
+        <!-- Get the app -->
         <div class="flex flex-col gap-4">
-          <AppBadge store="apple" />
-          <AppBadge store="google" />
+          <h4 class="text-sm font-semibold leading-5 text-white">
+            Get the app:
+          </h4>
+          <div class="flex flex-col gap-4">
+            <AppBadge store="apple" />
+            <AppBadge store="google" />
+          </div>
+        </div>
+        <!-- See what's ahead -->
+        <div class="flex flex-col gap-4">
+          <h4 class="text-sm font-semibold leading-5 text-white">
+            See what's ahead:
+          </h4>
+          <div class="flex flex-col gap-3">
+            <a
+              href="https://handoff.featurebase.app/roadmap"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-sm font-medium leading-5 px-3.5 py-2.5 rounded-xl bg-white/10 text-white hover:bg-white/20 transition-colors duration-150 text-center whitespace-nowrap"
+            >
+              Public roadmap
+            </a>
+            <a
+              href="https://handoff.featurebase.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-sm font-medium leading-5 px-3.5 py-2.5 rounded-xl bg-white/10 text-white hover:bg-white/20 transition-colors duration-150 text-center whitespace-nowrap"
+            >
+              Request features
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -59,7 +86,7 @@ const footerColumns = columns?.length ? columns : localFooterColumns;
         <Logo />
       </a>
       <p class="text-base font-normal leading-6 text-text-on-brand-secondary">
-        © 2077 Untitled UI. All rights reserved.
+        © 2026 Handoff. All rights reserved.
       </p>
     </div>
   </div>

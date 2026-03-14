@@ -1,5 +1,8 @@
 ---
 import DetailRowClientManagement from "./DetailRowClientManagement.astro";
+import suppliersIntegration from "@/assets/images/AI Agent/Suppliers Integration@2x.webp";
+import aiFileAnalysis from "@/assets/images/AI Agent/Create estimates using photos & drawings@2x.webp";
+import filesInChat from "@/assets/images/AI Agent/Files in chat@2x.webp";
 
 const rows = [
   {
@@ -8,6 +11,7 @@ const rows = [
     description: "Don't know where to start? Simply open our app and ask Handoff AI assistant what it can do. Handoff will offer to generate invoices, update customer records, create estimates, change orders, and answer your general question.",
     reverse: false,
     visualType: "desktop" as const,
+    visualImages: [suppliersIntegration],
     placeholder: "Screenshot of Handoff AI assistant chat",
   },
   {
@@ -16,6 +20,7 @@ const rows = [
     description: "Simply upload construction drawings, scopes of work, client notes, photos, videos or any other files relevant to your project. Handoff will analyze your files and provide detailed information about what you've uploaded. Ask away!",
     reverse: true,
     visualType: "phones" as const,
+    visualImages: [aiFileAnalysis],
     placeholder: "Screenshot of AI file analysis",
   },
   {
@@ -23,13 +28,14 @@ const rows = [
     title: "Complete multiple actions in one go",
     description: "Using Handoff AI is like having a virtual assistant available at your finger tips 24/7. Handoff can perform multiple actions without skipping a beat.",
     reverse: false,
-    visualType: "isometric" as const,
+    visualType: "desktop" as const,
+    visualImages: [filesInChat],
     placeholder: "Screenshot of Handoff AI performing multiple actions",
   },
 ];
 ---
 
-<section class="relative z-[2] px-4 pb-4 bg-brand-800">
+<section class="relative z-[2] px-4 pb-4">
   <div class="max-w-[1920px] mx-auto bg-white rounded-3xl py-16 lg:py-24 overflow-hidden flex flex-col gap-20 lg:gap-40">
     {rows.map((r) => (
       <DetailRowClientManagement
@@ -38,6 +44,7 @@ const rows = [
         description={r.description}
         reverse={r.reverse}
         visualType={r.visualType}
+        visualImages={r.visualImages}
         placeholder={r.placeholder}
       />
     ))}

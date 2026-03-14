@@ -1,5 +1,8 @@
 ---
 import DetailRowClientManagement from "./DetailRowClientManagement.astro";
+import proposalSignatureImg from "@/assets/images/Proposals/Proposal + Signature@2x.webp";
+import attachFromProjectFilesImg from "@/assets/images/Proposals/Attach from project files@2x.webp";
+import digitalSignatureImg from "@/assets/images/Proposals/Create Proposals with AI@2x.webp";
 
 const rows = [
   {
@@ -8,6 +11,7 @@ const rows = [
     description: "Get back time in your day and win more projects with proposals that, literally, write themselves. Handoff automatically converts your estimate into a detailed proposal that will impress your clients.",
     reverse: false,
     visualType: "desktop" as const,
+    visualImages: [proposalSignatureImg],
     placeholder: "Screenshot of AI generated proposal",
   },
   {
@@ -16,6 +20,7 @@ const rows = [
     description: "You can easily upload any files you want into Handoff and send them to your clients along with your proposal. Easily share photos of their space, images of selections, or your standard contract language in PDF.",
     reverse: true,
     visualType: "phones" as const,
+    visualImages: [attachFromProjectFilesImg],
     placeholder: "Screenshot of file attachments",
   },
   {
@@ -23,13 +28,14 @@ const rows = [
     title: "Collect digital signatures and make your contract official",
     description: "Handoff allows you to request digital signatures from your clients to make your proposals and contracts even more official. The client can sign your proposal on any device with ease, providing you with the peace of mind to move forward.",
     reverse: false,
-    visualType: "isometric" as const,
+    visualType: "desktop" as const,
+    visualImages: [digitalSignatureImg],
     placeholder: "Screenshot of digital signature flow",
   },
 ];
 ---
 
-<section class="relative z-[2] px-4 pb-4 bg-brand-800">
+<section class="relative z-[2] px-4 pb-4">
   <div class="max-w-[1920px] mx-auto bg-white rounded-3xl py-16 lg:py-24 overflow-hidden flex flex-col gap-20 lg:gap-40">
     {rows.map((r) => (
       <DetailRowClientManagement
@@ -38,6 +44,7 @@ const rows = [
         description={r.description}
         reverse={r.reverse}
         visualType={r.visualType}
+        visualImages={r.visualImages}
         placeholder={r.placeholder}
       />
     ))}
