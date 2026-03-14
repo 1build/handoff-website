@@ -376,7 +376,7 @@ const seo = getPageSeo(Astro.url.pathname);
           <!-- As in Header -->
           <div class="bg-brand-800 rounded-2xl p-10 mb-6">
             <p class="font-mono text-xs text-white/40 uppercase tracking-wider mb-4">In Header</p>
-            <a href="/" class="flex items-start h-8 pb-2">
+            <a href="/" class="flex items-start h-8 pb-2" aria-label="Handoff home">
               <Logo />
             </a>
           </div>
@@ -384,7 +384,7 @@ const seo = getPageSeo(Astro.url.pathname);
           <div class="bg-brand-800 rounded-2xl p-10 border-t border-white/10">
             <p class="font-mono text-xs text-white/40 uppercase tracking-wider mb-4">In Footer</p>
             <div class="flex items-center justify-between pt-6 border-t border-white/10">
-              <a href="/" class="flex items-start h-8 pb-2">
+              <a href="/" class="flex items-start h-8 pb-2" aria-label="Handoff home">
                 <Logo />
               </a>
               <p class="text-base font-normal leading-6 text-text-on-brand-secondary">

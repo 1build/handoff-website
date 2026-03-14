@@ -79,6 +79,15 @@ Use this as a quick audit list for schema, meta, and social sharing.
 - **Table of contents** – Long articles can add a TOC component and (if desired) `TableOfContents` or list schema; not implemented by default.
 - **BreadcrumbList** – Can be added via `jsonLd` for deeper pages (e.g. comparison, blog) if you want breadcrumb rich results.
 
+## Performance (speed)
+
+- **Static output** – Site is fully static (Astro `output: 'static'`); HTML is pre-rendered and compressHTML is on by default.
+- **LCP** – Homepage hero image (NewHeroSection) uses `loading="eager"`, `decoding="async"`, and `fetchpriority="high"`. Other hero images use `loading="eager"` where they are above the fold; below-the-fold images use `loading="lazy"` and `decoding="async"`.
+- **Fonts** – `preconnect` for `fonts.googleapis.com` and `fonts.gstatic.com`; Google Fonts requested with `display=swap` to avoid invisible text.
+- **Third-party** – `preconnect` for `www.googletagmanager.com`. GTM loads async; PostHog and Intercom are deferred (load after window load with a delay).
+- **Scripts** – Swiper (carousel) loads with `defer` so it does not block parsing. Vercel Speed Insights is used for monitoring.
+- **Images** – Hero/section images use Astro-processed assets; many use `loading="lazy"` and `decoding="async"`. Consider adding explicit `width`/`height` where known to reduce CLS.
+
 ## Overriding from a page (optional)
 
 If a page needs to override or add SEO props (e.g. from Sanity), you can still pass props to `BaseLayout`:
