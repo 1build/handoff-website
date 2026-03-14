@@ -43,10 +43,10 @@ const features = [
 <section class="relative z-[2] border-t border-[#E9EAEB]" data-animate="fade-up">
   <div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 py-12 md:py-20">
     <!-- Header -->
-    <div class="flex flex-col gap-4 mb-[96px] md:flex-row md:items-end md:justify-between md:gap-8">
+    <div class="flex flex-col gap-4 mb-12 md:mb-[96px] md:flex-row md:items-end md:justify-between md:gap-8">
       <div class="flex flex-col gap-2">
         <h2 class="font-display text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight tracking-[-0.02em] text-text-primary">
-          The Contractors Winning Right Now All Have<br />One Thing in Common.
+          The Contractors Winning Right Now All Have One Thing in Common.
         </h2>
         <p class="text-base text-text-tertiary leading-relaxed max-w-[560px]">
           It's not that they work harder. They move faster. First to bid. First to win. First payment collected. Handoff is that edge.
@@ -60,40 +60,40 @@ const features = [
       </a>
     </div>
 
-    <div class="flex flex-col gap-y-[96px]">
+    <div class="flex flex-col gap-y-12 md:gap-y-[96px]">
       {Array.from({ length: Math.ceil(features.length / 2) }, (_, i) => features.slice(i * 2, i * 2 + 2)).map((pair) => (
-        <div class="grid md:grid-cols-2 gap-x-[96px] grid-rows-[auto_1fr]">
-          <!-- Text sections — same grid row so CSS equalizes their height -->
+        <div class="grid md:grid-cols-2 md:gap-x-12 lg:gap-x-[96px] md:grid-rows-[auto_1fr]">
           {pair.map((feature) => (
-            <div class="row-start-1 py-6 sm:py-8 flex flex-col gap-3">
-              <h3 class="font-display text-xl sm:text-2xl font-semibold leading-snug tracking-[-0.01em] text-text-primary">
-                {feature.title}
-              </h3>
-              <p class="text-sm sm:text-base text-text-tertiary leading-relaxed">
-                {feature.description}
-              </p>
-              <a
-                href={feature.href}
-                class="inline-flex items-center gap-1.5 text-sm font-medium text-text-primary hover:text-brand-700 transition-colors mt-1"
-              >
-                Learn more
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </a>
-            </div>
-          ))}
-          <!-- Image sections — same grid row so both start at identical height -->
-          {pair.map((feature) => (
-            <div class="row-start-2 aspect-[4/3] overflow-hidden rounded-xl bg-[#1a3327] flex items-start justify-center">
-              <img
-                src={feature.image.src}
-                alt=""
-                class="w-full h-full object-cover object-top"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
+            <Fragment>
+              <!-- Text — on mobile flows before image; on desktop placed into row 1 -->
+              <div class="md:row-start-1 pt-6 pb-4 md:py-8 flex flex-col gap-3">
+                <h3 class="font-display text-xl sm:text-2xl font-semibold leading-snug tracking-[-0.01em] text-text-primary">
+                  {feature.title}
+                </h3>
+                <p class="text-sm sm:text-base text-text-tertiary leading-relaxed">
+                  {feature.description}
+                </p>
+                <a
+                  href={feature.href}
+                  class="inline-flex items-center gap-1.5 text-sm font-medium text-text-primary hover:text-brand-700 transition-colors mt-1"
+                >
+                  Learn more
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>
+              </div>
+              <!-- Image — on mobile flows after text; on desktop placed into row 2 -->
+              <div class="md:row-start-2 aspect-[4/3] overflow-hidden rounded-xl bg-[#1a3327] flex items-start justify-center mb-8 md:mb-0">
+                <img
+                  src={feature.image.src}
+                  alt=""
+                  class="w-full h-full object-cover object-top"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </Fragment>
           ))}
         </div>
       ))}
