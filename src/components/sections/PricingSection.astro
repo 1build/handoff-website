@@ -316,7 +316,6 @@ const tiers: PricingTier[] = [
   const heroToggle = document.getElementById("billing-toggle");
   const compareToggle = document.getElementById("billing-toggle-compare");
   const annualLabel = document.getElementById("label-annual");
-  const monthlyLabel = document.getElementById("label-monthly");
 
   // --- Apply billing state to all UI ---
   function applyBillingState() {
@@ -369,10 +368,11 @@ const tiers: PricingTier[] = [
     });
 
     // Label emphasis (hero section)
-    annualLabel?.classList.toggle("text-white", isAnnual);
-    annualLabel?.classList.toggle("text-text-on-brand-tertiary", !isAnnual);
-    monthlyLabel?.classList.toggle("text-white", !isAnnual);
-    monthlyLabel?.classList.toggle("text-text-on-brand-tertiary", isAnnual);
+    if (annualLabel) annualLabel.textContent = isAnnual ? "Annual pricing" : "Monthly pricing";
+
+    // Compare label text
+    const compareBillingLabel = document.getElementById("label-billing-compare");
+    if (compareBillingLabel) compareBillingLabel.textContent = isAnnual ? "Annual pricing" : "Monthly pricing";
 
     // Save 20% badges
     ["save-badge", "save-badge-compare"].forEach((id) => {
