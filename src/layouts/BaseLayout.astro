@@ -118,33 +118,50 @@ window.addEventListener('load', function() {
 
 
 <!-- Intercom -->
-<script>
+<script is:inline>
   window.intercomSettings = {
     api_base: "https://api-iam.intercom.io",
     app_id: "stmnrgsx"
   };
-</script>
 
+  if (!window._intercomSetup) {
+    window._intercomSetup = true;
 
-<script defer>
-function loadIntercom() {
+    window._bootIntercom = function() {
+      // Always create a fresh Intercom stub and load the widget script
+      var w = window;
+      var d = document;
+      var i = function(){i.c(arguments);};
+      i.q = [];
+      i.c = function(args){i.q.push(args);};
+      w.Intercom = i;
+      var s = d.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://widget.intercom.io/widget/stmnrgsx';
+      var x = d.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+      window._intercomLoaded = true;
+    };
 
-  // We pre-filled your app ID in the widget URL: 'https://widget.intercom.io/widget/stmnrgsx'
-  (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/stmnrgsx';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(document.readyState==='complete'){l();}else if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
+    // Initial load: defer by 5s to avoid blocking
+    window.addEventListener('load', function() {
+      setTimeout(window._bootIntercom, 5000);
+    });
 
- }
-
- // Initial load: defer Intercom by 5s to avoid blocking
- window.addEventListener('load', function() {
-    setTimeout(loadIntercom, 5000);
- });
-
- // ViewTransitions: re-fire Intercom on every client-side navigation
- document.addEventListener('astro:page-load', function() {
-   if (typeof window.Intercom === 'function') {
-     window.Intercom('update', window.intercomSettings);
-   }
- });
+    // After ViewTransitions body swap: clean slate + re-bootstrap
+    document.addEventListener('astro:after-swap', function() {
+      if (window._intercomLoaded) {
+        // Remove all traces of previous Intercom instance
+        delete window.Intercom;
+        document.querySelectorAll('script[src*="intercom"], [id^="intercom"], [class*="intercom"]').forEach(function(el) {
+          el.remove();
+        });
+        // Re-bootstrap from scratch (widget script loads from browser cache)
+        window._bootIntercom();
+      }
+    });
+  }
 </script>
 <!-- Intercom end -->
 
