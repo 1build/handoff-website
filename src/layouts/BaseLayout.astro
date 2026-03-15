@@ -134,8 +134,16 @@ function loadIntercom() {
 
  }
 
+ // Initial load: defer Intercom by 5s to avoid blocking
  window.addEventListener('load', function() {
     setTimeout(loadIntercom, 5000);
+ });
+
+ // ViewTransitions: re-fire Intercom on every client-side navigation
+ document.addEventListener('astro:page-load', function() {
+   if (typeof window.Intercom === 'function') {
+     window.Intercom('update', window.intercomSettings);
+   }
  });
 </script>
 <!-- Intercom end -->
