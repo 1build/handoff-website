@@ -8,10 +8,7 @@ import BuildersBenefitsSection from "@/components/sections/BuildersBenefitsSecti
 import BuildersCommunitySection from "@/components/sections/BuildersCommunitySection.astro";
 import bgPattern from "@/assets/images/background-pattern.png";
 import heroGlow from "@/assets/images/hero-glow-line.svg";
-import heroRemodeler from "@/assets/images/hero-remodeler.png";
-import iconFileCheck from "@/assets/icons/icon-file-check.svg";
-import iconBanknote from "@/assets/icons/icon-banknote.svg";
-import iconSend from "@/assets/icons/icon-send.svg";
+import heroRemodeler from "@/assets/images/Home Builders.webp";
 import { navItems, footerColumns } from "@/lib/navigation";
 import { getPageSeo } from "@/lib/seo-pages";
 
@@ -86,47 +83,6 @@ const seo = getPageSeo(Astro.url.pathname);
             decoding="async"
           />
 
-          <!-- Notification cards -->
-          <div class="absolute bottom-[3px] left-[16px] w-[330px] flex flex-col gap-0">
-            <!-- Card 1: Proposal approved (top, solid white) -->
-            <div class="bg-white rounded-xl p-4 shadow-[0px_21px_25px_-4px_rgba(10,13,18,0.08),0px_8px_8px_-4px_rgba(10,13,18,0.03)] flex items-start gap-4 relative z-30">
-              <div class="bg-[rgba(213,222,216,0.3)] rounded-lg p-2 shrink-0">
-                <img src={iconFileCheck.src} alt="" class="w-6 h-6" />
-              </div>
-              <div class="flex flex-col gap-0.5 min-w-0">
-                <p class="text-sm font-medium leading-5 text-text-brand-secondary">
-                  Master Bath Remodel proposal <span class="font-bold">approved</span> by Sarah Miller
-                </p>
-                <p class="text-xs font-medium leading-[18px] text-text-quaternary">Just now</p>
-              </div>
-            </div>
-
-            <!-- Card 2: Deposit received (middle, solid white, offset right) -->
-            <div class="bg-white rounded-xl p-4 shadow-[0px_21px_25px_-4px_rgba(10,13,18,0.08),0px_8px_8px_-4px_rgba(10,13,18,0.03)] flex items-start gap-4 ml-8 -mt-1 relative z-20">
-              <div class="bg-[rgba(213,222,216,0.3)] rounded-lg p-2 shrink-0">
-                <img src={iconBanknote.src} alt="" class="w-6 h-6" />
-              </div>
-              <div class="flex flex-col gap-0.5 min-w-0">
-                <p class="text-sm font-medium leading-5 text-text-brand-secondary">
-                  Deposit of <span class="font-bold">$8,500 received</span> for Kitchen Remodel project
-                </p>
-                <p class="text-xs font-medium leading-[18px] text-text-quaternary">2m ago</p>
-              </div>
-            </div>
-
-            <!-- Card 3: Proposal sent (bottom, faded) -->
-            <div class="bg-gradient-to-b from-white from-[49%] to-transparent rounded-xl p-4 opacity-80 flex items-start gap-4 -mt-1 relative z-10">
-              <div class="bg-[rgba(213,222,216,0.3)] rounded-lg p-2 shrink-0">
-                <img src={iconSend.src} alt="" class="w-6 h-6" />
-              </div>
-              <div class="flex flex-col gap-0.5 min-w-0">
-                <p class="text-sm font-medium leading-5 text-text-brand-secondary">
-                  Kitchen Remodel <span class="font-bold">proposal sent</span> successfully to Olivia Rhye
-                </p>
-                <p class="text-xs font-medium leading-[18px] text-text-quaternary">15m ago</p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
